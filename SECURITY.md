@@ -16,7 +16,11 @@ before making any information public.
 ## Reporting Non-SDK Related Security Issues
 
 If you encounter security issues that are not directly related to SDKs but pertain to the services
-or products provided by Onlyfansapi, please follow the respective company's security reporting guidelines.
+or products provided by Only Fans API, please follow the respective company's security reporting guidelines.
+
+### Only Fans API Terms and Policies
+
+Please contact hello@onlyfansapi.com for any questions or concerns regarding the security of our services.
 
 ---
 

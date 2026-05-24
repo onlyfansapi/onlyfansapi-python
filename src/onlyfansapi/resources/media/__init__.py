@@ -16,8 +16,22 @@ from .vault import (
     VaultResourceWithStreamingResponse,
     AsyncVaultResourceWithStreamingResponse,
 )
+from .uploads import (
+    UploadsResource,
+    AsyncUploadsResource,
+    UploadsResourceWithRawResponse,
+    AsyncUploadsResourceWithRawResponse,
+    UploadsResourceWithStreamingResponse,
+    AsyncUploadsResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "UploadsResource",
+    "AsyncUploadsResource",
+    "UploadsResourceWithRawResponse",
+    "AsyncUploadsResourceWithRawResponse",
+    "UploadsResourceWithStreamingResponse",
+    "AsyncUploadsResourceWithStreamingResponse",
     "VaultResource",
     "AsyncVaultResource",
     "VaultResourceWithRawResponse",

@@ -8,8 +8,8 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import (
-    payout_list_payout_requests_params,
-    payout_update_payout_frequency_params,
+    payout_list_requests_params,
+    payout_update_frequency_params,
     payout_request_manual_withdrawal_params,
     payout_retrieve_earning_statistics_params,
 )
@@ -24,10 +24,10 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.payout_list_requests_response import PayoutListRequestsResponse
+from ..types.payout_update_frequency_response import PayoutUpdateFrequencyResponse
 from ..types.payout_retrieve_balances_response import PayoutRetrieveBalancesResponse
-from ..types.payout_list_payout_requests_response import PayoutListPayoutRequestsResponse
 from ..types.payout_retrieve_eligibility_response import PayoutRetrieveEligibilityResponse
-from ..types.payout_update_payout_frequency_response import PayoutUpdatePayoutFrequencyResponse
 from ..types.payout_request_manual_withdrawal_response import PayoutRequestManualWithdrawalResponse
 from ..types.payout_retrieve_earning_statistics_response import PayoutRetrieveEarningStatisticsResponse
 
@@ -54,7 +54,7 @@ class PayoutsResource(SyncAPIResource):
         """
         return PayoutsResourceWithStreamingResponse(self)
 
-    def list_payout_requests(
+    def list_requests(
         self,
         account: str,
         *,
@@ -66,7 +66,7 @@ class PayoutsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PayoutListPayoutRequestsResponse:
+    ) -> PayoutListRequestsResponse:
         """
         List all payout requests for the account.
 
@@ -97,10 +97,10 @@ class PayoutsResource(SyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                     },
-                    payout_list_payout_requests_params.PayoutListPayoutRequestsParams,
+                    payout_list_requests_params.PayoutListRequestsParams,
                 ),
             ),
-            cast_to=PayoutListPayoutRequestsResponse,
+            cast_to=PayoutListRequestsResponse,
         )
 
     def request_manual_withdrawal(
@@ -265,7 +265,7 @@ class PayoutsResource(SyncAPIResource):
             cast_to=PayoutRetrieveEligibilityResponse,
         )
 
-    def update_payout_frequency(
+    def update_frequency(
         self,
         account: str,
         *,
@@ -276,7 +276,7 @@ class PayoutsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PayoutUpdatePayoutFrequencyResponse:
+    ) -> PayoutUpdateFrequencyResponse:
         """
         Update the payout frequency for the account (Manual, Weekly or Monthly).
 
@@ -295,13 +295,11 @@ class PayoutsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return self._patch(
             path_template("/api/{account}/payouts/payout-frequency", account=account),
-            body=maybe_transform(
-                {"frequency": frequency}, payout_update_payout_frequency_params.PayoutUpdatePayoutFrequencyParams
-            ),
+            body=maybe_transform({"frequency": frequency}, payout_update_frequency_params.PayoutUpdateFrequencyParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PayoutUpdatePayoutFrequencyResponse,
+            cast_to=PayoutUpdateFrequencyResponse,
         )
 
 
@@ -325,7 +323,7 @@ class AsyncPayoutsResource(AsyncAPIResource):
         """
         return AsyncPayoutsResourceWithStreamingResponse(self)
 
-    async def list_payout_requests(
+    async def list_requests(
         self,
         account: str,
         *,
@@ -337,7 +335,7 @@ class AsyncPayoutsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PayoutListPayoutRequestsResponse:
+    ) -> PayoutListRequestsResponse:
         """
         List all payout requests for the account.
 
@@ -368,10 +366,10 @@ class AsyncPayoutsResource(AsyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                     },
-                    payout_list_payout_requests_params.PayoutListPayoutRequestsParams,
+                    payout_list_requests_params.PayoutListRequestsParams,
                 ),
             ),
-            cast_to=PayoutListPayoutRequestsResponse,
+            cast_to=PayoutListRequestsResponse,
         )
 
     async def request_manual_withdrawal(
@@ -536,7 +534,7 @@ class AsyncPayoutsResource(AsyncAPIResource):
             cast_to=PayoutRetrieveEligibilityResponse,
         )
 
-    async def update_payout_frequency(
+    async def update_frequency(
         self,
         account: str,
         *,
@@ -547,7 +545,7 @@ class AsyncPayoutsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PayoutUpdatePayoutFrequencyResponse:
+    ) -> PayoutUpdateFrequencyResponse:
         """
         Update the payout frequency for the account (Manual, Weekly or Monthly).
 
@@ -567,12 +565,12 @@ class AsyncPayoutsResource(AsyncAPIResource):
         return await self._patch(
             path_template("/api/{account}/payouts/payout-frequency", account=account),
             body=await async_maybe_transform(
-                {"frequency": frequency}, payout_update_payout_frequency_params.PayoutUpdatePayoutFrequencyParams
+                {"frequency": frequency}, payout_update_frequency_params.PayoutUpdateFrequencyParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PayoutUpdatePayoutFrequencyResponse,
+            cast_to=PayoutUpdateFrequencyResponse,
         )
 
 
@@ -580,8 +578,8 @@ class PayoutsResourceWithRawResponse:
     def __init__(self, payouts: PayoutsResource) -> None:
         self._payouts = payouts
 
-        self.list_payout_requests = to_raw_response_wrapper(
-            payouts.list_payout_requests,
+        self.list_requests = to_raw_response_wrapper(
+            payouts.list_requests,
         )
         self.request_manual_withdrawal = to_raw_response_wrapper(
             payouts.request_manual_withdrawal,
@@ -595,8 +593,8 @@ class PayoutsResourceWithRawResponse:
         self.retrieve_eligibility = to_raw_response_wrapper(
             payouts.retrieve_eligibility,
         )
-        self.update_payout_frequency = to_raw_response_wrapper(
-            payouts.update_payout_frequency,
+        self.update_frequency = to_raw_response_wrapper(
+            payouts.update_frequency,
         )
 
 
@@ -604,8 +602,8 @@ class AsyncPayoutsResourceWithRawResponse:
     def __init__(self, payouts: AsyncPayoutsResource) -> None:
         self._payouts = payouts
 
-        self.list_payout_requests = async_to_raw_response_wrapper(
-            payouts.list_payout_requests,
+        self.list_requests = async_to_raw_response_wrapper(
+            payouts.list_requests,
         )
         self.request_manual_withdrawal = async_to_raw_response_wrapper(
             payouts.request_manual_withdrawal,
@@ -619,8 +617,8 @@ class AsyncPayoutsResourceWithRawResponse:
         self.retrieve_eligibility = async_to_raw_response_wrapper(
             payouts.retrieve_eligibility,
         )
-        self.update_payout_frequency = async_to_raw_response_wrapper(
-            payouts.update_payout_frequency,
+        self.update_frequency = async_to_raw_response_wrapper(
+            payouts.update_frequency,
         )
 
 
@@ -628,8 +626,8 @@ class PayoutsResourceWithStreamingResponse:
     def __init__(self, payouts: PayoutsResource) -> None:
         self._payouts = payouts
 
-        self.list_payout_requests = to_streamed_response_wrapper(
-            payouts.list_payout_requests,
+        self.list_requests = to_streamed_response_wrapper(
+            payouts.list_requests,
         )
         self.request_manual_withdrawal = to_streamed_response_wrapper(
             payouts.request_manual_withdrawal,
@@ -643,8 +641,8 @@ class PayoutsResourceWithStreamingResponse:
         self.retrieve_eligibility = to_streamed_response_wrapper(
             payouts.retrieve_eligibility,
         )
-        self.update_payout_frequency = to_streamed_response_wrapper(
-            payouts.update_payout_frequency,
+        self.update_frequency = to_streamed_response_wrapper(
+            payouts.update_frequency,
         )
 
 
@@ -652,8 +650,8 @@ class AsyncPayoutsResourceWithStreamingResponse:
     def __init__(self, payouts: AsyncPayoutsResource) -> None:
         self._payouts = payouts
 
-        self.list_payout_requests = async_to_streamed_response_wrapper(
-            payouts.list_payout_requests,
+        self.list_requests = async_to_streamed_response_wrapper(
+            payouts.list_requests,
         )
         self.request_manual_withdrawal = async_to_streamed_response_wrapper(
             payouts.request_manual_withdrawal,
@@ -667,6 +665,6 @@ class AsyncPayoutsResourceWithStreamingResponse:
         self.retrieve_eligibility = async_to_streamed_response_wrapper(
             payouts.retrieve_eligibility,
         )
-        self.update_payout_frequency = async_to_streamed_response_wrapper(
-            payouts.update_payout_frequency,
+        self.update_frequency = async_to_streamed_response_wrapper(
+            payouts.update_frequency,
         )

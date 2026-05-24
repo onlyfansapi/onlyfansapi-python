@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -54,7 +54,7 @@ class DataPayout(BaseModel):
 
     description: Optional[str] = None
 
-    fields: Optional[object] = None
+    fields: Optional[Dict[str, object]] = None
 
     fields_order: Optional[List[object]] = FieldInfo(alias="fieldsOrder", default=None)
 
@@ -66,7 +66,7 @@ class DataPayout(BaseModel):
 
     title: Optional[str] = None
 
-    ui_mapping: Optional[object] = FieldInfo(alias="uiMapping", default=None)
+    ui_mapping: Optional[Dict[str, object]] = FieldInfo(alias="uiMapping", default=None)
 
 
 class Data(BaseModel):

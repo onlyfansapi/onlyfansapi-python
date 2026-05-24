@@ -19,6 +19,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.account_list_response import AccountListResponse
+from ..types.account_disconnect_response import AccountDisconnectResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -105,7 +106,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> Optional[AccountDisconnectResponse]:
         """
         Disconnect an OnlyFans account.
 
@@ -125,7 +126,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=AccountDisconnectResponse,
         )
 
 
@@ -211,7 +212,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> Optional[AccountDisconnectResponse]:
         """
         Disconnect an OnlyFans account.
 
@@ -231,7 +232,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=AccountDisconnectResponse,
         )
 
 

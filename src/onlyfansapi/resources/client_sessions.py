@@ -67,8 +67,6 @@ class ClientSessionsResource(SyncAPIResource):
 
           client_reference_id: Your Internal Reference ID for the connected account.
 
-          proxy_country
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -136,8 +134,6 @@ class AsyncClientSessionsResource(AsyncAPIResource):
           display_name: Display Name of the account visible in your OnlyFansAPI Console Dashboard.
 
           client_reference_id: Your Internal Reference ID for the connected account.
-
-          proxy_country
 
           extra_headers: Send extra headers
 

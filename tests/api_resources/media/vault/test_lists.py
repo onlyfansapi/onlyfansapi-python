@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types.media.vault import (
     ListListResponse,
@@ -25,7 +25,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_create(self, client: Onlyfansapi) -> None:
+    def test_method_create(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new list",
@@ -34,7 +34,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Onlyfansapi) -> None:
+    def test_raw_response_create(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new list",
@@ -47,7 +47,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_create(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new list",
@@ -62,7 +62,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_create(self, client: Onlyfansapi) -> None:
+    def test_path_params_create(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.with_raw_response.create(
                 account="",
@@ -71,7 +71,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.retrieve(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -80,7 +80,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.with_raw_response.retrieve(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -93,7 +93,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.with_streaming_response.retrieve(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -108,7 +108,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.with_raw_response.retrieve(
                 list_id="123",
@@ -123,7 +123,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_update(self, client: Onlyfansapi) -> None:
+    def test_method_update(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -132,7 +132,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: Onlyfansapi) -> None:
+    def test_raw_response_update(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.with_raw_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -145,7 +145,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_update(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.with_streaming_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -160,7 +160,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: Onlyfansapi) -> None:
+    def test_path_params_update(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.with_raw_response.update(
                 list_id="123",
@@ -175,7 +175,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list(self, client: Onlyfansapi) -> None:
+    def test_method_list(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -183,7 +183,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=24,
@@ -194,7 +194,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -206,7 +206,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -220,7 +220,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list(self, client: Onlyfansapi) -> None:
+    def test_path_params_list(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.with_raw_response.list(
                 account="",
@@ -228,7 +228,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_delete(self, client: Onlyfansapi) -> None:
+    def test_method_delete(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.delete(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -237,7 +237,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_delete(self, client: Onlyfansapi) -> None:
+    def test_raw_response_delete(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.with_raw_response.delete(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -250,7 +250,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_delete(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_delete(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.with_streaming_response.delete(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -265,7 +265,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_delete(self, client: Onlyfansapi) -> None:
+    def test_path_params_delete(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.with_raw_response.delete(
                 list_id="123",
@@ -286,7 +286,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_create(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new list",
@@ -295,7 +295,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new list",
@@ -308,7 +308,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new list",
@@ -323,7 +323,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_create(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.with_raw_response.create(
                 account="",
@@ -332,7 +332,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.retrieve(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -341,7 +341,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.with_raw_response.retrieve(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -354,7 +354,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.with_streaming_response.retrieve(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -369,7 +369,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.with_raw_response.retrieve(
                 list_id="123",
@@ -384,7 +384,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_update(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -393,7 +393,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_update(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.with_raw_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -406,7 +406,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.with_streaming_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -421,7 +421,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_update(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.with_raw_response.update(
                 list_id="123",
@@ -436,7 +436,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -444,7 +444,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=24,
@@ -455,7 +455,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -467,7 +467,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -481,7 +481,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.with_raw_response.list(
                 account="",
@@ -489,7 +489,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_delete(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.delete(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -498,7 +498,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.with_raw_response.delete(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -511,7 +511,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.with_streaming_response.delete(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
@@ -526,7 +526,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.with_raw_response.delete(
                 list_id="123",

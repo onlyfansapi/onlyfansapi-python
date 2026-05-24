@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import SearchProfilesResponse
 
@@ -19,13 +19,13 @@ class TestSearch:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_profiles(self, client: Onlyfansapi) -> None:
+    def test_method_profiles(self, client: OnlyFansAPI) -> None:
         search = client.search.profiles()
         assert_matches_type(SearchProfilesResponse, search, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_profiles_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_profiles_with_all_params(self, client: OnlyFansAPI) -> None:
         search = client.search.profiles(
             cursor=None,
             filter={"gender": "female"},
@@ -44,7 +44,7 @@ class TestSearch:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_profiles(self, client: Onlyfansapi) -> None:
+    def test_raw_response_profiles(self, client: OnlyFansAPI) -> None:
         response = client.search.with_raw_response.profiles()
 
         assert response.is_closed is True
@@ -54,7 +54,7 @@ class TestSearch:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_profiles(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_profiles(self, client: OnlyFansAPI) -> None:
         with client.search.with_streaming_response.profiles() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -72,13 +72,13 @@ class TestAsyncSearch:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_profiles(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_profiles(self, async_client: AsyncOnlyFansAPI) -> None:
         search = await async_client.search.profiles()
         assert_matches_type(SearchProfilesResponse, search, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_profiles_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_profiles_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         search = await async_client.search.profiles(
             cursor=None,
             filter={"gender": "female"},
@@ -97,7 +97,7 @@ class TestAsyncSearch:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_profiles(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_profiles(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.search.with_raw_response.profiles()
 
         assert response.is_closed is True
@@ -107,7 +107,7 @@ class TestAsyncSearch:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_profiles(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_profiles(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.search.with_streaming_response.profiles() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

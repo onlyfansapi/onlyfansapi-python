@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import WhoamiRetrieveResponse
 
@@ -19,13 +19,13 @@ class TestWhoami:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve(self, client: OnlyFansAPI) -> None:
         whoami = client.whoami.retrieve()
         assert_matches_type(WhoamiRetrieveResponse, whoami, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve(self, client: OnlyFansAPI) -> None:
         response = client.whoami.with_raw_response.retrieve()
 
         assert response.is_closed is True
@@ -35,7 +35,7 @@ class TestWhoami:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve(self, client: OnlyFansAPI) -> None:
         with client.whoami.with_streaming_response.retrieve() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -53,13 +53,13 @@ class TestAsyncWhoami:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         whoami = await async_client.whoami.retrieve()
         assert_matches_type(WhoamiRetrieveResponse, whoami, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.whoami.with_raw_response.retrieve()
 
         assert response.is_closed is True
@@ -69,7 +69,7 @@ class TestAsyncWhoami:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.whoami.with_streaming_response.retrieve() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

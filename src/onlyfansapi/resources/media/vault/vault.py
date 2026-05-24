@@ -2,13 +2,24 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Mapping, Optional, cast
 from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import path_template, maybe_transform, async_maybe_transform
+from ...._files import deepcopy_with_paths
+from ...._types import (
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NotGiven,
+    FileTypes,
+    SequenceNotStr,
+    omit,
+    not_given,
+)
+from ...._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from .lists.lists import (
     ListsResource,
@@ -25,10 +36,12 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.media import vault_list_params, vault_delete_params
+from ....types.media import vault_list_params, vault_delete_params, vault_upload_params
 from ...._base_client import make_request_options
 from ....types.media.vault_list_response import VaultListResponse
 from ....types.media.vault_delete_response import VaultDeleteResponse
+from ....types.media.vault_upload_response import VaultUploadResponse
+from ....types.media.vault_retrieve_response import VaultRetrieveResponse
 
 __all__ = ["VaultResource", "AsyncVaultResource"]
 
@@ -56,6 +69,40 @@ class VaultResource(SyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
         return VaultResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        media_id: int,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> VaultRetrieveResponse:
+        """
+        Retrieve details about a specific media item in your vault.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        return self._get(
+            path_template("/api/{account}/media/vault/{media_id}", account=account, media_id=media_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=VaultRetrieveResponse,
+        )
 
     def list(
         self,
@@ -166,6 +213,67 @@ class VaultResource(SyncAPIResource):
             cast_to=VaultDeleteResponse,
         )
 
+    def upload(
+        self,
+        account: str,
+        *,
+        async_: bool | Omit = omit,
+        file: FileTypes | Omit = omit,
+        file_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> VaultUploadResponse:
+        """
+        Upload a media file directly to your vault.
+
+        Args:
+          async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
+              check status. Recommended for large files.
+
+          file:
+              The file to upload. Required if `file_url` is not provided. Maximum file size:
+              100 MB (limited by Cloudflare).
+
+          file_url: A URL to download the file from. Required if `file` is not provided. Maximum
+              file size depends on the subscription configuration.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        body = deepcopy_with_paths(
+            {
+                "async_": async_,
+                "file": file,
+                "file_url": file_url,
+            },
+            [["file"]],
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return self._post(
+            path_template("/api/{account}/media/vault", account=account),
+            body=maybe_transform(body, vault_upload_params.VaultUploadParams),
+            files=files,
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=VaultUploadResponse,
+        )
+
 
 class AsyncVaultResource(AsyncAPIResource):
     @cached_property
@@ -190,6 +298,40 @@ class AsyncVaultResource(AsyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
         return AsyncVaultResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        media_id: int,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> VaultRetrieveResponse:
+        """
+        Retrieve details about a specific media item in your vault.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        return await self._get(
+            path_template("/api/{account}/media/vault/{media_id}", account=account, media_id=media_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=VaultRetrieveResponse,
+        )
 
     async def list(
         self,
@@ -300,16 +442,83 @@ class AsyncVaultResource(AsyncAPIResource):
             cast_to=VaultDeleteResponse,
         )
 
+    async def upload(
+        self,
+        account: str,
+        *,
+        async_: bool | Omit = omit,
+        file: FileTypes | Omit = omit,
+        file_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> VaultUploadResponse:
+        """
+        Upload a media file directly to your vault.
+
+        Args:
+          async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
+              check status. Recommended for large files.
+
+          file:
+              The file to upload. Required if `file_url` is not provided. Maximum file size:
+              100 MB (limited by Cloudflare).
+
+          file_url: A URL to download the file from. Required if `file` is not provided. Maximum
+              file size depends on the subscription configuration.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        body = deepcopy_with_paths(
+            {
+                "async_": async_,
+                "file": file,
+                "file_url": file_url,
+            },
+            [["file"]],
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return await self._post(
+            path_template("/api/{account}/media/vault", account=account),
+            body=await async_maybe_transform(body, vault_upload_params.VaultUploadParams),
+            files=files,
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=VaultUploadResponse,
+        )
+
 
 class VaultResourceWithRawResponse:
     def __init__(self, vault: VaultResource) -> None:
         self._vault = vault
 
+        self.retrieve = to_raw_response_wrapper(
+            vault.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             vault.list,
         )
         self.delete = to_raw_response_wrapper(
             vault.delete,
+        )
+        self.upload = to_raw_response_wrapper(
+            vault.upload,
         )
 
     @cached_property
@@ -321,11 +530,17 @@ class AsyncVaultResourceWithRawResponse:
     def __init__(self, vault: AsyncVaultResource) -> None:
         self._vault = vault
 
+        self.retrieve = async_to_raw_response_wrapper(
+            vault.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             vault.list,
         )
         self.delete = async_to_raw_response_wrapper(
             vault.delete,
+        )
+        self.upload = async_to_raw_response_wrapper(
+            vault.upload,
         )
 
     @cached_property
@@ -337,11 +552,17 @@ class VaultResourceWithStreamingResponse:
     def __init__(self, vault: VaultResource) -> None:
         self._vault = vault
 
+        self.retrieve = to_streamed_response_wrapper(
+            vault.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             vault.list,
         )
         self.delete = to_streamed_response_wrapper(
             vault.delete,
+        )
+        self.upload = to_streamed_response_wrapper(
+            vault.upload,
         )
 
     @cached_property
@@ -353,11 +574,17 @@ class AsyncVaultResourceWithStreamingResponse:
     def __init__(self, vault: AsyncVaultResource) -> None:
         self._vault = vault
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            vault.retrieve,
+        )
         self.list = async_to_streamed_response_wrapper(
             vault.list,
         )
         self.delete = async_to_streamed_response_wrapper(
             vault.delete,
+        )
+        self.upload = async_to_streamed_response_wrapper(
+            vault.upload,
         )
 
     @cached_property

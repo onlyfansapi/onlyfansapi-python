@@ -18,13 +18,13 @@ from ..._response import (
 )
 from ...types.posts import comment_list_params, comment_create_params
 from ..._base_client import make_request_options
+from ...types.posts.comment_pin_response import CommentPinResponse
+from ...types.posts.comment_like_response import CommentLikeResponse
 from ...types.posts.comment_list_response import CommentListResponse
+from ...types.posts.comment_unpin_response import CommentUnpinResponse
 from ...types.posts.comment_create_response import CommentCreateResponse
 from ...types.posts.comment_delete_response import CommentDeleteResponse
-from ...types.posts.comment_pin_comment_response import CommentPinCommentResponse
-from ...types.posts.comment_like_comment_response import CommentLikeCommentResponse
-from ...types.posts.comment_unpin_comment_response import CommentUnpinCommentResponse
-from ...types.posts.comment_unlike_comment_response import CommentUnlikeCommentResponse
+from ...types.posts.comment_unlike_response import CommentUnlikeResponse
 
 __all__ = ["CommentsResource", "AsyncCommentsResource"]
 
@@ -201,7 +201,7 @@ class CommentsResource(SyncAPIResource):
             cast_to=CommentDeleteResponse,
         )
 
-    def like_comment(
+    def like(
         self,
         comment_id: int,
         *,
@@ -213,7 +213,7 @@ class CommentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentLikeCommentResponse:
+    ) -> CommentLikeResponse:
         """
         Like a comment on one of your posts.
 
@@ -238,10 +238,10 @@ class CommentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentLikeCommentResponse,
+            cast_to=CommentLikeResponse,
         )
 
-    def pin_comment(
+    def pin(
         self,
         comment_id: int,
         *,
@@ -253,7 +253,7 @@ class CommentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentPinCommentResponse:
+    ) -> CommentPinResponse:
         """
         Pin a comment on one of your posts.
 
@@ -278,10 +278,10 @@ class CommentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentPinCommentResponse,
+            cast_to=CommentPinResponse,
         )
 
-    def unlike_comment(
+    def unlike(
         self,
         comment_id: int,
         *,
@@ -293,7 +293,7 @@ class CommentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentUnlikeCommentResponse:
+    ) -> CommentUnlikeResponse:
         """
         Unlike a comment on one of your posts.
 
@@ -318,10 +318,10 @@ class CommentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentUnlikeCommentResponse,
+            cast_to=CommentUnlikeResponse,
         )
 
-    def unpin_comment(
+    def unpin(
         self,
         comment_id: int,
         *,
@@ -333,7 +333,7 @@ class CommentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentUnpinCommentResponse:
+    ) -> CommentUnpinResponse:
         """
         Unpin a comment from one of your posts.
 
@@ -358,7 +358,7 @@ class CommentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentUnpinCommentResponse,
+            cast_to=CommentUnpinResponse,
         )
 
 
@@ -534,7 +534,7 @@ class AsyncCommentsResource(AsyncAPIResource):
             cast_to=CommentDeleteResponse,
         )
 
-    async def like_comment(
+    async def like(
         self,
         comment_id: int,
         *,
@@ -546,7 +546,7 @@ class AsyncCommentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentLikeCommentResponse:
+    ) -> CommentLikeResponse:
         """
         Like a comment on one of your posts.
 
@@ -571,10 +571,10 @@ class AsyncCommentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentLikeCommentResponse,
+            cast_to=CommentLikeResponse,
         )
 
-    async def pin_comment(
+    async def pin(
         self,
         comment_id: int,
         *,
@@ -586,7 +586,7 @@ class AsyncCommentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentPinCommentResponse:
+    ) -> CommentPinResponse:
         """
         Pin a comment on one of your posts.
 
@@ -611,10 +611,10 @@ class AsyncCommentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentPinCommentResponse,
+            cast_to=CommentPinResponse,
         )
 
-    async def unlike_comment(
+    async def unlike(
         self,
         comment_id: int,
         *,
@@ -626,7 +626,7 @@ class AsyncCommentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentUnlikeCommentResponse:
+    ) -> CommentUnlikeResponse:
         """
         Unlike a comment on one of your posts.
 
@@ -651,10 +651,10 @@ class AsyncCommentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentUnlikeCommentResponse,
+            cast_to=CommentUnlikeResponse,
         )
 
-    async def unpin_comment(
+    async def unpin(
         self,
         comment_id: int,
         *,
@@ -666,7 +666,7 @@ class AsyncCommentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CommentUnpinCommentResponse:
+    ) -> CommentUnpinResponse:
         """
         Unpin a comment from one of your posts.
 
@@ -691,7 +691,7 @@ class AsyncCommentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CommentUnpinCommentResponse,
+            cast_to=CommentUnpinResponse,
         )
 
 
@@ -708,17 +708,17 @@ class CommentsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             comments.delete,
         )
-        self.like_comment = to_raw_response_wrapper(
-            comments.like_comment,
+        self.like = to_raw_response_wrapper(
+            comments.like,
         )
-        self.pin_comment = to_raw_response_wrapper(
-            comments.pin_comment,
+        self.pin = to_raw_response_wrapper(
+            comments.pin,
         )
-        self.unlike_comment = to_raw_response_wrapper(
-            comments.unlike_comment,
+        self.unlike = to_raw_response_wrapper(
+            comments.unlike,
         )
-        self.unpin_comment = to_raw_response_wrapper(
-            comments.unpin_comment,
+        self.unpin = to_raw_response_wrapper(
+            comments.unpin,
         )
 
 
@@ -735,17 +735,17 @@ class AsyncCommentsResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             comments.delete,
         )
-        self.like_comment = async_to_raw_response_wrapper(
-            comments.like_comment,
+        self.like = async_to_raw_response_wrapper(
+            comments.like,
         )
-        self.pin_comment = async_to_raw_response_wrapper(
-            comments.pin_comment,
+        self.pin = async_to_raw_response_wrapper(
+            comments.pin,
         )
-        self.unlike_comment = async_to_raw_response_wrapper(
-            comments.unlike_comment,
+        self.unlike = async_to_raw_response_wrapper(
+            comments.unlike,
         )
-        self.unpin_comment = async_to_raw_response_wrapper(
-            comments.unpin_comment,
+        self.unpin = async_to_raw_response_wrapper(
+            comments.unpin,
         )
 
 
@@ -762,17 +762,17 @@ class CommentsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             comments.delete,
         )
-        self.like_comment = to_streamed_response_wrapper(
-            comments.like_comment,
+        self.like = to_streamed_response_wrapper(
+            comments.like,
         )
-        self.pin_comment = to_streamed_response_wrapper(
-            comments.pin_comment,
+        self.pin = to_streamed_response_wrapper(
+            comments.pin,
         )
-        self.unlike_comment = to_streamed_response_wrapper(
-            comments.unlike_comment,
+        self.unlike = to_streamed_response_wrapper(
+            comments.unlike,
         )
-        self.unpin_comment = to_streamed_response_wrapper(
-            comments.unpin_comment,
+        self.unpin = to_streamed_response_wrapper(
+            comments.unpin,
         )
 
 
@@ -789,15 +789,15 @@ class AsyncCommentsResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             comments.delete,
         )
-        self.like_comment = async_to_streamed_response_wrapper(
-            comments.like_comment,
+        self.like = async_to_streamed_response_wrapper(
+            comments.like,
         )
-        self.pin_comment = async_to_streamed_response_wrapper(
-            comments.pin_comment,
+        self.pin = async_to_streamed_response_wrapper(
+            comments.pin,
         )
-        self.unlike_comment = async_to_streamed_response_wrapper(
-            comments.unlike_comment,
+        self.unlike = async_to_streamed_response_wrapper(
+            comments.unlike,
         )
-        self.unpin_comment = async_to_streamed_response_wrapper(
-            comments.unpin_comment,
+        self.unpin = async_to_streamed_response_wrapper(
+            comments.unpin,
         )

@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import (
     FollowingListAllResponse,
@@ -23,7 +23,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_active(self, client: Onlyfansapi) -> None:
+    def test_method_list_active(self, client: OnlyFansAPI) -> None:
         following = client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -31,7 +31,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_active_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_active_with_all_params(self, client: OnlyFansAPI) -> None:
         following = client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
@@ -46,7 +46,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_active(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list_active(self, client: OnlyFansAPI) -> None:
         response = client.following.with_raw_response.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -58,7 +58,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_active(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list_active(self, client: OnlyFansAPI) -> None:
         with client.following.with_streaming_response.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -72,7 +72,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list_active(self, client: Onlyfansapi) -> None:
+    def test_path_params_list_active(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.following.with_raw_response.list_active(
                 account="",
@@ -80,7 +80,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_all(self, client: Onlyfansapi) -> None:
+    def test_method_list_all(self, client: OnlyFansAPI) -> None:
         following = client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -88,7 +88,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_all_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_all_with_all_params(self, client: OnlyFansAPI) -> None:
         following = client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
@@ -103,7 +103,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_all(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list_all(self, client: OnlyFansAPI) -> None:
         response = client.following.with_raw_response.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -115,7 +115,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_all(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list_all(self, client: OnlyFansAPI) -> None:
         with client.following.with_streaming_response.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -129,7 +129,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list_all(self, client: Onlyfansapi) -> None:
+    def test_path_params_list_all(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.following.with_raw_response.list_all(
                 account="",
@@ -137,7 +137,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_expired(self, client: Onlyfansapi) -> None:
+    def test_method_list_expired(self, client: OnlyFansAPI) -> None:
         following = client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -145,7 +145,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_expired_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_expired_with_all_params(self, client: OnlyFansAPI) -> None:
         following = client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
@@ -160,7 +160,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_expired(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list_expired(self, client: OnlyFansAPI) -> None:
         response = client.following.with_raw_response.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -172,7 +172,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_expired(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list_expired(self, client: OnlyFansAPI) -> None:
         with client.following.with_streaming_response.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -186,7 +186,7 @@ class TestFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list_expired(self, client: Onlyfansapi) -> None:
+    def test_path_params_list_expired(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.following.with_raw_response.list_expired(
                 account="",
@@ -200,7 +200,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_active(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_active(self, async_client: AsyncOnlyFansAPI) -> None:
         following = await async_client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -208,7 +208,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_active_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_active_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         following = await async_client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
@@ -223,7 +223,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_active(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list_active(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.following.with_raw_response.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -235,7 +235,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_active(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list_active(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.following.with_streaming_response.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -249,7 +249,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list_active(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list_active(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.following.with_raw_response.list_active(
                 account="",
@@ -257,7 +257,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_all(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_all(self, async_client: AsyncOnlyFansAPI) -> None:
         following = await async_client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -265,7 +265,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_all_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_all_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         following = await async_client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
@@ -280,7 +280,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_all(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list_all(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.following.with_raw_response.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -292,7 +292,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_all(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list_all(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.following.with_streaming_response.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -306,7 +306,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list_all(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list_all(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.following.with_raw_response.list_all(
                 account="",
@@ -314,7 +314,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_expired(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_expired(self, async_client: AsyncOnlyFansAPI) -> None:
         following = await async_client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -322,7 +322,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_expired_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_expired_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         following = await async_client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
@@ -337,7 +337,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_expired(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list_expired(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.following.with_raw_response.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -349,7 +349,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_expired(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list_expired(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.following.with_streaming_response.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -363,7 +363,7 @@ class TestAsyncFollowing:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list_expired(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list_expired(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.following.with_raw_response.list_expired(
                 account="",

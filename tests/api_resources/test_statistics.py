@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import (
     StatisticGetOverviewResponse,
@@ -23,7 +23,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_calculate_total_transactions(self, client: Onlyfansapi) -> None:
+    def test_method_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         statistic = client.statistics.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -33,7 +33,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_calculate_total_transactions(self, client: Onlyfansapi) -> None:
+    def test_raw_response_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         response = client.statistics.with_raw_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -47,7 +47,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_calculate_total_transactions(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         with client.statistics.with_streaming_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -63,7 +63,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_calculate_total_transactions(self, client: Onlyfansapi) -> None:
+    def test_path_params_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.with_raw_response.calculate_total_transactions(
                 account="",
@@ -73,7 +73,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_overview(self, client: Onlyfansapi) -> None:
+    def test_method_get_overview(self, client: OnlyFansAPI) -> None:
         statistic = client.statistics.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -81,7 +81,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_overview_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_get_overview_with_all_params(self, client: OnlyFansAPI) -> None:
         statistic = client.statistics.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -92,7 +92,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_overview(self, client: Onlyfansapi) -> None:
+    def test_raw_response_get_overview(self, client: OnlyFansAPI) -> None:
         response = client.statistics.with_raw_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -104,7 +104,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_overview(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_get_overview(self, client: OnlyFansAPI) -> None:
         with client.statistics.with_streaming_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -118,7 +118,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_overview(self, client: Onlyfansapi) -> None:
+    def test_path_params_get_overview(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.with_raw_response.get_overview(
                 account="",
@@ -126,7 +126,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_subscriber_metrics(self, client: Onlyfansapi) -> None:
+    def test_method_get_subscriber_metrics(self, client: OnlyFansAPI) -> None:
         statistic = client.statistics.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -136,7 +136,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_subscriber_metrics_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_get_subscriber_metrics_with_all_params(self, client: OnlyFansAPI) -> None:
         statistic = client.statistics.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -147,7 +147,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_subscriber_metrics(self, client: Onlyfansapi) -> None:
+    def test_raw_response_get_subscriber_metrics(self, client: OnlyFansAPI) -> None:
         response = client.statistics.with_raw_response.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -161,7 +161,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_subscriber_metrics(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_get_subscriber_metrics(self, client: OnlyFansAPI) -> None:
         with client.statistics.with_streaming_response.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -177,7 +177,7 @@ class TestStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_subscriber_metrics(self, client: Onlyfansapi) -> None:
+    def test_path_params_get_subscriber_metrics(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.with_raw_response.get_subscriber_metrics(
                 account="",
@@ -193,7 +193,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_calculate_total_transactions(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         statistic = await async_client.statistics.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -203,7 +203,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_calculate_total_transactions(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.with_raw_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -217,7 +217,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_calculate_total_transactions(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.with_streaming_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -233,7 +233,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_calculate_total_transactions(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.with_raw_response.calculate_total_transactions(
                 account="",
@@ -243,7 +243,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_overview(self, async_client: AsyncOnlyFansAPI) -> None:
         statistic = await async_client.statistics.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -251,7 +251,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_overview_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_overview_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         statistic = await async_client.statistics.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -262,7 +262,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_get_overview(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.with_raw_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -274,7 +274,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_get_overview(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.with_streaming_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -288,7 +288,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_get_overview(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.with_raw_response.get_overview(
                 account="",
@@ -296,7 +296,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_subscriber_metrics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_subscriber_metrics(self, async_client: AsyncOnlyFansAPI) -> None:
         statistic = await async_client.statistics.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -306,7 +306,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_subscriber_metrics_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_subscriber_metrics_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         statistic = await async_client.statistics.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -317,7 +317,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_subscriber_metrics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_get_subscriber_metrics(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.with_raw_response.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -331,7 +331,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_subscriber_metrics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_get_subscriber_metrics(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.with_streaming_response.get_subscriber_metrics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -347,7 +347,7 @@ class TestAsyncStatistics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_subscriber_metrics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_get_subscriber_metrics(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.with_raw_response.get_subscriber_metrics(
                 account="",

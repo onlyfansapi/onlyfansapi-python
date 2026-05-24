@@ -6,7 +6,7 @@ from typing import Iterable
 
 import httpx
 
-from ..types import mass_messaging_send_params, mass_messaging_update_params
+from ..types import mass_messaging_send_params, mass_messaging_update_params, mass_messaging_retrieve_overview_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,11 +18,12 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.mass_messaging_list_response import MassMessagingListResponse
 from ..types.mass_messaging_send_response import MassMessagingSendResponse
 from ..types.mass_messaging_delete_response import MassMessagingDeleteResponse
 from ..types.mass_messaging_update_response import MassMessagingUpdateResponse
 from ..types.mass_messaging_retrieve_response import MassMessagingRetrieveResponse
-from ..types.mass_messaging_list_queue_response import MassMessagingListQueueResponse
+from ..types.mass_messaging_retrieve_overview_response import MassMessagingRetrieveOverviewResponse
 
 __all__ = ["MassMessagingResource", "AsyncMassMessagingResource"]
 
@@ -165,6 +166,39 @@ class MassMessagingResource(SyncAPIResource):
             cast_to=MassMessagingUpdateResponse,
         )
 
+    def list(
+        self,
+        account: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MassMessagingListResponse:
+        """
+        List the pending or recently sent mass messages in the message queue.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        return self._get(
+            path_template("/api/{account}/mass-messaging", account=account),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MassMessagingListResponse,
+        )
+
     def delete(
         self,
         id: str,
@@ -203,21 +237,34 @@ class MassMessagingResource(SyncAPIResource):
             cast_to=MassMessagingDeleteResponse,
         )
 
-    def list_queue(
+    def retrieve_overview(
         self,
         account: str,
         *,
+        end_date: str | Omit = omit,
+        limit: int | Omit = omit,
+        query: str | Omit = omit,
+        start_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MassMessagingListQueueResponse:
+    ) -> MassMessagingRetrieveOverviewResponse:
         """
-        List the pending or recently sent mass messages in the message queue.
+        Get an overview of mass messages, showing the send count and view count.
 
         Args:
+          end_date: The latest mass message to retrieve. Keep empty to get all. MUST BE DATE AFTER
+              `startDate`. This is also used for pagination.
+
+          limit: Number of mass messages to return (default = 10)
+
+          query: Optionally, find a mass message by the message text.
+
+          start_date: The earliest mass message to retrieve. Keep empty to get all.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -229,11 +276,23 @@ class MassMessagingResource(SyncAPIResource):
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return self._get(
-            path_template("/api/{account}/mass-messaging", account=account),
+            path_template("/api/{account}/mass-messaging/overview", account=account),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "end_date": end_date,
+                        "limit": limit,
+                        "query": query,
+                        "start_date": start_date,
+                    },
+                    mass_messaging_retrieve_overview_params.MassMessagingRetrieveOverviewParams,
+                ),
             ),
-            cast_to=MassMessagingListQueueResponse,
+            cast_to=MassMessagingRetrieveOverviewResponse,
         )
 
     def send(
@@ -477,6 +536,39 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             cast_to=MassMessagingUpdateResponse,
         )
 
+    async def list(
+        self,
+        account: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MassMessagingListResponse:
+        """
+        List the pending or recently sent mass messages in the message queue.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        return await self._get(
+            path_template("/api/{account}/mass-messaging", account=account),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MassMessagingListResponse,
+        )
+
     async def delete(
         self,
         id: str,
@@ -515,21 +607,34 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             cast_to=MassMessagingDeleteResponse,
         )
 
-    async def list_queue(
+    async def retrieve_overview(
         self,
         account: str,
         *,
+        end_date: str | Omit = omit,
+        limit: int | Omit = omit,
+        query: str | Omit = omit,
+        start_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MassMessagingListQueueResponse:
+    ) -> MassMessagingRetrieveOverviewResponse:
         """
-        List the pending or recently sent mass messages in the message queue.
+        Get an overview of mass messages, showing the send count and view count.
 
         Args:
+          end_date: The latest mass message to retrieve. Keep empty to get all. MUST BE DATE AFTER
+              `startDate`. This is also used for pagination.
+
+          limit: Number of mass messages to return (default = 10)
+
+          query: Optionally, find a mass message by the message text.
+
+          start_date: The earliest mass message to retrieve. Keep empty to get all.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -541,11 +646,23 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return await self._get(
-            path_template("/api/{account}/mass-messaging", account=account),
+            path_template("/api/{account}/mass-messaging/overview", account=account),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "end_date": end_date,
+                        "limit": limit,
+                        "query": query,
+                        "start_date": start_date,
+                    },
+                    mass_messaging_retrieve_overview_params.MassMessagingRetrieveOverviewParams,
+                ),
             ),
-            cast_to=MassMessagingListQueueResponse,
+            cast_to=MassMessagingRetrieveOverviewResponse,
         )
 
     async def send(
@@ -661,11 +778,14 @@ class MassMessagingResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             mass_messaging.update,
         )
+        self.list = to_raw_response_wrapper(
+            mass_messaging.list,
+        )
         self.delete = to_raw_response_wrapper(
             mass_messaging.delete,
         )
-        self.list_queue = to_raw_response_wrapper(
-            mass_messaging.list_queue,
+        self.retrieve_overview = to_raw_response_wrapper(
+            mass_messaging.retrieve_overview,
         )
         self.send = to_raw_response_wrapper(
             mass_messaging.send,
@@ -682,11 +802,14 @@ class AsyncMassMessagingResourceWithRawResponse:
         self.update = async_to_raw_response_wrapper(
             mass_messaging.update,
         )
+        self.list = async_to_raw_response_wrapper(
+            mass_messaging.list,
+        )
         self.delete = async_to_raw_response_wrapper(
             mass_messaging.delete,
         )
-        self.list_queue = async_to_raw_response_wrapper(
-            mass_messaging.list_queue,
+        self.retrieve_overview = async_to_raw_response_wrapper(
+            mass_messaging.retrieve_overview,
         )
         self.send = async_to_raw_response_wrapper(
             mass_messaging.send,
@@ -703,11 +826,14 @@ class MassMessagingResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             mass_messaging.update,
         )
+        self.list = to_streamed_response_wrapper(
+            mass_messaging.list,
+        )
         self.delete = to_streamed_response_wrapper(
             mass_messaging.delete,
         )
-        self.list_queue = to_streamed_response_wrapper(
-            mass_messaging.list_queue,
+        self.retrieve_overview = to_streamed_response_wrapper(
+            mass_messaging.retrieve_overview,
         )
         self.send = to_streamed_response_wrapper(
             mass_messaging.send,
@@ -724,11 +850,14 @@ class AsyncMassMessagingResourceWithStreamingResponse:
         self.update = async_to_streamed_response_wrapper(
             mass_messaging.update,
         )
+        self.list = async_to_streamed_response_wrapper(
+            mass_messaging.list,
+        )
         self.delete = async_to_streamed_response_wrapper(
             mass_messaging.delete,
         )
-        self.list_queue = async_to_streamed_response_wrapper(
-            mass_messaging.list_queue,
+        self.retrieve_overview = async_to_streamed_response_wrapper(
+            mass_messaging.retrieve_overview,
         )
         self.send = async_to_streamed_response_wrapper(
             mass_messaging.send,

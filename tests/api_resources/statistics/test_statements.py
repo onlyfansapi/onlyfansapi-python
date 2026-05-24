@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types.statistics import StatementGetEarningsResponse
 
@@ -19,7 +19,7 @@ class TestStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_earnings(self, client: Onlyfansapi) -> None:
+    def test_method_get_earnings(self, client: OnlyFansAPI) -> None:
         statement = client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -28,7 +28,7 @@ class TestStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_earnings_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_get_earnings_with_all_params(self, client: OnlyFansAPI) -> None:
         statement = client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -39,7 +39,7 @@ class TestStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_earnings(self, client: Onlyfansapi) -> None:
+    def test_raw_response_get_earnings(self, client: OnlyFansAPI) -> None:
         response = client.statistics.statements.with_raw_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -52,7 +52,7 @@ class TestStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_earnings(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_get_earnings(self, client: OnlyFansAPI) -> None:
         with client.statistics.statements.with_streaming_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -67,7 +67,7 @@ class TestStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_earnings(self, client: Onlyfansapi) -> None:
+    def test_path_params_get_earnings(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.statements.with_raw_response.get_earnings(
                 account="",
@@ -82,7 +82,7 @@ class TestAsyncStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_earnings(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         statement = await async_client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -91,7 +91,7 @@ class TestAsyncStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_earnings_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_earnings_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         statement = await async_client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -102,7 +102,7 @@ class TestAsyncStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_earnings(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.statements.with_raw_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -115,7 +115,7 @@ class TestAsyncStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_earnings(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.statements.with_streaming_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
             start_date="2025-01-01 00:00:00",
@@ -130,7 +130,7 @@ class TestAsyncStatements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_earnings(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.statements.with_raw_response.get_earnings(
                 account="",

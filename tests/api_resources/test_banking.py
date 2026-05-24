@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import BankingListCountriesResponse, BankingListAvailablePayoutSystemsResponse
 
@@ -19,7 +19,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_available_payout_systems(self, client: Onlyfansapi) -> None:
+    def test_method_list_available_payout_systems(self, client: OnlyFansAPI) -> None:
         banking = client.banking.list_available_payout_systems(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -27,7 +27,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_available_payout_systems(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list_available_payout_systems(self, client: OnlyFansAPI) -> None:
         response = client.banking.with_raw_response.list_available_payout_systems(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -39,7 +39,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_available_payout_systems(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list_available_payout_systems(self, client: OnlyFansAPI) -> None:
         with client.banking.with_streaming_response.list_available_payout_systems(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -53,7 +53,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list_available_payout_systems(self, client: Onlyfansapi) -> None:
+    def test_path_params_list_available_payout_systems(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.with_raw_response.list_available_payout_systems(
                 "",
@@ -61,7 +61,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_countries(self, client: Onlyfansapi) -> None:
+    def test_method_list_countries(self, client: OnlyFansAPI) -> None:
         banking = client.banking.list_countries(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -69,7 +69,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_countries(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list_countries(self, client: OnlyFansAPI) -> None:
         response = client.banking.with_raw_response.list_countries(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -81,7 +81,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_countries(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list_countries(self, client: OnlyFansAPI) -> None:
         with client.banking.with_streaming_response.list_countries(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -95,7 +95,7 @@ class TestBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list_countries(self, client: Onlyfansapi) -> None:
+    def test_path_params_list_countries(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.with_raw_response.list_countries(
                 "",
@@ -109,7 +109,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_available_payout_systems(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_available_payout_systems(self, async_client: AsyncOnlyFansAPI) -> None:
         banking = await async_client.banking.list_available_payout_systems(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -117,7 +117,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_available_payout_systems(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list_available_payout_systems(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.with_raw_response.list_available_payout_systems(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -129,7 +129,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_available_payout_systems(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list_available_payout_systems(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.with_streaming_response.list_available_payout_systems(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -143,7 +143,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list_available_payout_systems(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list_available_payout_systems(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.with_raw_response.list_available_payout_systems(
                 "",
@@ -151,7 +151,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_countries(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_countries(self, async_client: AsyncOnlyFansAPI) -> None:
         banking = await async_client.banking.list_countries(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -159,7 +159,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_countries(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list_countries(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.with_raw_response.list_countries(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -171,7 +171,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_countries(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list_countries(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.with_streaming_response.list_countries(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -185,7 +185,7 @@ class TestAsyncBanking:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list_countries(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list_countries(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.with_raw_response.list_countries(
                 "",
