@@ -26,21 +26,22 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .mark_as_read import (
-    MarkAsReadResource,
-    AsyncMarkAsReadResource,
-    MarkAsReadResourceWithRawResponse,
-    AsyncMarkAsReadResourceWithRawResponse,
-    MarkAsReadResourceWithStreamingResponse,
-    AsyncMarkAsReadResourceWithStreamingResponse,
-)
 from ..._base_client import make_request_options
+from .mark_all_as_read import (
+    MarkAllAsReadResource,
+    AsyncMarkAllAsReadResource,
+    MarkAllAsReadResourceWithRawResponse,
+    AsyncMarkAllAsReadResourceWithRawResponse,
+    MarkAllAsReadResourceWithStreamingResponse,
+    AsyncMarkAllAsReadResourceWithStreamingResponse,
+)
 from ...types.chat_hide_response import ChatHideResponse
 from ...types.chat_list_response import ChatListResponse
 from ...types.chat_mute_response import ChatMuteResponse
 from ...types.chat_delete_response import ChatDeleteResponse
 from ...types.chat_unmute_response import ChatUnmuteResponse
 from ...types.chat_list_media_response import ChatListMediaResponse
+from ...types.chat_mark_as_read_response import ChatMarkAsReadResponse
 from ...types.chat_start_typing_response import ChatStartTypingResponse
 from ...types.chat_mark_as_unread_response import ChatMarkAsUnreadResponse
 
@@ -53,8 +54,8 @@ class ChatsResource(SyncAPIResource):
         return MessagesResource(self._client)
 
     @cached_property
-    def mark_as_read(self) -> MarkAsReadResource:
-        return MarkAsReadResource(self._client)
+    def mark_all_as_read(self) -> MarkAllAsReadResource:
+        return MarkAllAsReadResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ChatsResourceWithRawResponse:
@@ -274,6 +275,44 @@ class ChatsResource(SyncAPIResource):
             cast_to=ChatListMediaResponse,
         )
 
+    def mark_as_read(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatMarkAsReadResponse:
+        """Mark a specific chat as read.
+
+        Alternative to List Chat Messages endpoint, if you
+        just want to mark the chat as read without fetching messages.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._post(
+            path_template("/api/{account}/chats/{chat_id}/mark-as-read", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatMarkAsReadResponse,
+        )
+
     def mark_as_unread(
         self,
         chat_id: str,
@@ -427,8 +466,8 @@ class AsyncChatsResource(AsyncAPIResource):
         return AsyncMessagesResource(self._client)
 
     @cached_property
-    def mark_as_read(self) -> AsyncMarkAsReadResource:
-        return AsyncMarkAsReadResource(self._client)
+    def mark_all_as_read(self) -> AsyncMarkAllAsReadResource:
+        return AsyncMarkAllAsReadResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncChatsResourceWithRawResponse:
@@ -648,6 +687,44 @@ class AsyncChatsResource(AsyncAPIResource):
             cast_to=ChatListMediaResponse,
         )
 
+    async def mark_as_read(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatMarkAsReadResponse:
+        """Mark a specific chat as read.
+
+        Alternative to List Chat Messages endpoint, if you
+        just want to mark the chat as read without fetching messages.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._post(
+            path_template("/api/{account}/chats/{chat_id}/mark-as-read", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatMarkAsReadResponse,
+        )
+
     async def mark_as_unread(
         self,
         chat_id: str,
@@ -811,6 +888,9 @@ class ChatsResourceWithRawResponse:
         self.list_media = to_raw_response_wrapper(
             chats.list_media,
         )
+        self.mark_as_read = to_raw_response_wrapper(
+            chats.mark_as_read,
+        )
         self.mark_as_unread = to_raw_response_wrapper(
             chats.mark_as_unread,
         )
@@ -829,8 +909,8 @@ class ChatsResourceWithRawResponse:
         return MessagesResourceWithRawResponse(self._chats.messages)
 
     @cached_property
-    def mark_as_read(self) -> MarkAsReadResourceWithRawResponse:
-        return MarkAsReadResourceWithRawResponse(self._chats.mark_as_read)
+    def mark_all_as_read(self) -> MarkAllAsReadResourceWithRawResponse:
+        return MarkAllAsReadResourceWithRawResponse(self._chats.mark_all_as_read)
 
 
 class AsyncChatsResourceWithRawResponse:
@@ -848,6 +928,9 @@ class AsyncChatsResourceWithRawResponse:
         )
         self.list_media = async_to_raw_response_wrapper(
             chats.list_media,
+        )
+        self.mark_as_read = async_to_raw_response_wrapper(
+            chats.mark_as_read,
         )
         self.mark_as_unread = async_to_raw_response_wrapper(
             chats.mark_as_unread,
@@ -867,8 +950,8 @@ class AsyncChatsResourceWithRawResponse:
         return AsyncMessagesResourceWithRawResponse(self._chats.messages)
 
     @cached_property
-    def mark_as_read(self) -> AsyncMarkAsReadResourceWithRawResponse:
-        return AsyncMarkAsReadResourceWithRawResponse(self._chats.mark_as_read)
+    def mark_all_as_read(self) -> AsyncMarkAllAsReadResourceWithRawResponse:
+        return AsyncMarkAllAsReadResourceWithRawResponse(self._chats.mark_all_as_read)
 
 
 class ChatsResourceWithStreamingResponse:
@@ -886,6 +969,9 @@ class ChatsResourceWithStreamingResponse:
         )
         self.list_media = to_streamed_response_wrapper(
             chats.list_media,
+        )
+        self.mark_as_read = to_streamed_response_wrapper(
+            chats.mark_as_read,
         )
         self.mark_as_unread = to_streamed_response_wrapper(
             chats.mark_as_unread,
@@ -905,8 +991,8 @@ class ChatsResourceWithStreamingResponse:
         return MessagesResourceWithStreamingResponse(self._chats.messages)
 
     @cached_property
-    def mark_as_read(self) -> MarkAsReadResourceWithStreamingResponse:
-        return MarkAsReadResourceWithStreamingResponse(self._chats.mark_as_read)
+    def mark_all_as_read(self) -> MarkAllAsReadResourceWithStreamingResponse:
+        return MarkAllAsReadResourceWithStreamingResponse(self._chats.mark_all_as_read)
 
 
 class AsyncChatsResourceWithStreamingResponse:
@@ -924,6 +1010,9 @@ class AsyncChatsResourceWithStreamingResponse:
         )
         self.list_media = async_to_streamed_response_wrapper(
             chats.list_media,
+        )
+        self.mark_as_read = async_to_streamed_response_wrapper(
+            chats.mark_as_read,
         )
         self.mark_as_unread = async_to_streamed_response_wrapper(
             chats.mark_as_unread,
@@ -943,5 +1032,5 @@ class AsyncChatsResourceWithStreamingResponse:
         return AsyncMessagesResourceWithStreamingResponse(self._chats.messages)
 
     @cached_property
-    def mark_as_read(self) -> AsyncMarkAsReadResourceWithStreamingResponse:
-        return AsyncMarkAsReadResourceWithStreamingResponse(self._chats.mark_as_read)
+    def mark_all_as_read(self) -> AsyncMarkAllAsReadResourceWithStreamingResponse:
+        return AsyncMarkAllAsReadResourceWithStreamingResponse(self._chats.mark_all_as_read)

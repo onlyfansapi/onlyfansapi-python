@@ -15,30 +15,30 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.chats.mark_as_read_all_response import MarkAsReadAllResponse
+from ...types.chats.mark_all_as_read_all_response import MarkAllAsReadAllResponse
 
-__all__ = ["MarkAsReadResource", "AsyncMarkAsReadResource"]
+__all__ = ["MarkAllAsReadResource", "AsyncMarkAllAsReadResource"]
 
 
-class MarkAsReadResource(SyncAPIResource):
+class MarkAllAsReadResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> MarkAsReadResourceWithRawResponse:
+    def with_raw_response(self) -> MarkAllAsReadResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#accessing-raw-response-data-eg-headers
         """
-        return MarkAsReadResourceWithRawResponse(self)
+        return MarkAllAsReadResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> MarkAsReadResourceWithStreamingResponse:
+    def with_streaming_response(self) -> MarkAllAsReadResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
-        return MarkAsReadResourceWithStreamingResponse(self)
+        return MarkAllAsReadResourceWithStreamingResponse(self)
 
     def all(
         self,
@@ -50,7 +50,7 @@ class MarkAsReadResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MarkAsReadAllResponse:
+    ) -> MarkAllAsReadAllResponse:
         """
         Mark all chats as read.
 
@@ -70,29 +70,29 @@ class MarkAsReadResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MarkAsReadAllResponse,
+            cast_to=MarkAllAsReadAllResponse,
         )
 
 
-class AsyncMarkAsReadResource(AsyncAPIResource):
+class AsyncMarkAllAsReadResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncMarkAsReadResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncMarkAllAsReadResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncMarkAsReadResourceWithRawResponse(self)
+        return AsyncMarkAllAsReadResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncMarkAsReadResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncMarkAllAsReadResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
-        return AsyncMarkAsReadResourceWithStreamingResponse(self)
+        return AsyncMarkAllAsReadResourceWithStreamingResponse(self)
 
     async def all(
         self,
@@ -104,7 +104,7 @@ class AsyncMarkAsReadResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MarkAsReadAllResponse:
+    ) -> MarkAllAsReadAllResponse:
         """
         Mark all chats as read.
 
@@ -124,41 +124,41 @@ class AsyncMarkAsReadResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MarkAsReadAllResponse,
+            cast_to=MarkAllAsReadAllResponse,
         )
 
 
-class MarkAsReadResourceWithRawResponse:
-    def __init__(self, mark_as_read: MarkAsReadResource) -> None:
-        self._mark_as_read = mark_as_read
+class MarkAllAsReadResourceWithRawResponse:
+    def __init__(self, mark_all_as_read: MarkAllAsReadResource) -> None:
+        self._mark_all_as_read = mark_all_as_read
 
         self.all = to_raw_response_wrapper(
-            mark_as_read.all,
+            mark_all_as_read.all,
         )
 
 
-class AsyncMarkAsReadResourceWithRawResponse:
-    def __init__(self, mark_as_read: AsyncMarkAsReadResource) -> None:
-        self._mark_as_read = mark_as_read
+class AsyncMarkAllAsReadResourceWithRawResponse:
+    def __init__(self, mark_all_as_read: AsyncMarkAllAsReadResource) -> None:
+        self._mark_all_as_read = mark_all_as_read
 
         self.all = async_to_raw_response_wrapper(
-            mark_as_read.all,
+            mark_all_as_read.all,
         )
 
 
-class MarkAsReadResourceWithStreamingResponse:
-    def __init__(self, mark_as_read: MarkAsReadResource) -> None:
-        self._mark_as_read = mark_as_read
+class MarkAllAsReadResourceWithStreamingResponse:
+    def __init__(self, mark_all_as_read: MarkAllAsReadResource) -> None:
+        self._mark_all_as_read = mark_all_as_read
 
         self.all = to_streamed_response_wrapper(
-            mark_as_read.all,
+            mark_all_as_read.all,
         )
 
 
-class AsyncMarkAsReadResourceWithStreamingResponse:
-    def __init__(self, mark_as_read: AsyncMarkAsReadResource) -> None:
-        self._mark_as_read = mark_as_read
+class AsyncMarkAllAsReadResourceWithStreamingResponse:
+    def __init__(self, mark_all_as_read: AsyncMarkAllAsReadResource) -> None:
+        self._mark_all_as_read = mark_all_as_read
 
         self.all = async_to_streamed_response_wrapper(
-            mark_as_read.all,
+            mark_all_as_read.all,
         )

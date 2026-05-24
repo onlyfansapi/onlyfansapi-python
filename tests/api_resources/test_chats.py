@@ -16,6 +16,7 @@ from onlyfansapi.types import (
     ChatDeleteResponse,
     ChatUnmuteResponse,
     ChatListMediaResponse,
+    ChatMarkAsReadResponse,
     ChatStartTypingResponse,
     ChatMarkAsUnreadResponse,
 )
@@ -247,6 +248,58 @@ class TestChats:
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
             client.chats.with_raw_response.list_media(
+                chat_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_mark_as_read(self, client: OnlyFansAPI) -> None:
+        chat = client.chats.mark_as_read(
+            chat_id="123",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(ChatMarkAsReadResponse, chat, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_mark_as_read(self, client: OnlyFansAPI) -> None:
+        response = client.chats.with_raw_response.mark_as_read(
+            chat_id="123",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        chat = response.parse()
+        assert_matches_type(ChatMarkAsReadResponse, chat, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_mark_as_read(self, client: OnlyFansAPI) -> None:
+        with client.chats.with_streaming_response.mark_as_read(
+            chat_id="123",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            chat = response.parse()
+            assert_matches_type(ChatMarkAsReadResponse, chat, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_mark_as_read(self, client: OnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            client.chats.with_raw_response.mark_as_read(
+                chat_id="123",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
+            client.chats.with_raw_response.mark_as_read(
                 chat_id="",
                 account="acct_XXXXXXXXXXXXXXX",
             )
@@ -686,6 +739,58 @@ class TestAsyncChats:
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
             await async_client.chats.with_raw_response.list_media(
+                chat_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_mark_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
+        chat = await async_client.chats.mark_as_read(
+            chat_id="123",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(ChatMarkAsReadResponse, chat, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_mark_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.chats.with_raw_response.mark_as_read(
+            chat_id="123",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        chat = await response.parse()
+        assert_matches_type(ChatMarkAsReadResponse, chat, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_mark_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.chats.with_streaming_response.mark_as_read(
+            chat_id="123",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            chat = await response.parse()
+            assert_matches_type(ChatMarkAsReadResponse, chat, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_mark_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            await async_client.chats.with_raw_response.mark_as_read(
+                chat_id="123",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
+            await async_client.chats.with_raw_response.mark_as_read(
                 chat_id="",
                 account="acct_XXXXXXXXXXXXXXX",
             )
