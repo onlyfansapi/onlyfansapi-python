@@ -171,6 +171,7 @@ from onlyfansapi.types import (
     ChatDeleteResponse,
     ChatHideResponse,
     ChatListMediaResponse,
+    ChatMarkAsReadResponse,
     ChatMarkAsUnreadResponse,
     ChatMuteResponse,
     ChatStartTypingResponse,
@@ -184,6 +185,7 @@ Methods:
 - <code title="delete /api/{account}/chats/{chat_id}">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">delete</a>(chat_id, \*, account) -> <a href="./src/onlyfansapi/types/chat_delete_response.py">ChatDeleteResponse</a></code>
 - <code title="post /api/{account}/chats/{chat_id}/hide">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">hide</a>(chat_id, \*, account) -> <a href="./src/onlyfansapi/types/chat_hide_response.py">ChatHideResponse</a></code>
 - <code title="get /api/{account}/chats/{chat_id}/media">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">list_media</a>(chat_id, \*, account, \*\*<a href="src/onlyfansapi/types/chat_list_media_params.py">params</a>) -> <a href="./src/onlyfansapi/types/chat_list_media_response.py">ChatListMediaResponse</a></code>
+- <code title="post /api/{account}/chats/{chat_id}/mark-as-read">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">mark_as_read</a>(chat_id, \*, account) -> <a href="./src/onlyfansapi/types/chat_mark_as_read_response.py">ChatMarkAsReadResponse</a></code>
 - <code title="post /api/{account}/chats/{chat_id}/mark-as-unread">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">mark_as_unread</a>(chat_id, \*, account) -> <a href="./src/onlyfansapi/types/chat_mark_as_unread_response.py">ChatMarkAsUnreadResponse</a></code>
 - <code title="post /api/{account}/chats/{chat_id}/mute">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">mute</a>(chat_id, \*, account) -> <a href="./src/onlyfansapi/types/chat_mute_response.py">ChatMuteResponse</a></code>
 - <code title="post /api/{account}/chats/{chat_id}/typing">client.chats.<a href="./src/onlyfansapi/resources/chats/chats.py">start_typing</a>(chat_id, \*, account) -> <a href="./src/onlyfansapi/types/chat_start_typing_response.py">ChatStartTypingResponse</a></code>
@@ -219,17 +221,17 @@ Methods:
 - <code title="delete /api/{account}/chats/{chat_id}/messages/{message_id}/unlike">client.chats.messages.<a href="./src/onlyfansapi/resources/chats/messages.py">unlike</a>(message_id, \*, account, chat_id) -> <a href="./src/onlyfansapi/types/chats/message_unlike_response.py">MessageUnlikeResponse</a></code>
 - <code title="delete /api/{account}/chats/{chat_id}/messages/{message_id}/unpin">client.chats.messages.<a href="./src/onlyfansapi/resources/chats/messages.py">unpin</a>(message_id, \*, account, chat_id) -> <a href="./src/onlyfansapi/types/chats/message_unpin_response.py">MessageUnpinResponse</a></code>
 
-## MarkAsRead
+## MarkAllAsRead
 
 Types:
 
 ```python
-from onlyfansapi.types.chats import MarkAsReadAllResponse
+from onlyfansapi.types.chats import MarkAllAsReadAllResponse
 ```
 
 Methods:
 
-- <code title="post /api/{account}/chats/mark-as-read">client.chats.mark_as_read.<a href="./src/onlyfansapi/resources/chats/mark_as_read.py">all</a>(account) -> <a href="./src/onlyfansapi/types/chats/mark_as_read_all_response.py">MarkAsReadAllResponse</a></code>
+- <code title="post /api/{account}/chats/mark-as-read">client.chats.mark_all_as_read.<a href="./src/onlyfansapi/resources/chats/mark_all_as_read.py">all</a>(account) -> <a href="./src/onlyfansapi/types/chats/mark_all_as_read_all_response.py">MarkAllAsReadAllResponse</a></code>
 
 # Messages
 

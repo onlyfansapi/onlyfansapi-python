@@ -6,7 +6,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["MarkAsReadAllResponse", "_Meta", "_Meta_Cache", "_Meta_Credits", "_Meta_RateLimits", "Data"]
+__all__ = ["MarkAllAsReadAllResponse", "_Meta", "_Meta_Cache", "_Meta_Credits", "_Meta_RateLimits", "Data"]
 
 
 class _Meta_Cache(BaseModel):
@@ -45,7 +45,7 @@ class Data(BaseModel):
     success: Optional[bool] = None
 
 
-class MarkAsReadAllResponse(BaseModel):
+class MarkAllAsReadAllResponse(BaseModel):
     api_meta: Optional[_Meta] = FieldInfo(alias="_meta", default=None)
 
     data: Optional[Data] = None

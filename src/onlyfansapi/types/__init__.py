@@ -108,6 +108,7 @@ from .user_list_create_response import UserListCreateResponse as UserListCreateR
 from .user_list_delete_response import UserListDeleteResponse as UserListDeleteResponse
 from .user_list_update_response import UserListUpdateResponse as UserListUpdateResponse
 from .webhook_retrieve_response import WebhookRetrieveResponse as WebhookRetrieveResponse
+from .chat_mark_as_read_response import ChatMarkAsReadResponse as ChatMarkAsReadResponse
 from .chat_start_typing_response import ChatStartTypingResponse as ChatStartTypingResponse
 from .data_export_retry_response import DataExportRetryResponse as DataExportRetryResponse
 from .data_export_start_response import DataExportStartResponse as DataExportStartResponse

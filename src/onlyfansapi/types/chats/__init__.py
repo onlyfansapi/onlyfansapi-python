@@ -13,5 +13,5 @@ from .message_unpin_response import MessageUnpinResponse as MessageUnpinResponse
 from .message_delete_response import MessageDeleteResponse as MessageDeleteResponse
 from .message_search_response import MessageSearchResponse as MessageSearchResponse
 from .message_unlike_response import MessageUnlikeResponse as MessageUnlikeResponse
-from .mark_as_read_all_response import MarkAsReadAllResponse as MarkAsReadAllResponse
 from .message_retrieve_response import MessageRetrieveResponse as MessageRetrieveResponse
+from .mark_all_as_read_all_response import MarkAllAsReadAllResponse as MarkAllAsReadAllResponse

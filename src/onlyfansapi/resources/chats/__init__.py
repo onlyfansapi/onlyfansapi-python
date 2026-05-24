@@ -16,13 +16,13 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
-from .mark_as_read import (
-    MarkAsReadResource,
-    AsyncMarkAsReadResource,
-    MarkAsReadResourceWithRawResponse,
-    AsyncMarkAsReadResourceWithRawResponse,
-    MarkAsReadResourceWithStreamingResponse,
-    AsyncMarkAsReadResourceWithStreamingResponse,
+from .mark_all_as_read import (
+    MarkAllAsReadResource,
+    AsyncMarkAllAsReadResource,
+    MarkAllAsReadResourceWithRawResponse,
+    AsyncMarkAllAsReadResourceWithRawResponse,
+    MarkAllAsReadResourceWithStreamingResponse,
+    AsyncMarkAllAsReadResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -32,12 +32,12 @@ __all__ = [
     "AsyncMessagesResourceWithRawResponse",
     "MessagesResourceWithStreamingResponse",
     "AsyncMessagesResourceWithStreamingResponse",
-    "MarkAsReadResource",
-    "AsyncMarkAsReadResource",
-    "MarkAsReadResourceWithRawResponse",
-    "AsyncMarkAsReadResourceWithRawResponse",
-    "MarkAsReadResourceWithStreamingResponse",
-    "AsyncMarkAsReadResourceWithStreamingResponse",
+    "MarkAllAsReadResource",
+    "AsyncMarkAllAsReadResource",
+    "MarkAllAsReadResourceWithRawResponse",
+    "AsyncMarkAllAsReadResourceWithRawResponse",
+    "MarkAllAsReadResourceWithStreamingResponse",
+    "AsyncMarkAllAsReadResourceWithStreamingResponse",
     "ChatsResource",
     "AsyncChatsResource",
     "ChatsResourceWithRawResponse",
