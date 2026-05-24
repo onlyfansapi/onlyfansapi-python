@@ -52,7 +52,7 @@ class SharedTrialLinksResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/onlyfansapi/onlyfansapi-python#accessing-raw-response-data-eg-headers
         """
         return SharedTrialLinksResourceWithRawResponse(self)
 
@@ -61,7 +61,7 @@ class SharedTrialLinksResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
+        For more information, see https://www.github.com/onlyfansapi/onlyfansapi-python#with_streaming_response
         """
         return SharedTrialLinksResourceWithStreamingResponse(self)
 
@@ -183,7 +183,7 @@ class AsyncSharedTrialLinksResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/onlyfansapi/onlyfansapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSharedTrialLinksResourceWithRawResponse(self)
 
@@ -192,7 +192,7 @@ class AsyncSharedTrialLinksResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
+        For more information, see https://www.github.com/onlyfansapi/onlyfansapi-python#with_streaming_response
         """
         return AsyncSharedTrialLinksResourceWithStreamingResponse(self)
 
