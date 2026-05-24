@@ -16,12 +16,9 @@ The REST API documentation can be found on [docs.onlyfansapi.com](https://docs.o
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/onlyfansapi/onlyfansapi-python.git
+# install from PyPI
+pip install onlyfansapi
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install onlyfansapi`
 
 ## Usage
 
@@ -75,8 +72,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from the production repo
-pip install 'onlyfansapi[aiohttp] @ git+ssh://git@github.com/onlyfansapi/onlyfansapi-python.git'
+# install from PyPI
+pip install onlyfansapi[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
