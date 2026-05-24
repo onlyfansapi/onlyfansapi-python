@@ -16,6 +16,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.me_retrieve_response import MeRetrieveResponse
+from ..types.me_get_top_percentage_response import MeGetTopPercentageResponse
 from ..types.me_get_model_start_date_response import MeGetModelStartDateResponse
 
 __all__ = ["MeResource", "AsyncMeResource"]
@@ -109,6 +110,39 @@ class MeResource(SyncAPIResource):
             cast_to=MeGetModelStartDateResponse,
         )
 
+    def get_top_percentage(
+        self,
+        account: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MeGetTopPercentageResponse:
+        """
+        Get the top percentage of the model (e.g., top 0.02% of all creators)
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        return self._get(
+            path_template("/api/{account}/me/top-percentage", account=account),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MeGetTopPercentageResponse,
+        )
+
 
 class AsyncMeResource(AsyncAPIResource):
     """Endpoints for your linked accounts"""
@@ -198,6 +232,39 @@ class AsyncMeResource(AsyncAPIResource):
             cast_to=MeGetModelStartDateResponse,
         )
 
+    async def get_top_percentage(
+        self,
+        account: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MeGetTopPercentageResponse:
+        """
+        Get the top percentage of the model (e.g., top 0.02% of all creators)
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        return await self._get(
+            path_template("/api/{account}/me/top-percentage", account=account),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MeGetTopPercentageResponse,
+        )
+
 
 class MeResourceWithRawResponse:
     def __init__(self, me: MeResource) -> None:
@@ -208,6 +275,9 @@ class MeResourceWithRawResponse:
         )
         self.get_model_start_date = to_raw_response_wrapper(
             me.get_model_start_date,
+        )
+        self.get_top_percentage = to_raw_response_wrapper(
+            me.get_top_percentage,
         )
 
 
@@ -221,6 +291,9 @@ class AsyncMeResourceWithRawResponse:
         self.get_model_start_date = async_to_raw_response_wrapper(
             me.get_model_start_date,
         )
+        self.get_top_percentage = async_to_raw_response_wrapper(
+            me.get_top_percentage,
+        )
 
 
 class MeResourceWithStreamingResponse:
@@ -233,6 +306,9 @@ class MeResourceWithStreamingResponse:
         self.get_model_start_date = to_streamed_response_wrapper(
             me.get_model_start_date,
         )
+        self.get_top_percentage = to_streamed_response_wrapper(
+            me.get_top_percentage,
+        )
 
 
 class AsyncMeResourceWithStreamingResponse:
@@ -244,4 +320,7 @@ class AsyncMeResourceWithStreamingResponse:
         )
         self.get_model_start_date = async_to_streamed_response_wrapper(
             me.get_model_start_date,
+        )
+        self.get_top_percentage = async_to_streamed_response_wrapper(
+            me.get_top_percentage,
         )

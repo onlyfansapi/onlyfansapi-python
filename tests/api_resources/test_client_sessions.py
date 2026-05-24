@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import ClientSessionCreateResponse
 
@@ -19,7 +19,7 @@ class TestClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_create(self, client: Onlyfansapi) -> None:
+    def test_method_create(self, client: OnlyFansAPI) -> None:
         client_session = client.client_sessions.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
         )
@@ -27,7 +27,7 @@ class TestClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_create_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_create_with_all_params(self, client: OnlyFansAPI) -> None:
         client_session = client.client_sessions.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
             client_reference_id="my_crm_model_12345",
@@ -37,7 +37,7 @@ class TestClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Onlyfansapi) -> None:
+    def test_raw_response_create(self, client: OnlyFansAPI) -> None:
         response = client.client_sessions.with_raw_response.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
         )
@@ -49,7 +49,7 @@ class TestClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_create(self, client: OnlyFansAPI) -> None:
         with client.client_sessions.with_streaming_response.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
         ) as response:
@@ -69,7 +69,7 @@ class TestAsyncClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_create(self, async_client: AsyncOnlyFansAPI) -> None:
         client_session = await async_client.client_sessions.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
         )
@@ -77,7 +77,7 @@ class TestAsyncClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         client_session = await async_client.client_sessions.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
             client_reference_id="my_crm_model_12345",
@@ -87,7 +87,7 @@ class TestAsyncClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.client_sessions.with_raw_response.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
         )
@@ -99,7 +99,7 @@ class TestAsyncClientSessions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.client_sessions.with_streaming_response.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
         ) as response:

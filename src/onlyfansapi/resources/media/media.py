@@ -8,6 +8,14 @@ from typing_extensions import Literal
 import httpx
 
 from ...types import media_scrape_params, media_upload_params
+from .uploads import (
+    UploadsResource,
+    AsyncUploadsResource,
+    UploadsResourceWithRawResponse,
+    AsyncUploadsResourceWithRawResponse,
+    UploadsResourceWithStreamingResponse,
+    AsyncUploadsResourceWithStreamingResponse,
+)
 from ..._files import deepcopy_with_paths
 from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from ..._utils import extract_files, path_template, maybe_transform, async_maybe_transform
@@ -36,6 +44,10 @@ __all__ = ["MediaResource", "AsyncMediaResource"]
 
 class MediaResource(SyncAPIResource):
     @cached_property
+    def uploads(self) -> UploadsResource:
+        return UploadsResource(self._client)
+
+    @cached_property
     def vault(self) -> VaultResource:
         return VaultResource(self._client)
 
@@ -57,6 +69,48 @@ class MediaResource(SyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
         return MediaResourceWithStreamingResponse(self)
+
+    def download(
+        self,
+        cdn_url: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> str:
+        """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
+
+        When the
+        file is already cached on our CDN, this endpoint returns a `302` redirect to a
+        `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
+        automatically (`curl` requires `-L`). Otherwise, the file is streamed through
+        our proxies and queued for caching.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not cdn_url:
+            raise ValueError(f"Expected a non-empty value for `cdn_url` but received {cdn_url!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            path_template("/api/{account}/media/download/{cdn_url}", account=account, cdn_url=cdn_url),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
 
     def scrape(
         self,
@@ -194,6 +248,10 @@ class MediaResource(SyncAPIResource):
 
 class AsyncMediaResource(AsyncAPIResource):
     @cached_property
+    def uploads(self) -> AsyncUploadsResource:
+        return AsyncUploadsResource(self._client)
+
+    @cached_property
     def vault(self) -> AsyncVaultResource:
         return AsyncVaultResource(self._client)
 
@@ -215,6 +273,48 @@ class AsyncMediaResource(AsyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
         return AsyncMediaResourceWithStreamingResponse(self)
+
+    async def download(
+        self,
+        cdn_url: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> str:
+        """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
+
+        When the
+        file is already cached on our CDN, this endpoint returns a `302` redirect to a
+        `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
+        automatically (`curl` requires `-L`). Otherwise, the file is streamed through
+        our proxies and queued for caching.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not cdn_url:
+            raise ValueError(f"Expected a non-empty value for `cdn_url` but received {cdn_url!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            path_template("/api/{account}/media/download/{cdn_url}", account=account, cdn_url=cdn_url),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
 
     async def scrape(
         self,
@@ -354,12 +454,19 @@ class MediaResourceWithRawResponse:
     def __init__(self, media: MediaResource) -> None:
         self._media = media
 
+        self.download = to_raw_response_wrapper(
+            media.download,
+        )
         self.scrape = to_raw_response_wrapper(
             media.scrape,
         )
         self.upload = to_raw_response_wrapper(
             media.upload,
         )
+
+    @cached_property
+    def uploads(self) -> UploadsResourceWithRawResponse:
+        return UploadsResourceWithRawResponse(self._media.uploads)
 
     @cached_property
     def vault(self) -> VaultResourceWithRawResponse:
@@ -370,12 +477,19 @@ class AsyncMediaResourceWithRawResponse:
     def __init__(self, media: AsyncMediaResource) -> None:
         self._media = media
 
+        self.download = async_to_raw_response_wrapper(
+            media.download,
+        )
         self.scrape = async_to_raw_response_wrapper(
             media.scrape,
         )
         self.upload = async_to_raw_response_wrapper(
             media.upload,
         )
+
+    @cached_property
+    def uploads(self) -> AsyncUploadsResourceWithRawResponse:
+        return AsyncUploadsResourceWithRawResponse(self._media.uploads)
 
     @cached_property
     def vault(self) -> AsyncVaultResourceWithRawResponse:
@@ -386,12 +500,19 @@ class MediaResourceWithStreamingResponse:
     def __init__(self, media: MediaResource) -> None:
         self._media = media
 
+        self.download = to_streamed_response_wrapper(
+            media.download,
+        )
         self.scrape = to_streamed_response_wrapper(
             media.scrape,
         )
         self.upload = to_streamed_response_wrapper(
             media.upload,
         )
+
+    @cached_property
+    def uploads(self) -> UploadsResourceWithStreamingResponse:
+        return UploadsResourceWithStreamingResponse(self._media.uploads)
 
     @cached_property
     def vault(self) -> VaultResourceWithStreamingResponse:
@@ -402,12 +523,19 @@ class AsyncMediaResourceWithStreamingResponse:
     def __init__(self, media: AsyncMediaResource) -> None:
         self._media = media
 
+        self.download = async_to_streamed_response_wrapper(
+            media.download,
+        )
         self.scrape = async_to_streamed_response_wrapper(
             media.scrape,
         )
         self.upload = async_to_streamed_response_wrapper(
             media.upload,
         )
+
+    @cached_property
+    def uploads(self) -> AsyncUploadsResourceWithStreamingResponse:
+        return AsyncUploadsResourceWithStreamingResponse(self._media.uploads)
 
     @cached_property
     def vault(self) -> AsyncVaultResourceWithStreamingResponse:

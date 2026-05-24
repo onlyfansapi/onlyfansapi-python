@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types.saved_for_later.posts import (
     SettingRetrieveResponse,
@@ -23,7 +23,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve(self, client: OnlyFansAPI) -> None:
         setting = client.saved_for_later.posts.settings.retrieve(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -31,7 +31,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve(self, client: OnlyFansAPI) -> None:
         response = client.saved_for_later.posts.settings.with_raw_response.retrieve(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -43,7 +43,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve(self, client: OnlyFansAPI) -> None:
         with client.saved_for_later.posts.settings.with_streaming_response.retrieve(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -57,7 +57,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.saved_for_later.posts.settings.with_raw_response.retrieve(
                 "",
@@ -65,7 +65,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_disable_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_method_disable_automatic_posting(self, client: OnlyFansAPI) -> None:
         setting = client.saved_for_later.posts.settings.disable_automatic_posting(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -73,7 +73,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_disable_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_raw_response_disable_automatic_posting(self, client: OnlyFansAPI) -> None:
         response = client.saved_for_later.posts.settings.with_raw_response.disable_automatic_posting(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -85,7 +85,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_disable_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_disable_automatic_posting(self, client: OnlyFansAPI) -> None:
         with client.saved_for_later.posts.settings.with_streaming_response.disable_automatic_posting(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -99,7 +99,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_disable_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_path_params_disable_automatic_posting(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.saved_for_later.posts.settings.with_raw_response.disable_automatic_posting(
                 "",
@@ -107,7 +107,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_enable_or_update_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_method_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         setting = client.saved_for_later.posts.settings.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
             period=6,
@@ -116,7 +116,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_enable_or_update_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_raw_response_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         response = client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
             period=6,
@@ -129,7 +129,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_enable_or_update_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         with client.saved_for_later.posts.settings.with_streaming_response.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
             period=6,
@@ -144,7 +144,7 @@ class TestSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_enable_or_update_automatic_posting(self, client: Onlyfansapi) -> None:
+    def test_path_params_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
                 account="",
@@ -159,7 +159,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         setting = await async_client.saved_for_later.posts.settings.retrieve(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -167,7 +167,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.saved_for_later.posts.settings.with_raw_response.retrieve(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -179,7 +179,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.saved_for_later.posts.settings.with_streaming_response.retrieve(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -193,7 +193,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.saved_for_later.posts.settings.with_raw_response.retrieve(
                 "",
@@ -201,7 +201,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_disable_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_disable_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         setting = await async_client.saved_for_later.posts.settings.disable_automatic_posting(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -209,7 +209,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_disable_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_disable_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.saved_for_later.posts.settings.with_raw_response.disable_automatic_posting(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -221,7 +221,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_disable_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_disable_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.saved_for_later.posts.settings.with_streaming_response.disable_automatic_posting(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -235,7 +235,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_disable_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_disable_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.saved_for_later.posts.settings.with_raw_response.disable_automatic_posting(
                 "",
@@ -243,7 +243,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_enable_or_update_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_enable_or_update_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         setting = await async_client.saved_for_later.posts.settings.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
             period=6,
@@ -252,7 +252,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_enable_or_update_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_enable_or_update_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         response = (
             await async_client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
                 account="acct_XXXXXXXXXXXXXXX",
@@ -267,7 +267,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_enable_or_update_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_enable_or_update_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         async with (
             async_client.saved_for_later.posts.settings.with_streaming_response.enable_or_update_automatic_posting(
                 account="acct_XXXXXXXXXXXXXXX",
@@ -284,7 +284,7 @@ class TestAsyncSettings:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_enable_or_update_automatic_posting(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_enable_or_update_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
                 account="",

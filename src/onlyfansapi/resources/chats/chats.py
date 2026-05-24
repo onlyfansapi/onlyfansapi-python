@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ...types import chat_list_params
+from ...types import chat_list_params, chat_list_media_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from .messages import (
@@ -25,9 +26,23 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .mark_as_read import (
+    MarkAsReadResource,
+    AsyncMarkAsReadResource,
+    MarkAsReadResourceWithRawResponse,
+    AsyncMarkAsReadResourceWithRawResponse,
+    MarkAsReadResourceWithStreamingResponse,
+    AsyncMarkAsReadResourceWithStreamingResponse,
+)
 from ..._base_client import make_request_options
+from ...types.chat_hide_response import ChatHideResponse
 from ...types.chat_list_response import ChatListResponse
-from ...types.chat_start_typing_indicator_response import ChatStartTypingIndicatorResponse
+from ...types.chat_mute_response import ChatMuteResponse
+from ...types.chat_delete_response import ChatDeleteResponse
+from ...types.chat_unmute_response import ChatUnmuteResponse
+from ...types.chat_list_media_response import ChatListMediaResponse
+from ...types.chat_start_typing_response import ChatStartTypingResponse
+from ...types.chat_mark_as_unread_response import ChatMarkAsUnreadResponse
 
 __all__ = ["ChatsResource", "AsyncChatsResource"]
 
@@ -36,6 +51,10 @@ class ChatsResource(SyncAPIResource):
     @cached_property
     def messages(self) -> MessagesResource:
         return MessagesResource(self._client)
+
+    @cached_property
+    def mark_as_read(self) -> MarkAsReadResource:
+        return MarkAsReadResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ChatsResourceWithRawResponse:
@@ -121,7 +140,7 @@ class ChatsResource(SyncAPIResource):
             cast_to=ChatListResponse,
         )
 
-    def start_typing_indicator(
+    def delete(
         self,
         chat_id: str,
         *,
@@ -132,7 +151,213 @@ class ChatsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChatStartTypingIndicatorResponse:
+    ) -> ChatDeleteResponse:
+        """
+        Delete a specific chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._delete(
+            path_template("/api/{account}/chats/{chat_id}", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatDeleteResponse,
+        )
+
+    def hide(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatHideResponse:
+        """Hide a specific chat from the chat list.
+
+        To unhide this chat, send a new message
+        to the user.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._post(
+            path_template("/api/{account}/chats/{chat_id}/hide", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatHideResponse,
+        )
+
+    def list_media(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        limit: str | Omit = omit,
+        offset: str | Omit = omit,
+        skip_users: str | Omit = omit,
+        type: Optional[Literal["photos", "videos", "audios"]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatListMediaResponse:
+        """
+        List media files shared in a specific chat.
+
+        Args:
+          limit: Number of medias to return. Default = 20
+
+          offset: Number of medias to skip for pagination
+
+          skip_users: Whether to skip user details in response (all or none). Default = all
+
+          type: Filter by specific media types. Keep empty to return all.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._get(
+            path_template("/api/{account}/chats/{chat_id}/media", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                        "skip_users": skip_users,
+                        "type": type,
+                    },
+                    chat_list_media_params.ChatListMediaParams,
+                ),
+            ),
+            cast_to=ChatListMediaResponse,
+        )
+
+    def mark_as_unread(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatMarkAsUnreadResponse:
+        """
+        Mark a specific chat as unread.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._post(
+            path_template("/api/{account}/chats/{chat_id}/mark-as-unread", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatMarkAsUnreadResponse,
+        )
+
+    def mute(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatMuteResponse:
+        """
+        Mute notifications for a specific chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._post(
+            path_template("/api/{account}/chats/{chat_id}/mute", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatMuteResponse,
+        )
+
+    def start_typing(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatStartTypingResponse:
         """
         Calling this endpoint will show the target fan a "Model is typing..." note in
         the chat for ~4 seconds. If you want to continue showing the indicator call this
@@ -156,7 +381,43 @@ class ChatsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChatStartTypingIndicatorResponse,
+            cast_to=ChatStartTypingResponse,
+        )
+
+    def unmute(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatUnmuteResponse:
+        """
+        Unmute notifications for a specific chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._delete(
+            path_template("/api/{account}/chats/{chat_id}/unmute", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatUnmuteResponse,
         )
 
 
@@ -164,6 +425,10 @@ class AsyncChatsResource(AsyncAPIResource):
     @cached_property
     def messages(self) -> AsyncMessagesResource:
         return AsyncMessagesResource(self._client)
+
+    @cached_property
+    def mark_as_read(self) -> AsyncMarkAsReadResource:
+        return AsyncMarkAsReadResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncChatsResourceWithRawResponse:
@@ -249,7 +514,7 @@ class AsyncChatsResource(AsyncAPIResource):
             cast_to=ChatListResponse,
         )
 
-    async def start_typing_indicator(
+    async def delete(
         self,
         chat_id: str,
         *,
@@ -260,7 +525,213 @@ class AsyncChatsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChatStartTypingIndicatorResponse:
+    ) -> ChatDeleteResponse:
+        """
+        Delete a specific chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._delete(
+            path_template("/api/{account}/chats/{chat_id}", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatDeleteResponse,
+        )
+
+    async def hide(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatHideResponse:
+        """Hide a specific chat from the chat list.
+
+        To unhide this chat, send a new message
+        to the user.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._post(
+            path_template("/api/{account}/chats/{chat_id}/hide", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatHideResponse,
+        )
+
+    async def list_media(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        limit: str | Omit = omit,
+        offset: str | Omit = omit,
+        skip_users: str | Omit = omit,
+        type: Optional[Literal["photos", "videos", "audios"]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatListMediaResponse:
+        """
+        List media files shared in a specific chat.
+
+        Args:
+          limit: Number of medias to return. Default = 20
+
+          offset: Number of medias to skip for pagination
+
+          skip_users: Whether to skip user details in response (all or none). Default = all
+
+          type: Filter by specific media types. Keep empty to return all.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._get(
+            path_template("/api/{account}/chats/{chat_id}/media", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                        "skip_users": skip_users,
+                        "type": type,
+                    },
+                    chat_list_media_params.ChatListMediaParams,
+                ),
+            ),
+            cast_to=ChatListMediaResponse,
+        )
+
+    async def mark_as_unread(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatMarkAsUnreadResponse:
+        """
+        Mark a specific chat as unread.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._post(
+            path_template("/api/{account}/chats/{chat_id}/mark-as-unread", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatMarkAsUnreadResponse,
+        )
+
+    async def mute(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatMuteResponse:
+        """
+        Mute notifications for a specific chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._post(
+            path_template("/api/{account}/chats/{chat_id}/mute", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatMuteResponse,
+        )
+
+    async def start_typing(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatStartTypingResponse:
         """
         Calling this endpoint will show the target fan a "Model is typing..." note in
         the chat for ~4 seconds. If you want to continue showing the indicator call this
@@ -284,7 +755,43 @@ class AsyncChatsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChatStartTypingIndicatorResponse,
+            cast_to=ChatStartTypingResponse,
+        )
+
+    async def unmute(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ChatUnmuteResponse:
+        """
+        Unmute notifications for a specific chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._delete(
+            path_template("/api/{account}/chats/{chat_id}/unmute", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ChatUnmuteResponse,
         )
 
 
@@ -295,13 +802,35 @@ class ChatsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             chats.list,
         )
-        self.start_typing_indicator = to_raw_response_wrapper(
-            chats.start_typing_indicator,
+        self.delete = to_raw_response_wrapper(
+            chats.delete,
+        )
+        self.hide = to_raw_response_wrapper(
+            chats.hide,
+        )
+        self.list_media = to_raw_response_wrapper(
+            chats.list_media,
+        )
+        self.mark_as_unread = to_raw_response_wrapper(
+            chats.mark_as_unread,
+        )
+        self.mute = to_raw_response_wrapper(
+            chats.mute,
+        )
+        self.start_typing = to_raw_response_wrapper(
+            chats.start_typing,
+        )
+        self.unmute = to_raw_response_wrapper(
+            chats.unmute,
         )
 
     @cached_property
     def messages(self) -> MessagesResourceWithRawResponse:
         return MessagesResourceWithRawResponse(self._chats.messages)
+
+    @cached_property
+    def mark_as_read(self) -> MarkAsReadResourceWithRawResponse:
+        return MarkAsReadResourceWithRawResponse(self._chats.mark_as_read)
 
 
 class AsyncChatsResourceWithRawResponse:
@@ -311,13 +840,35 @@ class AsyncChatsResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             chats.list,
         )
-        self.start_typing_indicator = async_to_raw_response_wrapper(
-            chats.start_typing_indicator,
+        self.delete = async_to_raw_response_wrapper(
+            chats.delete,
+        )
+        self.hide = async_to_raw_response_wrapper(
+            chats.hide,
+        )
+        self.list_media = async_to_raw_response_wrapper(
+            chats.list_media,
+        )
+        self.mark_as_unread = async_to_raw_response_wrapper(
+            chats.mark_as_unread,
+        )
+        self.mute = async_to_raw_response_wrapper(
+            chats.mute,
+        )
+        self.start_typing = async_to_raw_response_wrapper(
+            chats.start_typing,
+        )
+        self.unmute = async_to_raw_response_wrapper(
+            chats.unmute,
         )
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
         return AsyncMessagesResourceWithRawResponse(self._chats.messages)
+
+    @cached_property
+    def mark_as_read(self) -> AsyncMarkAsReadResourceWithRawResponse:
+        return AsyncMarkAsReadResourceWithRawResponse(self._chats.mark_as_read)
 
 
 class ChatsResourceWithStreamingResponse:
@@ -327,13 +878,35 @@ class ChatsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             chats.list,
         )
-        self.start_typing_indicator = to_streamed_response_wrapper(
-            chats.start_typing_indicator,
+        self.delete = to_streamed_response_wrapper(
+            chats.delete,
+        )
+        self.hide = to_streamed_response_wrapper(
+            chats.hide,
+        )
+        self.list_media = to_streamed_response_wrapper(
+            chats.list_media,
+        )
+        self.mark_as_unread = to_streamed_response_wrapper(
+            chats.mark_as_unread,
+        )
+        self.mute = to_streamed_response_wrapper(
+            chats.mute,
+        )
+        self.start_typing = to_streamed_response_wrapper(
+            chats.start_typing,
+        )
+        self.unmute = to_streamed_response_wrapper(
+            chats.unmute,
         )
 
     @cached_property
     def messages(self) -> MessagesResourceWithStreamingResponse:
         return MessagesResourceWithStreamingResponse(self._chats.messages)
+
+    @cached_property
+    def mark_as_read(self) -> MarkAsReadResourceWithStreamingResponse:
+        return MarkAsReadResourceWithStreamingResponse(self._chats.mark_as_read)
 
 
 class AsyncChatsResourceWithStreamingResponse:
@@ -343,10 +916,32 @@ class AsyncChatsResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             chats.list,
         )
-        self.start_typing_indicator = async_to_streamed_response_wrapper(
-            chats.start_typing_indicator,
+        self.delete = async_to_streamed_response_wrapper(
+            chats.delete,
+        )
+        self.hide = async_to_streamed_response_wrapper(
+            chats.hide,
+        )
+        self.list_media = async_to_streamed_response_wrapper(
+            chats.list_media,
+        )
+        self.mark_as_unread = async_to_streamed_response_wrapper(
+            chats.mark_as_unread,
+        )
+        self.mute = async_to_streamed_response_wrapper(
+            chats.mute,
+        )
+        self.start_typing = async_to_streamed_response_wrapper(
+            chats.start_typing,
+        )
+        self.unmute = async_to_streamed_response_wrapper(
+            chats.unmute,
         )
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
         return AsyncMessagesResourceWithStreamingResponse(self._chats.messages)
+
+    @cached_property
+    def mark_as_read(self) -> AsyncMarkAsReadResourceWithStreamingResponse:
+        return AsyncMarkAsReadResourceWithStreamingResponse(self._chats.mark_as_read)

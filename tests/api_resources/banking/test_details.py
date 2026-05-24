@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types.banking import (
     DetailRetrieveBankDetailsResponse,
@@ -25,7 +25,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_account_country_details(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_account_country_details(self, client: OnlyFansAPI) -> None:
         detail = client.banking.details.retrieve_account_country_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -33,7 +33,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_account_country_details(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_account_country_details(self, client: OnlyFansAPI) -> None:
         response = client.banking.details.with_raw_response.retrieve_account_country_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -45,7 +45,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_account_country_details(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_account_country_details(self, client: OnlyFansAPI) -> None:
         with client.banking.details.with_streaming_response.retrieve_account_country_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -59,7 +59,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_account_country_details(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_account_country_details(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.details.with_raw_response.retrieve_account_country_details(
                 "",
@@ -67,7 +67,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_bank_details(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_bank_details(self, client: OnlyFansAPI) -> None:
         detail = client.banking.details.retrieve_bank_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -75,7 +75,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_bank_details(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_bank_details(self, client: OnlyFansAPI) -> None:
         response = client.banking.details.with_raw_response.retrieve_bank_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -87,7 +87,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_bank_details(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_bank_details(self, client: OnlyFansAPI) -> None:
         with client.banking.details.with_streaming_response.retrieve_bank_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -101,7 +101,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_bank_details(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_bank_details(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.details.with_raw_response.retrieve_bank_details(
                 "",
@@ -109,7 +109,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_dac7_form_details(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_dac7_form_details(self, client: OnlyFansAPI) -> None:
         detail = client.banking.details.retrieve_dac7_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -117,7 +117,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_dac7_form_details(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_dac7_form_details(self, client: OnlyFansAPI) -> None:
         response = client.banking.details.with_raw_response.retrieve_dac7_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -129,7 +129,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_dac7_form_details(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_dac7_form_details(self, client: OnlyFansAPI) -> None:
         with client.banking.details.with_streaming_response.retrieve_dac7_form_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -143,7 +143,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_dac7_form_details(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_dac7_form_details(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.details.with_raw_response.retrieve_dac7_form_details(
                 "",
@@ -151,7 +151,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_legal_and_tax_status(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_legal_and_tax_status(self, client: OnlyFansAPI) -> None:
         detail = client.banking.details.retrieve_legal_and_tax_status(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -159,7 +159,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_legal_and_tax_status(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_legal_and_tax_status(self, client: OnlyFansAPI) -> None:
         response = client.banking.details.with_raw_response.retrieve_legal_and_tax_status(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -171,7 +171,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_legal_and_tax_status(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_legal_and_tax_status(self, client: OnlyFansAPI) -> None:
         with client.banking.details.with_streaming_response.retrieve_legal_and_tax_status(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -185,7 +185,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_legal_and_tax_status(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_legal_and_tax_status(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.details.with_raw_response.retrieve_legal_and_tax_status(
                 "",
@@ -193,7 +193,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_legal_form_details(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_legal_form_details(self, client: OnlyFansAPI) -> None:
         detail = client.banking.details.retrieve_legal_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -201,7 +201,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_legal_form_details(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_legal_form_details(self, client: OnlyFansAPI) -> None:
         response = client.banking.details.with_raw_response.retrieve_legal_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -213,7 +213,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_legal_form_details(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_legal_form_details(self, client: OnlyFansAPI) -> None:
         with client.banking.details.with_streaming_response.retrieve_legal_form_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -227,7 +227,7 @@ class TestDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_legal_form_details(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_legal_form_details(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.banking.details.with_raw_response.retrieve_legal_form_details(
                 "",
@@ -241,7 +241,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_account_country_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_account_country_details(self, async_client: AsyncOnlyFansAPI) -> None:
         detail = await async_client.banking.details.retrieve_account_country_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -249,7 +249,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_account_country_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_account_country_details(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.details.with_raw_response.retrieve_account_country_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -261,7 +261,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_account_country_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_account_country_details(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.details.with_streaming_response.retrieve_account_country_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -275,7 +275,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_account_country_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_account_country_details(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.details.with_raw_response.retrieve_account_country_details(
                 "",
@@ -283,7 +283,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_bank_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_bank_details(self, async_client: AsyncOnlyFansAPI) -> None:
         detail = await async_client.banking.details.retrieve_bank_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -291,7 +291,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_bank_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_bank_details(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.details.with_raw_response.retrieve_bank_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -303,7 +303,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_bank_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_bank_details(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.details.with_streaming_response.retrieve_bank_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -317,7 +317,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_bank_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_bank_details(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.details.with_raw_response.retrieve_bank_details(
                 "",
@@ -325,7 +325,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_dac7_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_dac7_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         detail = await async_client.banking.details.retrieve_dac7_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -333,7 +333,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_dac7_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_dac7_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.details.with_raw_response.retrieve_dac7_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -345,7 +345,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_dac7_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_dac7_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.details.with_streaming_response.retrieve_dac7_form_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -359,7 +359,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_dac7_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_dac7_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.details.with_raw_response.retrieve_dac7_form_details(
                 "",
@@ -367,7 +367,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyFansAPI) -> None:
         detail = await async_client.banking.details.retrieve_legal_and_tax_status(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -375,7 +375,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.details.with_raw_response.retrieve_legal_and_tax_status(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -387,7 +387,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.details.with_streaming_response.retrieve_legal_and_tax_status(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -401,7 +401,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_legal_and_tax_status(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.details.with_raw_response.retrieve_legal_and_tax_status(
                 "",
@@ -409,7 +409,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_legal_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_legal_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         detail = await async_client.banking.details.retrieve_legal_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -417,7 +417,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_legal_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_legal_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.banking.details.with_raw_response.retrieve_legal_form_details(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -429,7 +429,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_legal_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_legal_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.banking.details.with_streaming_response.retrieve_legal_form_details(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -443,7 +443,7 @@ class TestAsyncDetails:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_legal_form_details(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_legal_form_details(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.banking.details.with_raw_response.retrieve_legal_form_details(
                 "",

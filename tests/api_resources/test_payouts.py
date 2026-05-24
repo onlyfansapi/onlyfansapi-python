@@ -7,13 +7,13 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import (
+    PayoutListRequestsResponse,
+    PayoutUpdateFrequencyResponse,
     PayoutRetrieveBalancesResponse,
-    PayoutListPayoutRequestsResponse,
     PayoutRetrieveEligibilityResponse,
-    PayoutUpdatePayoutFrequencyResponse,
     PayoutRequestManualWithdrawalResponse,
     PayoutRetrieveEarningStatisticsResponse,
 )
@@ -26,59 +26,59 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_payout_requests(self, client: Onlyfansapi) -> None:
-        payout = client.payouts.list_payout_requests(
+    def test_method_list_requests(self, client: OnlyFansAPI) -> None:
+        payout = client.payouts.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+        assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_payout_requests_with_all_params(self, client: Onlyfansapi) -> None:
-        payout = client.payouts.list_payout_requests(
+    def test_method_list_requests_with_all_params(self, client: OnlyFansAPI) -> None:
+        payout = client.payouts.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
             limit="limit",
             offset="offset",
         )
-        assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+        assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_payout_requests(self, client: Onlyfansapi) -> None:
-        response = client.payouts.with_raw_response.list_payout_requests(
+    def test_raw_response_list_requests(self, client: OnlyFansAPI) -> None:
+        response = client.payouts.with_raw_response.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payout = response.parse()
-        assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+        assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_payout_requests(self, client: Onlyfansapi) -> None:
-        with client.payouts.with_streaming_response.list_payout_requests(
+    def test_streaming_response_list_requests(self, client: OnlyFansAPI) -> None:
+        with client.payouts.with_streaming_response.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             payout = response.parse()
-            assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+            assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list_payout_requests(self, client: Onlyfansapi) -> None:
+    def test_path_params_list_requests(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
-            client.payouts.with_raw_response.list_payout_requests(
+            client.payouts.with_raw_response.list_requests(
                 account="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_request_manual_withdrawal(self, client: Onlyfansapi) -> None:
+    def test_method_request_manual_withdrawal(self, client: OnlyFansAPI) -> None:
         payout = client.payouts.request_manual_withdrawal(
             account="acct_XXXXXXXXXXXXXXX",
             amount=50,
@@ -87,7 +87,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_request_manual_withdrawal(self, client: Onlyfansapi) -> None:
+    def test_raw_response_request_manual_withdrawal(self, client: OnlyFansAPI) -> None:
         response = client.payouts.with_raw_response.request_manual_withdrawal(
             account="acct_XXXXXXXXXXXXXXX",
             amount=50,
@@ -100,7 +100,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_request_manual_withdrawal(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_request_manual_withdrawal(self, client: OnlyFansAPI) -> None:
         with client.payouts.with_streaming_response.request_manual_withdrawal(
             account="acct_XXXXXXXXXXXXXXX",
             amount=50,
@@ -115,7 +115,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_request_manual_withdrawal(self, client: Onlyfansapi) -> None:
+    def test_path_params_request_manual_withdrawal(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.payouts.with_raw_response.request_manual_withdrawal(
                 account="",
@@ -124,7 +124,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_balances(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_balances(self, client: OnlyFansAPI) -> None:
         payout = client.payouts.retrieve_balances(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -132,7 +132,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_balances(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_balances(self, client: OnlyFansAPI) -> None:
         response = client.payouts.with_raw_response.retrieve_balances(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -144,7 +144,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_balances(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_balances(self, client: OnlyFansAPI) -> None:
         with client.payouts.with_streaming_response.retrieve_balances(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -158,7 +158,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_balances(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_balances(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.payouts.with_raw_response.retrieve_balances(
                 "",
@@ -166,7 +166,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_earning_statistics(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_earning_statistics(self, client: OnlyFansAPI) -> None:
         payout = client.payouts.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -174,7 +174,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_earning_statistics_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_earning_statistics_with_all_params(self, client: OnlyFansAPI) -> None:
         payout = client.payouts.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-01-01 00:00:00, +30days",
@@ -184,7 +184,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_earning_statistics(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_earning_statistics(self, client: OnlyFansAPI) -> None:
         response = client.payouts.with_raw_response.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -196,7 +196,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_earning_statistics(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_earning_statistics(self, client: OnlyFansAPI) -> None:
         with client.payouts.with_streaming_response.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -210,7 +210,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_earning_statistics(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_earning_statistics(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.payouts.with_raw_response.retrieve_earning_statistics(
                 account="",
@@ -218,7 +218,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_eligibility(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_eligibility(self, client: OnlyFansAPI) -> None:
         payout = client.payouts.retrieve_eligibility(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -226,7 +226,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_eligibility(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve_eligibility(self, client: OnlyFansAPI) -> None:
         response = client.payouts.with_raw_response.retrieve_eligibility(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -238,7 +238,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_eligibility(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve_eligibility(self, client: OnlyFansAPI) -> None:
         with client.payouts.with_streaming_response.retrieve_eligibility(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -252,7 +252,7 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve_eligibility(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve_eligibility(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.payouts.with_raw_response.retrieve_eligibility(
                 "",
@@ -260,17 +260,17 @@ class TestPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_update_payout_frequency(self, client: Onlyfansapi) -> None:
-        payout = client.payouts.update_payout_frequency(
+    def test_method_update_frequency(self, client: OnlyFansAPI) -> None:
+        payout = client.payouts.update_frequency(
             account="acct_XXXXXXXXXXXXXXX",
             frequency="manual",
         )
-        assert_matches_type(PayoutUpdatePayoutFrequencyResponse, payout, path=["response"])
+        assert_matches_type(PayoutUpdateFrequencyResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_update_payout_frequency(self, client: Onlyfansapi) -> None:
-        response = client.payouts.with_raw_response.update_payout_frequency(
+    def test_raw_response_update_frequency(self, client: OnlyFansAPI) -> None:
+        response = client.payouts.with_raw_response.update_frequency(
             account="acct_XXXXXXXXXXXXXXX",
             frequency="manual",
         )
@@ -278,12 +278,12 @@ class TestPayouts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payout = response.parse()
-        assert_matches_type(PayoutUpdatePayoutFrequencyResponse, payout, path=["response"])
+        assert_matches_type(PayoutUpdateFrequencyResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_update_payout_frequency(self, client: Onlyfansapi) -> None:
-        with client.payouts.with_streaming_response.update_payout_frequency(
+    def test_streaming_response_update_frequency(self, client: OnlyFansAPI) -> None:
+        with client.payouts.with_streaming_response.update_frequency(
             account="acct_XXXXXXXXXXXXXXX",
             frequency="manual",
         ) as response:
@@ -291,15 +291,15 @@ class TestPayouts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             payout = response.parse()
-            assert_matches_type(PayoutUpdatePayoutFrequencyResponse, payout, path=["response"])
+            assert_matches_type(PayoutUpdateFrequencyResponse, payout, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_update_payout_frequency(self, client: Onlyfansapi) -> None:
+    def test_path_params_update_frequency(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
-            client.payouts.with_raw_response.update_payout_frequency(
+            client.payouts.with_raw_response.update_frequency(
                 account="",
                 frequency="manual",
             )
@@ -312,59 +312,59 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_payout_requests(self, async_client: AsyncOnlyfansapi) -> None:
-        payout = await async_client.payouts.list_payout_requests(
+    async def test_method_list_requests(self, async_client: AsyncOnlyFansAPI) -> None:
+        payout = await async_client.payouts.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+        assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_payout_requests_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
-        payout = await async_client.payouts.list_payout_requests(
+    async def test_method_list_requests_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        payout = await async_client.payouts.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
             limit="limit",
             offset="offset",
         )
-        assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+        assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_payout_requests(self, async_client: AsyncOnlyfansapi) -> None:
-        response = await async_client.payouts.with_raw_response.list_payout_requests(
+    async def test_raw_response_list_requests(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.payouts.with_raw_response.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payout = await response.parse()
-        assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+        assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_payout_requests(self, async_client: AsyncOnlyfansapi) -> None:
-        async with async_client.payouts.with_streaming_response.list_payout_requests(
+    async def test_streaming_response_list_requests(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.payouts.with_streaming_response.list_requests(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             payout = await response.parse()
-            assert_matches_type(PayoutListPayoutRequestsResponse, payout, path=["response"])
+            assert_matches_type(PayoutListRequestsResponse, payout, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list_payout_requests(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list_requests(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
-            await async_client.payouts.with_raw_response.list_payout_requests(
+            await async_client.payouts.with_raw_response.list_requests(
                 account="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_request_manual_withdrawal(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_request_manual_withdrawal(self, async_client: AsyncOnlyFansAPI) -> None:
         payout = await async_client.payouts.request_manual_withdrawal(
             account="acct_XXXXXXXXXXXXXXX",
             amount=50,
@@ -373,7 +373,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_request_manual_withdrawal(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_request_manual_withdrawal(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.payouts.with_raw_response.request_manual_withdrawal(
             account="acct_XXXXXXXXXXXXXXX",
             amount=50,
@@ -386,7 +386,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_request_manual_withdrawal(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_request_manual_withdrawal(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.payouts.with_streaming_response.request_manual_withdrawal(
             account="acct_XXXXXXXXXXXXXXX",
             amount=50,
@@ -401,7 +401,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_request_manual_withdrawal(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_request_manual_withdrawal(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.payouts.with_raw_response.request_manual_withdrawal(
                 account="",
@@ -410,7 +410,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_balances(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_balances(self, async_client: AsyncOnlyFansAPI) -> None:
         payout = await async_client.payouts.retrieve_balances(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -418,7 +418,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_balances(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_balances(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.payouts.with_raw_response.retrieve_balances(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -430,7 +430,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_balances(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_balances(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.payouts.with_streaming_response.retrieve_balances(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -444,7 +444,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_balances(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_balances(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.payouts.with_raw_response.retrieve_balances(
                 "",
@@ -452,7 +452,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_earning_statistics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_earning_statistics(self, async_client: AsyncOnlyFansAPI) -> None:
         payout = await async_client.payouts.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -460,7 +460,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_earning_statistics_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_earning_statistics_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         payout = await async_client.payouts.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-01-01 00:00:00, +30days",
@@ -470,7 +470,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_earning_statistics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_earning_statistics(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.payouts.with_raw_response.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -482,7 +482,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_earning_statistics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_earning_statistics(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.payouts.with_streaming_response.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -496,7 +496,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_earning_statistics(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_earning_statistics(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.payouts.with_raw_response.retrieve_earning_statistics(
                 account="",
@@ -504,7 +504,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_eligibility(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_eligibility(self, async_client: AsyncOnlyFansAPI) -> None:
         payout = await async_client.payouts.retrieve_eligibility(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -512,7 +512,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_eligibility(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve_eligibility(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.payouts.with_raw_response.retrieve_eligibility(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -524,7 +524,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_eligibility(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve_eligibility(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.payouts.with_streaming_response.retrieve_eligibility(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -538,7 +538,7 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_eligibility(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve_eligibility(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.payouts.with_raw_response.retrieve_eligibility(
                 "",
@@ -546,17 +546,17 @@ class TestAsyncPayouts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_update_payout_frequency(self, async_client: AsyncOnlyfansapi) -> None:
-        payout = await async_client.payouts.update_payout_frequency(
+    async def test_method_update_frequency(self, async_client: AsyncOnlyFansAPI) -> None:
+        payout = await async_client.payouts.update_frequency(
             account="acct_XXXXXXXXXXXXXXX",
             frequency="manual",
         )
-        assert_matches_type(PayoutUpdatePayoutFrequencyResponse, payout, path=["response"])
+        assert_matches_type(PayoutUpdateFrequencyResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_update_payout_frequency(self, async_client: AsyncOnlyfansapi) -> None:
-        response = await async_client.payouts.with_raw_response.update_payout_frequency(
+    async def test_raw_response_update_frequency(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.payouts.with_raw_response.update_frequency(
             account="acct_XXXXXXXXXXXXXXX",
             frequency="manual",
         )
@@ -564,12 +564,12 @@ class TestAsyncPayouts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         payout = await response.parse()
-        assert_matches_type(PayoutUpdatePayoutFrequencyResponse, payout, path=["response"])
+        assert_matches_type(PayoutUpdateFrequencyResponse, payout, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_update_payout_frequency(self, async_client: AsyncOnlyfansapi) -> None:
-        async with async_client.payouts.with_streaming_response.update_payout_frequency(
+    async def test_streaming_response_update_frequency(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.payouts.with_streaming_response.update_frequency(
             account="acct_XXXXXXXXXXXXXXX",
             frequency="manual",
         ) as response:
@@ -577,15 +577,15 @@ class TestAsyncPayouts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             payout = await response.parse()
-            assert_matches_type(PayoutUpdatePayoutFrequencyResponse, payout, path=["response"])
+            assert_matches_type(PayoutUpdateFrequencyResponse, payout, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_update_payout_frequency(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_update_frequency(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
-            await async_client.payouts.with_raw_response.update_payout_frequency(
+            await async_client.payouts.with_raw_response.update_frequency(
                 account="",
                 frequency="manual",
             )

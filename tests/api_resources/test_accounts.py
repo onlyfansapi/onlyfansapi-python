@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
+from typing import Any, Optional, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
-from onlyfansapi.types import AccountListResponse
+from onlyfansapi.types import AccountListResponse, AccountDisconnectResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,13 +19,13 @@ class TestAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list(self, client: Onlyfansapi) -> None:
+    def test_method_list(self, client: OnlyFansAPI) -> None:
         account = client.accounts.list()
         assert_matches_type(AccountListResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         account = client.accounts.list(
             onlyfans_email="creator@example.com",
             onlyfans_id="onlyfans_id",
@@ -35,7 +35,7 @@ class TestAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.accounts.with_raw_response.list()
 
         assert response.is_closed is True
@@ -45,7 +45,7 @@ class TestAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.accounts.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -57,15 +57,15 @@ class TestAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_disconnect(self, client: Onlyfansapi) -> None:
+    def test_method_disconnect(self, client: OnlyFansAPI) -> None:
         account = client.accounts.disconnect(
             "minima",
         )
-        assert_matches_type(object, account, path=["response"])
+        assert_matches_type(Optional[AccountDisconnectResponse], account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_disconnect(self, client: Onlyfansapi) -> None:
+    def test_raw_response_disconnect(self, client: OnlyFansAPI) -> None:
         response = client.accounts.with_raw_response.disconnect(
             "minima",
         )
@@ -73,11 +73,11 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(object, account, path=["response"])
+        assert_matches_type(Optional[AccountDisconnectResponse], account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_disconnect(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_disconnect(self, client: OnlyFansAPI) -> None:
         with client.accounts.with_streaming_response.disconnect(
             "minima",
         ) as response:
@@ -85,13 +85,13 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(object, account, path=["response"])
+            assert_matches_type(Optional[AccountDisconnectResponse], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_disconnect(self, client: Onlyfansapi) -> None:
+    def test_path_params_disconnect(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.accounts.with_raw_response.disconnect(
                 "",
@@ -105,13 +105,13 @@ class TestAsyncAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         account = await async_client.accounts.list()
         assert_matches_type(AccountListResponse, account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         account = await async_client.accounts.list(
             onlyfans_email="creator@example.com",
             onlyfans_id="onlyfans_id",
@@ -121,7 +121,7 @@ class TestAsyncAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.accounts.with_raw_response.list()
 
         assert response.is_closed is True
@@ -131,7 +131,7 @@ class TestAsyncAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.accounts.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -143,15 +143,15 @@ class TestAsyncAccounts:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_disconnect(self, async_client: AsyncOnlyFansAPI) -> None:
         account = await async_client.accounts.disconnect(
             "minima",
         )
-        assert_matches_type(object, account, path=["response"])
+        assert_matches_type(Optional[AccountDisconnectResponse], account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_disconnect(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.accounts.with_raw_response.disconnect(
             "minima",
         )
@@ -159,11 +159,11 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(object, account, path=["response"])
+        assert_matches_type(Optional[AccountDisconnectResponse], account, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_disconnect(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.accounts.with_streaming_response.disconnect(
             "minima",
         ) as response:
@@ -171,13 +171,13 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(object, account, path=["response"])
+            assert_matches_type(Optional[AccountDisconnectResponse], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_disconnect(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.accounts.with_raw_response.disconnect(
                 "",

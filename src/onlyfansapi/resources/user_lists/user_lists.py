@@ -30,6 +30,7 @@ from ...types.user_list_list_response import UserListListResponse
 from ...types.user_list_create_response import UserListCreateResponse
 from ...types.user_list_delete_response import UserListDeleteResponse
 from ...types.user_list_update_response import UserListUpdateResponse
+from ...types.user_list_retrieve_response import UserListRetrieveResponse
 
 __all__ = ["UserListsResource", "AsyncUserListsResource"]
 
@@ -93,6 +94,42 @@ class UserListsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=UserListCreateResponse,
+        )
+
+    def retrieve(
+        self,
+        user_list_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> UserListRetrieveResponse:
+        """
+        Get a user list
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
+        return self._get(
+            path_template("/api/{account}/user-lists/{user_list_id}", account=account, user_list_id=user_list_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UserListRetrieveResponse,
         )
 
     def update(
@@ -292,6 +329,42 @@ class AsyncUserListsResource(AsyncAPIResource):
             cast_to=UserListCreateResponse,
         )
 
+    async def retrieve(
+        self,
+        user_list_id: str,
+        *,
+        account: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> UserListRetrieveResponse:
+        """
+        Get a user list
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
+        return await self._get(
+            path_template("/api/{account}/user-lists/{user_list_id}", account=account, user_list_id=user_list_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UserListRetrieveResponse,
+        )
+
     async def update(
         self,
         user_list_id: str,
@@ -435,6 +508,9 @@ class UserListsResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             user_lists.create,
         )
+        self.retrieve = to_raw_response_wrapper(
+            user_lists.retrieve,
+        )
         self.update = to_raw_response_wrapper(
             user_lists.update,
         )
@@ -456,6 +532,9 @@ class AsyncUserListsResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             user_lists.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            user_lists.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
             user_lists.update,
@@ -479,6 +558,9 @@ class UserListsResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             user_lists.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            user_lists.retrieve,
+        )
         self.update = to_streamed_response_wrapper(
             user_lists.update,
         )
@@ -500,6 +582,9 @@ class AsyncUserListsResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             user_lists.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            user_lists.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
             user_lists.update,

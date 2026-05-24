@@ -17,11 +17,17 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.chats import message_list_params, message_send_params
+from ...types.chats import message_list_params, message_send_params, message_search_params
 from ..._base_client import make_request_options
+from ...types.chats.message_pin_response import MessagePinResponse
+from ...types.chats.message_like_response import MessageLikeResponse
 from ...types.chats.message_list_response import MessageListResponse
 from ...types.chats.message_send_response import MessageSendResponse
+from ...types.chats.message_unpin_response import MessageUnpinResponse
 from ...types.chats.message_delete_response import MessageDeleteResponse
+from ...types.chats.message_search_response import MessageSearchResponse
+from ...types.chats.message_unlike_response import MessageUnlikeResponse
+from ...types.chats.message_retrieve_response import MessageRetrieveResponse
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
@@ -45,6 +51,52 @@ class MessagesResource(SyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
         return MessagesResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageRetrieveResponse:
+        """Get a single chat message by its ID.
+
+        Returns a 404 if the message does not exist
+        in the chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._get(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageRetrieveResponse,
+        )
 
     def list(
         self,
@@ -166,6 +218,139 @@ class MessagesResource(SyncAPIResource):
             cast_to=MessageDeleteResponse,
         )
 
+    def like(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageLikeResponse:
+        """
+        Like a chat message.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._post(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/like",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageLikeResponse,
+        )
+
+    def pin(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessagePinResponse:
+        """
+        Pin a message from a chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._post(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/pin",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessagePinResponse,
+        )
+
+    def search(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        query: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageSearchResponse:
+        """Search messages in a specific chat.
+
+        Returns a list of message IDs matching the
+        search query.
+
+        Args:
+          query: The query search in messages
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return self._get(
+            path_template("/api/{account}/chats/{chat_id}/messages/search", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"query": query}, message_search_params.MessageSearchParams),
+            ),
+            cast_to=MessageSearchResponse,
+        )
+
     def send(
         self,
         chat_id: str,
@@ -253,6 +438,94 @@ class MessagesResource(SyncAPIResource):
             cast_to=MessageSendResponse,
         )
 
+    def unlike(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageUnlikeResponse:
+        """
+        Unlike a chat message.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._delete(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/unlike",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageUnlikeResponse,
+        )
+
+    def unpin(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageUnpinResponse:
+        """
+        Unpin a message from a chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._delete(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/unpin",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageUnpinResponse,
+        )
+
 
 class AsyncMessagesResource(AsyncAPIResource):
     @cached_property
@@ -273,6 +546,52 @@ class AsyncMessagesResource(AsyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/onlyfansapi-python#with_streaming_response
         """
         return AsyncMessagesResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageRetrieveResponse:
+        """Get a single chat message by its ID.
+
+        Returns a 404 if the message does not exist
+        in the chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._get(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageRetrieveResponse,
+        )
 
     async def list(
         self,
@@ -394,6 +713,139 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=MessageDeleteResponse,
         )
 
+    async def like(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageLikeResponse:
+        """
+        Like a chat message.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._post(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/like",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageLikeResponse,
+        )
+
+    async def pin(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessagePinResponse:
+        """
+        Pin a message from a chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._post(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/pin",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessagePinResponse,
+        )
+
+    async def search(
+        self,
+        chat_id: str,
+        *,
+        account: str,
+        query: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageSearchResponse:
+        """Search messages in a specific chat.
+
+        Returns a list of message IDs matching the
+        search query.
+
+        Args:
+          query: The query search in messages
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        return await self._get(
+            path_template("/api/{account}/chats/{chat_id}/messages/search", account=account, chat_id=chat_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"query": query}, message_search_params.MessageSearchParams),
+            ),
+            cast_to=MessageSearchResponse,
+        )
+
     async def send(
         self,
         chat_id: str,
@@ -481,19 +933,125 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=MessageSendResponse,
         )
 
+    async def unlike(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageUnlikeResponse:
+        """
+        Unlike a chat message.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._delete(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/unlike",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageUnlikeResponse,
+        )
+
+    async def unpin(
+        self,
+        message_id: str,
+        *,
+        account: str,
+        chat_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageUnpinResponse:
+        """
+        Unpin a message from a chat.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account:
+            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not chat_id:
+            raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._delete(
+            path_template(
+                "/api/{account}/chats/{chat_id}/messages/{message_id}/unpin",
+                account=account,
+                chat_id=chat_id,
+                message_id=message_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageUnpinResponse,
+        )
+
 
 class MessagesResourceWithRawResponse:
     def __init__(self, messages: MessagesResource) -> None:
         self._messages = messages
 
+        self.retrieve = to_raw_response_wrapper(
+            messages.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             messages.list,
         )
         self.delete = to_raw_response_wrapper(
             messages.delete,
         )
+        self.like = to_raw_response_wrapper(
+            messages.like,
+        )
+        self.pin = to_raw_response_wrapper(
+            messages.pin,
+        )
+        self.search = to_raw_response_wrapper(
+            messages.search,
+        )
         self.send = to_raw_response_wrapper(
             messages.send,
+        )
+        self.unlike = to_raw_response_wrapper(
+            messages.unlike,
+        )
+        self.unpin = to_raw_response_wrapper(
+            messages.unpin,
         )
 
 
@@ -501,14 +1059,32 @@ class AsyncMessagesResourceWithRawResponse:
     def __init__(self, messages: AsyncMessagesResource) -> None:
         self._messages = messages
 
+        self.retrieve = async_to_raw_response_wrapper(
+            messages.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             messages.list,
         )
         self.delete = async_to_raw_response_wrapper(
             messages.delete,
         )
+        self.like = async_to_raw_response_wrapper(
+            messages.like,
+        )
+        self.pin = async_to_raw_response_wrapper(
+            messages.pin,
+        )
+        self.search = async_to_raw_response_wrapper(
+            messages.search,
+        )
         self.send = async_to_raw_response_wrapper(
             messages.send,
+        )
+        self.unlike = async_to_raw_response_wrapper(
+            messages.unlike,
+        )
+        self.unpin = async_to_raw_response_wrapper(
+            messages.unpin,
         )
 
 
@@ -516,14 +1092,32 @@ class MessagesResourceWithStreamingResponse:
     def __init__(self, messages: MessagesResource) -> None:
         self._messages = messages
 
+        self.retrieve = to_streamed_response_wrapper(
+            messages.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             messages.list,
         )
         self.delete = to_streamed_response_wrapper(
             messages.delete,
         )
+        self.like = to_streamed_response_wrapper(
+            messages.like,
+        )
+        self.pin = to_streamed_response_wrapper(
+            messages.pin,
+        )
+        self.search = to_streamed_response_wrapper(
+            messages.search,
+        )
         self.send = to_streamed_response_wrapper(
             messages.send,
+        )
+        self.unlike = to_streamed_response_wrapper(
+            messages.unlike,
+        )
+        self.unpin = to_streamed_response_wrapper(
+            messages.unpin,
         )
 
 
@@ -531,12 +1125,30 @@ class AsyncMessagesResourceWithStreamingResponse:
     def __init__(self, messages: AsyncMessagesResource) -> None:
         self._messages = messages
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            messages.retrieve,
+        )
         self.list = async_to_streamed_response_wrapper(
             messages.list,
         )
         self.delete = async_to_streamed_response_wrapper(
             messages.delete,
         )
+        self.like = async_to_streamed_response_wrapper(
+            messages.like,
+        )
+        self.pin = async_to_streamed_response_wrapper(
+            messages.pin,
+        )
+        self.search = async_to_streamed_response_wrapper(
+            messages.search,
+        )
         self.send = async_to_streamed_response_wrapper(
             messages.send,
+        )
+        self.unlike = async_to_streamed_response_wrapper(
+            messages.unlike,
+        )
+        self.unpin = async_to_streamed_response_wrapper(
+            messages.unpin,
         )

@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import (
     NotificationListResponse,
@@ -24,7 +24,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list(self, client: Onlyfansapi) -> None:
+    def test_method_list(self, client: OnlyFansAPI) -> None:
         notification = client.notifications.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -32,7 +32,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         notification = client.notifications.list(
             account="acct_XXXXXXXXXXXXXXX",
             from_id=123,
@@ -44,7 +44,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.notifications.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -56,7 +56,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.notifications.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -70,7 +70,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list(self, client: Onlyfansapi) -> None:
+    def test_path_params_list(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.notifications.with_raw_response.list(
                 account="",
@@ -78,7 +78,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_counts(self, client: Onlyfansapi) -> None:
+    def test_method_get_counts(self, client: OnlyFansAPI) -> None:
         notification = client.notifications.get_counts(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -86,7 +86,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_counts(self, client: Onlyfansapi) -> None:
+    def test_raw_response_get_counts(self, client: OnlyFansAPI) -> None:
         response = client.notifications.with_raw_response.get_counts(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -98,7 +98,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_counts(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_get_counts(self, client: OnlyFansAPI) -> None:
         with client.notifications.with_streaming_response.get_counts(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -112,7 +112,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_counts(self, client: Onlyfansapi) -> None:
+    def test_path_params_get_counts(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.notifications.with_raw_response.get_counts(
                 "",
@@ -120,7 +120,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_mark_all_as_read(self, client: Onlyfansapi) -> None:
+    def test_method_mark_all_as_read(self, client: OnlyFansAPI) -> None:
         notification = client.notifications.mark_all_as_read(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -128,7 +128,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_mark_all_as_read(self, client: Onlyfansapi) -> None:
+    def test_raw_response_mark_all_as_read(self, client: OnlyFansAPI) -> None:
         response = client.notifications.with_raw_response.mark_all_as_read(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -140,7 +140,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_mark_all_as_read(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_mark_all_as_read(self, client: OnlyFansAPI) -> None:
         with client.notifications.with_streaming_response.mark_all_as_read(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -154,7 +154,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_mark_all_as_read(self, client: Onlyfansapi) -> None:
+    def test_path_params_mark_all_as_read(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.notifications.with_raw_response.mark_all_as_read(
                 "",
@@ -162,7 +162,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_search_users(self, client: Onlyfansapi) -> None:
+    def test_method_search_users(self, client: OnlyFansAPI) -> None:
         notification = client.notifications.search_users(
             account="acct_XXXXXXXXXXXXXXX",
             query="User",
@@ -171,7 +171,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_search_users(self, client: Onlyfansapi) -> None:
+    def test_raw_response_search_users(self, client: OnlyFansAPI) -> None:
         response = client.notifications.with_raw_response.search_users(
             account="acct_XXXXXXXXXXXXXXX",
             query="User",
@@ -184,7 +184,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_search_users(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_search_users(self, client: OnlyFansAPI) -> None:
         with client.notifications.with_streaming_response.search_users(
             account="acct_XXXXXXXXXXXXXXX",
             query="User",
@@ -199,7 +199,7 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_search_users(self, client: Onlyfansapi) -> None:
+    def test_path_params_search_users(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.notifications.with_raw_response.search_users(
                 account="",
@@ -214,7 +214,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         notification = await async_client.notifications.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -222,7 +222,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         notification = await async_client.notifications.list(
             account="acct_XXXXXXXXXXXXXXX",
             from_id=123,
@@ -234,7 +234,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.notifications.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -246,7 +246,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.notifications.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -260,7 +260,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.notifications.with_raw_response.list(
                 account="",
@@ -268,7 +268,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_counts(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_counts(self, async_client: AsyncOnlyFansAPI) -> None:
         notification = await async_client.notifications.get_counts(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -276,7 +276,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_counts(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_get_counts(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.notifications.with_raw_response.get_counts(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -288,7 +288,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_counts(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_get_counts(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.notifications.with_streaming_response.get_counts(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -302,7 +302,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_counts(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_get_counts(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.notifications.with_raw_response.get_counts(
                 "",
@@ -310,7 +310,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_mark_all_as_read(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_mark_all_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
         notification = await async_client.notifications.mark_all_as_read(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -318,7 +318,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_mark_all_as_read(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_mark_all_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.notifications.with_raw_response.mark_all_as_read(
             "acct_XXXXXXXXXXXXXXX",
         )
@@ -330,7 +330,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_mark_all_as_read(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_mark_all_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.notifications.with_streaming_response.mark_all_as_read(
             "acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -344,7 +344,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_mark_all_as_read(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_mark_all_as_read(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.notifications.with_raw_response.mark_all_as_read(
                 "",
@@ -352,7 +352,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_search_users(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_search_users(self, async_client: AsyncOnlyFansAPI) -> None:
         notification = await async_client.notifications.search_users(
             account="acct_XXXXXXXXXXXXXXX",
             query="User",
@@ -361,7 +361,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_search_users(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_search_users(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.notifications.with_raw_response.search_users(
             account="acct_XXXXXXXXXXXXXXX",
             query="User",
@@ -374,7 +374,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_search_users(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_search_users(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.notifications.with_streaming_response.search_users(
             account="acct_XXXXXXXXXXXXXXX",
             query="User",
@@ -389,7 +389,7 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_search_users(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_search_users(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.notifications.with_raw_response.search_users(
                 account="",

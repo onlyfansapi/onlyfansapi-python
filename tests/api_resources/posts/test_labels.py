@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types.posts import LabelListResponse, LabelCreateResponse
 
@@ -19,7 +19,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_create(self, client: Onlyfansapi) -> None:
+    def test_method_create(self, client: OnlyFansAPI) -> None:
         label = client.posts.labels.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new label",
@@ -28,7 +28,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Onlyfansapi) -> None:
+    def test_raw_response_create(self, client: OnlyFansAPI) -> None:
         response = client.posts.labels.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new label",
@@ -41,7 +41,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_create(self, client: OnlyFansAPI) -> None:
         with client.posts.labels.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new label",
@@ -56,7 +56,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_create(self, client: Onlyfansapi) -> None:
+    def test_path_params_create(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.posts.labels.with_raw_response.create(
                 account="",
@@ -65,7 +65,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list(self, client: Onlyfansapi) -> None:
+    def test_method_list(self, client: OnlyFansAPI) -> None:
         label = client.posts.labels.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -73,7 +73,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         label = client.posts.labels.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit="limit",
@@ -83,7 +83,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.posts.labels.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -95,7 +95,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.posts.labels.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -109,7 +109,7 @@ class TestLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list(self, client: Onlyfansapi) -> None:
+    def test_path_params_list(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.posts.labels.with_raw_response.list(
                 account="",
@@ -123,7 +123,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_create(self, async_client: AsyncOnlyFansAPI) -> None:
         label = await async_client.posts.labels.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new label",
@@ -132,7 +132,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.posts.labels.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new label",
@@ -145,7 +145,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.posts.labels.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
             name="My new label",
@@ -160,7 +160,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_create(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.posts.labels.with_raw_response.create(
                 account="",
@@ -169,7 +169,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         label = await async_client.posts.labels.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -177,7 +177,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         label = await async_client.posts.labels.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit="limit",
@@ -187,7 +187,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.posts.labels.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         )
@@ -199,7 +199,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.posts.labels.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
@@ -213,7 +213,7 @@ class TestAsyncLabels:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.posts.labels.with_raw_response.list(
                 account="",

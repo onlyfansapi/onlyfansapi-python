@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import (
     QueueListResponse,
@@ -23,7 +23,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list(self, client: Onlyfansapi) -> None:
+    def test_method_list(self, client: OnlyFansAPI) -> None:
         queue = client.queue.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=20,
@@ -35,7 +35,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: Onlyfansapi) -> None:
+    def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.queue.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=20,
@@ -51,7 +51,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.queue.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=20,
@@ -69,7 +69,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_list(self, client: Onlyfansapi) -> None:
+    def test_path_params_list(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.queue.with_raw_response.list(
                 account="",
@@ -81,7 +81,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_count(self, client: Onlyfansapi) -> None:
+    def test_method_count(self, client: OnlyFansAPI) -> None:
         queue = client.queue.count(
             account="acct_XXXXXXXXXXXXXXX",
             publish_date_end="2025-01-01",
@@ -92,7 +92,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_count(self, client: Onlyfansapi) -> None:
+    def test_raw_response_count(self, client: OnlyFansAPI) -> None:
         response = client.queue.with_raw_response.count(
             account="acct_XXXXXXXXXXXXXXX",
             publish_date_end="2025-01-01",
@@ -107,7 +107,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_count(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_count(self, client: OnlyFansAPI) -> None:
         with client.queue.with_streaming_response.count(
             account="acct_XXXXXXXXXXXXXXX",
             publish_date_end="2025-01-01",
@@ -124,7 +124,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_count(self, client: Onlyfansapi) -> None:
+    def test_path_params_count(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.queue.with_raw_response.count(
                 account="",
@@ -135,7 +135,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_publish(self, client: Onlyfansapi) -> None:
+    def test_method_publish(self, client: OnlyFansAPI) -> None:
         queue = client.queue.publish(
             queue_id="queue_id",
             account="acct_XXXXXXXXXXXXXXX",
@@ -144,7 +144,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_publish(self, client: Onlyfansapi) -> None:
+    def test_raw_response_publish(self, client: OnlyFansAPI) -> None:
         response = client.queue.with_raw_response.publish(
             queue_id="queue_id",
             account="acct_XXXXXXXXXXXXXXX",
@@ -157,7 +157,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_publish(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_publish(self, client: OnlyFansAPI) -> None:
         with client.queue.with_streaming_response.publish(
             queue_id="queue_id",
             account="acct_XXXXXXXXXXXXXXX",
@@ -172,7 +172,7 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_publish(self, client: Onlyfansapi) -> None:
+    def test_path_params_publish(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.queue.with_raw_response.publish(
                 queue_id="queue_id",
@@ -193,7 +193,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         queue = await async_client.queue.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=20,
@@ -205,7 +205,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.queue.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=20,
@@ -221,7 +221,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.queue.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
             limit=20,
@@ -239,7 +239,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_list(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.queue.with_raw_response.list(
                 account="",
@@ -251,7 +251,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_count(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_count(self, async_client: AsyncOnlyFansAPI) -> None:
         queue = await async_client.queue.count(
             account="acct_XXXXXXXXXXXXXXX",
             publish_date_end="2025-01-01",
@@ -262,7 +262,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_count(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_count(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.queue.with_raw_response.count(
             account="acct_XXXXXXXXXXXXXXX",
             publish_date_end="2025-01-01",
@@ -277,7 +277,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_count(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_count(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.queue.with_streaming_response.count(
             account="acct_XXXXXXXXXXXXXXX",
             publish_date_end="2025-01-01",
@@ -294,7 +294,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_count(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_count(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.queue.with_raw_response.count(
                 account="",
@@ -305,7 +305,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_publish(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_publish(self, async_client: AsyncOnlyFansAPI) -> None:
         queue = await async_client.queue.publish(
             queue_id="queue_id",
             account="acct_XXXXXXXXXXXXXXX",
@@ -314,7 +314,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_publish(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_publish(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.queue.with_raw_response.publish(
             queue_id="queue_id",
             account="acct_XXXXXXXXXXXXXXX",
@@ -327,7 +327,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_publish(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_publish(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.queue.with_streaming_response.publish(
             queue_id="queue_id",
             account="acct_XXXXXXXXXXXXXXX",
@@ -342,7 +342,7 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_publish(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_publish(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.queue.with_raw_response.publish(
                 queue_id="queue_id",

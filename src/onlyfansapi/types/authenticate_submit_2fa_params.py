@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["AuthenticateSubmit2faParams"]
 
@@ -14,5 +14,5 @@ class AuthenticateSubmit2faParams(TypedDict, total=False):
     Must be empty if `selfie_verification_completed` is `true`.
     """
 
-    selfie_verification_completed: Literal
+    selfie_verification_completed: object
     """This field is required when <code>code</code> is not present."""

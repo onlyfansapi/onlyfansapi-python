@@ -23,6 +23,7 @@ from ..types.authenticate_start_response import AuthenticateStartResponse
 from ..types.authenticate_submit_2fa_response import AuthenticateSubmit2faResponse
 from ..types.authenticate_poll_status_response import AuthenticatePollStatusResponse
 from ..types.authenticate_reauthenticate_response import AuthenticateReauthenticateResponse
+from ..types.authenticate_send_2fa_email_response import AuthenticateSend2faEmailResponse
 
 __all__ = ["AuthenticateResource", "AsyncAuthenticateResource"]
 
@@ -116,6 +117,41 @@ class AuthenticateResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AuthenticateReauthenticateResponse,
+        )
+
+    def send_2fa_email(
+        self,
+        attempt_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthenticateSend2faEmailResponse:
+        """
+        Send 2FA verification e-mail to the creator's email so they can verify login on
+        their device without your input. The e-mail will be sent to the e-mail address
+        used for signing into OnlyFans.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not attempt_id:
+            raise ValueError(f"Expected a non-empty value for `attempt_id` but received {attempt_id!r}")
+        return self._post(
+            path_template("/api/authenticate/{attempt_id}/send-email-to-creator", attempt_id=attempt_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthenticateSend2faEmailResponse,
         )
 
     def start(
@@ -223,7 +259,7 @@ class AuthenticateResource(SyncAPIResource):
         attempt_id: str,
         *,
         code: str | Omit = omit,
-        selfie_verification_completed: Literal | Omit = omit,
+        selfie_verification_completed: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -358,6 +394,41 @@ class AsyncAuthenticateResource(AsyncAPIResource):
             cast_to=AuthenticateReauthenticateResponse,
         )
 
+    async def send_2fa_email(
+        self,
+        attempt_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AuthenticateSend2faEmailResponse:
+        """
+        Send 2FA verification e-mail to the creator's email so they can verify login on
+        their device without your input. The e-mail will be sent to the e-mail address
+        used for signing into OnlyFans.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not attempt_id:
+            raise ValueError(f"Expected a non-empty value for `attempt_id` but received {attempt_id!r}")
+        return await self._post(
+            path_template("/api/authenticate/{attempt_id}/send-email-to-creator", attempt_id=attempt_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthenticateSend2faEmailResponse,
+        )
+
     async def start(
         self,
         *,
@@ -463,7 +534,7 @@ class AsyncAuthenticateResource(AsyncAPIResource):
         attempt_id: str,
         *,
         code: str | Omit = omit,
-        selfie_verification_completed: Literal | Omit = omit,
+        selfie_verification_completed: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -517,6 +588,9 @@ class AuthenticateResourceWithRawResponse:
         self.reauthenticate = to_raw_response_wrapper(
             authenticate.reauthenticate,
         )
+        self.send_2fa_email = to_raw_response_wrapper(
+            authenticate.send_2fa_email,
+        )
         self.start = to_raw_response_wrapper(
             authenticate.start,
         )
@@ -534,6 +608,9 @@ class AsyncAuthenticateResourceWithRawResponse:
         )
         self.reauthenticate = async_to_raw_response_wrapper(
             authenticate.reauthenticate,
+        )
+        self.send_2fa_email = async_to_raw_response_wrapper(
+            authenticate.send_2fa_email,
         )
         self.start = async_to_raw_response_wrapper(
             authenticate.start,
@@ -553,6 +630,9 @@ class AuthenticateResourceWithStreamingResponse:
         self.reauthenticate = to_streamed_response_wrapper(
             authenticate.reauthenticate,
         )
+        self.send_2fa_email = to_streamed_response_wrapper(
+            authenticate.send_2fa_email,
+        )
         self.start = to_streamed_response_wrapper(
             authenticate.start,
         )
@@ -570,6 +650,9 @@ class AsyncAuthenticateResourceWithStreamingResponse:
         )
         self.reauthenticate = async_to_streamed_response_wrapper(
             authenticate.reauthenticate,
+        )
+        self.send_2fa_email = async_to_streamed_response_wrapper(
+            authenticate.send_2fa_email,
         )
         self.start = async_to_streamed_response_wrapper(
             authenticate.start,

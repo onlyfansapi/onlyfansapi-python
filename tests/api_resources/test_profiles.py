@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types import ProfileRetrieveResponse
 
@@ -19,7 +19,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve(self, client: OnlyFansAPI) -> None:
         profile = client.profiles.retrieve(
             username="madison420ivy",
         )
@@ -27,7 +27,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_retrieve_with_all_params(self, client: OnlyFansAPI) -> None:
         profile = client.profiles.retrieve(
             username="madison420ivy",
             fresh=False,
@@ -36,7 +36,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_raw_response_retrieve(self, client: OnlyFansAPI) -> None:
         response = client.profiles.with_raw_response.retrieve(
             username="madison420ivy",
         )
@@ -48,7 +48,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_retrieve(self, client: OnlyFansAPI) -> None:
         with client.profiles.with_streaming_response.retrieve(
             username="madison420ivy",
         ) as response:
@@ -62,7 +62,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: Onlyfansapi) -> None:
+    def test_path_params_retrieve(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `username` but received ''"):
             client.profiles.with_raw_response.retrieve(
                 username="",
@@ -76,7 +76,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         profile = await async_client.profiles.retrieve(
             username="madison420ivy",
         )
@@ -84,7 +84,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         profile = await async_client.profiles.retrieve(
             username="madison420ivy",
             fresh=False,
@@ -93,7 +93,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.profiles.with_raw_response.retrieve(
             username="madison420ivy",
         )
@@ -105,7 +105,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.profiles.with_streaming_response.retrieve(
             username="madison420ivy",
         ) as response:
@@ -119,7 +119,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `username` but received ''"):
             await async_client.profiles.with_raw_response.retrieve(
                 username="",

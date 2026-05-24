@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class OnlyfansapiError(Exception):
+class OnlyFansAPIError(Exception):
     pass
 
 
-class APIError(OnlyfansapiError):
+class APIError(OnlyFansAPIError):
     message: str
     request: httpx.Request
 

@@ -7,9 +7,16 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
-from onlyfansapi.types.user_lists import UserAddResponse, UserRemoveResponse
+from onlyfansapi.types.user_lists import (
+    UserAddResponse,
+    UserPinResponse,
+    UserListResponse,
+    UserClearResponse,
+    UserRemoveResponse,
+    UserListPinnedResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +26,70 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_add(self, client: Onlyfansapi) -> None:
+    def test_method_list(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(UserListResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+            limit="limit",
+            offset="offset",
+        )
+        assert_matches_type(UserListResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list(self, client: OnlyFansAPI) -> None:
+        response = client.user_lists.users.with_raw_response.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = response.parse()
+        assert_matches_type(UserListResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
+        with client.user_lists.users.with_streaming_response.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = response.parse()
+            assert_matches_type(UserListResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_list(self, client: OnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            client.user_lists.users.with_raw_response.list(
+                user_list_id="userListId",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.users.with_raw_response.list(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_add(self, client: OnlyFansAPI) -> None:
         user = client.user_lists.users.add(
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
@@ -29,7 +99,7 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_add(self, client: Onlyfansapi) -> None:
+    def test_raw_response_add(self, client: OnlyFansAPI) -> None:
         response = client.user_lists.users.with_raw_response.add(
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
@@ -43,7 +113,7 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_add(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_add(self, client: OnlyFansAPI) -> None:
         with client.user_lists.users.with_streaming_response.add(
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
@@ -59,7 +129,7 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_add(self, client: Onlyfansapi) -> None:
+    def test_path_params_add(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.users.with_raw_response.add(
                 user_list_id="userListId",
@@ -76,7 +146,179 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_remove(self, client: Onlyfansapi) -> None:
+    def test_method_clear(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.clear(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(UserClearResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_clear(self, client: OnlyFansAPI) -> None:
+        response = client.user_lists.users.with_raw_response.clear(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = response.parse()
+        assert_matches_type(UserClearResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_clear(self, client: OnlyFansAPI) -> None:
+        with client.user_lists.users.with_streaming_response.clear(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = response.parse()
+            assert_matches_type(UserClearResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_clear(self, client: OnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            client.user_lists.users.with_raw_response.clear(
+                user_list_id="userListId",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.users.with_raw_response.clear(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_pinned(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_pinned_with_all_params(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+            limit="limit",
+            offset="offset",
+        )
+        assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_pinned(self, client: OnlyFansAPI) -> None:
+        response = client.user_lists.users.with_raw_response.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = response.parse()
+        assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_pinned(self, client: OnlyFansAPI) -> None:
+        with client.user_lists.users.with_streaming_response.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = response.parse()
+            assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_list_pinned(self, client: OnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            client.user_lists.users.with_raw_response.list_pinned(
+                user_list_id="friends",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.users.with_raw_response.list_pinned(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_pin(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.pin(
+            user_id=1145988,
+            account="acct_XXXXXXXXXXXXXXX",
+            user_list_id="friends",
+        )
+        assert_matches_type(UserPinResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_pin(self, client: OnlyFansAPI) -> None:
+        response = client.user_lists.users.with_raw_response.pin(
+            user_id=1145988,
+            account="acct_XXXXXXXXXXXXXXX",
+            user_list_id="friends",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = response.parse()
+        assert_matches_type(UserPinResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_pin(self, client: OnlyFansAPI) -> None:
+        with client.user_lists.users.with_streaming_response.pin(
+            user_id=1145988,
+            account="acct_XXXXXXXXXXXXXXX",
+            user_list_id="friends",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = response.parse()
+            assert_matches_type(UserPinResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_pin(self, client: OnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            client.user_lists.users.with_raw_response.pin(
+                user_id=1145988,
+                account="",
+                user_list_id="friends",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.users.with_raw_response.pin(
+                user_id=1145988,
+                account="acct_XXXXXXXXXXXXXXX",
+                user_list_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_remove(self, client: OnlyFansAPI) -> None:
         user = client.user_lists.users.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
@@ -86,7 +328,7 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_remove(self, client: Onlyfansapi) -> None:
+    def test_raw_response_remove(self, client: OnlyFansAPI) -> None:
         response = client.user_lists.users.with_raw_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
@@ -100,7 +342,7 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_remove(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_remove(self, client: OnlyFansAPI) -> None:
         with client.user_lists.users.with_streaming_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
@@ -116,7 +358,7 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_remove(self, client: Onlyfansapi) -> None:
+    def test_path_params_remove(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.users.with_raw_response.remove(
                 user_id=123456,
@@ -139,7 +381,70 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_add(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(UserListResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+            limit="limit",
+            offset="offset",
+        )
+        assert_matches_type(UserListResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.user_lists.users.with_raw_response.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = await response.parse()
+        assert_matches_type(UserListResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.user_lists.users.with_streaming_response.list(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = await response.parse()
+            assert_matches_type(UserListResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_list(self, async_client: AsyncOnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            await async_client.user_lists.users.with_raw_response.list(
+                user_list_id="userListId",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.users.with_raw_response.list(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_add(self, async_client: AsyncOnlyFansAPI) -> None:
         user = await async_client.user_lists.users.add(
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
@@ -149,7 +454,7 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_add(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_add(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.user_lists.users.with_raw_response.add(
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
@@ -163,7 +468,7 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_add(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_add(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.user_lists.users.with_streaming_response.add(
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
@@ -179,7 +484,7 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_add(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_add(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.users.with_raw_response.add(
                 user_list_id="userListId",
@@ -196,7 +501,179 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_remove(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_clear(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.clear(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(UserClearResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_clear(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.user_lists.users.with_raw_response.clear(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = await response.parse()
+        assert_matches_type(UserClearResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_clear(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.user_lists.users.with_streaming_response.clear(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = await response.parse()
+            assert_matches_type(UserClearResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_clear(self, async_client: AsyncOnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            await async_client.user_lists.users.with_raw_response.clear(
+                user_list_id="userListId",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.users.with_raw_response.clear(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_pinned(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_pinned_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+            limit="limit",
+            offset="offset",
+        )
+        assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_pinned(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.user_lists.users.with_raw_response.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = await response.parse()
+        assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_pinned(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.user_lists.users.with_streaming_response.list_pinned(
+            user_list_id="friends",
+            account="acct_XXXXXXXXXXXXXXX",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = await response.parse()
+            assert_matches_type(UserListPinnedResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_list_pinned(self, async_client: AsyncOnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            await async_client.user_lists.users.with_raw_response.list_pinned(
+                user_list_id="friends",
+                account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.users.with_raw_response.list_pinned(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_pin(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.pin(
+            user_id=1145988,
+            account="acct_XXXXXXXXXXXXXXX",
+            user_list_id="friends",
+        )
+        assert_matches_type(UserPinResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_pin(self, async_client: AsyncOnlyFansAPI) -> None:
+        response = await async_client.user_lists.users.with_raw_response.pin(
+            user_id=1145988,
+            account="acct_XXXXXXXXXXXXXXX",
+            user_list_id="friends",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = await response.parse()
+        assert_matches_type(UserPinResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_pin(self, async_client: AsyncOnlyFansAPI) -> None:
+        async with async_client.user_lists.users.with_streaming_response.pin(
+            user_id=1145988,
+            account="acct_XXXXXXXXXXXXXXX",
+            user_list_id="friends",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = await response.parse()
+            assert_matches_type(UserPinResponse, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_pin(self, async_client: AsyncOnlyFansAPI) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
+            await async_client.user_lists.users.with_raw_response.pin(
+                user_id=1145988,
+                account="",
+                user_list_id="friends",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.users.with_raw_response.pin(
+                user_id=1145988,
+                account="acct_XXXXXXXXXXXXXXX",
+                user_list_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         user = await async_client.user_lists.users.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
@@ -206,7 +683,7 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_remove(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.user_lists.users.with_raw_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
@@ -220,7 +697,7 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_remove(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.user_lists.users.with_streaming_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
@@ -236,7 +713,7 @@ class TestAsyncUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_remove(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.users.with_raw_response.remove(
                 user_id=123456,

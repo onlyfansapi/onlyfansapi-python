@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
 from onlyfansapi.types.statistics import ReachGetProfileVisitorsResponse
 
@@ -19,7 +19,7 @@ class TestReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_profile_visitors(self, client: Onlyfansapi) -> None:
+    def test_method_get_profile_visitors(self, client: OnlyFansAPI) -> None:
         reach = client.statistics.reach.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -29,7 +29,7 @@ class TestReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_profile_visitors_with_all_params(self, client: Onlyfansapi) -> None:
+    def test_method_get_profile_visitors_with_all_params(self, client: OnlyFansAPI) -> None:
         reach = client.statistics.reach.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -42,7 +42,7 @@ class TestReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_profile_visitors(self, client: Onlyfansapi) -> None:
+    def test_raw_response_get_profile_visitors(self, client: OnlyFansAPI) -> None:
         response = client.statistics.reach.with_raw_response.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -56,7 +56,7 @@ class TestReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_profile_visitors(self, client: Onlyfansapi) -> None:
+    def test_streaming_response_get_profile_visitors(self, client: OnlyFansAPI) -> None:
         with client.statistics.reach.with_streaming_response.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -72,7 +72,7 @@ class TestReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_profile_visitors(self, client: Onlyfansapi) -> None:
+    def test_path_params_get_profile_visitors(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.reach.with_raw_response.get_profile_visitors(
                 account="",
@@ -88,7 +88,7 @@ class TestAsyncReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_profile_visitors(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_profile_visitors(self, async_client: AsyncOnlyFansAPI) -> None:
         reach = await async_client.statistics.reach.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -98,7 +98,7 @@ class TestAsyncReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_profile_visitors_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_method_get_profile_visitors_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         reach = await async_client.statistics.reach.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -111,7 +111,7 @@ class TestAsyncReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_profile_visitors(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_raw_response_get_profile_visitors(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.reach.with_raw_response.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -125,7 +125,7 @@ class TestAsyncReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_profile_visitors(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_streaming_response_get_profile_visitors(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.reach.with_streaming_response.get_profile_visitors(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
@@ -141,7 +141,7 @@ class TestAsyncReach:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_profile_visitors(self, async_client: AsyncOnlyfansapi) -> None:
+    async def test_path_params_get_profile_visitors(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.reach.with_raw_response.get_profile_visitors(
                 account="",
