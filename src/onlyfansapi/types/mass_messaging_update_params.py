@@ -16,6 +16,12 @@ class MassMessagingUpdateParams(TypedDict, total=False):
     text: Required[str]
     """The message text content"""
 
+    giphy_id: Annotated[str, PropertyInfo(alias="giphyId")]
+    """The ID of the Giphy GIF to attach to the message.
+
+    Get IDs from the Giphy listing endpoints (`/giphy/trending`, `/giphy/search`).
+    """
+
     locked_text: Annotated[bool, PropertyInfo(alias="lockedText")]
     """Whether the text should be shown or hidden"""
 

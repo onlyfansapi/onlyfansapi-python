@@ -18,3 +18,16 @@ class TransactionListParams(TypedDict, total=False):
 
     start_date: Annotated[str, PropertyInfo(alias="startDate")]
     """The start date for transactions list. Default: `-30days`"""
+
+    tips_source: Annotated[str, PropertyInfo(alias="tipsSource")]
+    """Filter tips by source.
+
+    Only applies when `type=tips`. Options: `profile`, `post_all`, `chat`, `stream`,
+    `story`
+    """
+
+    type: str
+    """Filter by transaction type.
+
+    Options: `subscribes`, `tips`, `post`, `chat_messages`, `stream`
+    """

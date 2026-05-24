@@ -170,6 +170,10 @@ class Data(BaseModel):
 
     name: Optional[str] = None
 
+    ofapi_gender: Optional[str] = None
+
+    ofapi_gender_confidence: Optional[float] = None
+
     photos_count: Optional[int] = FieldInfo(alias="photosCount", default=None)
 
     posts_count: Optional[int] = FieldInfo(alias="postsCount", default=None)

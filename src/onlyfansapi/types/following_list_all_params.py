@@ -20,10 +20,13 @@ class FollowingListAllParams(TypedDict, total=False):
     offset: int
     """Pagination offset. Must be at least 0."""
 
+    query: Optional[str]
+    """Search within following name/username."""
+
 
 class Filter(TypedDict, total=False):
-    online: Optional[Literal]
+    online: Optional[Literal[1, 0]]
     """Filter by online status (1 for online, 0 for offline, null for all)."""
 
-    paid: Optional[Literal]
+    paid: Optional[Literal[1, 0]]
     """Filter by paid status (1 for paid, 0 for free, null for all)."""

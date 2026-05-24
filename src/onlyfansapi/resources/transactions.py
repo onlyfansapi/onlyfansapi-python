@@ -50,6 +50,8 @@ class TransactionsResource(SyncAPIResource):
         limit: str | Omit = omit,
         marker: str | Omit = omit,
         start_date: str | Omit = omit,
+        tips_source: str | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -60,7 +62,7 @@ class TransactionsResource(SyncAPIResource):
         """Get a paginated list of transactions for an Account.
 
         Newest transactions are
-        first.
+        first. You can filter by transaction type and tips source.
 
         Args:
           limit: The number of transactions to return. Recommended: `10`
@@ -68,6 +70,12 @@ class TransactionsResource(SyncAPIResource):
           marker: The marker used for pagination. Default: `null`
 
           start_date: The start date for transactions list. Default: `-30days`
+
+          tips_source: Filter tips by source. Only applies when `type=tips`. Options: `profile`,
+              `post_all`, `chat`, `stream`, `story`
+
+          type: Filter by transaction type. Options: `subscribes`, `tips`, `post`,
+              `chat_messages`, `stream`
 
           extra_headers: Send extra headers
 
@@ -91,6 +99,8 @@ class TransactionsResource(SyncAPIResource):
                         "limit": limit,
                         "marker": marker,
                         "start_date": start_date,
+                        "tips_source": tips_source,
+                        "type": type,
                     },
                     transaction_list_params.TransactionListParams,
                 ),
@@ -128,6 +138,8 @@ class AsyncTransactionsResource(AsyncAPIResource):
         limit: str | Omit = omit,
         marker: str | Omit = omit,
         start_date: str | Omit = omit,
+        tips_source: str | Omit = omit,
+        type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -138,7 +150,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         """Get a paginated list of transactions for an Account.
 
         Newest transactions are
-        first.
+        first. You can filter by transaction type and tips source.
 
         Args:
           limit: The number of transactions to return. Recommended: `10`
@@ -146,6 +158,12 @@ class AsyncTransactionsResource(AsyncAPIResource):
           marker: The marker used for pagination. Default: `null`
 
           start_date: The start date for transactions list. Default: `-30days`
+
+          tips_source: Filter tips by source. Only applies when `type=tips`. Options: `profile`,
+              `post_all`, `chat`, `stream`, `story`
+
+          type: Filter by transaction type. Options: `subscribes`, `tips`, `post`,
+              `chat_messages`, `stream`
 
           extra_headers: Send extra headers
 
@@ -169,6 +187,8 @@ class AsyncTransactionsResource(AsyncAPIResource):
                         "limit": limit,
                         "marker": marker,
                         "start_date": start_date,
+                        "tips_source": tips_source,
+                        "type": type,
                     },
                     transaction_list_params.TransactionListParams,
                 ),

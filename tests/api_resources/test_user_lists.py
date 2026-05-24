@@ -27,7 +27,7 @@ class TestUserLists:
     def test_method_create(self, client: Onlyfansapi) -> None:
         user_list = client.user_lists.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="scyfotubmi",
+            name="iaxxxx",
         )
         assert_matches_type(UserListCreateResponse, user_list, path=["response"])
 
@@ -36,7 +36,7 @@ class TestUserLists:
     def test_raw_response_create(self, client: Onlyfansapi) -> None:
         response = client.user_lists.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="scyfotubmi",
+            name="iaxxxx",
         )
 
         assert response.is_closed is True
@@ -49,7 +49,7 @@ class TestUserLists:
     def test_streaming_response_create(self, client: Onlyfansapi) -> None:
         with client.user_lists.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="scyfotubmi",
+            name="iaxxxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -65,16 +65,27 @@ class TestUserLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.with_raw_response.create(
                 account="",
-                name="scyfotubmi",
+                name="iaxxxx",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Onlyfansapi) -> None:
         user_list = client.user_lists.update(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
-            name="jqnoventcce",
+            name="My Updated List Name",
+        )
+        assert_matches_type(UserListUpdateResponse, user_list, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_update_with_all_params(self, client: Onlyfansapi) -> None:
+        user_list = client.user_lists.update(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+            name="My Updated List Name",
+            is_pinned_to_feed=True,
         )
         assert_matches_type(UserListUpdateResponse, user_list, path=["response"])
 
@@ -82,9 +93,9 @@ class TestUserLists:
     @parametrize
     def test_raw_response_update(self, client: Onlyfansapi) -> None:
         response = client.user_lists.with_raw_response.update(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
-            name="jqnoventcce",
+            name="My Updated List Name",
         )
 
         assert response.is_closed is True
@@ -96,9 +107,9 @@ class TestUserLists:
     @parametrize
     def test_streaming_response_update(self, client: Onlyfansapi) -> None:
         with client.user_lists.with_streaming_response.update(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
-            name="jqnoventcce",
+            name="My Updated List Name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -113,9 +124,16 @@ class TestUserLists:
     def test_path_params_update(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.with_raw_response.update(
-                user_list_id=1224114714,
+                user_list_id="userListId",
                 account="",
-                name="jqnoventcce",
+                name="My Updated List Name",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.with_raw_response.update(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+                name="My Updated List Name",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -174,7 +192,7 @@ class TestUserLists:
     @parametrize
     def test_method_delete(self, client: Onlyfansapi) -> None:
         user_list = client.user_lists.delete(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(UserListDeleteResponse, user_list, path=["response"])
@@ -183,7 +201,7 @@ class TestUserLists:
     @parametrize
     def test_raw_response_delete(self, client: Onlyfansapi) -> None:
         response = client.user_lists.with_raw_response.delete(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -196,7 +214,7 @@ class TestUserLists:
     @parametrize
     def test_streaming_response_delete(self, client: Onlyfansapi) -> None:
         with client.user_lists.with_streaming_response.delete(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -212,8 +230,14 @@ class TestUserLists:
     def test_path_params_delete(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.with_raw_response.delete(
-                user_list_id=1224114714,
+                user_list_id="userListId",
                 account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.with_raw_response.delete(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
             )
 
 
@@ -227,7 +251,7 @@ class TestAsyncUserLists:
     async def test_method_create(self, async_client: AsyncOnlyfansapi) -> None:
         user_list = await async_client.user_lists.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="scyfotubmi",
+            name="iaxxxx",
         )
         assert_matches_type(UserListCreateResponse, user_list, path=["response"])
 
@@ -236,7 +260,7 @@ class TestAsyncUserLists:
     async def test_raw_response_create(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.user_lists.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="scyfotubmi",
+            name="iaxxxx",
         )
 
         assert response.is_closed is True
@@ -249,7 +273,7 @@ class TestAsyncUserLists:
     async def test_streaming_response_create(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.user_lists.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="scyfotubmi",
+            name="iaxxxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -265,16 +289,27 @@ class TestAsyncUserLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.with_raw_response.create(
                 account="",
-                name="scyfotubmi",
+                name="iaxxxx",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncOnlyfansapi) -> None:
         user_list = await async_client.user_lists.update(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
-            name="jqnoventcce",
+            name="My Updated List Name",
+        )
+        assert_matches_type(UserListUpdateResponse, user_list, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+        user_list = await async_client.user_lists.update(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+            name="My Updated List Name",
+            is_pinned_to_feed=True,
         )
         assert_matches_type(UserListUpdateResponse, user_list, path=["response"])
 
@@ -282,9 +317,9 @@ class TestAsyncUserLists:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.user_lists.with_raw_response.update(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
-            name="jqnoventcce",
+            name="My Updated List Name",
         )
 
         assert response.is_closed is True
@@ -296,9 +331,9 @@ class TestAsyncUserLists:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.user_lists.with_streaming_response.update(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
-            name="jqnoventcce",
+            name="My Updated List Name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -313,9 +348,16 @@ class TestAsyncUserLists:
     async def test_path_params_update(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.with_raw_response.update(
-                user_list_id=1224114714,
+                user_list_id="userListId",
                 account="",
-                name="jqnoventcce",
+                name="My Updated List Name",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.with_raw_response.update(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
+                name="My Updated List Name",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -374,7 +416,7 @@ class TestAsyncUserLists:
     @parametrize
     async def test_method_delete(self, async_client: AsyncOnlyfansapi) -> None:
         user_list = await async_client.user_lists.delete(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(UserListDeleteResponse, user_list, path=["response"])
@@ -383,7 +425,7 @@ class TestAsyncUserLists:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.user_lists.with_raw_response.delete(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -396,7 +438,7 @@ class TestAsyncUserLists:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.user_lists.with_streaming_response.delete(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -412,6 +454,12 @@ class TestAsyncUserLists:
     async def test_path_params_delete(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.with_raw_response.delete(
-                user_list_id=1224114714,
+                user_list_id="userListId",
                 account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.with_raw_response.delete(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
             )

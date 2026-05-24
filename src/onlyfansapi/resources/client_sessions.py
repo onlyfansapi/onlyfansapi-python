@@ -49,8 +49,7 @@ class ClientSessionsResource(SyncAPIResource):
         *,
         display_name: str,
         client_reference_id: str | Omit = omit,
-        proxy_country: Optional[Literal["us", "uk", "de", "es", "fr", "it", "ua", "pl", "ro", "cz", "hu", "sk"]]
-        | Omit = omit,
+        proxy_country: Optional[Literal["us", "uk"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -120,8 +119,7 @@ class AsyncClientSessionsResource(AsyncAPIResource):
         *,
         display_name: str,
         client_reference_id: str | Omit = omit,
-        proxy_country: Optional[Literal["us", "uk", "de", "es", "fr", "it", "ua", "pl", "ro", "cz", "hu", "sk"]]
-        | Omit = omit,
+        proxy_country: Optional[Literal["us", "uk"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

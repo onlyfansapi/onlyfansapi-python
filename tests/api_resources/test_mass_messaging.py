@@ -15,7 +15,6 @@ from onlyfansapi.types import (
     MassMessagingUpdateResponse,
     MassMessagingRetrieveResponse,
     MassMessagingListQueueResponse,
-    MassMessagingListStatisticsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -93,6 +92,7 @@ class TestMassMessaging:
             id="id",
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", "string"],
             previews=["ofapi_media_abc123", "string"],
@@ -246,60 +246,6 @@ class TestMassMessaging:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_statistics(self, client: Onlyfansapi) -> None:
-        mass_messaging = client.mass_messaging.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-        )
-        assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_list_statistics_with_all_params(self, client: Onlyfansapi) -> None:
-        mass_messaging = client.mass_messaging.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
-            offset=0,
-            query="My message text",
-            type="sent",
-        )
-        assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_list_statistics(self, client: Onlyfansapi) -> None:
-        response = client.mass_messaging.with_raw_response.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        mass_messaging = response.parse()
-        assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_list_statistics(self, client: Onlyfansapi) -> None:
-        with client.mass_messaging.with_streaming_response.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            mass_messaging = response.parse()
-            assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_list_statistics(self, client: Onlyfansapi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
-            client.mass_messaging.with_raw_response.list_statistics(
-                account="",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_method_send(self, client: Onlyfansapi) -> None:
         mass_messaging = client.mass_messaging.send(
             account="acct_XXXXXXXXXXXXXXX",
@@ -313,10 +259,15 @@ class TestMassMessaging:
         mass_messaging = client.mass_messaging.send(
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            excluded_lists=["fans", "recent", "following", "rebill_off", "tagged", "string"],
+            giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
-            media_files=["ofapi_media_abc123", "string"],
-            previews=["ofapi_media_abc123", "string"],
+            media_files=["ofapi_media_abc123", 1234567890],
+            previews=["ofapi_media_abc123", 1234567890],
             price=100,
+            rf_guest="rfGuest",
+            rf_partner="rfPartner",
+            rf_tag="rfTag",
             save_for_later=True,
             scheduled_date="2025-01-01T00:00:00.000Z",
             user_ids=["string"],
@@ -436,6 +387,7 @@ class TestAsyncMassMessaging:
             id="id",
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", "string"],
             previews=["ofapi_media_abc123", "string"],
@@ -589,60 +541,6 @@ class TestAsyncMassMessaging:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_statistics(self, async_client: AsyncOnlyfansapi) -> None:
-        mass_messaging = await async_client.mass_messaging.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-        )
-        assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_list_statistics_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
-        mass_messaging = await async_client.mass_messaging.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
-            offset=0,
-            query="My message text",
-            type="sent",
-        )
-        assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_list_statistics(self, async_client: AsyncOnlyfansapi) -> None:
-        response = await async_client.mass_messaging.with_raw_response.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        mass_messaging = await response.parse()
-        assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_list_statistics(self, async_client: AsyncOnlyfansapi) -> None:
-        async with async_client.mass_messaging.with_streaming_response.list_statistics(
-            account="acct_XXXXXXXXXXXXXXX",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            mass_messaging = await response.parse()
-            assert_matches_type(MassMessagingListStatisticsResponse, mass_messaging, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_list_statistics(self, async_client: AsyncOnlyfansapi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
-            await async_client.mass_messaging.with_raw_response.list_statistics(
-                account="",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     async def test_method_send(self, async_client: AsyncOnlyfansapi) -> None:
         mass_messaging = await async_client.mass_messaging.send(
             account="acct_XXXXXXXXXXXXXXX",
@@ -656,10 +554,15 @@ class TestAsyncMassMessaging:
         mass_messaging = await async_client.mass_messaging.send(
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            excluded_lists=["fans", "recent", "following", "rebill_off", "tagged", "string"],
+            giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
-            media_files=["ofapi_media_abc123", "string"],
-            previews=["ofapi_media_abc123", "string"],
+            media_files=["ofapi_media_abc123", 1234567890],
+            previews=["ofapi_media_abc123", 1234567890],
             price=100,
+            rf_guest="rfGuest",
+            rf_partner="rfPartner",
+            rf_tag="rfTag",
             save_for_later=True,
             scheduled_date="2025-01-01T00:00:00.000Z",
             user_ids=["string"],

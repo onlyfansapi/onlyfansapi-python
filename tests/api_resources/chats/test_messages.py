@@ -25,7 +25,7 @@ class TestMessages:
     @parametrize
     def test_method_list(self, client: Onlyfansapi) -> None:
         message = client.chats.messages.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(MessageListResponse, message, path=["response"])
@@ -34,9 +34,12 @@ class TestMessages:
     @parametrize
     def test_method_list_with_all_params(self, client: Onlyfansapi) -> None:
         message = client.chats.messages.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            id="id",
+            filter="pinned",
+            first_id="first_id",
+            last_id="last_id",
+            limit="limit",
             order="desc",
             skip_users="all",
         )
@@ -46,7 +49,7 @@ class TestMessages:
     @parametrize
     def test_raw_response_list(self, client: Onlyfansapi) -> None:
         response = client.chats.messages.with_raw_response.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -59,7 +62,7 @@ class TestMessages:
     @parametrize
     def test_streaming_response_list(self, client: Onlyfansapi) -> None:
         with client.chats.messages.with_streaming_response.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -75,7 +78,7 @@ class TestMessages:
     def test_path_params_list(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.chats.messages.with_raw_response.list(
-                chat_id="458485726",
+                chat_id="123",
                 account="",
             )
 
@@ -89,9 +92,9 @@ class TestMessages:
     @parametrize
     def test_method_delete(self, client: Onlyfansapi) -> None:
         message = client.chats.messages.delete(
-            message_id="123456789",
+            message_id="69696969",
             account="acct_XXXXXXXXXXXXXXX",
-            chat_id="458485726",
+            chat_id="123",
         )
         assert_matches_type(MessageDeleteResponse, message, path=["response"])
 
@@ -99,9 +102,9 @@ class TestMessages:
     @parametrize
     def test_raw_response_delete(self, client: Onlyfansapi) -> None:
         response = client.chats.messages.with_raw_response.delete(
-            message_id="123456789",
+            message_id="69696969",
             account="acct_XXXXXXXXXXXXXXX",
-            chat_id="458485726",
+            chat_id="123",
         )
 
         assert response.is_closed is True
@@ -113,9 +116,9 @@ class TestMessages:
     @parametrize
     def test_streaming_response_delete(self, client: Onlyfansapi) -> None:
         with client.chats.messages.with_streaming_response.delete(
-            message_id="123456789",
+            message_id="69696969",
             account="acct_XXXXXXXXXXXXXXX",
-            chat_id="458485726",
+            chat_id="123",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -130,14 +133,14 @@ class TestMessages:
     def test_path_params_delete(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.chats.messages.with_raw_response.delete(
-                message_id="123456789",
+                message_id="69696969",
                 account="",
-                chat_id="458485726",
+                chat_id="123",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
             client.chats.messages.with_raw_response.delete(
-                message_id="123456789",
+                message_id="69696969",
                 account="acct_XXXXXXXXXXXXXXX",
                 chat_id="",
             )
@@ -146,16 +149,15 @@ class TestMessages:
             client.chats.messages.with_raw_response.delete(
                 message_id="",
                 account="acct_XXXXXXXXXXXXXXX",
-                chat_id="458485726",
+                chat_id="123",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_send(self, client: Onlyfansapi) -> None:
         message = client.chats.messages.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 
@@ -163,13 +165,18 @@ class TestMessages:
     @parametrize
     def test_method_send_with_all_params(self, client: Onlyfansapi) -> None:
         message = client.chats.messages.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
+            giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
-            media_files=["ofapi_media_abc123", "string"],
-            previews=["ofapi_media_abc123", "string"],
+            media_files=["ofapi_media_abc123", 1234567890],
+            previews=["ofapi_media_abc123", 1234567890],
             price=10,
+            reply_to_message_id=123456789,
+            rf_guest="rfGuest",
+            rf_partner="rfPartner",
+            rf_tag="rfTag",
+            text="Hello!",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 
@@ -177,9 +184,8 @@ class TestMessages:
     @parametrize
     def test_raw_response_send(self, client: Onlyfansapi) -> None:
         response = client.chats.messages.with_raw_response.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
         )
 
         assert response.is_closed is True
@@ -191,9 +197,8 @@ class TestMessages:
     @parametrize
     def test_streaming_response_send(self, client: Onlyfansapi) -> None:
         with client.chats.messages.with_streaming_response.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -208,16 +213,14 @@ class TestMessages:
     def test_path_params_send(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.chats.messages.with_raw_response.send(
-                chat_id="458485726",
+                chat_id="123",
                 account="",
-                text="Hello!",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
             client.chats.messages.with_raw_response.send(
                 chat_id="",
                 account="acct_XXXXXXXXXXXXXXX",
-                text="Hello!",
             )
 
 
@@ -230,7 +233,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_method_list(self, async_client: AsyncOnlyfansapi) -> None:
         message = await async_client.chats.messages.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(MessageListResponse, message, path=["response"])
@@ -239,9 +242,12 @@ class TestAsyncMessages:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         message = await async_client.chats.messages.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            id="id",
+            filter="pinned",
+            first_id="first_id",
+            last_id="last_id",
+            limit="limit",
             order="desc",
             skip_users="all",
         )
@@ -251,7 +257,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.chats.messages.with_raw_response.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -264,7 +270,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.chats.messages.with_streaming_response.list(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -280,7 +286,7 @@ class TestAsyncMessages:
     async def test_path_params_list(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.chats.messages.with_raw_response.list(
-                chat_id="458485726",
+                chat_id="123",
                 account="",
             )
 
@@ -294,9 +300,9 @@ class TestAsyncMessages:
     @parametrize
     async def test_method_delete(self, async_client: AsyncOnlyfansapi) -> None:
         message = await async_client.chats.messages.delete(
-            message_id="123456789",
+            message_id="69696969",
             account="acct_XXXXXXXXXXXXXXX",
-            chat_id="458485726",
+            chat_id="123",
         )
         assert_matches_type(MessageDeleteResponse, message, path=["response"])
 
@@ -304,9 +310,9 @@ class TestAsyncMessages:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.chats.messages.with_raw_response.delete(
-            message_id="123456789",
+            message_id="69696969",
             account="acct_XXXXXXXXXXXXXXX",
-            chat_id="458485726",
+            chat_id="123",
         )
 
         assert response.is_closed is True
@@ -318,9 +324,9 @@ class TestAsyncMessages:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.chats.messages.with_streaming_response.delete(
-            message_id="123456789",
+            message_id="69696969",
             account="acct_XXXXXXXXXXXXXXX",
-            chat_id="458485726",
+            chat_id="123",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -335,14 +341,14 @@ class TestAsyncMessages:
     async def test_path_params_delete(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.chats.messages.with_raw_response.delete(
-                message_id="123456789",
+                message_id="69696969",
                 account="",
-                chat_id="458485726",
+                chat_id="123",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
             await async_client.chats.messages.with_raw_response.delete(
-                message_id="123456789",
+                message_id="69696969",
                 account="acct_XXXXXXXXXXXXXXX",
                 chat_id="",
             )
@@ -351,16 +357,15 @@ class TestAsyncMessages:
             await async_client.chats.messages.with_raw_response.delete(
                 message_id="",
                 account="acct_XXXXXXXXXXXXXXX",
-                chat_id="458485726",
+                chat_id="123",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_send(self, async_client: AsyncOnlyfansapi) -> None:
         message = await async_client.chats.messages.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 
@@ -368,13 +373,18 @@ class TestAsyncMessages:
     @parametrize
     async def test_method_send_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         message = await async_client.chats.messages.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
+            giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
-            media_files=["ofapi_media_abc123", "string"],
-            previews=["ofapi_media_abc123", "string"],
+            media_files=["ofapi_media_abc123", 1234567890],
+            previews=["ofapi_media_abc123", 1234567890],
             price=10,
+            reply_to_message_id=123456789,
+            rf_guest="rfGuest",
+            rf_partner="rfPartner",
+            rf_tag="rfTag",
+            text="Hello!",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 
@@ -382,9 +392,8 @@ class TestAsyncMessages:
     @parametrize
     async def test_raw_response_send(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.chats.messages.with_raw_response.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
         )
 
         assert response.is_closed is True
@@ -396,9 +405,8 @@ class TestAsyncMessages:
     @parametrize
     async def test_streaming_response_send(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.chats.messages.with_streaming_response.send(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
-            text="Hello!",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -413,14 +421,12 @@ class TestAsyncMessages:
     async def test_path_params_send(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.chats.messages.with_raw_response.send(
-                chat_id="458485726",
+                chat_id="123",
                 account="",
-                text="Hello!",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `chat_id` but received ''"):
             await async_client.chats.messages.with_raw_response.send(
                 chat_id="",
                 account="acct_XXXXXXXXXXXXXXX",
-                text="Hello!",
             )

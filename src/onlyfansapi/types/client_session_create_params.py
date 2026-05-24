@@ -15,4 +15,4 @@ class ClientSessionCreateParams(TypedDict, total=False):
     client_reference_id: str
     """Your Internal Reference ID for the connected account."""
 
-    proxy_country: Optional[Literal["us", "uk", "de", "es", "fr", "it", "ua", "pl", "ro", "cz", "hu", "sk"]]
+    proxy_country: Optional[Literal["us", "uk"]]

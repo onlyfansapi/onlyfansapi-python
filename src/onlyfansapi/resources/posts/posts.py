@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -93,8 +94,8 @@ class PostsResource(SyncAPIResource):
         fund_raising_target_amount: int | Omit = omit,
         fund_raising_tips_presets: SequenceNotStr[str] | Omit = omit,
         label_ids: str | Omit = omit,
-        media_files: str | Omit = omit,
-        previews: SequenceNotStr[str] | Omit = omit,
+        media_files: Iterable[object] | Omit = omit,
+        previews: Iterable[object] | Omit = omit,
         rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
@@ -115,7 +116,7 @@ class PostsResource(SyncAPIResource):
         Args:
           text: The post text content
 
-          expire_days: Number of days after which the post will expire. Can be 1, 3, 7 or 30 days. Keep
+          expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
 
           fund_raising_target_amount: Add a fundraising target to your post. If present, value must be at least 10.
@@ -126,11 +127,11 @@ class PostsResource(SyncAPIResource):
 
           label_ids: Array of OF label IDs. Refer to our `/posts/labels` endpoint.
 
-          media_files: Array of OFAPI `ofapi_media_` IDs, or OF media IDs
+          media_files: Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs.
 
-          previews: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be shown if `price` is provided. All `previews` values must also
-              exist in the `mediaFiles` array.
+          previews: Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+              referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+              provided.
 
           rf_tag: Array OnlyFans creator user IDs to tag in your post
 
@@ -251,7 +252,7 @@ class PostsResource(SyncAPIResource):
         Args:
           text: The post text content
 
-          expire_days: Number of days after which the post will expire. Can be 1, 3, 7 or 30 days. Keep
+          expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
 
           fund_raising_target_amount: Add a fundraising target to your post. If present, value must be at least 10.
@@ -630,8 +631,8 @@ class AsyncPostsResource(AsyncAPIResource):
         fund_raising_target_amount: int | Omit = omit,
         fund_raising_tips_presets: SequenceNotStr[str] | Omit = omit,
         label_ids: str | Omit = omit,
-        media_files: str | Omit = omit,
-        previews: SequenceNotStr[str] | Omit = omit,
+        media_files: Iterable[object] | Omit = omit,
+        previews: Iterable[object] | Omit = omit,
         rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
@@ -652,7 +653,7 @@ class AsyncPostsResource(AsyncAPIResource):
         Args:
           text: The post text content
 
-          expire_days: Number of days after which the post will expire. Can be 1, 3, 7 or 30 days. Keep
+          expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
 
           fund_raising_target_amount: Add a fundraising target to your post. If present, value must be at least 10.
@@ -663,11 +664,11 @@ class AsyncPostsResource(AsyncAPIResource):
 
           label_ids: Array of OF label IDs. Refer to our `/posts/labels` endpoint.
 
-          media_files: Array of OFAPI `ofapi_media_` IDs, or OF media IDs
+          media_files: Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs.
 
-          previews: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be shown if `price` is provided. All `previews` values must also
-              exist in the `mediaFiles` array.
+          previews: Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+              referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+              provided.
 
           rf_tag: Array OnlyFans creator user IDs to tag in your post
 
@@ -788,7 +789,7 @@ class AsyncPostsResource(AsyncAPIResource):
         Args:
           text: The post text content
 
-          expire_days: Number of days after which the post will expire. Can be 1, 3, 7 or 30 days. Keep
+          expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
 
           fund_raising_target_amount: Add a fundraising target to your post. If present, value must be at least 10.

@@ -43,6 +43,7 @@ class TestTrialLinks:
             offer_expiration=7,
             offer_limit=7,
             name="name",
+            tags=["string"],
         )
         assert_matches_type(TrialLinkCreateResponse, trial_link, path=["response"])
 
@@ -156,7 +157,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_delete(self, client: Onlyfansapi) -> None:
         trial_link = client.trial_links.delete(
-            trial_link_id=123456789,
+            trial_link_id="explicabo",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkDeleteResponse, trial_link, path=["response"])
@@ -165,7 +166,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_delete(self, client: Onlyfansapi) -> None:
         response = client.trial_links.with_raw_response.delete(
-            trial_link_id=123456789,
+            trial_link_id="explicabo",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -178,7 +179,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_delete(self, client: Onlyfansapi) -> None:
         with client.trial_links.with_streaming_response.delete(
-            trial_link_id=123456789,
+            trial_link_id="explicabo",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -194,8 +195,14 @@ class TestTrialLinks:
     def test_path_params_delete(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.delete(
-                trial_link_id=123456789,
+                trial_link_id="explicabo",
                 account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `trial_link_id` but received ''"):
+            client.trial_links.with_raw_response.delete(
+                trial_link_id="",
+                account="acct_XXXXXXXXXXXXXXX",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -266,7 +273,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_list_subscribers(self, client: Onlyfansapi) -> None:
         trial_link = client.trial_links.list_subscribers(
-            trial_link_id="excepturi",
+            trial_link_id="est",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -277,7 +284,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_list_subscribers(self, client: Onlyfansapi) -> None:
         response = client.trial_links.with_raw_response.list_subscribers(
-            trial_link_id="excepturi",
+            trial_link_id="est",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -292,7 +299,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_list_subscribers(self, client: Onlyfansapi) -> None:
         with client.trial_links.with_streaming_response.list_subscribers(
-            trial_link_id="excepturi",
+            trial_link_id="est",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -310,7 +317,7 @@ class TestTrialLinks:
     def test_path_params_list_subscribers(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.list_subscribers(
-                trial_link_id="excepturi",
+                trial_link_id="est",
                 account="",
                 limit=10,
                 offset=0,
@@ -350,6 +357,7 @@ class TestAsyncTrialLinks:
             offer_expiration=7,
             offer_limit=7,
             name="name",
+            tags=["string"],
         )
         assert_matches_type(TrialLinkCreateResponse, trial_link, path=["response"])
 
@@ -463,7 +471,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_delete(self, async_client: AsyncOnlyfansapi) -> None:
         trial_link = await async_client.trial_links.delete(
-            trial_link_id=123456789,
+            trial_link_id="explicabo",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkDeleteResponse, trial_link, path=["response"])
@@ -472,7 +480,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.trial_links.with_raw_response.delete(
-            trial_link_id=123456789,
+            trial_link_id="explicabo",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -485,7 +493,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.trial_links.with_streaming_response.delete(
-            trial_link_id=123456789,
+            trial_link_id="explicabo",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -501,8 +509,14 @@ class TestAsyncTrialLinks:
     async def test_path_params_delete(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.delete(
-                trial_link_id=123456789,
+                trial_link_id="explicabo",
                 account="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `trial_link_id` but received ''"):
+            await async_client.trial_links.with_raw_response.delete(
+                trial_link_id="",
+                account="acct_XXXXXXXXXXXXXXX",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -573,7 +587,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_list_subscribers(self, async_client: AsyncOnlyfansapi) -> None:
         trial_link = await async_client.trial_links.list_subscribers(
-            trial_link_id="excepturi",
+            trial_link_id="est",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -584,7 +598,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_list_subscribers(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.trial_links.with_raw_response.list_subscribers(
-            trial_link_id="excepturi",
+            trial_link_id="est",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -599,7 +613,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_list_subscribers(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.trial_links.with_streaming_response.list_subscribers(
-            trial_link_id="excepturi",
+            trial_link_id="est",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -617,7 +631,7 @@ class TestAsyncTrialLinks:
     async def test_path_params_list_subscribers(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.list_subscribers(
-                trial_link_id="excepturi",
+                trial_link_id="est",
                 account="",
                 limit=10,
                 offset=0,

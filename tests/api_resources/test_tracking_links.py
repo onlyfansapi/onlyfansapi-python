@@ -34,6 +34,16 @@ class TestTrackingLinks:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_create_with_all_params(self, client: Onlyfansapi) -> None:
+        tracking_link = client.tracking_links.create(
+            account="acct_XXXXXXXXXXXXXXX",
+            name="Twitter bio",
+            tags=["string"],
+        )
+        assert_matches_type(TrackingLinkCreateResponse, tracking_link, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_create(self, client: Onlyfansapi) -> None:
         response = client.tracking_links.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
@@ -131,7 +141,7 @@ class TestTrackingLinks:
     @parametrize
     def test_method_delete(self, client: Onlyfansapi) -> None:
         tracking_link = client.tracking_links.delete(
-            tracking_link_id="tracking_link_id",
+            tracking_link_id="incidunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrackingLinkDeleteResponse, tracking_link, path=["response"])
@@ -140,7 +150,7 @@ class TestTrackingLinks:
     @parametrize
     def test_raw_response_delete(self, client: Onlyfansapi) -> None:
         response = client.tracking_links.with_raw_response.delete(
-            tracking_link_id="tracking_link_id",
+            tracking_link_id="incidunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -153,7 +163,7 @@ class TestTrackingLinks:
     @parametrize
     def test_streaming_response_delete(self, client: Onlyfansapi) -> None:
         with client.tracking_links.with_streaming_response.delete(
-            tracking_link_id="tracking_link_id",
+            tracking_link_id="incidunt",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -169,7 +179,7 @@ class TestTrackingLinks:
     def test_path_params_delete(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.tracking_links.with_raw_response.delete(
-                tracking_link_id="tracking_link_id",
+                tracking_link_id="incidunt",
                 account="",
             )
 
@@ -322,6 +332,16 @@ class TestAsyncTrackingLinks:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+        tracking_link = await async_client.tracking_links.create(
+            account="acct_XXXXXXXXXXXXXXX",
+            name="Twitter bio",
+            tags=["string"],
+        )
+        assert_matches_type(TrackingLinkCreateResponse, tracking_link, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_create(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.tracking_links.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
@@ -419,7 +439,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_method_delete(self, async_client: AsyncOnlyfansapi) -> None:
         tracking_link = await async_client.tracking_links.delete(
-            tracking_link_id="tracking_link_id",
+            tracking_link_id="incidunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrackingLinkDeleteResponse, tracking_link, path=["response"])
@@ -428,7 +448,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.tracking_links.with_raw_response.delete(
-            tracking_link_id="tracking_link_id",
+            tracking_link_id="incidunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -441,7 +461,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.tracking_links.with_streaming_response.delete(
-            tracking_link_id="tracking_link_id",
+            tracking_link_id="incidunt",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -457,7 +477,7 @@ class TestAsyncTrackingLinks:
     async def test_path_params_delete(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.tracking_links.with_raw_response.delete(
-                tracking_link_id="tracking_link_id",
+                tracking_link_id="incidunt",
                 account="",
             )
 

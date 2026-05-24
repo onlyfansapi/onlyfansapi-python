@@ -52,7 +52,6 @@ if TYPE_CHECKING:
         settings,
         webhooks,
         following,
-        workflows,
         statistics,
         user_lists,
         subscribers,
@@ -88,7 +87,6 @@ if TYPE_CHECKING:
     from .resources.tracking_links import TrackingLinksResource, AsyncTrackingLinksResource
     from .resources.banking.banking import BankingResource, AsyncBankingResource
     from .resources.client_sessions import ClientSessionsResource, AsyncClientSessionsResource
-    from .resources.workflows.workflows import WorkflowsResource, AsyncWorkflowsResource
     from .resources.statistics.statistics import StatisticsResource, AsyncStatisticsResource
     from .resources.user_lists.user_lists import UserListsResource, AsyncUserListsResource
     from .resources.notifications.notifications import NotificationsResource, AsyncNotificationsResource
@@ -201,7 +199,6 @@ class Onlyfansapi(SyncAPIClient):
 
     @cached_property
     def chats(self) -> ChatsResource:
-        """APIs for managing OnlyFans chats"""
         from .resources.chats import ChatsResource
 
         return ChatsResource(self)
@@ -223,12 +220,6 @@ class Onlyfansapi(SyncAPIClient):
         from .resources.authenticate import AuthenticateResource
 
         return AuthenticateResource(self)
-
-    @cached_property
-    def workflows(self) -> WorkflowsResource:
-        from .resources.workflows import WorkflowsResource
-
-        return WorkflowsResource(self)
 
     @cached_property
     def fans(self) -> FansResource:
@@ -309,7 +300,6 @@ class Onlyfansapi(SyncAPIClient):
 
     @cached_property
     def settings(self) -> SettingsResource:
-        """Operations related to user account settings."""
         from .resources.settings import SettingsResource
 
         return SettingsResource(self)
@@ -561,7 +551,6 @@ class AsyncOnlyfansapi(AsyncAPIClient):
 
     @cached_property
     def chats(self) -> AsyncChatsResource:
-        """APIs for managing OnlyFans chats"""
         from .resources.chats import AsyncChatsResource
 
         return AsyncChatsResource(self)
@@ -583,12 +572,6 @@ class AsyncOnlyfansapi(AsyncAPIClient):
         from .resources.authenticate import AsyncAuthenticateResource
 
         return AsyncAuthenticateResource(self)
-
-    @cached_property
-    def workflows(self) -> AsyncWorkflowsResource:
-        from .resources.workflows import AsyncWorkflowsResource
-
-        return AsyncWorkflowsResource(self)
 
     @cached_property
     def fans(self) -> AsyncFansResource:
@@ -669,7 +652,6 @@ class AsyncOnlyfansapi(AsyncAPIClient):
 
     @cached_property
     def settings(self) -> AsyncSettingsResource:
-        """Operations related to user account settings."""
         from .resources.settings import AsyncSettingsResource
 
         return AsyncSettingsResource(self)
@@ -863,7 +845,6 @@ class OnlyfansapiWithRawResponse:
 
     @cached_property
     def chats(self) -> chats.ChatsResourceWithRawResponse:
-        """APIs for managing OnlyFans chats"""
         from .resources.chats import ChatsResourceWithRawResponse
 
         return ChatsResourceWithRawResponse(self._client.chats)
@@ -885,12 +866,6 @@ class OnlyfansapiWithRawResponse:
         from .resources.authenticate import AuthenticateResourceWithRawResponse
 
         return AuthenticateResourceWithRawResponse(self._client.authenticate)
-
-    @cached_property
-    def workflows(self) -> workflows.WorkflowsResourceWithRawResponse:
-        from .resources.workflows import WorkflowsResourceWithRawResponse
-
-        return WorkflowsResourceWithRawResponse(self._client.workflows)
 
     @cached_property
     def fans(self) -> fans.FansResourceWithRawResponse:
@@ -971,7 +946,6 @@ class OnlyfansapiWithRawResponse:
 
     @cached_property
     def settings(self) -> settings.SettingsResourceWithRawResponse:
-        """Operations related to user account settings."""
         from .resources.settings import SettingsResourceWithRawResponse
 
         return SettingsResourceWithRawResponse(self._client.settings)
@@ -1053,7 +1027,6 @@ class AsyncOnlyfansapiWithRawResponse:
 
     @cached_property
     def chats(self) -> chats.AsyncChatsResourceWithRawResponse:
-        """APIs for managing OnlyFans chats"""
         from .resources.chats import AsyncChatsResourceWithRawResponse
 
         return AsyncChatsResourceWithRawResponse(self._client.chats)
@@ -1075,12 +1048,6 @@ class AsyncOnlyfansapiWithRawResponse:
         from .resources.authenticate import AsyncAuthenticateResourceWithRawResponse
 
         return AsyncAuthenticateResourceWithRawResponse(self._client.authenticate)
-
-    @cached_property
-    def workflows(self) -> workflows.AsyncWorkflowsResourceWithRawResponse:
-        from .resources.workflows import AsyncWorkflowsResourceWithRawResponse
-
-        return AsyncWorkflowsResourceWithRawResponse(self._client.workflows)
 
     @cached_property
     def fans(self) -> fans.AsyncFansResourceWithRawResponse:
@@ -1161,7 +1128,6 @@ class AsyncOnlyfansapiWithRawResponse:
 
     @cached_property
     def settings(self) -> settings.AsyncSettingsResourceWithRawResponse:
-        """Operations related to user account settings."""
         from .resources.settings import AsyncSettingsResourceWithRawResponse
 
         return AsyncSettingsResourceWithRawResponse(self._client.settings)
@@ -1243,7 +1209,6 @@ class OnlyfansapiWithStreamedResponse:
 
     @cached_property
     def chats(self) -> chats.ChatsResourceWithStreamingResponse:
-        """APIs for managing OnlyFans chats"""
         from .resources.chats import ChatsResourceWithStreamingResponse
 
         return ChatsResourceWithStreamingResponse(self._client.chats)
@@ -1265,12 +1230,6 @@ class OnlyfansapiWithStreamedResponse:
         from .resources.authenticate import AuthenticateResourceWithStreamingResponse
 
         return AuthenticateResourceWithStreamingResponse(self._client.authenticate)
-
-    @cached_property
-    def workflows(self) -> workflows.WorkflowsResourceWithStreamingResponse:
-        from .resources.workflows import WorkflowsResourceWithStreamingResponse
-
-        return WorkflowsResourceWithStreamingResponse(self._client.workflows)
 
     @cached_property
     def fans(self) -> fans.FansResourceWithStreamingResponse:
@@ -1351,7 +1310,6 @@ class OnlyfansapiWithStreamedResponse:
 
     @cached_property
     def settings(self) -> settings.SettingsResourceWithStreamingResponse:
-        """Operations related to user account settings."""
         from .resources.settings import SettingsResourceWithStreamingResponse
 
         return SettingsResourceWithStreamingResponse(self._client.settings)
@@ -1433,7 +1391,6 @@ class AsyncOnlyfansapiWithStreamedResponse:
 
     @cached_property
     def chats(self) -> chats.AsyncChatsResourceWithStreamingResponse:
-        """APIs for managing OnlyFans chats"""
         from .resources.chats import AsyncChatsResourceWithStreamingResponse
 
         return AsyncChatsResourceWithStreamingResponse(self._client.chats)
@@ -1455,12 +1412,6 @@ class AsyncOnlyfansapiWithStreamedResponse:
         from .resources.authenticate import AsyncAuthenticateResourceWithStreamingResponse
 
         return AsyncAuthenticateResourceWithStreamingResponse(self._client.authenticate)
-
-    @cached_property
-    def workflows(self) -> workflows.AsyncWorkflowsResourceWithStreamingResponse:
-        from .resources.workflows import AsyncWorkflowsResourceWithStreamingResponse
-
-        return AsyncWorkflowsResourceWithStreamingResponse(self._client.workflows)
 
     @cached_property
     def fans(self) -> fans.AsyncFansResourceWithStreamingResponse:
@@ -1541,7 +1492,6 @@ class AsyncOnlyfansapiWithStreamedResponse:
 
     @cached_property
     def settings(self) -> settings.AsyncSettingsResourceWithStreamingResponse:
-        """Operations related to user account settings."""
         from .resources.settings import AsyncSettingsResourceWithStreamingResponse
 
         return AsyncSettingsResourceWithStreamingResponse(self._client.settings)

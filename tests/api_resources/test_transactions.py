@@ -33,6 +33,8 @@ class TestTransactions:
             limit="limit",
             marker="1739155047",
             start_date="2025-01-01 00:00:00, -30days",
+            tips_source="post_all",
+            type="tips",
         )
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
@@ -92,6 +94,8 @@ class TestAsyncTransactions:
             limit="limit",
             marker="1739155047",
             start_date="2025-01-01 00:00:00, -30days",
+            tips_source="post_all",
+            type="tips",
         )
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 

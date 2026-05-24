@@ -44,7 +44,7 @@ class UsersResource(SyncAPIResource):
 
     def add(
         self,
-        user_list_id: int,
+        user_list_id: str,
         *,
         account: str,
         ids: SequenceNotStr[str],
@@ -71,6 +71,8 @@ class UsersResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return self._post(
             path_template("/api/{account}/user-lists/{user_list_id}/users", account=account, user_list_id=user_list_id),
             body=maybe_transform({"ids": ids}, user_add_params.UserAddParams),
@@ -85,7 +87,7 @@ class UsersResource(SyncAPIResource):
         user_id: int,
         *,
         account: str,
-        user_list_id: int,
+        user_list_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -107,6 +109,8 @@ class UsersResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return self._delete(
             path_template(
                 "/api/{account}/user-lists/{user_list_id}/users/{user_id}",
@@ -143,7 +147,7 @@ class AsyncUsersResource(AsyncAPIResource):
 
     async def add(
         self,
-        user_list_id: int,
+        user_list_id: str,
         *,
         account: str,
         ids: SequenceNotStr[str],
@@ -170,6 +174,8 @@ class AsyncUsersResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return await self._post(
             path_template("/api/{account}/user-lists/{user_list_id}/users", account=account, user_list_id=user_list_id),
             body=await async_maybe_transform({"ids": ids}, user_add_params.UserAddParams),
@@ -184,7 +190,7 @@ class AsyncUsersResource(AsyncAPIResource):
         user_id: int,
         *,
         account: str,
-        user_list_id: int,
+        user_list_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -206,6 +212,8 @@ class AsyncUsersResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return await self._delete(
             path_template(
                 "/api/{account}/user-lists/{user_list_id}/users/{user_id}",

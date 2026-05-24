@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
@@ -14,20 +15,29 @@ class MassMessagingSendParams(TypedDict, total=False):
     text: Required[str]
     """The message text content"""
 
+    excluded_lists: Annotated[SequenceNotStr[str], PropertyInfo(alias="excludedLists")]
+    """Array of user list IDs that the mass message will NOT be sent to."""
+
+    giphy_id: Annotated[str, PropertyInfo(alias="giphyId")]
+    """The ID of the Giphy GIF to attach to the message.
+
+    Get IDs from the Giphy listing endpoints (`/giphy/trending`, `/giphy/search`).
+    """
+
     locked_text: Annotated[bool, PropertyInfo(alias="lockedText")]
     """Whether the text should be shown or hidden"""
 
-    media_files: Annotated[SequenceNotStr[str], PropertyInfo(alias="mediaFiles")]
-    """
-    Array of media file upload prefixed_ids, or OF media IDs (required if price is
-    not 0). Will be hidden if `price` is provided.
+    media_files: Annotated[Iterable[object], PropertyInfo(alias="mediaFiles")]
+    """Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs.
+
+    Will be hidden if `price` is provided.
     """
 
-    previews: SequenceNotStr[str]
+    previews: Iterable[object]
     """
-    Array of media file upload prefixed_ids, or OF media IDs (required if price is
-    not 0). Will be shown if `price` is provided. All `previews` values must also
-    exist in the `mediaFiles` array.
+    Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+    referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+    provided.
     """
 
     price: int
@@ -35,6 +45,15 @@ class MassMessagingSendParams(TypedDict, total=False):
 
     In case this is not zero, **mediaFiles** is required
     """
+
+    rf_guest: Annotated[str, PropertyInfo(alias="rfGuest")]
+    """Array of OnlyFans Release Form Guest IDs to tag in your mass message"""
+
+    rf_partner: Annotated[str, PropertyInfo(alias="rfPartner")]
+    """Array of OnlyFans Release Form Partners IDs to tag in your mass message"""
+
+    rf_tag: Annotated[str, PropertyInfo(alias="rfTag")]
+    """Array of OnlyFans Creator User IDs to tag in your mass message"""
 
     save_for_later: Annotated[bool, PropertyInfo(alias="saveForLater")]
     """Add your message to the "Saved for later" queue."""

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ...types import chat_list_params
@@ -31,11 +33,8 @@ __all__ = ["ChatsResource", "AsyncChatsResource"]
 
 
 class ChatsResource(SyncAPIResource):
-    """APIs for managing OnlyFans chats"""
-
     @cached_property
     def messages(self) -> MessagesResource:
-        """APIs for managing OnlyFans chats"""
         return MessagesResource(self._client)
 
     @cached_property
@@ -61,11 +60,12 @@ class ChatsResource(SyncAPIResource):
         self,
         account: str,
         *,
+        filter: Literal["pinned", "priority", "unread", "with_tips", "unread_with_tips"] | Omit = omit,
         limit: str | Omit = omit,
         offset: str | Omit = omit,
-        order: str | Omit = omit,
+        order: Literal["recent", "old"] | Omit = omit,
         query: str | Omit = omit,
-        skip_users: str | Omit = omit,
+        skip_users: Literal["all", "none"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,15 +77,17 @@ class ChatsResource(SyncAPIResource):
         Get the list of chats for an Account.
 
         Args:
-          limit: Number of chats to return (10, 20, or 30)
+          filter: Optionally, filter the chats by type.
+
+          limit: Number of chats to return (1 - 100). Default = 10
 
           offset: Number of chats to skip for pagination
 
-          order: Sort order for chats (recent or old)
+          order: Sort order for chats (recent or old). Default = recent
 
           query: Search query to filter chats
 
-          skip_users: Whether to skip user details in response (all or none)
+          skip_users: Whether to skip user details in response (all or none). Default = all
 
           extra_headers: Send extra headers
 
@@ -106,6 +108,7 @@ class ChatsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -158,11 +161,8 @@ class ChatsResource(SyncAPIResource):
 
 
 class AsyncChatsResource(AsyncAPIResource):
-    """APIs for managing OnlyFans chats"""
-
     @cached_property
     def messages(self) -> AsyncMessagesResource:
-        """APIs for managing OnlyFans chats"""
         return AsyncMessagesResource(self._client)
 
     @cached_property
@@ -188,11 +188,12 @@ class AsyncChatsResource(AsyncAPIResource):
         self,
         account: str,
         *,
+        filter: Literal["pinned", "priority", "unread", "with_tips", "unread_with_tips"] | Omit = omit,
         limit: str | Omit = omit,
         offset: str | Omit = omit,
-        order: str | Omit = omit,
+        order: Literal["recent", "old"] | Omit = omit,
         query: str | Omit = omit,
-        skip_users: str | Omit = omit,
+        skip_users: Literal["all", "none"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -204,15 +205,17 @@ class AsyncChatsResource(AsyncAPIResource):
         Get the list of chats for an Account.
 
         Args:
-          limit: Number of chats to return (10, 20, or 30)
+          filter: Optionally, filter the chats by type.
+
+          limit: Number of chats to return (1 - 100). Default = 10
 
           offset: Number of chats to skip for pagination
 
-          order: Sort order for chats (recent or old)
+          order: Sort order for chats (recent or old). Default = recent
 
           query: Search query to filter chats
 
-          skip_users: Whether to skip user details in response (all or none)
+          skip_users: Whether to skip user details in response (all or none). Default = all
 
           extra_headers: Send extra headers
 
@@ -233,6 +236,7 @@ class AsyncChatsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -297,7 +301,6 @@ class ChatsResourceWithRawResponse:
 
     @cached_property
     def messages(self) -> MessagesResourceWithRawResponse:
-        """APIs for managing OnlyFans chats"""
         return MessagesResourceWithRawResponse(self._chats.messages)
 
 
@@ -314,7 +317,6 @@ class AsyncChatsResourceWithRawResponse:
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
-        """APIs for managing OnlyFans chats"""
         return AsyncMessagesResourceWithRawResponse(self._chats.messages)
 
 
@@ -331,7 +333,6 @@ class ChatsResourceWithStreamingResponse:
 
     @cached_property
     def messages(self) -> MessagesResourceWithStreamingResponse:
-        """APIs for managing OnlyFans chats"""
         return MessagesResourceWithStreamingResponse(self._chats.messages)
 
 
@@ -348,5 +349,4 @@ class AsyncChatsResourceWithStreamingResponse:
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
-        """APIs for managing OnlyFans chats"""
         return AsyncMessagesResourceWithStreamingResponse(self._chats.messages)

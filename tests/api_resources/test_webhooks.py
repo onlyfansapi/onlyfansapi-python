@@ -21,6 +21,7 @@ class TestWebhooks:
     @parametrize
     def test_method_create(self, client: Onlyfansapi) -> None:
         webhook = client.webhooks.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
         )
@@ -30,8 +31,10 @@ class TestWebhooks:
     @parametrize
     def test_method_create_with_all_params(self, client: Onlyfansapi) -> None:
         webhook = client.webhooks.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
+            account_ids=["ac_abc123"],
             signing_secret="signing_secret",
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
@@ -40,6 +43,7 @@ class TestWebhooks:
     @parametrize
     def test_raw_response_create(self, client: Onlyfansapi) -> None:
         response = client.webhooks.with_raw_response.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
         )
@@ -53,6 +57,7 @@ class TestWebhooks:
     @parametrize
     def test_streaming_response_create(self, client: Onlyfansapi) -> None:
         with client.webhooks.with_streaming_response.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
         ) as response:
@@ -116,6 +121,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_create(self, async_client: AsyncOnlyfansapi) -> None:
         webhook = await async_client.webhooks.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
         )
@@ -125,8 +131,10 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         webhook = await async_client.webhooks.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
+            account_ids=["ac_abc123"],
             signing_secret="signing_secret",
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
@@ -135,6 +143,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.webhooks.with_raw_response.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
         )
@@ -148,6 +157,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.webhooks.with_streaming_response.create(
+            account_scope="global",
             endpoint_url="https://example.com",
             events=["accounts.connected", "subscriptions.new"],
         ) as response:

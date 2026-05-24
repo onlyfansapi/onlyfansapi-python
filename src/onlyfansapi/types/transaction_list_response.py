@@ -99,6 +99,8 @@ class DataList(BaseModel):
 
     tax_amount: Optional[int] = FieldInfo(alias="taxAmount", default=None)
 
+    type: Optional[str] = None
+
     user: Optional[DataListUser] = None
 
     vat_amount: Optional[int] = FieldInfo(alias="vatAmount", default=None)

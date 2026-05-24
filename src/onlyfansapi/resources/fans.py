@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -53,9 +54,10 @@ class FansResource(SyncAPIResource):
         account: str,
         *,
         filter: fan_list_active_params.Filter | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        type: Literal["active", "expired", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,11 +70,14 @@ class FansResource(SyncAPIResource):
         Newest fans are first.
 
         Args:
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 20.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          type: Filter by fan type
+          query: Search within fan name/username.
+
+          type: Filter by fan type.
 
           extra_headers: Send extra headers
 
@@ -96,6 +101,7 @@ class FansResource(SyncAPIResource):
                         "filter": filter,
                         "limit": limit,
                         "offset": offset,
+                        "query": query,
                         "type": type,
                     },
                     fan_list_active_params.FanListActiveParams,
@@ -109,9 +115,10 @@ class FansResource(SyncAPIResource):
         account: str,
         *,
         filter: fan_list_all_params.Filter | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        type: Literal["active", "expired", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,11 +131,14 @@ class FansResource(SyncAPIResource):
         Newest fans are first.
 
         Args:
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 20.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          type: Filter by fan type
+          query: Search within fan name/username.
+
+          type: Filter by fan type.
 
           extra_headers: Send extra headers
 
@@ -152,6 +162,7 @@ class FansResource(SyncAPIResource):
                         "filter": filter,
                         "limit": limit,
                         "offset": offset,
+                        "query": query,
                         "type": type,
                     },
                     fan_list_all_params.FanListAllParams,
@@ -165,9 +176,10 @@ class FansResource(SyncAPIResource):
         account: str,
         *,
         filter: fan_list_expired_params.Filter | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        type: Literal["active", "expired", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,11 +192,14 @@ class FansResource(SyncAPIResource):
         Newest fans are first.
 
         Args:
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 20.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          type: Filter by fan type
+          query: Search within fan name/username.
+
+          type: Filter by fan type.
 
           extra_headers: Send extra headers
 
@@ -208,6 +223,7 @@ class FansResource(SyncAPIResource):
                         "filter": filter,
                         "limit": limit,
                         "offset": offset,
+                        "query": query,
                         "type": type,
                     },
                     fan_list_expired_params.FanListExpiredParams,
@@ -239,7 +255,7 @@ class FansResource(SyncAPIResource):
         Args:
           end_date: End date for filtering (required with start_date)
 
-          limit: Number of fans to return (1-100)
+          limit: Number of fans to return (1-50)
 
           offset: Number of fans to skip
 
@@ -306,9 +322,10 @@ class AsyncFansResource(AsyncAPIResource):
         account: str,
         *,
         filter: fan_list_active_params.Filter | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        type: Literal["active", "expired", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -321,11 +338,14 @@ class AsyncFansResource(AsyncAPIResource):
         Newest fans are first.
 
         Args:
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 20.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          type: Filter by fan type
+          query: Search within fan name/username.
+
+          type: Filter by fan type.
 
           extra_headers: Send extra headers
 
@@ -349,6 +369,7 @@ class AsyncFansResource(AsyncAPIResource):
                         "filter": filter,
                         "limit": limit,
                         "offset": offset,
+                        "query": query,
                         "type": type,
                     },
                     fan_list_active_params.FanListActiveParams,
@@ -362,9 +383,10 @@ class AsyncFansResource(AsyncAPIResource):
         account: str,
         *,
         filter: fan_list_all_params.Filter | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        type: Literal["active", "expired", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -377,11 +399,14 @@ class AsyncFansResource(AsyncAPIResource):
         Newest fans are first.
 
         Args:
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 20.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          type: Filter by fan type
+          query: Search within fan name/username.
+
+          type: Filter by fan type.
 
           extra_headers: Send extra headers
 
@@ -405,6 +430,7 @@ class AsyncFansResource(AsyncAPIResource):
                         "filter": filter,
                         "limit": limit,
                         "offset": offset,
+                        "query": query,
                         "type": type,
                     },
                     fan_list_all_params.FanListAllParams,
@@ -418,9 +444,10 @@ class AsyncFansResource(AsyncAPIResource):
         account: str,
         *,
         filter: fan_list_expired_params.Filter | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        type: Literal["active", "expired", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -433,11 +460,14 @@ class AsyncFansResource(AsyncAPIResource):
         Newest fans are first.
 
         Args:
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 20.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          type: Filter by fan type
+          query: Search within fan name/username.
+
+          type: Filter by fan type.
 
           extra_headers: Send extra headers
 
@@ -461,6 +491,7 @@ class AsyncFansResource(AsyncAPIResource):
                         "filter": filter,
                         "limit": limit,
                         "offset": offset,
+                        "query": query,
                         "type": type,
                     },
                     fan_list_expired_params.FanListExpiredParams,
@@ -492,7 +523,7 @@ class AsyncFansResource(AsyncAPIResource):
         Args:
           end_date: End date for filtering (required with start_date)
 
-          limit: Number of fans to return (1-100)
+          limit: Number of fans to return (1-50)
 
           offset: Number of fans to skip
 

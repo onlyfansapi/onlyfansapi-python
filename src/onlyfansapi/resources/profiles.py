@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
-from .._types import Body, Query, Headers, NotGiven, not_given
-from .._utils import path_template
+from ..types import profile_retrieve_params
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -44,6 +47,7 @@ class ProfilesResource(SyncAPIResource):
         self,
         username: str,
         *,
+        fresh: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -55,6 +59,9 @@ class ProfilesResource(SyncAPIResource):
         Get profile details by username.
 
         Args:
+          fresh: If `true` then OnlyFansAPI will always return the real time information about
+              profile (eg. when was the profile last online).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -68,7 +75,11 @@ class ProfilesResource(SyncAPIResource):
         return self._get(
             path_template("/api/profiles/{username}", username=username),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"fresh": fresh}, profile_retrieve_params.ProfileRetrieveParams),
             ),
             cast_to=ProfileRetrieveResponse,
         )
@@ -98,6 +109,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         self,
         username: str,
         *,
+        fresh: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -109,6 +121,9 @@ class AsyncProfilesResource(AsyncAPIResource):
         Get profile details by username.
 
         Args:
+          fresh: If `true` then OnlyFansAPI will always return the real time information about
+              profile (eg. when was the profile last online).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -122,7 +137,11 @@ class AsyncProfilesResource(AsyncAPIResource):
         return await self._get(
             path_template("/api/profiles/{username}", username=username),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"fresh": fresh}, profile_retrieve_params.ProfileRetrieveParams),
             ),
             cast_to=ProfileRetrieveResponse,
         )

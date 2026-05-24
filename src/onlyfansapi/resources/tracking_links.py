@@ -13,7 +13,7 @@ from ..types import (
     tracking_link_list_spenders_params,
     tracking_link_list_subscribers_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -60,6 +60,7 @@ class TrackingLinksResource(SyncAPIResource):
         account: str,
         *,
         name: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -73,6 +74,8 @@ class TrackingLinksResource(SyncAPIResource):
         Args:
           name: The name of the Tracking Link
 
+          tags: Array of tag names to add to the tracking link.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -85,7 +88,13 @@ class TrackingLinksResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return self._post(
             path_template("/api/{account}/tracking-links", account=account),
-            body=maybe_transform({"name": name}, tracking_link_create_params.TrackingLinkCreateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "tags": tags,
+                },
+                tracking_link_create_params.TrackingLinkCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -350,6 +359,7 @@ class AsyncTrackingLinksResource(AsyncAPIResource):
         account: str,
         *,
         name: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -363,6 +373,8 @@ class AsyncTrackingLinksResource(AsyncAPIResource):
         Args:
           name: The name of the Tracking Link
 
+          tags: Array of tag names to add to the tracking link.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -375,7 +387,13 @@ class AsyncTrackingLinksResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return await self._post(
             path_template("/api/{account}/tracking-links", account=account),
-            body=await async_maybe_transform({"name": name}, tracking_link_create_params.TrackingLinkCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "tags": tags,
+                },
+                tracking_link_create_params.TrackingLinkCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

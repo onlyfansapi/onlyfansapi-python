@@ -46,8 +46,10 @@ class WebhooksResource(SyncAPIResource):
     def create(
         self,
         *,
+        account_scope: str,
         endpoint_url: str,
         events: SequenceNotStr[str],
+        account_ids: SequenceNotStr[str] | Omit = omit,
         signing_secret: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -60,13 +62,16 @@ class WebhooksResource(SyncAPIResource):
         Create a new webhook for your Team
 
         Args:
+          account_scope: The account scope for the webhook. Use "global" for all accounts, "inclusive"
+              for only selected accounts, or "exclusive" for all except selected accounts.
+
           endpoint_url: The URL of your webhook endpoint.
 
-          events: An array of webhook events to subscribe to. Options: `messages.received`,
-              `messages.sent`, `messages.ppv.unlocked`, `subscriptions.new`, `users.typing`,
-              `posts.liked`, `accounts.connected`, `accounts.reconnected`,
-              `accounts.session_expired`, `accounts.authentication_failed`,
-              `accounts.otp_code_required`, `accounts.face_otp_required`
+          events: An array of webhook events to subscribe to. For all options, refer to our **List
+              Available Events** endpoint.
+
+          account_ids: An array of account IDs to apply the scope to. Required unless account_scope is
+              "global".
 
           signing_secret: Optionally, add a signing secret to protect your webhook.
 
@@ -82,8 +87,10 @@ class WebhooksResource(SyncAPIResource):
             "/api/webhooks",
             body=maybe_transform(
                 {
+                    "account_scope": account_scope,
                     "endpoint_url": endpoint_url,
                     "events": events,
+                    "account_ids": account_ids,
                     "signing_secret": signing_secret,
                 },
                 webhook_create_params.WebhookCreateParams,
@@ -151,8 +158,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        account_scope: str,
         endpoint_url: str,
         events: SequenceNotStr[str],
+        account_ids: SequenceNotStr[str] | Omit = omit,
         signing_secret: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -165,13 +174,16 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Create a new webhook for your Team
 
         Args:
+          account_scope: The account scope for the webhook. Use "global" for all accounts, "inclusive"
+              for only selected accounts, or "exclusive" for all except selected accounts.
+
           endpoint_url: The URL of your webhook endpoint.
 
-          events: An array of webhook events to subscribe to. Options: `messages.received`,
-              `messages.sent`, `messages.ppv.unlocked`, `subscriptions.new`, `users.typing`,
-              `posts.liked`, `accounts.connected`, `accounts.reconnected`,
-              `accounts.session_expired`, `accounts.authentication_failed`,
-              `accounts.otp_code_required`, `accounts.face_otp_required`
+          events: An array of webhook events to subscribe to. For all options, refer to our **List
+              Available Events** endpoint.
+
+          account_ids: An array of account IDs to apply the scope to. Required unless account_scope is
+              "global".
 
           signing_secret: Optionally, add a signing secret to protect your webhook.
 
@@ -187,8 +199,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
             "/api/webhooks",
             body=await async_maybe_transform(
                 {
+                    "account_scope": account_scope,
                     "endpoint_url": endpoint_url,
                     "events": events,
+                    "account_ids": account_ids,
                     "signing_secret": signing_secret,
                 },
                 webhook_create_params.WebhookCreateParams,

@@ -13,6 +13,7 @@ from onlyfansapi.types import (
     AuthenticateStartResponse,
     AuthenticateSubmit2faResponse,
     AuthenticatePollStatusResponse,
+    AuthenticateReauthenticateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -69,7 +70,7 @@ class TestAuthenticate:
         authenticate = client.authenticate.reauthenticate(
             "acct_XXXXXXXXXX",
         )
-        assert authenticate is None
+        assert_matches_type(AuthenticateReauthenticateResponse, authenticate, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -81,7 +82,7 @@ class TestAuthenticate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authenticate = response.parse()
-        assert authenticate is None
+        assert_matches_type(AuthenticateReauthenticateResponse, authenticate, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -93,7 +94,7 @@ class TestAuthenticate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             authenticate = response.parse()
-            assert authenticate is None
+            assert_matches_type(AuthenticateReauthenticateResponse, authenticate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -108,21 +109,36 @@ class TestAuthenticate:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_start(self, client: Onlyfansapi) -> None:
+        authenticate = client.authenticate.start()
+        assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_start_with_all_params(self, client: Onlyfansapi) -> None:
         authenticate = client.authenticate.start(
-            email="jalyn75@example.net",
-            password="vXIA}fx5Ek:",
-            proxy_country="pl",
+            auth_id="unde",
+            auth_type="raw_data",
+            cookies="quas",
+            custom_proxy={
+                "host": "proxy.example.com",
+                "password": "kUs%4~:w^=4XptWD]D",
+                "port": 8080,
+                "username": "excepturi",
+            },
+            email="colleen06@example.com",
+            force_connect=True,
+            name="fugit",
+            password=":#5q4Bm}|0#Qr%11",
+            proxy_country="uk",
+            user_agent="delectus",
+            xbc="ut",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_start(self, client: Onlyfansapi) -> None:
-        response = client.authenticate.with_raw_response.start(
-            email="jalyn75@example.net",
-            password="vXIA}fx5Ek:",
-            proxy_country="pl",
-        )
+        response = client.authenticate.with_raw_response.start()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -132,11 +148,7 @@ class TestAuthenticate:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_start(self, client: Onlyfansapi) -> None:
-        with client.authenticate.with_streaming_response.start(
-            email="jalyn75@example.net",
-            password="vXIA}fx5Ek:",
-            proxy_country="pl",
-        ) as response:
+        with client.authenticate.with_streaming_response.start() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -150,7 +162,16 @@ class TestAuthenticate:
     def test_method_submit_2fa(self, client: Onlyfansapi) -> None:
         authenticate = client.authenticate.submit_2fa(
             attempt_id="auth_XXXXXXX",
+        )
+        assert_matches_type(AuthenticateSubmit2faResponse, authenticate, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_submit_2fa_with_all_params(self, client: Onlyfansapi) -> None:
+        authenticate = client.authenticate.submit_2fa(
+            attempt_id="auth_XXXXXXX",
             code="12345",
+            selfie_verification_completed=None,
         )
         assert_matches_type(AuthenticateSubmit2faResponse, authenticate, path=["response"])
 
@@ -159,7 +180,6 @@ class TestAuthenticate:
     def test_raw_response_submit_2fa(self, client: Onlyfansapi) -> None:
         response = client.authenticate.with_raw_response.submit_2fa(
             attempt_id="auth_XXXXXXX",
-            code="12345",
         )
 
         assert response.is_closed is True
@@ -172,7 +192,6 @@ class TestAuthenticate:
     def test_streaming_response_submit_2fa(self, client: Onlyfansapi) -> None:
         with client.authenticate.with_streaming_response.submit_2fa(
             attempt_id="auth_XXXXXXX",
-            code="12345",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -188,7 +207,6 @@ class TestAuthenticate:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `attempt_id` but received ''"):
             client.authenticate.with_raw_response.submit_2fa(
                 attempt_id="",
-                code="12345",
             )
 
 
@@ -245,7 +263,7 @@ class TestAsyncAuthenticate:
         authenticate = await async_client.authenticate.reauthenticate(
             "acct_XXXXXXXXXX",
         )
-        assert authenticate is None
+        assert_matches_type(AuthenticateReauthenticateResponse, authenticate, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -257,7 +275,7 @@ class TestAsyncAuthenticate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         authenticate = await response.parse()
-        assert authenticate is None
+        assert_matches_type(AuthenticateReauthenticateResponse, authenticate, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -269,7 +287,7 @@ class TestAsyncAuthenticate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             authenticate = await response.parse()
-            assert authenticate is None
+            assert_matches_type(AuthenticateReauthenticateResponse, authenticate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -284,21 +302,36 @@ class TestAsyncAuthenticate:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_start(self, async_client: AsyncOnlyfansapi) -> None:
+        authenticate = await async_client.authenticate.start()
+        assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_start_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         authenticate = await async_client.authenticate.start(
-            email="jalyn75@example.net",
-            password="vXIA}fx5Ek:",
-            proxy_country="pl",
+            auth_id="unde",
+            auth_type="raw_data",
+            cookies="quas",
+            custom_proxy={
+                "host": "proxy.example.com",
+                "password": "kUs%4~:w^=4XptWD]D",
+                "port": 8080,
+                "username": "excepturi",
+            },
+            email="colleen06@example.com",
+            force_connect=True,
+            name="fugit",
+            password=":#5q4Bm}|0#Qr%11",
+            proxy_country="uk",
+            user_agent="delectus",
+            xbc="ut",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_start(self, async_client: AsyncOnlyfansapi) -> None:
-        response = await async_client.authenticate.with_raw_response.start(
-            email="jalyn75@example.net",
-            password="vXIA}fx5Ek:",
-            proxy_country="pl",
-        )
+        response = await async_client.authenticate.with_raw_response.start()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -308,11 +341,7 @@ class TestAsyncAuthenticate:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_start(self, async_client: AsyncOnlyfansapi) -> None:
-        async with async_client.authenticate.with_streaming_response.start(
-            email="jalyn75@example.net",
-            password="vXIA}fx5Ek:",
-            proxy_country="pl",
-        ) as response:
+        async with async_client.authenticate.with_streaming_response.start() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -326,7 +355,16 @@ class TestAsyncAuthenticate:
     async def test_method_submit_2fa(self, async_client: AsyncOnlyfansapi) -> None:
         authenticate = await async_client.authenticate.submit_2fa(
             attempt_id="auth_XXXXXXX",
+        )
+        assert_matches_type(AuthenticateSubmit2faResponse, authenticate, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_submit_2fa_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
+        authenticate = await async_client.authenticate.submit_2fa(
+            attempt_id="auth_XXXXXXX",
             code="12345",
+            selfie_verification_completed=None,
         )
         assert_matches_type(AuthenticateSubmit2faResponse, authenticate, path=["response"])
 
@@ -335,7 +373,6 @@ class TestAsyncAuthenticate:
     async def test_raw_response_submit_2fa(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.authenticate.with_raw_response.submit_2fa(
             attempt_id="auth_XXXXXXX",
-            code="12345",
         )
 
         assert response.is_closed is True
@@ -348,7 +385,6 @@ class TestAsyncAuthenticate:
     async def test_streaming_response_submit_2fa(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.authenticate.with_streaming_response.submit_2fa(
             attempt_id="auth_XXXXXXX",
-            code="12345",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -364,5 +400,4 @@ class TestAsyncAuthenticate:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `attempt_id` but received ''"):
             await async_client.authenticate.with_raw_response.submit_2fa(
                 attempt_id="",
-                code="12345",
             )

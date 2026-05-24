@@ -42,25 +42,21 @@ class _Meta(BaseModel):
 
 
 class _Pagination(BaseModel):
+    next_cursor: Optional[str] = None
+
     next_page_url: Optional[str] = None
 
     total_results: Optional[int] = None
 
 
 class Data(BaseModel):
-    id: Optional[int] = None
-
     about: Optional[str] = None
 
     audios_count: Optional[int] = None
 
     avatar_url: Optional[str] = None
 
-    browsable: Optional[bool] = None
-
     bundles: Optional[str] = None
-
-    created_at: Optional[str] = None
 
     facebook: Optional[str] = None
 
@@ -69,8 +65,6 @@ class Data(BaseModel):
     favorited_count: Optional[int] = None
 
     favorites_count: Optional[int] = None
-
-    gender: Optional[str] = None
 
     header_url: Optional[str] = None
 
@@ -96,7 +90,11 @@ class Data(BaseModel):
 
     name: Optional[str] = None
 
-    onlyfans_id: Optional[str] = None
+    ofapi_gender: Optional[str] = None
+
+    ofapi_gender_confidence: Optional[float] = None
+
+    onlyfans_id: Optional[int] = None
 
     photos_count: Optional[int] = None
 
@@ -115,8 +113,6 @@ class Data(BaseModel):
     tiktok: Optional[str] = None
 
     twitter: Optional[str] = None
-
-    updated_at: Optional[str] = None
 
     username: Optional[str] = None
 

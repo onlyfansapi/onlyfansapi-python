@@ -21,7 +21,7 @@ class TestUsers:
     @parametrize
     def test_method_retrieve(self, client: Onlyfansapi) -> None:
         user = client.users.retrieve(
-            username="consequuntur",
+            username="exampleuser",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(UserRetrieveResponse, user, path=["response"])
@@ -30,7 +30,7 @@ class TestUsers:
     @parametrize
     def test_raw_response_retrieve(self, client: Onlyfansapi) -> None:
         response = client.users.with_raw_response.retrieve(
-            username="consequuntur",
+            username="exampleuser",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -43,7 +43,7 @@ class TestUsers:
     @parametrize
     def test_streaming_response_retrieve(self, client: Onlyfansapi) -> None:
         with client.users.with_streaming_response.retrieve(
-            username="consequuntur",
+            username="exampleuser",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -59,7 +59,7 @@ class TestUsers:
     def test_path_params_retrieve(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.users.with_raw_response.retrieve(
-                username="consequuntur",
+                username="exampleuser",
                 account="",
             )
 
@@ -79,7 +79,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
         user = await async_client.users.retrieve(
-            username="consequuntur",
+            username="exampleuser",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(UserRetrieveResponse, user, path=["response"])
@@ -88,7 +88,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.users.with_raw_response.retrieve(
-            username="consequuntur",
+            username="exampleuser",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -101,7 +101,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.users.with_streaming_response.retrieve(
-            username="consequuntur",
+            username="exampleuser",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -117,7 +117,7 @@ class TestAsyncUsers:
     async def test_path_params_retrieve(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.users.with_raw_response.retrieve(
-                username="consequuntur",
+                username="exampleuser",
                 account="",
             )
 

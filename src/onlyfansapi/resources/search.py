@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Optional
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import search_profiles_params
@@ -44,11 +47,28 @@ class SearchResource(SyncAPIResource):
     def profiles(
         self,
         *,
-        query: str,
-        limit: str | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: search_profiles_params.Filter | Omit = omit,
+        instagram: str | Omit = omit,
+        limit: int | Omit = omit,
         location: str | Omit = omit,
-        max_subscribe_price: str | Omit = omit,
-        min_subscribe_price: str | Omit = omit,
+        max_subscribe_price: float | Omit = omit,
+        min_subscribe_price: float | Omit = omit,
+        query: str | Omit = omit,
+        sort: Literal[
+            "likes",
+            "photos",
+            "videos",
+            "subscribers",
+            "subscribe_price",
+            "min_subscribe_price",
+            "join_date",
+            "last_seen",
+        ]
+        | Omit = omit,
+        sort_direction: Literal["desc", "asc"] | Omit = omit,
+        tiktok: str | Omit = omit,
+        website: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -61,16 +81,31 @@ class SearchResource(SyncAPIResource):
         media count and more.
 
         Args:
-          query: Query for full text search in username, display name, bio
+          cursor: Cursor for pagination. Use the `next_cursor` from the previous response to get
+              the next page of results.
+
+          instagram: Filter by Instagram username.
 
           limit: The number of profiles to return. For each returned profile we charge your
-              account 1 credit. Default: `10`
+              account 1 credit. Default: `10`. Must be at least 1. Must not be greater
+              than 100.
 
-          location: Location
+          location: Filter by location.
 
-          max_subscribe_price: Maximum subscribe price
+          max_subscribe_price: Filter by maximum subscribe price. Must be at least 0.00.
 
-          min_subscribe_price: Minimum subscribe price
+          min_subscribe_price: Filter by minimum subscribe price. Must be at least 0.00.
+
+          query: Query for full text search in username, display name, bio. Must be at least 3
+              characters.
+
+          sort: Field to sort by. ⭐️ Only available on the Pro and Enterprise plan.
+
+          sort_direction: Direction for sorting. `desc` - highest value first. `asc` - lowest value first.
+
+          tiktok: Filter by TikTok username.
+
+          website: Filter by website.
 
           extra_headers: Send extra headers
 
@@ -89,11 +124,18 @@ class SearchResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "query": query,
+                        "cursor": cursor,
+                        "filter": filter,
+                        "instagram": instagram,
                         "limit": limit,
                         "location": location,
                         "max_subscribe_price": max_subscribe_price,
                         "min_subscribe_price": min_subscribe_price,
+                        "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
+                        "tiktok": tiktok,
+                        "website": website,
                     },
                     search_profiles_params.SearchProfilesParams,
                 ),
@@ -125,11 +167,28 @@ class AsyncSearchResource(AsyncAPIResource):
     async def profiles(
         self,
         *,
-        query: str,
-        limit: str | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: search_profiles_params.Filter | Omit = omit,
+        instagram: str | Omit = omit,
+        limit: int | Omit = omit,
         location: str | Omit = omit,
-        max_subscribe_price: str | Omit = omit,
-        min_subscribe_price: str | Omit = omit,
+        max_subscribe_price: float | Omit = omit,
+        min_subscribe_price: float | Omit = omit,
+        query: str | Omit = omit,
+        sort: Literal[
+            "likes",
+            "photos",
+            "videos",
+            "subscribers",
+            "subscribe_price",
+            "min_subscribe_price",
+            "join_date",
+            "last_seen",
+        ]
+        | Omit = omit,
+        sort_direction: Literal["desc", "asc"] | Omit = omit,
+        tiktok: str | Omit = omit,
+        website: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,16 +201,31 @@ class AsyncSearchResource(AsyncAPIResource):
         media count and more.
 
         Args:
-          query: Query for full text search in username, display name, bio
+          cursor: Cursor for pagination. Use the `next_cursor` from the previous response to get
+              the next page of results.
+
+          instagram: Filter by Instagram username.
 
           limit: The number of profiles to return. For each returned profile we charge your
-              account 1 credit. Default: `10`
+              account 1 credit. Default: `10`. Must be at least 1. Must not be greater
+              than 100.
 
-          location: Location
+          location: Filter by location.
 
-          max_subscribe_price: Maximum subscribe price
+          max_subscribe_price: Filter by maximum subscribe price. Must be at least 0.00.
 
-          min_subscribe_price: Minimum subscribe price
+          min_subscribe_price: Filter by minimum subscribe price. Must be at least 0.00.
+
+          query: Query for full text search in username, display name, bio. Must be at least 3
+              characters.
+
+          sort: Field to sort by. ⭐️ Only available on the Pro and Enterprise plan.
+
+          sort_direction: Direction for sorting. `desc` - highest value first. `asc` - lowest value first.
+
+          tiktok: Filter by TikTok username.
+
+          website: Filter by website.
 
           extra_headers: Send extra headers
 
@@ -170,11 +244,18 @@ class AsyncSearchResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "query": query,
+                        "cursor": cursor,
+                        "filter": filter,
+                        "instagram": instagram,
                         "limit": limit,
                         "location": location,
                         "max_subscribe_price": max_subscribe_price,
                         "min_subscribe_price": min_subscribe_price,
+                        "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
+                        "tiktok": tiktok,
+                        "website": website,
                     },
                     search_profiles_params.SearchProfilesParams,
                 ),

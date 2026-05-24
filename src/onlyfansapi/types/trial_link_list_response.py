@@ -98,6 +98,8 @@ class DataList(BaseModel):
 
     subscribe_days: Optional[int] = FieldInfo(alias="subscribeDays", default=None)
 
+    tags: Optional[List[str]] = None
+
     trial_link_name: Optional[str] = FieldInfo(alias="trialLinkName", default=None)
 
     url: Optional[str] = None

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["TrialLinkCreateParams"]
@@ -35,3 +36,6 @@ class TrialLinkCreateParams(TypedDict, total=False):
 
     name: Optional[str]
     """The name of the trail link (optional). Cannot be longer than 64 characters."""
+
+    tags: SequenceNotStr[str]
+    """Array of tag names to add to the trial link."""
