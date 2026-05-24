@@ -153,6 +153,7 @@ Types:
 ```python
 from onlyfansapi.types import (
     AuthenticatePollStatusResponse,
+    AuthenticateReauthenticateResponse,
     AuthenticateStartResponse,
     AuthenticateSubmit2faResponse,
 )
@@ -161,17 +162,9 @@ from onlyfansapi.types import (
 Methods:
 
 - <code title="get /api/authenticate/{attempt_id}">client.authenticate.<a href="./src/onlyfansapi/resources/authenticate.py">poll_status</a>(attempt_id) -> <a href="./src/onlyfansapi/types/authenticate_poll_status_response.py">AuthenticatePollStatusResponse</a></code>
-- <code title="post /api/authenticate/{account_id}/reauthenticate">client.authenticate.<a href="./src/onlyfansapi/resources/authenticate.py">reauthenticate</a>(account_id) -> None</code>
+- <code title="post /api/authenticate/{account_id}/reauthenticate">client.authenticate.<a href="./src/onlyfansapi/resources/authenticate.py">reauthenticate</a>(account_id) -> <a href="./src/onlyfansapi/types/authenticate_reauthenticate_response.py">AuthenticateReauthenticateResponse</a></code>
 - <code title="post /api/authenticate">client.authenticate.<a href="./src/onlyfansapi/resources/authenticate.py">start</a>(\*\*<a href="src/onlyfansapi/types/authenticate_start_params.py">params</a>) -> <a href="./src/onlyfansapi/types/authenticate_start_response.py">AuthenticateStartResponse</a></code>
 - <code title="put /api/authenticate/{attempt_id}">client.authenticate.<a href="./src/onlyfansapi/resources/authenticate.py">submit_2fa</a>(attempt_id, \*\*<a href="src/onlyfansapi/types/authenticate_submit_2fa_params.py">params</a>) -> <a href="./src/onlyfansapi/types/authenticate_submit_2fa_response.py">AuthenticateSubmit2faResponse</a></code>
-
-# Workflows
-
-## AccountPerformance
-
-Methods:
-
-- <code title="get /api/{account}/workflows/account-performance/starting-revenues">client.workflows.account_performance.<a href="./src/onlyfansapi/resources/workflows/account_performance.py">retrieve_starting_revenues</a>(account) -> None</code>
 
 # Fans
 
@@ -195,11 +188,21 @@ Methods:
 
 # Following
 
+Types:
+
+```python
+from onlyfansapi.types import (
+    FollowingListActiveResponse,
+    FollowingListAllResponse,
+    FollowingListExpiredResponse,
+)
+```
+
 Methods:
 
-- <code title="get /api/{account}/following/active">client.following.<a href="./src/onlyfansapi/resources/following.py">list_active</a>(account, \*\*<a href="src/onlyfansapi/types/following_list_active_params.py">params</a>) -> None</code>
-- <code title="get /api/{account}/following/all">client.following.<a href="./src/onlyfansapi/resources/following.py">list_all</a>(account, \*\*<a href="src/onlyfansapi/types/following_list_all_params.py">params</a>) -> None</code>
-- <code title="get /api/{account}/following/expired">client.following.<a href="./src/onlyfansapi/resources/following.py">list_expired</a>(account, \*\*<a href="src/onlyfansapi/types/following_list_expired_params.py">params</a>) -> None</code>
+- <code title="get /api/{account}/following/active">client.following.<a href="./src/onlyfansapi/resources/following.py">list_active</a>(account, \*\*<a href="src/onlyfansapi/types/following_list_active_params.py">params</a>) -> <a href="./src/onlyfansapi/types/following_list_active_response.py">FollowingListActiveResponse</a></code>
+- <code title="get /api/{account}/following/all">client.following.<a href="./src/onlyfansapi/resources/following.py">list_all</a>(account, \*\*<a href="src/onlyfansapi/types/following_list_all_params.py">params</a>) -> <a href="./src/onlyfansapi/types/following_list_all_response.py">FollowingListAllResponse</a></code>
+- <code title="get /api/{account}/following/expired">client.following.<a href="./src/onlyfansapi/resources/following.py">list_expired</a>(account, \*\*<a href="src/onlyfansapi/types/following_list_expired_params.py">params</a>) -> <a href="./src/onlyfansapi/types/following_list_expired_response.py">FollowingListExpiredResponse</a></code>
 
 # TrialLinks
 
@@ -233,7 +236,6 @@ from onlyfansapi.types import (
     MassMessagingUpdateResponse,
     MassMessagingDeleteResponse,
     MassMessagingListQueueResponse,
-    MassMessagingListStatisticsResponse,
     MassMessagingSendResponse,
 )
 ```
@@ -244,7 +246,6 @@ Methods:
 - <code title="put /api/{account}/mass-messaging/{id}">client.mass_messaging.<a href="./src/onlyfansapi/resources/mass_messaging.py">update</a>(id, \*, account, \*\*<a href="src/onlyfansapi/types/mass_messaging_update_params.py">params</a>) -> <a href="./src/onlyfansapi/types/mass_messaging_update_response.py">MassMessagingUpdateResponse</a></code>
 - <code title="delete /api/{account}/mass-messaging/{id}">client.mass_messaging.<a href="./src/onlyfansapi/resources/mass_messaging.py">delete</a>(id, \*, account) -> <a href="./src/onlyfansapi/types/mass_messaging_delete_response.py">MassMessagingDeleteResponse</a></code>
 - <code title="get /api/{account}/mass-messaging">client.mass_messaging.<a href="./src/onlyfansapi/resources/mass_messaging.py">list_queue</a>(account) -> <a href="./src/onlyfansapi/types/mass_messaging_list_queue_response.py">MassMessagingListQueueResponse</a></code>
-- <code title="get /api/{account}/mass-messaging/statistics">client.mass_messaging.<a href="./src/onlyfansapi/resources/mass_messaging.py">list_statistics</a>(account, \*\*<a href="src/onlyfansapi/types/mass_messaging_list_statistics_params.py">params</a>) -> <a href="./src/onlyfansapi/types/mass_messaging_list_statistics_response.py">MassMessagingListStatisticsResponse</a></code>
 - <code title="post /api/{account}/mass-messaging">client.mass_messaging.<a href="./src/onlyfansapi/resources/mass_messaging.py">send</a>(account, \*\*<a href="src/onlyfansapi/types/mass_messaging_send_params.py">params</a>) -> <a href="./src/onlyfansapi/types/mass_messaging_send_response.py">MassMessagingSendResponse</a></code>
 
 # Media
@@ -348,7 +349,6 @@ Types:
 ```python
 from onlyfansapi.types import (
     PayoutListPayoutRequestsResponse,
-    PayoutListTransactionsResponse,
     PayoutRequestManualWithdrawalResponse,
     PayoutRetrieveBalancesResponse,
     PayoutRetrieveEarningStatisticsResponse,
@@ -360,7 +360,6 @@ from onlyfansapi.types import (
 Methods:
 
 - <code title="get /api/{account}/payouts/payout-requests">client.payouts.<a href="./src/onlyfansapi/resources/payouts.py">list_payout_requests</a>(account, \*\*<a href="src/onlyfansapi/types/payout_list_payout_requests_params.py">params</a>) -> <a href="./src/onlyfansapi/types/payout_list_payout_requests_response.py">PayoutListPayoutRequestsResponse</a></code>
-- <code title="get /api/{account}/payouts/transactions">client.payouts.<a href="./src/onlyfansapi/resources/payouts.py">list_transactions</a>(account, \*\*<a href="src/onlyfansapi/types/payout_list_transactions_params.py">params</a>) -> <a href="./src/onlyfansapi/types/payout_list_transactions_response.py">PayoutListTransactionsResponse</a></code>
 - <code title="post /api/{account}/payouts/request-manual-withdrawal">client.payouts.<a href="./src/onlyfansapi/resources/payouts.py">request_manual_withdrawal</a>(account, \*\*<a href="src/onlyfansapi/types/payout_request_manual_withdrawal_params.py">params</a>) -> <a href="./src/onlyfansapi/types/payout_request_manual_withdrawal_response.py">PayoutRequestManualWithdrawalResponse</a></code>
 - <code title="get /api/{account}/payouts/balances">client.payouts.<a href="./src/onlyfansapi/resources/payouts.py">retrieve_balances</a>(account) -> <a href="./src/onlyfansapi/types/payout_retrieve_balances_response.py">PayoutRetrieveBalancesResponse</a></code>
 - <code title="get /api/{account}/payouts/earning-statistics">client.payouts.<a href="./src/onlyfansapi/resources/payouts.py">retrieve_earning_statistics</a>(account, \*\*<a href="src/onlyfansapi/types/payout_retrieve_earning_statistics_params.py">params</a>) -> <a href="./src/onlyfansapi/types/payout_retrieve_earning_statistics_response.py">PayoutRetrieveEarningStatisticsResponse</a></code>
@@ -446,7 +445,7 @@ from onlyfansapi.types import ProfileRetrieveResponse
 
 Methods:
 
-- <code title="get /api/profiles/{username}">client.profiles.<a href="./src/onlyfansapi/resources/profiles.py">retrieve</a>(username) -> <a href="./src/onlyfansapi/types/profile_retrieve_response.py">ProfileRetrieveResponse</a></code>
+- <code title="get /api/profiles/{username}">client.profiles.<a href="./src/onlyfansapi/resources/profiles.py">retrieve</a>(username, \*\*<a href="src/onlyfansapi/types/profile_retrieve_params.py">params</a>) -> <a href="./src/onlyfansapi/types/profile_retrieve_response.py">ProfileRetrieveResponse</a></code>
 
 # Search
 

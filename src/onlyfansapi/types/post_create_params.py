@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
@@ -17,7 +18,7 @@ class PostCreateParams(TypedDict, total=False):
     expire_days: Annotated[int, PropertyInfo(alias="expireDays")]
     """Number of days after which the post will expire.
 
-    Can be 1, 3, 7 or 30 days. Keep empty for no expiration.
+    Between 1 and 30 days. Keep empty for no expiration.
     """
 
     fund_raising_target_amount: Annotated[int, PropertyInfo(alias="fundRaisingTargetAmount")]
@@ -33,14 +34,14 @@ class PostCreateParams(TypedDict, total=False):
     label_ids: Annotated[str, PropertyInfo(alias="labelIds")]
     """Array of OF label IDs. Refer to our `/posts/labels` endpoint."""
 
-    media_files: Annotated[str, PropertyInfo(alias="mediaFiles")]
-    """Array of OFAPI `ofapi_media_` IDs, or OF media IDs"""
+    media_files: Annotated[Iterable[object], PropertyInfo(alias="mediaFiles")]
+    """Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs."""
 
-    previews: SequenceNotStr[str]
+    previews: Iterable[object]
     """
-    Array of media file upload prefixed_ids, or OF media IDs (required if price is
-    not 0). Will be shown if `price` is provided. All `previews` values must also
-    exist in the `mediaFiles` array.
+    Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+    referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+    provided.
     """
 
     rf_tag: Annotated[str, PropertyInfo(alias="rfTag")]

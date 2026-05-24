@@ -3,17 +3,20 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["StatisticGetOverviewParams"]
 
 
 class StatisticGetOverviewParams(TypedDict, total=False):
-    end_date: Required[str]
-    """The end date for the statistics."""
+    end_date: str
+    """The end date for the statistics. Keep empty to retrieve until now."""
 
-    start_date: Required[str]
-    """The start date for the statistics."""
+    start_date: str
+    """The start date for the statistics.
 
-    type: Optional[Literal["fans", "visitors", "posts"]]
+    Keep empty to retrieve from the model's start date.
+    """
+
+    type: Optional[Literal["fans", "visitors", "posts", "messages"]]
     """The type of statistics to retrieve (default = empty)"""

@@ -19,7 +19,7 @@ class PostUpdateParams(TypedDict, total=False):
     expire_days: Annotated[int, PropertyInfo(alias="expireDays")]
     """Number of days after which the post will expire.
 
-    Can be 1, 3, 7 or 30 days. Keep empty for no expiration.
+    Between 1 and 30 days. Keep empty for no expiration.
     """
 
     fund_raising_target_amount: Annotated[int, PropertyInfo(alias="fundRaisingTargetAmount")]

@@ -128,14 +128,6 @@ from .following import (
     FollowingResourceWithStreamingResponse,
     AsyncFollowingResourceWithStreamingResponse,
 )
-from .workflows import (
-    WorkflowsResource,
-    AsyncWorkflowsResource,
-    WorkflowsResourceWithRawResponse,
-    AsyncWorkflowsResourceWithRawResponse,
-    WorkflowsResourceWithStreamingResponse,
-    AsyncWorkflowsResourceWithStreamingResponse,
-)
 from .statistics import (
     StatisticsResource,
     AsyncStatisticsResource,
@@ -274,12 +266,6 @@ __all__ = [
     "AsyncAuthenticateResourceWithRawResponse",
     "AuthenticateResourceWithStreamingResponse",
     "AsyncAuthenticateResourceWithStreamingResponse",
-    "WorkflowsResource",
-    "AsyncWorkflowsResource",
-    "WorkflowsResourceWithRawResponse",
-    "AsyncWorkflowsResourceWithRawResponse",
-    "WorkflowsResourceWithStreamingResponse",
-    "AsyncWorkflowsResourceWithStreamingResponse",
     "FansResource",
     "AsyncFansResource",
     "FansResourceWithRawResponse",

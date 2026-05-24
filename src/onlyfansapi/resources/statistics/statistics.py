@@ -127,9 +127,9 @@ class StatisticsResource(SyncAPIResource):
         self,
         account: str,
         *,
-        end_date: str,
-        start_date: str,
-        type: Optional[Literal["fans", "visitors", "posts"]] | Omit = omit,
+        end_date: str | Omit = omit,
+        start_date: str | Omit = omit,
+        type: Optional[Literal["fans", "visitors", "posts", "messages"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -141,9 +141,10 @@ class StatisticsResource(SyncAPIResource):
         Get an overview of statistics for fans, visitors, posts, or general.
 
         Args:
-          end_date: The end date for the statistics.
+          end_date: The end date for the statistics. Keep empty to retrieve until now.
 
-          start_date: The start date for the statistics.
+          start_date: The start date for the statistics. Keep empty to retrieve from the model's start
+              date.
 
           type: The type of statistics to retrieve (default = empty)
 
@@ -314,9 +315,9 @@ class AsyncStatisticsResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        end_date: str,
-        start_date: str,
-        type: Optional[Literal["fans", "visitors", "posts"]] | Omit = omit,
+        end_date: str | Omit = omit,
+        start_date: str | Omit = omit,
+        type: Optional[Literal["fans", "visitors", "posts", "messages"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,9 +329,10 @@ class AsyncStatisticsResource(AsyncAPIResource):
         Get an overview of statistics for fans, visitors, posts, or general.
 
         Args:
-          end_date: The end date for the statistics.
+          end_date: The end date for the statistics. Keep empty to retrieve until now.
 
-          start_date: The start date for the statistics.
+          start_date: The start date for the statistics. Keep empty to retrieve from the model's start
+              date.
 
           type: The type of statistics to retrieve (default = empty)
 

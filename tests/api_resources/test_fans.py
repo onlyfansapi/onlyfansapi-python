@@ -36,13 +36,14 @@ class TestFans:
         fan = client.fans.list_active(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "duration": "duration",
-                "online": "online",
-                "tips": "tips",
-                "total_spent": "total_spent",
+                "duration": 0,
+                "online": None,
+                "tips": 0,
+                "total_spent": 0,
             },
-            limit="limit",
-            offset="offset",
+            limit=20,
+            offset=0,
+            query=None,
             type="active",
         )
         assert_matches_type(FanListActiveResponse, fan, path=["response"])
@@ -95,13 +96,14 @@ class TestFans:
         fan = client.fans.list_all(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "duration": "duration",
-                "online": "online",
-                "tips": "tips",
-                "total_spent": "total_spent",
+                "duration": 0,
+                "online": None,
+                "tips": 0,
+                "total_spent": 0,
             },
-            limit="limit",
-            offset="offset",
+            limit=20,
+            offset=0,
+            query=None,
             type="active",
         )
         assert_matches_type(FanListAllResponse, fan, path=["response"])
@@ -154,14 +156,15 @@ class TestFans:
         fan = client.fans.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "duration": "duration",
-                "online": "online",
-                "tips": "tips",
-                "total_spent": "total_spent",
+                "duration": 0,
+                "online": None,
+                "tips": 0,
+                "total_spent": 0,
             },
-            limit="limit",
-            offset="offset",
-            type="expired",
+            limit=20,
+            offset=0,
+            query=None,
+            type="active",
         )
         assert_matches_type(FanListExpiredResponse, fan, path=["response"])
 
@@ -274,13 +277,14 @@ class TestAsyncFans:
         fan = await async_client.fans.list_active(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "duration": "duration",
-                "online": "online",
-                "tips": "tips",
-                "total_spent": "total_spent",
+                "duration": 0,
+                "online": None,
+                "tips": 0,
+                "total_spent": 0,
             },
-            limit="limit",
-            offset="offset",
+            limit=20,
+            offset=0,
+            query=None,
             type="active",
         )
         assert_matches_type(FanListActiveResponse, fan, path=["response"])
@@ -333,13 +337,14 @@ class TestAsyncFans:
         fan = await async_client.fans.list_all(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "duration": "duration",
-                "online": "online",
-                "tips": "tips",
-                "total_spent": "total_spent",
+                "duration": 0,
+                "online": None,
+                "tips": 0,
+                "total_spent": 0,
             },
-            limit="limit",
-            offset="offset",
+            limit=20,
+            offset=0,
+            query=None,
             type="active",
         )
         assert_matches_type(FanListAllResponse, fan, path=["response"])
@@ -392,14 +397,15 @@ class TestAsyncFans:
         fan = await async_client.fans.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "duration": "duration",
-                "online": "online",
-                "tips": "tips",
-                "total_spent": "total_spent",
+                "duration": 0,
+                "online": None,
+                "tips": 0,
+                "total_spent": 0,
             },
-            limit="limit",
-            offset="offset",
-            type="expired",
+            limit=20,
+            offset=0,
+            query=None,
+            type="active",
         )
         assert_matches_type(FanListExpiredResponse, fan, path=["response"])
 

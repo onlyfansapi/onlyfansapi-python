@@ -13,7 +13,7 @@ from ..types import (
     trial_link_list_spenders_params,
     trial_link_list_subscribers_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -63,6 +63,7 @@ class TrialLinksResource(SyncAPIResource):
         offer_expiration: int,
         offer_limit: Literal[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 50, 100],
         name: Optional[str] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -85,6 +86,8 @@ class TrialLinksResource(SyncAPIResource):
 
           name: The name of the trail link (optional). Cannot be longer than 64 characters.
 
+          tags: Array of tag names to add to the trial link.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -103,6 +106,7 @@ class TrialLinksResource(SyncAPIResource):
                     "offer_expiration": offer_expiration,
                     "offer_limit": offer_limit,
                     "name": name,
+                    "tags": tags,
                 },
                 trial_link_create_params.TrialLinkCreateParams,
             ),
@@ -178,7 +182,7 @@ class TrialLinksResource(SyncAPIResource):
 
     def delete(
         self,
-        trial_link_id: int,
+        trial_link_id: str,
         *,
         account: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -202,6 +206,8 @@ class TrialLinksResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not trial_link_id:
+            raise ValueError(f"Expected a non-empty value for `trial_link_id` but received {trial_link_id!r}")
         return self._delete(
             path_template("/api/{account}/trial-links/{trial_link_id}", account=account, trial_link_id=trial_link_id),
             options=make_request_options(
@@ -353,6 +359,7 @@ class AsyncTrialLinksResource(AsyncAPIResource):
         offer_expiration: int,
         offer_limit: Literal[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 50, 100],
         name: Optional[str] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -375,6 +382,8 @@ class AsyncTrialLinksResource(AsyncAPIResource):
 
           name: The name of the trail link (optional). Cannot be longer than 64 characters.
 
+          tags: Array of tag names to add to the trial link.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -393,6 +402,7 @@ class AsyncTrialLinksResource(AsyncAPIResource):
                     "offer_expiration": offer_expiration,
                     "offer_limit": offer_limit,
                     "name": name,
+                    "tags": tags,
                 },
                 trial_link_create_params.TrialLinkCreateParams,
             ),
@@ -468,7 +478,7 @@ class AsyncTrialLinksResource(AsyncAPIResource):
 
     async def delete(
         self,
-        trial_link_id: int,
+        trial_link_id: str,
         *,
         account: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -492,6 +502,8 @@ class AsyncTrialLinksResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not trial_link_id:
+            raise ValueError(f"Expected a non-empty value for `trial_link_id` but received {trial_link_id!r}")
         return await self._delete(
             path_template("/api/{account}/trial-links/{trial_link_id}", account=account, trial_link_id=trial_link_id),
             options=make_request_options(

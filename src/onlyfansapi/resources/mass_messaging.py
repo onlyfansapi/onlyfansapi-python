@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
+from typing import Iterable
 
 import httpx
 
-from ..types import mass_messaging_send_params, mass_messaging_update_params, mass_messaging_list_statistics_params
+from ..types import mass_messaging_send_params, mass_messaging_update_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -23,7 +23,6 @@ from ..types.mass_messaging_delete_response import MassMessagingDeleteResponse
 from ..types.mass_messaging_update_response import MassMessagingUpdateResponse
 from ..types.mass_messaging_retrieve_response import MassMessagingRetrieveResponse
 from ..types.mass_messaging_list_queue_response import MassMessagingListQueueResponse
-from ..types.mass_messaging_list_statistics_response import MassMessagingListStatisticsResponse
 
 __all__ = ["MassMessagingResource", "AsyncMassMessagingResource"]
 
@@ -90,6 +89,7 @@ class MassMessagingResource(SyncAPIResource):
         *,
         account: str,
         text: str,
+        giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
         previews: SequenceNotStr[str] | Omit = omit,
@@ -109,6 +109,9 @@ class MassMessagingResource(SyncAPIResource):
 
         Args:
           text: The message text content
+
+          giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
+              endpoints (`/giphy/trending`, `/giphy/search`).
 
           locked_text: Whether the text should be shown or hidden
 
@@ -145,6 +148,7 @@ class MassMessagingResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
                     "previews": previews,
@@ -232,72 +236,20 @@ class MassMessagingResource(SyncAPIResource):
             cast_to=MassMessagingListQueueResponse,
         )
 
-    def list_statistics(
-        self,
-        account: str,
-        *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
-        query: str | Omit = omit,
-        type: Literal["sent", "scheduled", "unsent"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MassMessagingListStatisticsResponse:
-        """
-        List mass messaging statistics, showing the send count and view count.
-
-        Args:
-          limit: Number of mass messages to return (default = 20)
-
-          offset: Number of mass messages to skip for pagination
-
-          query: Optionally, find a mass message by the message text.
-
-          type: Filter by sent / scheduled / unsent (default = sent)
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account:
-            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return self._get(
-            path_template("/api/{account}/mass-messaging/statistics", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                        "query": query,
-                        "type": type,
-                    },
-                    mass_messaging_list_statistics_params.MassMessagingListStatisticsParams,
-                ),
-            ),
-            cast_to=MassMessagingListStatisticsResponse,
-        )
-
     def send(
         self,
         account: str,
         *,
         text: str,
+        excluded_lists: SequenceNotStr[str] | Omit = omit,
+        giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
-        media_files: SequenceNotStr[str] | Omit = omit,
-        previews: SequenceNotStr[str] | Omit = omit,
+        media_files: Iterable[object] | Omit = omit,
+        previews: Iterable[object] | Omit = omit,
         price: int | Omit = omit,
+        rf_guest: str | Omit = omit,
+        rf_partner: str | Omit = omit,
+        rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
@@ -318,17 +270,28 @@ class MassMessagingResource(SyncAPIResource):
         Args:
           text: The message text content
 
+          excluded_lists: Array of user list IDs that the mass message will NOT be sent to.
+
+          giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
+              endpoints (`/giphy/trending`, `/giphy/search`).
+
           locked_text: Whether the text should be shown or hidden
 
-          media_files: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be hidden if `price` is provided.
+          media_files: Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs. Will be hidden
+              if `price` is provided.
 
-          previews: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be shown if `price` is provided. All `previews` values must also
-              exist in the `mediaFiles` array.
+          previews: Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+              referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+              provided.
 
           price: Price for paid content (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
+
+          rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your mass message
+
+          rf_partner: Array of OnlyFans Release Form Partners IDs to tag in your mass message
+
+          rf_tag: Array of OnlyFans Creator User IDs to tag in your mass message
 
           save_for_later: Add your message to the "Saved for later" queue.
 
@@ -353,10 +316,15 @@ class MassMessagingResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "excluded_lists": excluded_lists,
+                    "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
                     "previews": previews,
                     "price": price,
+                    "rf_guest": rf_guest,
+                    "rf_partner": rf_partner,
+                    "rf_tag": rf_tag,
                     "save_for_later": save_for_later,
                     "scheduled_date": scheduled_date,
                     "user_ids": user_ids,
@@ -433,6 +401,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         *,
         account: str,
         text: str,
+        giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
         previews: SequenceNotStr[str] | Omit = omit,
@@ -452,6 +421,9 @@ class AsyncMassMessagingResource(AsyncAPIResource):
 
         Args:
           text: The message text content
+
+          giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
+              endpoints (`/giphy/trending`, `/giphy/search`).
 
           locked_text: Whether the text should be shown or hidden
 
@@ -488,6 +460,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
                     "previews": previews,
@@ -575,72 +548,20 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             cast_to=MassMessagingListQueueResponse,
         )
 
-    async def list_statistics(
-        self,
-        account: str,
-        *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
-        query: str | Omit = omit,
-        type: Literal["sent", "scheduled", "unsent"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MassMessagingListStatisticsResponse:
-        """
-        List mass messaging statistics, showing the send count and view count.
-
-        Args:
-          limit: Number of mass messages to return (default = 20)
-
-          offset: Number of mass messages to skip for pagination
-
-          query: Optionally, find a mass message by the message text.
-
-          type: Filter by sent / scheduled / unsent (default = sent)
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account:
-            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return await self._get(
-            path_template("/api/{account}/mass-messaging/statistics", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                        "query": query,
-                        "type": type,
-                    },
-                    mass_messaging_list_statistics_params.MassMessagingListStatisticsParams,
-                ),
-            ),
-            cast_to=MassMessagingListStatisticsResponse,
-        )
-
     async def send(
         self,
         account: str,
         *,
         text: str,
+        excluded_lists: SequenceNotStr[str] | Omit = omit,
+        giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
-        media_files: SequenceNotStr[str] | Omit = omit,
-        previews: SequenceNotStr[str] | Omit = omit,
+        media_files: Iterable[object] | Omit = omit,
+        previews: Iterable[object] | Omit = omit,
         price: int | Omit = omit,
+        rf_guest: str | Omit = omit,
+        rf_partner: str | Omit = omit,
+        rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
@@ -661,17 +582,28 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         Args:
           text: The message text content
 
+          excluded_lists: Array of user list IDs that the mass message will NOT be sent to.
+
+          giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
+              endpoints (`/giphy/trending`, `/giphy/search`).
+
           locked_text: Whether the text should be shown or hidden
 
-          media_files: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be hidden if `price` is provided.
+          media_files: Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs. Will be hidden
+              if `price` is provided.
 
-          previews: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be shown if `price` is provided. All `previews` values must also
-              exist in the `mediaFiles` array.
+          previews: Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+              referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+              provided.
 
           price: Price for paid content (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
+
+          rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your mass message
+
+          rf_partner: Array of OnlyFans Release Form Partners IDs to tag in your mass message
+
+          rf_tag: Array of OnlyFans Creator User IDs to tag in your mass message
 
           save_for_later: Add your message to the "Saved for later" queue.
 
@@ -696,10 +628,15 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "excluded_lists": excluded_lists,
+                    "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
                     "previews": previews,
                     "price": price,
+                    "rf_guest": rf_guest,
+                    "rf_partner": rf_partner,
+                    "rf_tag": rf_tag,
                     "save_for_later": save_for_later,
                     "scheduled_date": scheduled_date,
                     "user_ids": user_ids,
@@ -730,9 +667,6 @@ class MassMessagingResourceWithRawResponse:
         self.list_queue = to_raw_response_wrapper(
             mass_messaging.list_queue,
         )
-        self.list_statistics = to_raw_response_wrapper(
-            mass_messaging.list_statistics,
-        )
         self.send = to_raw_response_wrapper(
             mass_messaging.send,
         )
@@ -753,9 +687,6 @@ class AsyncMassMessagingResourceWithRawResponse:
         )
         self.list_queue = async_to_raw_response_wrapper(
             mass_messaging.list_queue,
-        )
-        self.list_statistics = async_to_raw_response_wrapper(
-            mass_messaging.list_statistics,
         )
         self.send = async_to_raw_response_wrapper(
             mass_messaging.send,
@@ -778,9 +709,6 @@ class MassMessagingResourceWithStreamingResponse:
         self.list_queue = to_streamed_response_wrapper(
             mass_messaging.list_queue,
         )
-        self.list_statistics = to_streamed_response_wrapper(
-            mass_messaging.list_statistics,
-        )
         self.send = to_streamed_response_wrapper(
             mass_messaging.send,
         )
@@ -801,9 +729,6 @@ class AsyncMassMessagingResourceWithStreamingResponse:
         )
         self.list_queue = async_to_streamed_response_wrapper(
             mass_messaging.list_queue,
-        )
-        self.list_statistics = async_to_streamed_response_wrapper(
-            mass_messaging.list_statistics,
         )
         self.send = async_to_streamed_response_wrapper(
             mass_messaging.send,

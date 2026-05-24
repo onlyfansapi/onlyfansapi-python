@@ -28,6 +28,8 @@ class MediaUploadResponse(BaseModel):
 
     host: Optional[str] = None
 
+    note: Optional[str] = None
+
     prefixed_id: Optional[str] = None
 
     process_id: Optional[str] = FieldInfo(alias="processId", default=None)

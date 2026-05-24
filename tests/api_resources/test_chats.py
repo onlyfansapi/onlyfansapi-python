@@ -30,6 +30,7 @@ class TestChats:
     def test_method_list_with_all_params(self, client: Onlyfansapi) -> None:
         chat = client.chats.list(
             account="acct_XXXXXXXXXXXXXXX",
+            filter="with_tips",
             limit="limit",
             offset="offset",
             order="recent",
@@ -76,7 +77,7 @@ class TestChats:
     @parametrize
     def test_method_start_typing_indicator(self, client: Onlyfansapi) -> None:
         chat = client.chats.start_typing_indicator(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(ChatStartTypingIndicatorResponse, chat, path=["response"])
@@ -85,7 +86,7 @@ class TestChats:
     @parametrize
     def test_raw_response_start_typing_indicator(self, client: Onlyfansapi) -> None:
         response = client.chats.with_raw_response.start_typing_indicator(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -98,7 +99,7 @@ class TestChats:
     @parametrize
     def test_streaming_response_start_typing_indicator(self, client: Onlyfansapi) -> None:
         with client.chats.with_streaming_response.start_typing_indicator(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -114,7 +115,7 @@ class TestChats:
     def test_path_params_start_typing_indicator(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.chats.with_raw_response.start_typing_indicator(
-                chat_id="458485726",
+                chat_id="123",
                 account="",
             )
 
@@ -143,6 +144,7 @@ class TestAsyncChats:
     async def test_method_list_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         chat = await async_client.chats.list(
             account="acct_XXXXXXXXXXXXXXX",
+            filter="with_tips",
             limit="limit",
             offset="offset",
             order="recent",
@@ -189,7 +191,7 @@ class TestAsyncChats:
     @parametrize
     async def test_method_start_typing_indicator(self, async_client: AsyncOnlyfansapi) -> None:
         chat = await async_client.chats.start_typing_indicator(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(ChatStartTypingIndicatorResponse, chat, path=["response"])
@@ -198,7 +200,7 @@ class TestAsyncChats:
     @parametrize
     async def test_raw_response_start_typing_indicator(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.chats.with_raw_response.start_typing_indicator(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -211,7 +213,7 @@ class TestAsyncChats:
     @parametrize
     async def test_streaming_response_start_typing_indicator(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.chats.with_streaming_response.start_typing_indicator(
-            chat_id="458485726",
+            chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -227,7 +229,7 @@ class TestAsyncChats:
     async def test_path_params_start_typing_indicator(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.chats.with_raw_response.start_typing_indicator(
-                chat_id="458485726",
+                chat_id="123",
                 account="",
             )
 

@@ -21,7 +21,7 @@ class TestUsers:
     @parametrize
     def test_method_add(self, client: Onlyfansapi) -> None:
         user = client.user_lists.users.add(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
         )
@@ -31,7 +31,7 @@ class TestUsers:
     @parametrize
     def test_raw_response_add(self, client: Onlyfansapi) -> None:
         response = client.user_lists.users.with_raw_response.add(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
         )
@@ -45,7 +45,7 @@ class TestUsers:
     @parametrize
     def test_streaming_response_add(self, client: Onlyfansapi) -> None:
         with client.user_lists.users.with_streaming_response.add(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
         ) as response:
@@ -62,8 +62,15 @@ class TestUsers:
     def test_path_params_add(self, client: Onlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.users.with_raw_response.add(
-                user_list_id=1224114714,
+                user_list_id="userListId",
                 account="",
+                ids=["string", "string", "string"],
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.users.with_raw_response.add(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
                 ids=["string", "string", "string"],
             )
 
@@ -73,7 +80,7 @@ class TestUsers:
         user = client.user_lists.users.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
-            user_list_id=1224114714,
+            user_list_id="userListId",
         )
         assert_matches_type(UserRemoveResponse, user, path=["response"])
 
@@ -83,7 +90,7 @@ class TestUsers:
         response = client.user_lists.users.with_raw_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
-            user_list_id=1224114714,
+            user_list_id="userListId",
         )
 
         assert response.is_closed is True
@@ -97,7 +104,7 @@ class TestUsers:
         with client.user_lists.users.with_streaming_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
-            user_list_id=1224114714,
+            user_list_id="userListId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -114,7 +121,14 @@ class TestUsers:
             client.user_lists.users.with_raw_response.remove(
                 user_id=123456,
                 account="",
-                user_list_id=1224114714,
+                user_list_id="userListId",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            client.user_lists.users.with_raw_response.remove(
+                user_id=123456,
+                account="acct_XXXXXXXXXXXXXXX",
+                user_list_id="",
             )
 
 
@@ -127,7 +141,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_method_add(self, async_client: AsyncOnlyfansapi) -> None:
         user = await async_client.user_lists.users.add(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
         )
@@ -137,7 +151,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.user_lists.users.with_raw_response.add(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
         )
@@ -151,7 +165,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.user_lists.users.with_streaming_response.add(
-            user_list_id=1224114714,
+            user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
         ) as response:
@@ -168,8 +182,15 @@ class TestAsyncUsers:
     async def test_path_params_add(self, async_client: AsyncOnlyfansapi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.users.with_raw_response.add(
-                user_list_id=1224114714,
+                user_list_id="userListId",
                 account="",
+                ids=["string", "string", "string"],
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.users.with_raw_response.add(
+                user_list_id="",
+                account="acct_XXXXXXXXXXXXXXX",
                 ids=["string", "string", "string"],
             )
 
@@ -179,7 +200,7 @@ class TestAsyncUsers:
         user = await async_client.user_lists.users.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
-            user_list_id=1224114714,
+            user_list_id="userListId",
         )
         assert_matches_type(UserRemoveResponse, user, path=["response"])
 
@@ -189,7 +210,7 @@ class TestAsyncUsers:
         response = await async_client.user_lists.users.with_raw_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
-            user_list_id=1224114714,
+            user_list_id="userListId",
         )
 
         assert response.is_closed is True
@@ -203,7 +224,7 @@ class TestAsyncUsers:
         async with async_client.user_lists.users.with_streaming_response.remove(
             user_id=123456,
             account="acct_XXXXXXXXXXXXXXX",
-            user_list_id=1224114714,
+            user_list_id="userListId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -220,5 +241,12 @@ class TestAsyncUsers:
             await async_client.user_lists.users.with_raw_response.remove(
                 user_id=123456,
                 account="",
-                user_list_id=1224114714,
+                user_list_id="userListId",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_list_id` but received ''"):
+            await async_client.user_lists.users.with_raw_response.remove(
+                user_id=123456,
+                account="acct_XXXXXXXXXXXXXXX",
+                user_list_id="",
             )

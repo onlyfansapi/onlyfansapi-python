@@ -26,8 +26,6 @@ __all__ = ["SettingsResource", "AsyncSettingsResource"]
 
 
 class SettingsResource(SyncAPIResource):
-    """Operations related to user account settings."""
-
     @cached_property
     def with_raw_response(self) -> SettingsResourceWithRawResponse:
         """
@@ -199,8 +197,6 @@ class SettingsResource(SyncAPIResource):
 
 
 class AsyncSettingsResource(AsyncAPIResource):
-    """Operations related to user account settings."""
-
     @cached_property
     def with_raw_response(self) -> AsyncSettingsResourceWithRawResponse:
         """

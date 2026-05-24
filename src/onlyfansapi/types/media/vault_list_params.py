@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, TypedDict
 
 __all__ = ["VaultListParams"]
@@ -12,7 +13,7 @@ class VaultListParams(TypedDict, total=False):
     """Sort the results by a field. Default `recent`"""
 
     limit: int
-    """Number of media to return per page. Default: `24`"""
+    """Number of media to return per page (10 - 100). Default: `24`"""
 
     list: int
     """Only show media items from a specific list (category).
@@ -23,7 +24,7 @@ class VaultListParams(TypedDict, total=False):
     offset: int
     """The offset used for pagination. Default `0`"""
 
-    query: str
+    query: Optional[str]
     """Optionally, search for a text query."""
 
     sort: Literal["desc", "asc"]

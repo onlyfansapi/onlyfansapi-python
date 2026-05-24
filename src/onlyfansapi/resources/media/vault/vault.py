@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -64,7 +65,7 @@ class VaultResource(SyncAPIResource):
         limit: int | Omit = omit,
         list: int | Omit = omit,
         offset: int | Omit = omit,
-        query: str | Omit = omit,
+        query: Optional[str] | Omit = omit,
         sort: Literal["desc", "asc"] | Omit = omit,
         type: Literal["photo", "gif", "video", "audio"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -82,7 +83,7 @@ class VaultResource(SyncAPIResource):
         Args:
           field: Sort the results by a field. Default `recent`
 
-          limit: Number of media to return per page. Default: `24`
+          limit: Number of media to return per page (10 - 100). Default: `24`
 
           list: Only show media items from a specific list (category). **Refer to our Media
               Vault Lists endpoints.**
@@ -198,7 +199,7 @@ class AsyncVaultResource(AsyncAPIResource):
         limit: int | Omit = omit,
         list: int | Omit = omit,
         offset: int | Omit = omit,
-        query: str | Omit = omit,
+        query: Optional[str] | Omit = omit,
         sort: Literal["desc", "asc"] | Omit = omit,
         type: Literal["photo", "gif", "video", "audio"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -216,7 +217,7 @@ class AsyncVaultResource(AsyncAPIResource):
         Args:
           field: Sort the results by a field. Default `recent`
 
-          limit: Number of media to return per page. Default: `24`
+          limit: Number of media to return per page (10 - 100). Default: `24`
 
           list: Only show media items from a specific list (category). **Refer to our Media
               Vault Lists endpoints.**

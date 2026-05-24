@@ -59,7 +59,7 @@ class TestAccounts:
     @parametrize
     def test_method_disconnect(self, client: Onlyfansapi) -> None:
         account = client.accounts.disconnect(
-            "aut",
+            "minima",
         )
         assert_matches_type(object, account, path=["response"])
 
@@ -67,7 +67,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_disconnect(self, client: Onlyfansapi) -> None:
         response = client.accounts.with_raw_response.disconnect(
-            "aut",
+            "minima",
         )
 
         assert response.is_closed is True
@@ -79,7 +79,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_disconnect(self, client: Onlyfansapi) -> None:
         with client.accounts.with_streaming_response.disconnect(
-            "aut",
+            "minima",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -145,7 +145,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
         account = await async_client.accounts.disconnect(
-            "aut",
+            "minima",
         )
         assert_matches_type(object, account, path=["response"])
 
@@ -153,7 +153,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.accounts.with_raw_response.disconnect(
-            "aut",
+            "minima",
         )
 
         assert response.is_closed is True
@@ -165,7 +165,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_disconnect(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.accounts.with_streaming_response.disconnect(
-            "aut",
+            "minima",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Iterable, Optional
+from typing_extensions import Literal
+
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -24,8 +27,6 @@ __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
 
 class MessagesResource(SyncAPIResource):
-    """APIs for managing OnlyFans chats"""
-
     @cached_property
     def with_raw_response(self) -> MessagesResourceWithRawResponse:
         """
@@ -50,7 +51,10 @@ class MessagesResource(SyncAPIResource):
         chat_id: str,
         *,
         account: str,
-        id: str | Omit = omit,
+        filter: Literal["pinned"] | Omit = omit,
+        first_id: Optional[str] | Omit = omit,
+        last_id: Optional[str] | Omit = omit,
+        limit: str | Omit = omit,
         order: str | Omit = omit,
         skip_users: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -60,11 +64,23 @@ class MessagesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageListResponse:
-        """
-        Get messages from a specific chat.
+        """Get messages from a specific chat.
 
         Args:
-          id: ID of the last message from previous page. Used for pagination
+          filter: Filter by certain messages.
+
+        Currently, only pins are filterable.
+
+          first_id: Use for pagination when `order=desc` (newest to oldest). Include this message ID
+              as the first message in the results. Used to retrieve messages from e.g. the
+              Search Chat Messages endpoint IDs.
+
+          last_id: Use for pagination when `order=asc` (oldest to newest). Include this message ID
+              as the first message in the results. WARNING! The response list of messages will
+              also be inverted (oldest messages will be first, opposite to default where
+              `order=desc`).
+
+          limit: The number of messages to return (default = 10, max = 100)
 
           order: Sort order for messages (desc or asc)
 
@@ -91,7 +107,10 @@ class MessagesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "id": id,
+                        "filter": filter,
+                        "first_id": first_id,
+                        "last_id": last_id,
+                        "limit": limit,
                         "order": order,
                         "skip_users": skip_users,
                     },
@@ -152,11 +171,16 @@ class MessagesResource(SyncAPIResource):
         chat_id: str,
         *,
         account: str,
-        text: str,
+        giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
-        media_files: SequenceNotStr[str] | Omit = omit,
-        previews: SequenceNotStr[str] | Omit = omit,
+        media_files: Iterable[object] | Omit = omit,
+        previews: Iterable[object] | Omit = omit,
         price: int | Omit = omit,
+        reply_to_message_id: int | Omit = omit,
+        rf_guest: str | Omit = omit,
+        rf_partner: str | Omit = omit,
+        rf_tag: str | Omit = omit,
+        text: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -168,19 +192,31 @@ class MessagesResource(SyncAPIResource):
         Send a new message to a chat.
 
         Args:
-          text: The message text content
+          giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
+              endpoints (`/giphy/trending`, `/giphy/search`).
 
           locked_text: Whether the text should be shown or hidden
 
-          media_files: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be hidden if `price` is provided.
+          media_files: Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs. Will be hidden
+              if `price` is provided.
 
-          previews: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be shown if `price` is provided. All `previews` values must also
-              exist in the `mediaFiles` array.
+          previews: Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+              referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+              provided.
 
           price: Price for paid content (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
+
+          reply_to_message_id: Mark this message as a reply to another (can be either your own, or the
+              recipient's)
+
+          rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your message
+
+          rf_partner: Array of OnlyFans Release Form Partners IDs to tag in your message
+
+          rf_tag: Array of OnlyFans Creator User IDs to tag in your message
+
+          text: The message text content. Required unless a media file is present.
 
           extra_headers: Send extra headers
 
@@ -198,11 +234,16 @@ class MessagesResource(SyncAPIResource):
             path_template("/api/{account}/chats/{chat_id}/messages", account=account, chat_id=chat_id),
             body=maybe_transform(
                 {
-                    "text": text,
+                    "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
                     "previews": previews,
                     "price": price,
+                    "reply_to_message_id": reply_to_message_id,
+                    "rf_guest": rf_guest,
+                    "rf_partner": rf_partner,
+                    "rf_tag": rf_tag,
+                    "text": text,
                 },
                 message_send_params.MessageSendParams,
             ),
@@ -214,8 +255,6 @@ class MessagesResource(SyncAPIResource):
 
 
 class AsyncMessagesResource(AsyncAPIResource):
-    """APIs for managing OnlyFans chats"""
-
     @cached_property
     def with_raw_response(self) -> AsyncMessagesResourceWithRawResponse:
         """
@@ -240,7 +279,10 @@ class AsyncMessagesResource(AsyncAPIResource):
         chat_id: str,
         *,
         account: str,
-        id: str | Omit = omit,
+        filter: Literal["pinned"] | Omit = omit,
+        first_id: Optional[str] | Omit = omit,
+        last_id: Optional[str] | Omit = omit,
+        limit: str | Omit = omit,
         order: str | Omit = omit,
         skip_users: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -250,11 +292,23 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageListResponse:
-        """
-        Get messages from a specific chat.
+        """Get messages from a specific chat.
 
         Args:
-          id: ID of the last message from previous page. Used for pagination
+          filter: Filter by certain messages.
+
+        Currently, only pins are filterable.
+
+          first_id: Use for pagination when `order=desc` (newest to oldest). Include this message ID
+              as the first message in the results. Used to retrieve messages from e.g. the
+              Search Chat Messages endpoint IDs.
+
+          last_id: Use for pagination when `order=asc` (oldest to newest). Include this message ID
+              as the first message in the results. WARNING! The response list of messages will
+              also be inverted (oldest messages will be first, opposite to default where
+              `order=desc`).
+
+          limit: The number of messages to return (default = 10, max = 100)
 
           order: Sort order for messages (desc or asc)
 
@@ -281,7 +335,10 @@ class AsyncMessagesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "id": id,
+                        "filter": filter,
+                        "first_id": first_id,
+                        "last_id": last_id,
+                        "limit": limit,
                         "order": order,
                         "skip_users": skip_users,
                     },
@@ -342,11 +399,16 @@ class AsyncMessagesResource(AsyncAPIResource):
         chat_id: str,
         *,
         account: str,
-        text: str,
+        giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
-        media_files: SequenceNotStr[str] | Omit = omit,
-        previews: SequenceNotStr[str] | Omit = omit,
+        media_files: Iterable[object] | Omit = omit,
+        previews: Iterable[object] | Omit = omit,
         price: int | Omit = omit,
+        reply_to_message_id: int | Omit = omit,
+        rf_guest: str | Omit = omit,
+        rf_partner: str | Omit = omit,
+        rf_tag: str | Omit = omit,
+        text: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -358,19 +420,31 @@ class AsyncMessagesResource(AsyncAPIResource):
         Send a new message to a chat.
 
         Args:
-          text: The message text content
+          giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
+              endpoints (`/giphy/trending`, `/giphy/search`).
 
           locked_text: Whether the text should be shown or hidden
 
-          media_files: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be hidden if `price` is provided.
+          media_files: Direct file uploads, OFAPI `ofapi_media_` IDs, or OF vault IDs. Will be hidden
+              if `price` is provided.
 
-          previews: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0). Will be shown if `price` is provided. All `previews` values must also
-              exist in the `mediaFiles` array.
+          previews: Direct file uploads, OFAPI `ofapi_media_` IDs, OF vault IDs, or integer indices
+              referencing uploaded files in `mediaFiles`. Will be shown if `price` is
+              provided.
 
           price: Price for paid content (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
+
+          reply_to_message_id: Mark this message as a reply to another (can be either your own, or the
+              recipient's)
+
+          rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your message
+
+          rf_partner: Array of OnlyFans Release Form Partners IDs to tag in your message
+
+          rf_tag: Array of OnlyFans Creator User IDs to tag in your message
+
+          text: The message text content. Required unless a media file is present.
 
           extra_headers: Send extra headers
 
@@ -388,11 +462,16 @@ class AsyncMessagesResource(AsyncAPIResource):
             path_template("/api/{account}/chats/{chat_id}/messages", account=account, chat_id=chat_id),
             body=await async_maybe_transform(
                 {
-                    "text": text,
+                    "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
                     "previews": previews,
                     "price": price,
+                    "reply_to_message_id": reply_to_message_id,
+                    "rf_guest": rf_guest,
+                    "rf_partner": rf_partner,
+                    "rf_tag": rf_tag,
+                    "text": text,
                 },
                 message_send_params.MessageSendParams,
             ),

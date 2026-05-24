@@ -300,6 +300,8 @@ class Account(BaseModel):
 class LastAttempt(BaseModel):
     completed_at: Optional[str] = None
 
+    error_code: Optional[str] = None
+
     error_message: Optional[str] = None
 
     needs_otp: Optional[bool] = None

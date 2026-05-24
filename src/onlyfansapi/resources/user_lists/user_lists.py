@@ -97,10 +97,11 @@ class UserListsResource(SyncAPIResource):
 
     def update(
         self,
-        user_list_id: int,
+        user_list_id: str,
         *,
         account: str,
         name: str,
+        is_pinned_to_feed: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -112,7 +113,9 @@ class UserListsResource(SyncAPIResource):
         Update a OnlyFans User List
 
         Args:
-          name: Must not be greater than 64 characters.
+          name: The new name for the User List.
+
+          is_pinned_to_feed: Whether to pin the User List to feed to the OnlyFans homepage or not.
 
           extra_headers: Send extra headers
 
@@ -124,9 +127,17 @@ class UserListsResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return self._put(
             path_template("/api/{account}/user-lists/{user_list_id}", account=account, user_list_id=user_list_id),
-            body=maybe_transform({"name": name}, user_list_update_params.UserListUpdateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "is_pinned_to_feed": is_pinned_to_feed,
+                },
+                user_list_update_params.UserListUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -185,7 +196,7 @@ class UserListsResource(SyncAPIResource):
 
     def delete(
         self,
-        user_list_id: int,
+        user_list_id: str,
         *,
         account: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -209,6 +220,8 @@ class UserListsResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return self._delete(
             path_template("/api/{account}/user-lists/{user_list_id}", account=account, user_list_id=user_list_id),
             options=make_request_options(
@@ -281,10 +294,11 @@ class AsyncUserListsResource(AsyncAPIResource):
 
     async def update(
         self,
-        user_list_id: int,
+        user_list_id: str,
         *,
         account: str,
         name: str,
+        is_pinned_to_feed: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -296,7 +310,9 @@ class AsyncUserListsResource(AsyncAPIResource):
         Update a OnlyFans User List
 
         Args:
-          name: Must not be greater than 64 characters.
+          name: The new name for the User List.
+
+          is_pinned_to_feed: Whether to pin the User List to feed to the OnlyFans homepage or not.
 
           extra_headers: Send extra headers
 
@@ -308,9 +324,17 @@ class AsyncUserListsResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return await self._put(
             path_template("/api/{account}/user-lists/{user_list_id}", account=account, user_list_id=user_list_id),
-            body=await async_maybe_transform({"name": name}, user_list_update_params.UserListUpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "is_pinned_to_feed": is_pinned_to_feed,
+                },
+                user_list_update_params.UserListUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -369,7 +393,7 @@ class AsyncUserListsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        user_list_id: int,
+        user_list_id: str,
         *,
         account: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -393,6 +417,8 @@ class AsyncUserListsResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        if not user_list_id:
+            raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
         return await self._delete(
             path_template("/api/{account}/user-lists/{user_list_id}", account=account, user_list_id=user_list_id),
             options=make_request_options(

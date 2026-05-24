@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Mapping, Optional, cast
 from typing_extensions import Literal
 
 import httpx
 
 from ...types import media_scrape_params, media_upload_params
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._files import deepcopy_with_paths
+from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
+from ..._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -61,8 +62,11 @@ class MediaResource(SyncAPIResource):
         self,
         account: str,
         *,
-        url: str,
         expiration_date: Optional[str] | Omit = omit,
+        file_type: Optional[Literal["full", "thumb", "preview", "squarePreview"]] | Omit = omit,
+        media_id: Optional[int] | Omit = omit,
+        public: Optional[bool] | Omit = omit,
+        url: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,14 +74,26 @@ class MediaResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MediaScrapeResponse:
-        """
-        Scrapes a `https://cdn*.onlyfans.com/*` URL and uploads it to the OnlyFans API
-        CDN, so that you can view or download the file. **Max file size is 500MB**
+        """**⚠️ This is a deprecated endpoint.
+
+        Please use the new "Download media from the
+        OnlyFans CDN" endpoint!** Scrapes a `https://cdn*.onlyfans.com/*` URL _or_ Vault
+        Media ID, and uploads it to the OnlyFans API CDN, where you can view or download
+        the file. **Max file size is 500MB**
 
         Args:
-          url: The CDN URL to scrape. **Keep in mind that these URLs expire fast.**
+          expiration_date: The expiration date of our returned `temporary_url`. Default of 5 minutes. Must
+              be null if `public` is true.
 
-          expiration_date: The expiration date of our returned `temporary_url`. Default of 5 minutes.
+          file_type: The file type to scrape. Only allowed when using `media_id`.
+
+          media_id: The OnlyFans Vault Media ID. **Can be used instead of the `url`.**
+
+          public: Set to true if you want to have the file uploaded to our public CDN (no signed
+              URL needed to access). Default is false. Must be null if `expiration_date` is
+              set.
+
+          url: The CDN URL to scrape. **Keep in mind that these URLs expire fast.**
 
           extra_headers: Send extra headers
 
@@ -93,8 +109,11 @@ class MediaResource(SyncAPIResource):
             path_template("/api/{account}/media/scrape", account=account),
             body=maybe_transform(
                 {
-                    "url": url,
                     "expiration_date": expiration_date,
+                    "file_type": file_type,
+                    "media_id": media_id,
+                    "public": public,
+                    "url": url,
                 },
                 media_scrape_params.MediaScrapeParams,
             ),
@@ -108,7 +127,9 @@ class MediaResource(SyncAPIResource):
         self,
         account: str,
         *,
-        file: str,
+        async_: bool | Omit = omit,
+        file: FileTypes | Omit = omit,
+        file_url: str | Omit = omit,
         type: Literal["default", "avatar", "header"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -119,10 +140,19 @@ class MediaResource(SyncAPIResource):
     ) -> MediaUploadResponse:
         """
         The response can be used **only once** to manually include media in a post or
-        message. This endpoint does not upload media to the Vault.
+        message. This endpoint does not upload media to the Vault. You must provide
+        either `file` or `file_url`.
 
         Args:
-          file: The file to upload.
+          async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
+              check status. Recommended for large files.
+
+          file:
+              The file to upload. Required if `file_url` is not provided. Maximum file size:
+              100 MB (limited by Cloudflare).
+
+          file_url: A URL to download the file from. Required if `file` is not provided. Maximum
+              file size depends on the subscription configuration.
 
           type: Set to `avatar` if this file will be used as a profile picture, `header` for a
               profile banner, or keep empty if this file will be for anything else.
@@ -137,15 +167,24 @@ class MediaResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        body = deepcopy_with_paths(
+            {
+                "async_": async_,
+                "file": file,
+                "file_url": file_url,
+                "type": type,
+            },
+            [["file"]],
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             path_template("/api/{account}/media/upload", account=account),
-            body=maybe_transform(
-                {
-                    "file": file,
-                    "type": type,
-                },
-                media_upload_params.MediaUploadParams,
-            ),
+            body=maybe_transform(body, media_upload_params.MediaUploadParams),
+            files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -181,8 +220,11 @@ class AsyncMediaResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        url: str,
         expiration_date: Optional[str] | Omit = omit,
+        file_type: Optional[Literal["full", "thumb", "preview", "squarePreview"]] | Omit = omit,
+        media_id: Optional[int] | Omit = omit,
+        public: Optional[bool] | Omit = omit,
+        url: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,14 +232,26 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MediaScrapeResponse:
-        """
-        Scrapes a `https://cdn*.onlyfans.com/*` URL and uploads it to the OnlyFans API
-        CDN, so that you can view or download the file. **Max file size is 500MB**
+        """**⚠️ This is a deprecated endpoint.
+
+        Please use the new "Download media from the
+        OnlyFans CDN" endpoint!** Scrapes a `https://cdn*.onlyfans.com/*` URL _or_ Vault
+        Media ID, and uploads it to the OnlyFans API CDN, where you can view or download
+        the file. **Max file size is 500MB**
 
         Args:
-          url: The CDN URL to scrape. **Keep in mind that these URLs expire fast.**
+          expiration_date: The expiration date of our returned `temporary_url`. Default of 5 minutes. Must
+              be null if `public` is true.
 
-          expiration_date: The expiration date of our returned `temporary_url`. Default of 5 minutes.
+          file_type: The file type to scrape. Only allowed when using `media_id`.
+
+          media_id: The OnlyFans Vault Media ID. **Can be used instead of the `url`.**
+
+          public: Set to true if you want to have the file uploaded to our public CDN (no signed
+              URL needed to access). Default is false. Must be null if `expiration_date` is
+              set.
+
+          url: The CDN URL to scrape. **Keep in mind that these URLs expire fast.**
 
           extra_headers: Send extra headers
 
@@ -213,8 +267,11 @@ class AsyncMediaResource(AsyncAPIResource):
             path_template("/api/{account}/media/scrape", account=account),
             body=await async_maybe_transform(
                 {
-                    "url": url,
                     "expiration_date": expiration_date,
+                    "file_type": file_type,
+                    "media_id": media_id,
+                    "public": public,
+                    "url": url,
                 },
                 media_scrape_params.MediaScrapeParams,
             ),
@@ -228,7 +285,9 @@ class AsyncMediaResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        file: str,
+        async_: bool | Omit = omit,
+        file: FileTypes | Omit = omit,
+        file_url: str | Omit = omit,
         type: Literal["default", "avatar", "header"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -239,10 +298,19 @@ class AsyncMediaResource(AsyncAPIResource):
     ) -> MediaUploadResponse:
         """
         The response can be used **only once** to manually include media in a post or
-        message. This endpoint does not upload media to the Vault.
+        message. This endpoint does not upload media to the Vault. You must provide
+        either `file` or `file_url`.
 
         Args:
-          file: The file to upload.
+          async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
+              check status. Recommended for large files.
+
+          file:
+              The file to upload. Required if `file_url` is not provided. Maximum file size:
+              100 MB (limited by Cloudflare).
+
+          file_url: A URL to download the file from. Required if `file` is not provided. Maximum
+              file size depends on the subscription configuration.
 
           type: Set to `avatar` if this file will be used as a profile picture, `header` for a
               profile banner, or keep empty if this file will be for anything else.
@@ -257,15 +325,24 @@ class AsyncMediaResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
+        body = deepcopy_with_paths(
+            {
+                "async_": async_,
+                "file": file,
+                "file_url": file_url,
+                "type": type,
+            },
+            [["file"]],
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             path_template("/api/{account}/media/upload", account=account),
-            body=await async_maybe_transform(
-                {
-                    "file": file,
-                    "type": type,
-                },
-                media_upload_params.MediaUploadParams,
-            ),
+            body=await async_maybe_transform(body, media_upload_params.MediaUploadParams),
+            files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

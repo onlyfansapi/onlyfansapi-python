@@ -8,6 +8,12 @@ from typing import Any, cast
 import pytest
 
 from onlyfansapi import Onlyfansapi, AsyncOnlyfansapi
+from tests.utils import assert_matches_type
+from onlyfansapi.types import (
+    FollowingListAllResponse,
+    FollowingListActiveResponse,
+    FollowingListExpiredResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,18 +27,22 @@ class TestFollowing:
         following = client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert following is None
+        assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_active_with_all_params(self, client: Onlyfansapi) -> None:
         following = client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
-            filter={},
+            filter={
+                "online": 1,
+                "paid": 1,
+            },
             limit=10,
             offset=0,
+            query="john",
         )
-        assert following is None
+        assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -44,7 +54,7 @@ class TestFollowing:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         following = response.parse()
-        assert following is None
+        assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -56,7 +66,7 @@ class TestFollowing:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             following = response.parse()
-            assert following is None
+            assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -74,18 +84,22 @@ class TestFollowing:
         following = client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert following is None
+        assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_all_with_all_params(self, client: Onlyfansapi) -> None:
         following = client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
-            filter={},
+            filter={
+                "online": 1,
+                "paid": 1,
+            },
             limit=10,
             offset=0,
+            query="john",
         )
-        assert following is None
+        assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -97,7 +111,7 @@ class TestFollowing:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         following = response.parse()
-        assert following is None
+        assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -109,7 +123,7 @@ class TestFollowing:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             following = response.parse()
-            assert following is None
+            assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -127,18 +141,22 @@ class TestFollowing:
         following = client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert following is None
+        assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_expired_with_all_params(self, client: Onlyfansapi) -> None:
         following = client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
-            filter={},
+            filter={
+                "online": 1,
+                "paid": 1,
+            },
             limit=10,
             offset=0,
+            query="john",
         )
-        assert following is None
+        assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -150,7 +168,7 @@ class TestFollowing:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         following = response.parse()
-        assert following is None
+        assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -162,7 +180,7 @@ class TestFollowing:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             following = response.parse()
-            assert following is None
+            assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -186,18 +204,22 @@ class TestAsyncFollowing:
         following = await async_client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert following is None
+        assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_active_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         following = await async_client.following.list_active(
             account="acct_XXXXXXXXXXXXXXX",
-            filter={},
+            filter={
+                "online": 1,
+                "paid": 1,
+            },
             limit=10,
             offset=0,
+            query="john",
         )
-        assert following is None
+        assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -209,7 +231,7 @@ class TestAsyncFollowing:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         following = await response.parse()
-        assert following is None
+        assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -221,7 +243,7 @@ class TestAsyncFollowing:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             following = await response.parse()
-            assert following is None
+            assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -239,18 +261,22 @@ class TestAsyncFollowing:
         following = await async_client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert following is None
+        assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_all_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         following = await async_client.following.list_all(
             account="acct_XXXXXXXXXXXXXXX",
-            filter={},
+            filter={
+                "online": 1,
+                "paid": 1,
+            },
             limit=10,
             offset=0,
+            query="john",
         )
-        assert following is None
+        assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -262,7 +288,7 @@ class TestAsyncFollowing:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         following = await response.parse()
-        assert following is None
+        assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -274,7 +300,7 @@ class TestAsyncFollowing:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             following = await response.parse()
-            assert following is None
+            assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -292,18 +318,22 @@ class TestAsyncFollowing:
         following = await async_client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert following is None
+        assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_expired_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         following = await async_client.following.list_expired(
             account="acct_XXXXXXXXXXXXXXX",
-            filter={},
+            filter={
+                "online": 1,
+                "paid": 1,
+            },
             limit=10,
             offset=0,
+            query="john",
         )
-        assert following is None
+        assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -315,7 +345,7 @@ class TestAsyncFollowing:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         following = await response.parse()
-        assert following is None
+        assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -327,7 +357,7 @@ class TestAsyncFollowing:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             following = await response.parse()
-            assert following is None
+            assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

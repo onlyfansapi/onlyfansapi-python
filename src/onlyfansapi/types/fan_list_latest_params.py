@@ -13,7 +13,7 @@ class FanListLatestParams(TypedDict, total=False):
     """End date for filtering (required with start_date)"""
 
     limit: Optional[str]
-    """Number of fans to return (1-100)"""
+    """Number of fans to return (1-50)"""
 
     offset: Optional[str]
     """Number of fans to skip"""

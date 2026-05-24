@@ -22,7 +22,6 @@ class TestMedia:
     def test_method_scrape(self, client: Onlyfansapi) -> None:
         media = client.media.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         )
         assert_matches_type(MediaScrapeResponse, media, path=["response"])
 
@@ -31,8 +30,11 @@ class TestMedia:
     def test_method_scrape_with_all_params(self, client: Onlyfansapi) -> None:
         media = client.media.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
             expiration_date="2025-01-01 00:00:00",
+            file_type="full",
+            media_id=1234567890,
+            public=False,
+            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         )
         assert_matches_type(MediaScrapeResponse, media, path=["response"])
 
@@ -41,7 +43,6 @@ class TestMedia:
     def test_raw_response_scrape(self, client: Onlyfansapi) -> None:
         response = client.media.with_raw_response.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         )
 
         assert response.is_closed is True
@@ -54,7 +55,6 @@ class TestMedia:
     def test_streaming_response_scrape(self, client: Onlyfansapi) -> None:
         with client.media.with_streaming_response.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -70,7 +70,6 @@ class TestMedia:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.with_raw_response.scrape(
                 account="",
-                url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -78,7 +77,6 @@ class TestMedia:
     def test_method_upload(self, client: Onlyfansapi) -> None:
         media = client.media.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
         )
         assert_matches_type(MediaUploadResponse, media, path=["response"])
 
@@ -87,7 +85,9 @@ class TestMedia:
     def test_method_upload_with_all_params(self, client: Onlyfansapi) -> None:
         media = client.media.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
+            async_=True,
+            file=b"Example data",
+            file_url="https://example.com/media/photo.jpg",
             type="avatar",
         )
         assert_matches_type(MediaUploadResponse, media, path=["response"])
@@ -97,7 +97,6 @@ class TestMedia:
     def test_raw_response_upload(self, client: Onlyfansapi) -> None:
         response = client.media.with_raw_response.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
         )
 
         assert response.is_closed is True
@@ -110,7 +109,6 @@ class TestMedia:
     def test_streaming_response_upload(self, client: Onlyfansapi) -> None:
         with client.media.with_streaming_response.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -126,7 +124,6 @@ class TestMedia:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.with_raw_response.upload(
                 account="",
-                file="file.jpg",
             )
 
 
@@ -140,7 +137,6 @@ class TestAsyncMedia:
     async def test_method_scrape(self, async_client: AsyncOnlyfansapi) -> None:
         media = await async_client.media.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         )
         assert_matches_type(MediaScrapeResponse, media, path=["response"])
 
@@ -149,8 +145,11 @@ class TestAsyncMedia:
     async def test_method_scrape_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         media = await async_client.media.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
             expiration_date="2025-01-01 00:00:00",
+            file_type="full",
+            media_id=1234567890,
+            public=False,
+            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         )
         assert_matches_type(MediaScrapeResponse, media, path=["response"])
 
@@ -159,7 +158,6 @@ class TestAsyncMedia:
     async def test_raw_response_scrape(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.media.with_raw_response.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         )
 
         assert response.is_closed is True
@@ -172,7 +170,6 @@ class TestAsyncMedia:
     async def test_streaming_response_scrape(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.media.with_streaming_response.scrape(
             account="acct_XXXXXXXXXXXXXXX",
-            url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -188,7 +185,6 @@ class TestAsyncMedia:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.with_raw_response.scrape(
                 account="",
-                url="https://cdn2.onlyfans.com/files/e/e5/123/600x400_123.jpg?Tag=2&u=123&Policy=123&Signature=signature&Key-Pair-Id=123",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -196,7 +192,6 @@ class TestAsyncMedia:
     async def test_method_upload(self, async_client: AsyncOnlyfansapi) -> None:
         media = await async_client.media.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
         )
         assert_matches_type(MediaUploadResponse, media, path=["response"])
 
@@ -205,7 +200,9 @@ class TestAsyncMedia:
     async def test_method_upload_with_all_params(self, async_client: AsyncOnlyfansapi) -> None:
         media = await async_client.media.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
+            async_=True,
+            file=b"Example data",
+            file_url="https://example.com/media/photo.jpg",
             type="avatar",
         )
         assert_matches_type(MediaUploadResponse, media, path=["response"])
@@ -215,7 +212,6 @@ class TestAsyncMedia:
     async def test_raw_response_upload(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.media.with_raw_response.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
         )
 
         assert response.is_closed is True
@@ -228,7 +224,6 @@ class TestAsyncMedia:
     async def test_streaming_response_upload(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.media.with_streaming_response.upload(
             account="acct_XXXXXXXXXXXXXXX",
-            file="file.jpg",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -244,5 +239,4 @@ class TestAsyncMedia:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.with_raw_response.upload(
                 account="",
-                file="file.jpg",
             )

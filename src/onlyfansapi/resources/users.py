@@ -57,8 +57,8 @@ class UsersResource(SyncAPIResource):
         """Get OnlyFans Profile details for a given username.
 
         User details are retrieved
-        using the current current `{account}` so fields like `subscribedOnData` which
-        include potential subscription details will be included.
+        using the current `{account}` so fields like `subscribedOnData` which include
+        potential subscription details will be included.
 
         Args:
           extra_headers: Send extra headers
@@ -119,8 +119,8 @@ class AsyncUsersResource(AsyncAPIResource):
         """Get OnlyFans Profile details for a given username.
 
         User details are retrieved
-        using the current current `{account}` so fields like `subscribedOnData` which
-        include potential subscription details will be included.
+        using the current `{account}` so fields like `subscribedOnData` which include
+        potential subscription details will be included.
 
         Args:
           extra_headers: Send extra headers

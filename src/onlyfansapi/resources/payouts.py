@@ -8,7 +8,6 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import (
-    payout_list_transactions_params,
     payout_list_payout_requests_params,
     payout_update_payout_frequency_params,
     payout_request_manual_withdrawal_params,
@@ -25,7 +24,6 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.payout_list_transactions_response import PayoutListTransactionsResponse
 from ..types.payout_retrieve_balances_response import PayoutRetrieveBalancesResponse
 from ..types.payout_list_payout_requests_response import PayoutListPayoutRequestsResponse
 from ..types.payout_retrieve_eligibility_response import PayoutRetrieveEligibilityResponse
@@ -103,55 +101,6 @@ class PayoutsResource(SyncAPIResource):
                 ),
             ),
             cast_to=PayoutListPayoutRequestsResponse,
-        )
-
-    def list_transactions(
-        self,
-        account: str,
-        *,
-        limit: str | Omit = omit,
-        marker: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PayoutListTransactionsResponse:
-        """
-        List all transactions for the account.
-
-        Args:
-          limit: Number of transactions to return
-
-          marker: The marker used for pagination. Default: `null`
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account:
-            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return self._get(
-            path_template("/api/{account}/payouts/transactions", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "marker": marker,
-                    },
-                    payout_list_transactions_params.PayoutListTransactionsParams,
-                ),
-            ),
-            cast_to=PayoutListTransactionsResponse,
         )
 
     def request_manual_withdrawal(
@@ -425,55 +374,6 @@ class AsyncPayoutsResource(AsyncAPIResource):
             cast_to=PayoutListPayoutRequestsResponse,
         )
 
-    async def list_transactions(
-        self,
-        account: str,
-        *,
-        limit: str | Omit = omit,
-        marker: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PayoutListTransactionsResponse:
-        """
-        List all transactions for the account.
-
-        Args:
-          limit: Number of transactions to return
-
-          marker: The marker used for pagination. Default: `null`
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account:
-            raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return await self._get(
-            path_template("/api/{account}/payouts/transactions", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "limit": limit,
-                        "marker": marker,
-                    },
-                    payout_list_transactions_params.PayoutListTransactionsParams,
-                ),
-            ),
-            cast_to=PayoutListTransactionsResponse,
-        )
-
     async def request_manual_withdrawal(
         self,
         account: str,
@@ -683,9 +583,6 @@ class PayoutsResourceWithRawResponse:
         self.list_payout_requests = to_raw_response_wrapper(
             payouts.list_payout_requests,
         )
-        self.list_transactions = to_raw_response_wrapper(
-            payouts.list_transactions,
-        )
         self.request_manual_withdrawal = to_raw_response_wrapper(
             payouts.request_manual_withdrawal,
         )
@@ -709,9 +606,6 @@ class AsyncPayoutsResourceWithRawResponse:
 
         self.list_payout_requests = async_to_raw_response_wrapper(
             payouts.list_payout_requests,
-        )
-        self.list_transactions = async_to_raw_response_wrapper(
-            payouts.list_transactions,
         )
         self.request_manual_withdrawal = async_to_raw_response_wrapper(
             payouts.request_manual_withdrawal,
@@ -737,9 +631,6 @@ class PayoutsResourceWithStreamingResponse:
         self.list_payout_requests = to_streamed_response_wrapper(
             payouts.list_payout_requests,
         )
-        self.list_transactions = to_streamed_response_wrapper(
-            payouts.list_transactions,
-        )
         self.request_manual_withdrawal = to_streamed_response_wrapper(
             payouts.request_manual_withdrawal,
         )
@@ -763,9 +654,6 @@ class AsyncPayoutsResourceWithStreamingResponse:
 
         self.list_payout_requests = async_to_streamed_response_wrapper(
             payouts.list_payout_requests,
-        )
-        self.list_transactions = async_to_streamed_response_wrapper(
-            payouts.list_transactions,
         )
         self.request_manual_withdrawal = async_to_streamed_response_wrapper(
             payouts.request_manual_withdrawal,

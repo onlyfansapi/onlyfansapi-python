@@ -70,7 +70,7 @@ class DataListRevenue(BaseModel):
 
     is_loading: Optional[bool] = FieldInfo(alias="isLoading", default=None)
 
-    revenue_per_click: Optional[int] = FieldInfo(alias="revenuePerClick", default=None)
+    revenue_per_click: Optional[float] = FieldInfo(alias="revenuePerClick", default=None)
 
     revenue_per_subscriber: Optional[int] = FieldInfo(alias="revenuePerSubscriber", default=None)
 
@@ -99,6 +99,8 @@ class DataList(BaseModel):
     revenue: Optional[DataListRevenue] = None
 
     subscribers_count: Optional[int] = FieldInfo(alias="subscribersCount", default=None)
+
+    tags: Optional[List[str]] = None
 
 
 class Data(BaseModel):

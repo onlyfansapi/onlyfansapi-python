@@ -76,8 +76,6 @@ class TestStatistics:
     def test_method_get_overview(self, client: Onlyfansapi) -> None:
         statistic = client.statistics.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         )
         assert_matches_type(StatisticGetOverviewResponse, statistic, path=["response"])
 
@@ -97,8 +95,6 @@ class TestStatistics:
     def test_raw_response_get_overview(self, client: Onlyfansapi) -> None:
         response = client.statistics.with_raw_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         )
 
         assert response.is_closed is True
@@ -111,8 +107,6 @@ class TestStatistics:
     def test_streaming_response_get_overview(self, client: Onlyfansapi) -> None:
         with client.statistics.with_streaming_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -128,8 +122,6 @@ class TestStatistics:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.with_raw_response.get_overview(
                 account="",
-                end_date="2025-03-31 23:59:59",
-                start_date="2025-01-01 00:00:00",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -254,8 +246,6 @@ class TestAsyncStatistics:
     async def test_method_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
         statistic = await async_client.statistics.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         )
         assert_matches_type(StatisticGetOverviewResponse, statistic, path=["response"])
 
@@ -275,8 +265,6 @@ class TestAsyncStatistics:
     async def test_raw_response_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
         response = await async_client.statistics.with_raw_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         )
 
         assert response.is_closed is True
@@ -289,8 +277,6 @@ class TestAsyncStatistics:
     async def test_streaming_response_get_overview(self, async_client: AsyncOnlyfansapi) -> None:
         async with async_client.statistics.with_streaming_response.get_overview(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -306,8 +292,6 @@ class TestAsyncStatistics:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.with_raw_response.get_overview(
                 account="",
-                end_date="2025-03-31 23:59:59",
-                start_date="2025-01-01 00:00:00",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
