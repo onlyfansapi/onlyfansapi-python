@@ -311,10 +311,10 @@ class FansResource(SyncAPIResource):
         account: str,
         *,
         end_date: Optional[str] | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         start_date: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        type: Optional[Literal["total", "renew", "new"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -327,15 +327,18 @@ class FansResource(SyncAPIResource):
         renewals. Newest fans are first.
 
         Args:
-          end_date: End date for filtering (required with start_date)
+          end_date: End date for filtering (required with start_date). This field is required when
+              <code>start_date</code> is present.
 
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 100.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          start_date: Start date for filtering (required with end_date)
+          start_date: Start date for filtering (required with end_date). This field is required when
+              <code>end_date</code> is present.
 
-          type: Filter by type: total, renew, or new
+          type: Filter by type: total, renew, or new.
 
           extra_headers: Send extra headers
 
@@ -725,10 +728,10 @@ class AsyncFansResource(AsyncAPIResource):
         account: str,
         *,
         end_date: Optional[str] | Omit = omit,
-        limit: Optional[str] | Omit = omit,
-        offset: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         start_date: Optional[str] | Omit = omit,
-        type: Optional[str] | Omit = omit,
+        type: Optional[Literal["total", "renew", "new"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -741,15 +744,18 @@ class AsyncFansResource(AsyncAPIResource):
         renewals. Newest fans are first.
 
         Args:
-          end_date: End date for filtering (required with start_date)
+          end_date: End date for filtering (required with start_date). This field is required when
+              <code>start_date</code> is present.
 
-          limit: Number of fans to return (1-50)
+          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
+              than 100.
 
-          offset: Number of fans to skip
+          offset: Number of fans to skip. Must be at least 0.
 
-          start_date: Start date for filtering (required with end_date)
+          start_date: Start date for filtering (required with end_date). This field is required when
+              <code>end_date</code> is present.
 
-          type: Filter by type: total, renew, or new
+          type: Filter by type: total, renew, or new.
 
           extra_headers: Send extra headers
 

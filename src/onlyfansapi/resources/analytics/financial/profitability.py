@@ -48,6 +48,7 @@ class ProfitabilityResource(SyncAPIResource):
         self,
         account: str,
         *,
+        account_prefixed_id: str,
         months: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -60,7 +61,10 @@ class ProfitabilityResource(SyncAPIResource):
         Get historical profitability data for a specific account over multiple months.
 
         Args:
-          months: Number of months of history to retrieve (1-60, default 12)
+          account_prefixed_id: The account prefixed ID.
+
+          months: Number of months of history to retrieve (1-60, default 12). Must be at least 1.
+              Must not be greater than 60.
 
           extra_headers: Send extra headers
 
@@ -80,7 +84,11 @@ class ProfitabilityResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"months": months}, profitability_get_history_params.ProfitabilityGetHistoryParams
+                    {
+                        "account_prefixed_id": account_prefixed_id,
+                        "months": months,
+                    },
+                    profitability_get_history_params.ProfitabilityGetHistoryParams,
                 ),
             ),
             cast_to=ProfitabilityGetHistoryResponse,
@@ -161,6 +169,7 @@ class AsyncProfitabilityResource(AsyncAPIResource):
         self,
         account: str,
         *,
+        account_prefixed_id: str,
         months: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -173,7 +182,10 @@ class AsyncProfitabilityResource(AsyncAPIResource):
         Get historical profitability data for a specific account over multiple months.
 
         Args:
-          months: Number of months of history to retrieve (1-60, default 12)
+          account_prefixed_id: The account prefixed ID.
+
+          months: Number of months of history to retrieve (1-60, default 12). Must be at least 1.
+              Must not be greater than 60.
 
           extra_headers: Send extra headers
 
@@ -193,7 +205,11 @@ class AsyncProfitabilityResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"months": months}, profitability_get_history_params.ProfitabilityGetHistoryParams
+                    {
+                        "account_prefixed_id": account_prefixed_id,
+                        "months": months,
+                    },
+                    profitability_get_history_params.ProfitabilityGetHistoryParams,
                 ),
             ),
             cast_to=ProfitabilityGetHistoryResponse,

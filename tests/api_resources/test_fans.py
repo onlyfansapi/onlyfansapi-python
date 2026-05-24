@@ -271,8 +271,8 @@ class TestFans:
         fan = client.fans.list_latest(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2024-12-31",
-            limit="limit",
-            offset="offset",
+            limit=50,
+            offset=0,
             start_date="2024-01-01",
             type="total",
         )
@@ -674,8 +674,8 @@ class TestAsyncFans:
         fan = await async_client.fans.list_latest(
             account="acct_XXXXXXXXXXXXXXX",
             end_date="2024-12-31",
-            limit="limit",
-            offset="offset",
+            limit=50,
+            offset=0,
             start_date="2024-01-01",
             type="total",
         )

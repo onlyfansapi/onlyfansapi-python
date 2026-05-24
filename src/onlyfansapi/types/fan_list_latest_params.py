@@ -3,23 +3,32 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["FanListLatestParams"]
 
 
 class FanListLatestParams(TypedDict, total=False):
     end_date: Optional[str]
-    """End date for filtering (required with start_date)"""
+    """End date for filtering (required with start_date).
 
-    limit: Optional[str]
-    """Number of fans to return (1-50)"""
+    This field is required when <code>start_date</code> is present.
+    """
 
-    offset: Optional[str]
-    """Number of fans to skip"""
+    limit: int
+    """Number of fans to return (1-50).
+
+    Must be at least 1. Must not be greater than 100.
+    """
+
+    offset: int
+    """Number of fans to skip. Must be at least 0."""
 
     start_date: Optional[str]
-    """Start date for filtering (required with end_date)"""
+    """Start date for filtering (required with end_date).
 
-    type: Optional[str]
-    """Filter by type: total, renew, or new"""
+    This field is required when <code>end_date</code> is present.
+    """
+
+    type: Optional[Literal["total", "renew", "new"]]
+    """Filter by type: total, renew, or new."""

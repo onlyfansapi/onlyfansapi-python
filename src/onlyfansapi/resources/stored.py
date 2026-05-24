@@ -53,8 +53,7 @@ class StoredResource(SyncAPIResource):
         self,
         account: str,
         *,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_shared_tracking_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -70,15 +69,10 @@ class StoredResource(SyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_search: Search campaign name, owner username, or a pasted OnlyFans tracking link URL.
+          limit: The number of shared tracking links to return. Default `10`. Must be at least 1.
+              Must not be greater than 1000.
 
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag. Tag namespace is shared with owned
-              Tracking Links.
-
-          limit: The number of shared tracking links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -99,8 +93,7 @@ class StoredResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -114,8 +107,7 @@ class StoredResource(SyncAPIResource):
         self,
         account: str,
         *,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_shared_trial_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -131,15 +123,10 @@ class StoredResource(SyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_search: Search shared trial link name, URL, or owner username.
+          limit: The number of shared trial links to return. Default `10`. Must be at least 1.
+              Must not be greater than 1000.
 
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag. Tag namespace is shared with owned
-              Free Trial Links.
-
-          limit: The number of shared trial links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -160,8 +147,7 @@ class StoredResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -175,9 +161,7 @@ class StoredResource(SyncAPIResource):
         self,
         account: str,
         *,
-        filter_include_smart_links: bool | Omit = omit,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_tracking_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -193,16 +177,10 @@ class StoredResource(SyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_include_smart_links: Include tracking links created by Smart Links. Default `false`
+          limit: The number of tracking links to return. Default `10`. Must be at least 1. Must
+              not be greater than 1000.
 
-          filter_search: Search campaign name, creator username, or a pasted OnlyFans tracking link URL.
-
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag.
-
-          limit: The number of tracking links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -223,9 +201,7 @@ class StoredResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "filter_include_smart_links": filter_include_smart_links,
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -239,9 +215,7 @@ class StoredResource(SyncAPIResource):
         self,
         account: str,
         *,
-        filter_include_smart_links: bool | Omit = omit,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_trial_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -257,16 +231,10 @@ class StoredResource(SyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_include_smart_links: Include trial links created by Smart Links. Default `false`
+          limit: The number of trial links to return. Default `10`. Must be at least 1. Must not
+              be greater than 1000.
 
-          filter_search: Search trial link name or URL.
-
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag.
-
-          limit: The number of trial links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -287,9 +255,7 @@ class StoredResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "filter_include_smart_links": filter_include_smart_links,
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -324,8 +290,7 @@ class AsyncStoredResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_shared_tracking_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -341,15 +306,10 @@ class AsyncStoredResource(AsyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_search: Search campaign name, owner username, or a pasted OnlyFans tracking link URL.
+          limit: The number of shared tracking links to return. Default `10`. Must be at least 1.
+              Must not be greater than 1000.
 
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag. Tag namespace is shared with owned
-              Tracking Links.
-
-          limit: The number of shared tracking links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -370,8 +330,7 @@ class AsyncStoredResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -385,8 +344,7 @@ class AsyncStoredResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_shared_trial_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -402,15 +360,10 @@ class AsyncStoredResource(AsyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_search: Search shared trial link name, URL, or owner username.
+          limit: The number of shared trial links to return. Default `10`. Must be at least 1.
+              Must not be greater than 1000.
 
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag. Tag namespace is shared with owned
-              Free Trial Links.
-
-          limit: The number of shared trial links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -431,8 +384,7 @@ class AsyncStoredResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -446,9 +398,7 @@ class AsyncStoredResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        filter_include_smart_links: bool | Omit = omit,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_tracking_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -464,16 +414,10 @@ class AsyncStoredResource(AsyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_include_smart_links: Include tracking links created by Smart Links. Default `false`
+          limit: The number of tracking links to return. Default `10`. Must be at least 1. Must
+              not be greater than 1000.
 
-          filter_search: Search campaign name, creator username, or a pasted OnlyFans tracking link URL.
-
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag.
-
-          limit: The number of tracking links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -494,9 +438,7 @@ class AsyncStoredResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "filter_include_smart_links": filter_include_smart_links,
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -510,9 +452,7 @@ class AsyncStoredResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        filter_include_smart_links: bool | Omit = omit,
-        filter_search: str | Omit = omit,
-        filter_tags: str | Omit = omit,
+        filter: stored_list_trial_links_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -528,16 +468,10 @@ class AsyncStoredResource(AsyncAPIResource):
         endpoint that does not call the OnlyFans API.
 
         Args:
-          filter_include_smart_links: Include trial links created by Smart Links. Default `false`
+          limit: The number of trial links to return. Default `10`. Must be at least 1. Must not
+              be greater than 1000.
 
-          filter_search: Search trial link name or URL.
-
-          filter_tags: Filter by one or more tag names or slugs. Accepts CSV or repeated array values
-              (`filter[tags][]=...`) and matches any tag.
-
-          limit: The number of trial links to return. Default `10`
-
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -558,9 +492,7 @@ class AsyncStoredResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "filter_include_smart_links": filter_include_smart_links,
-                        "filter_search": filter_search,
-                        "filter_tags": filter_tags,
+                        "filter": filter,
                         "limit": limit,
                         "offset": offset,
                     },
