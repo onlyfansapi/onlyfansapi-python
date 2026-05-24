@@ -11,4 +11,4 @@ class MessageSearchParams(TypedDict, total=False):
     account: Required[str]
 
     query: Required[str]
-    """The query search in messages"""
+    """The query search in messages."""

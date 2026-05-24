@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -154,10 +155,10 @@ class SmartLinksResource(SyncAPIResource):
     def list(
         self,
         *,
-        account_ids: str | Omit = omit,
+        account_ids: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
-        meta_pixel_ids: str | Omit = omit,
-        name: str | Omit = omit,
+        meta_pixel_ids: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -172,13 +173,14 @@ class SmartLinksResource(SyncAPIResource):
         Args:
           account_ids: Comma-separated account prefixed IDs to include.
 
-          limit: The number of Smart Links to return. Default `50`
+          limit: The number of Smart Links to return. Default `50`. Must be at least 1. Must not
+              be greater than 1000.
 
           meta_pixel_ids: Comma-separated Meta Pixel IDs to include.
 
-          name: Filter Smart Links by name.
+          name: Filter Smart Links by name. Must not be greater than 255 characters.
 
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 
@@ -734,10 +736,10 @@ class AsyncSmartLinksResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        account_ids: str | Omit = omit,
+        account_ids: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
-        meta_pixel_ids: str | Omit = omit,
-        name: str | Omit = omit,
+        meta_pixel_ids: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -752,13 +754,14 @@ class AsyncSmartLinksResource(AsyncAPIResource):
         Args:
           account_ids: Comma-separated account prefixed IDs to include.
 
-          limit: The number of Smart Links to return. Default `50`
+          limit: The number of Smart Links to return. Default `50`. Must be at least 1. Must not
+              be greater than 1000.
 
           meta_pixel_ids: Comma-separated Meta Pixel IDs to include.
 
-          name: Filter Smart Links by name.
+          name: Filter Smart Links by name. Must not be greater than 255 characters.
 
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
           extra_headers: Send extra headers
 

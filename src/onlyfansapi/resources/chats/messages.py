@@ -325,7 +325,7 @@ class MessagesResource(SyncAPIResource):
         search query.
 
         Args:
-          query: The query search in messages
+          query: The query search in messages.
 
           extra_headers: Send extra headers
 
@@ -820,7 +820,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         search query.
 
         Args:
-          query: The query search in messages
+          query: The query search in messages.
 
           extra_headers: Send extra headers
 

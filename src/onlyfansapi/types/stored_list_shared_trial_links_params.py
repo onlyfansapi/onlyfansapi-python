@@ -2,26 +2,30 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import TypedDict
 
-from .._utils import PropertyInfo
+from .._types import SequenceNotStr
 
-__all__ = ["StoredListSharedTrialLinksParams"]
+__all__ = ["StoredListSharedTrialLinksParams", "Filter"]
 
 
 class StoredListSharedTrialLinksParams(TypedDict, total=False):
-    filter_search: Annotated[str, PropertyInfo(alias="filter[search]")]
-    """Search shared trial link name, URL, or owner username."""
-
-    filter_tags: Annotated[str, PropertyInfo(alias="filter[tags]")]
-    """Filter by one or more tag names or slugs.
-
-    Accepts CSV or repeated array values (`filter[tags][]=...`) and matches any tag.
-    Tag namespace is shared with owned Free Trial Links.
-    """
+    filter: Filter
 
     limit: int
-    """The number of shared trial links to return. Default `10`"""
+    """The number of shared trial links to return.
+
+    Default `10`. Must be at least 1. Must not be greater than 1000.
+    """
 
     offset: int
-    """The offset used for pagination. Default `0`"""
+    """The offset used for pagination. Default `0`. Must be at least 0."""
+
+
+class Filter(TypedDict, total=False):
+    search: Optional[str]
+    """Must not be greater than 255 characters."""
+
+    tags: SequenceNotStr[str]
+    """Must not be greater than 50 characters."""

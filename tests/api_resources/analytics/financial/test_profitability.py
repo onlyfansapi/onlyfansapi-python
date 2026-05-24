@@ -25,6 +25,7 @@ class TestProfitability:
     def test_method_get_history(self, client: OnlyFansAPI) -> None:
         profitability = client.analytics.financial.profitability.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
         )
         assert_matches_type(ProfitabilityGetHistoryResponse, profitability, path=["response"])
 
@@ -33,6 +34,7 @@ class TestProfitability:
     def test_method_get_history_with_all_params(self, client: OnlyFansAPI) -> None:
         profitability = client.analytics.financial.profitability.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
             months=12,
         )
         assert_matches_type(ProfitabilityGetHistoryResponse, profitability, path=["response"])
@@ -42,6 +44,7 @@ class TestProfitability:
     def test_raw_response_get_history(self, client: OnlyFansAPI) -> None:
         response = client.analytics.financial.profitability.with_raw_response.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
         )
 
         assert response.is_closed is True
@@ -54,6 +57,7 @@ class TestProfitability:
     def test_streaming_response_get_history(self, client: OnlyFansAPI) -> None:
         with client.analytics.financial.profitability.with_streaming_response.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -69,6 +73,7 @@ class TestProfitability:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.analytics.financial.profitability.with_raw_response.get_history(
                 account="",
+                account_prefixed_id="acct_abc123",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -122,6 +127,7 @@ class TestAsyncProfitability:
     async def test_method_get_history(self, async_client: AsyncOnlyFansAPI) -> None:
         profitability = await async_client.analytics.financial.profitability.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
         )
         assert_matches_type(ProfitabilityGetHistoryResponse, profitability, path=["response"])
 
@@ -130,6 +136,7 @@ class TestAsyncProfitability:
     async def test_method_get_history_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         profitability = await async_client.analytics.financial.profitability.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
             months=12,
         )
         assert_matches_type(ProfitabilityGetHistoryResponse, profitability, path=["response"])
@@ -139,6 +146,7 @@ class TestAsyncProfitability:
     async def test_raw_response_get_history(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.analytics.financial.profitability.with_raw_response.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
         )
 
         assert response.is_closed is True
@@ -151,6 +159,7 @@ class TestAsyncProfitability:
     async def test_streaming_response_get_history(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.analytics.financial.profitability.with_streaming_response.get_history(
             account="acct_XXXXXXXXXXXXXXX",
+            account_prefixed_id="acct_abc123",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -166,6 +175,7 @@ class TestAsyncProfitability:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.analytics.financial.profitability.with_raw_response.get_history(
                 account="",
+                account_prefixed_id="acct_abc123",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

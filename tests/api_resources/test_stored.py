@@ -35,8 +35,10 @@ class TestStored:
     def test_method_list_shared_tracking_links_with_all_params(self, client: OnlyFansAPI) -> None:
         stored = client.stored.list_shared_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_search="twitter",
-            filter_tags="collab,sfs",
+            filter={
+                "search": "frlrfllcwpizfmb",
+                "tags": ["vkmteppnp"],
+            },
             limit=10,
             offset=0,
         )
@@ -89,8 +91,10 @@ class TestStored:
     def test_method_list_shared_trial_links_with_all_params(self, client: OnlyFansAPI) -> None:
         stored = client.stored.list_shared_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_search="collab",
-            filter_tags="collab,july",
+            filter={
+                "search": "ijgyh",
+                "tags": ["xtonuh"],
+            },
             limit=10,
             offset=0,
         )
@@ -143,9 +147,11 @@ class TestStored:
     def test_method_list_tracking_links_with_all_params(self, client: OnlyFansAPI) -> None:
         stored = client.stored.list_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_include_smart_links=False,
-            filter_search="Instagram",
-            filter_tags="instagram,twitter",
+            filter={
+                "include_smart_links": False,
+                "search": "ugcqnjiolnpwhfy",
+                "tags": ["nyknmwiekktwgnhggxo"],
+            },
             limit=10,
             offset=0,
         )
@@ -198,9 +204,11 @@ class TestStored:
     def test_method_list_trial_links_with_all_params(self, client: OnlyFansAPI) -> None:
         stored = client.stored.list_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_include_smart_links=False,
-            filter_search="Instagram",
-            filter_tags="instagram,twitter",
+            filter={
+                "include_smart_links": True,
+                "search": "kb",
+                "tags": ["ok"],
+            },
             limit=10,
             offset=0,
         )
@@ -259,8 +267,10 @@ class TestAsyncStored:
     async def test_method_list_shared_tracking_links_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         stored = await async_client.stored.list_shared_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_search="twitter",
-            filter_tags="collab,sfs",
+            filter={
+                "search": "frlrfllcwpizfmb",
+                "tags": ["vkmteppnp"],
+            },
             limit=10,
             offset=0,
         )
@@ -313,8 +323,10 @@ class TestAsyncStored:
     async def test_method_list_shared_trial_links_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         stored = await async_client.stored.list_shared_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_search="collab",
-            filter_tags="collab,july",
+            filter={
+                "search": "ijgyh",
+                "tags": ["xtonuh"],
+            },
             limit=10,
             offset=0,
         )
@@ -367,9 +379,11 @@ class TestAsyncStored:
     async def test_method_list_tracking_links_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         stored = await async_client.stored.list_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_include_smart_links=False,
-            filter_search="Instagram",
-            filter_tags="instagram,twitter",
+            filter={
+                "include_smart_links": False,
+                "search": "ugcqnjiolnpwhfy",
+                "tags": ["nyknmwiekktwgnhggxo"],
+            },
             limit=10,
             offset=0,
         )
@@ -422,9 +436,11 @@ class TestAsyncStored:
     async def test_method_list_trial_links_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         stored = await async_client.stored.list_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
-            filter_include_smart_links=False,
-            filter_search="Instagram",
-            filter_tags="instagram,twitter",
+            filter={
+                "include_smart_links": True,
+                "search": "kb",
+                "tags": ["ok"],
+            },
             limit=10,
             offset=0,
         )
