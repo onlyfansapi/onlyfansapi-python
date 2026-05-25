@@ -1,7 +1,7 @@
 # Only Fans API Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/onlyfansapi.svg?label=pypi%20(stable))](https://pypi.org/project/onlyfansapi/)
+[![PyPI version](https://img.shields.io/pypi/v/onlyfans.svg?label=pypi%20(stable))](https://pypi.org/project/onlyfans/)
 
 The Only Fans API Python library provides convenient access to the Only Fans API REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.onlyfansapi.com](https://docs.o
 
 ```sh
 # install from PyPI
-pip install onlyfansapi
+pip install onlyfans
 ```
 
 ## Usage
@@ -73,7 +73,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install onlyfansapi[aiohttp]
+pip install onlyfans[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
