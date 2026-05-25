@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 (2026-05-25)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/onlyfansapi/onlyfansapi-python/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* update SDK settings ([a98a87a](https://github.com/onlyfansapi/onlyfansapi-python/commit/a98a87a5453896b38c98f485673dd473e654c68b))
+* update SDK settings ([36ec9ce](https://github.com/onlyfansapi/onlyfansapi-python/commit/36ec9ceab847198b5f83186a51c4f2878dc0d945))
+
 ## 0.1.0 (2026-05-25)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/onlyfansapi/onlyfansapi-python/compare/v0.0.1...v0.1.0)
