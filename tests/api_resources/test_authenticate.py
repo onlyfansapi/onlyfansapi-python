@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="voluptatem",
+            auth_id="aut",
             auth_type="raw_data",
-            cookies="quidem",
+            cookies="nihil",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "B+:@hb)|H6^]Pd`]yD",
+                "password": "]%<>fO<D?MmY&/O;<+s",
                 "port": 8080,
-                "username": "corrupti",
+                "username": "nostrum",
             },
-            email="fwisoky@example.com",
+            email="rosalinda.feest@example.org",
             force_connect=False,
-            name="nemo",
-            password="Zx4;:QNTd6LrT>9hv)",
-            proxy_country="us",
-            user_agent="ut",
-            xbc="similique",
+            name="eius",
+            password=":I_LGeDf:Y\\w.T7n",
+            proxy_country="uk",
+            user_agent="enim",
+            xbc="suscipit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="voluptatem",
+            auth_id="aut",
             auth_type="raw_data",
-            cookies="quidem",
+            cookies="nihil",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "B+:@hb)|H6^]Pd`]yD",
+                "password": "]%<>fO<D?MmY&/O;<+s",
                 "port": 8080,
-                "username": "corrupti",
+                "username": "nostrum",
             },
-            email="fwisoky@example.com",
+            email="rosalinda.feest@example.org",
             force_connect=False,
-            name="nemo",
-            password="Zx4;:QNTd6LrT>9hv)",
-            proxy_country="us",
-            user_agent="ut",
-            xbc="similique",
+            name="eius",
+            password=":I_LGeDf:Y\\w.T7n",
+            proxy_country="uk",
+            user_agent="enim",
+            xbc="suscipit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 

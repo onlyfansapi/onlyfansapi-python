@@ -1,7 +1,7 @@
 # Only Fans API Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/onlyfansapi.svg?label=pypi%20(stable))](https://pypi.org/project/onlyfansapi/)
+[![PyPI version](https://img.shields.io/pypi/v/onlyfans.svg?label=pypi%20(stable))](https://pypi.org/project/onlyfans/)
 
 The Only Fans API Python library provides convenient access to the Only Fans API REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -16,12 +16,9 @@ The REST API documentation can be found on [docs.onlyfansapi.com](https://docs.o
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/onlyfansapi-python.git
+# install from PyPI
+pip install onlyfans
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install onlyfansapi`
 
 ## Usage
 
@@ -75,8 +72,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from this staging repo
-pip install 'onlyfansapi[aiohttp] @ git+ssh://git@github.com/stainless-sdks/onlyfansapi-python.git'
+# install from PyPI
+pip install onlyfans[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -280,9 +277,9 @@ whoami = response.parse()  # get the object that `whoami.retrieve()` would have 
 print(whoami.api_key)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/onlyfansapi-python/tree/main/src/onlyfansapi/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/onlyfansapi/onlyfansapi-python/tree/main/src/onlyfansapi/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/onlyfansapi-python/tree/main/src/onlyfansapi/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/onlyfansapi/onlyfansapi-python/tree/main/src/onlyfansapi/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -386,7 +383,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/onlyfansapi-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/onlyfansapi/onlyfansapi-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 

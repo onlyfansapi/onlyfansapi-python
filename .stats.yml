@@ -1,4 +1,4 @@
 configured_endpoints: 266
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/onlyfansapi/onlyfansapi-98f99bf644a3e5855dea42d567d86cc2d9150c1b96ee37dae3641b3af774a33e.yml
-openapi_spec_hash: df45bde0a256fd87ddf78b3775a0e050
-config_hash: b35617df571c3e46d2e845c5e293f1c5
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/onlyfansapi/onlyfansapi-db07c6b53db2576d9205de576b179c9aaf9929c8342d14ebd5aebd7fe9079caf.yml
+openapi_spec_hash: 6c2d47cd85674ece07dc37e471a36ac9
+config_hash: daf28359a88850c2eaa3b208a6161584
