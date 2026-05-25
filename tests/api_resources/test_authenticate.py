@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="eligendi",
-            auth_type="mobile_app",
-            cookies="neque",
+            auth_id="accusamus",
+            auth_type="email_password",
+            cookies="unde",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": 'pCV!L@n1Q]e"!lK62d',
+                "password": "}b2XD-AinlA~Cg9=",
                 "port": 8080,
-                "username": "nihil",
+                "username": "et",
             },
-            email="nicole67@example.com",
-            force_connect=True,
-            name="nihil",
-            password="MUEsS0x=7t9x<>4MALK",
+            email="ismael91@example.com",
+            force_connect=False,
+            name="molestiae",
+            password='iRPp(K"M[C1Qv,f',
             proxy_country="us",
-            user_agent="quia",
-            xbc="vitae",
+            user_agent="velit",
+            xbc="suscipit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="eligendi",
-            auth_type="mobile_app",
-            cookies="neque",
+            auth_id="accusamus",
+            auth_type="email_password",
+            cookies="unde",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": 'pCV!L@n1Q]e"!lK62d',
+                "password": "}b2XD-AinlA~Cg9=",
                 "port": 8080,
-                "username": "nihil",
+                "username": "et",
             },
-            email="nicole67@example.com",
-            force_connect=True,
-            name="nihil",
-            password="MUEsS0x=7t9x<>4MALK",
+            email="ismael91@example.com",
+            force_connect=False,
+            name="molestiae",
+            password='iRPp(K"M[C1Qv,f',
             proxy_country="us",
-            user_agent="quia",
-            xbc="vitae",
+            user_agent="velit",
+            xbc="suscipit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
