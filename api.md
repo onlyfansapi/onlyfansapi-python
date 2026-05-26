@@ -520,12 +520,12 @@ Methods:
 Types:
 
 ```python
-from onlyfansapi.types import MediaDownloadResponse, MediaScrapeResponse, MediaUploadResponse
+from onlyfansapi.types import MediaScrapeResponse, MediaUploadResponse
 ```
 
 Methods:
 
-- <code title="get /api/{account}/media/download/{cdnUrl}">client.media.<a href="./src/onlyfansapi/resources/media/media.py">download</a>(cdn_url, \*, account) -> str</code>
+- <code title="get /api/{account}/media/download/{cdnUrl}">client.media.<a href="./src/onlyfansapi/resources/media/media.py">download</a>(cdn_url, \*, account) -> None</code>
 - <code title="post /api/{account}/media/scrape">client.media.<a href="./src/onlyfansapi/resources/media/media.py">scrape</a>(account, \*\*<a href="src/onlyfansapi/types/media_scrape_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media_scrape_response.py">MediaScrapeResponse</a></code>
 - <code title="post /api/{account}/media/upload">client.media.<a href="./src/onlyfansapi/resources/media/media.py">upload</a>(account, \*\*<a href="src/onlyfansapi/types/media_upload_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media_upload_response.py">MediaUploadResponse</a></code>
 

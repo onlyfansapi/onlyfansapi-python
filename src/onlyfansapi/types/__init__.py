@@ -66,7 +66,6 @@ from .trial_link_list_params import TrialLinkListParams as TrialLinkListParams
 from .user_retrieve_response import UserRetrieveResponse as UserRetrieveResponse
 from .data_export_list_params import DataExportListParams as DataExportListParams
 from .fan_list_expired_params import FanListExpiredParams as FanListExpiredParams
-from .media_download_response import MediaDownloadResponse as MediaDownloadResponse
 from .post_unarchive_response import PostUnarchiveResponse as PostUnarchiveResponse
 from .profile_retrieve_params import ProfileRetrieveParams as ProfileRetrieveParams
 from .promotion_create_params import PromotionCreateParams as PromotionCreateParams
