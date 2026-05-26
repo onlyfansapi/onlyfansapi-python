@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="dolor",
-            auth_type="raw_data",
-            cookies="illum",
+            auth_id="voluptas",
+            auth_type="mobile_app",
+            cookies="et",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "QpR[^*m8dYw`fV>pDzM_",
+                "password": "qS*N*uL_",
                 "port": 8080,
-                "username": "autem",
+                "username": "voluptatibus",
             },
-            email="verna30@example.com",
+            email="triston96@example.org",
             force_connect=True,
-            name="dolor",
-            password="2!GY_AJ/#V,.u.zBK*",
+            name="laborum",
+            password="z|4Hba!J*[1tY",
             proxy_country="uk",
-            user_agent="temporibus",
-            xbc="consequuntur",
+            user_agent="ut",
+            xbc="exercitationem",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="dolor",
-            auth_type="raw_data",
-            cookies="illum",
+            auth_id="voluptas",
+            auth_type="mobile_app",
+            cookies="et",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "QpR[^*m8dYw`fV>pDzM_",
+                "password": "qS*N*uL_",
                 "port": 8080,
-                "username": "autem",
+                "username": "voluptatibus",
             },
-            email="verna30@example.com",
+            email="triston96@example.org",
             force_connect=True,
-            name="dolor",
-            password="2!GY_AJ/#V,.u.zBK*",
+            name="laborum",
+            password="z|4Hba!J*[1tY",
             proxy_country="uk",
-            user_agent="temporibus",
-            xbc="consequuntur",
+            user_agent="ut",
+            xbc="exercitationem",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 

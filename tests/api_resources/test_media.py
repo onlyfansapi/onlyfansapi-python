@@ -9,10 +9,7 @@ import pytest
 
 from onlyfansapi import OnlyFansAPI, AsyncOnlyFansAPI
 from tests.utils import assert_matches_type
-from onlyfansapi.types import (
-    MediaScrapeResponse,
-    MediaUploadResponse,
-)
+from onlyfansapi.types import MediaScrapeResponse, MediaUploadResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -27,7 +24,7 @@ class TestMedia:
             cdn_url="cdnUrl",
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert_matches_type(str, media, path=["response"])
+        assert media is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -40,7 +37,7 @@ class TestMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = response.parse()
-        assert_matches_type(str, media, path=["response"])
+        assert media is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -53,7 +50,7 @@ class TestMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = response.parse()
-            assert_matches_type(str, media, path=["response"])
+            assert media is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -194,7 +191,7 @@ class TestAsyncMedia:
             cdn_url="cdnUrl",
             account="acct_XXXXXXXXXXXXXXX",
         )
-        assert_matches_type(str, media, path=["response"])
+        assert media is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -207,7 +204,7 @@ class TestAsyncMedia:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         media = await response.parse()
-        assert_matches_type(str, media, path=["response"])
+        assert media is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -220,7 +217,7 @@ class TestAsyncMedia:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             media = await response.parse()
-            assert_matches_type(str, media, path=["response"])
+            assert media is None
 
         assert cast(Any, response.is_closed) is True
 

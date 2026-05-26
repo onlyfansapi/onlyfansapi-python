@@ -17,7 +17,7 @@ from .uploads import (
     AsyncUploadsResourceWithStreamingResponse,
 )
 from ..._files import deepcopy_with_paths
-from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
 from ..._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -81,14 +81,15 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
+    ) -> None:
         """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
 
         When the
         file is already cached on our CDN, this endpoint returns a `302` redirect to a
         `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
-        automatically (`curl` requires `-L`). Otherwise, the file is streamed through
-        our proxies and queued for caching.
+        automatically (`curl` requires `-L`). Otherwise, the file is redirected to
+        `dl.fansapi.com`, which streams it through the account proxy and reports billing
+        back to the API.
 
         Args:
           extra_headers: Send extra headers
@@ -103,13 +104,13 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not cdn_url:
             raise ValueError(f"Expected a non-empty value for `cdn_url` but received {cdn_url!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             path_template("/api/{account}/media/download/{cdn_url}", account=account, cdn_url=cdn_url),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
     def scrape(
@@ -285,14 +286,15 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
+    ) -> None:
         """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
 
         When the
         file is already cached on our CDN, this endpoint returns a `302` redirect to a
         `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
-        automatically (`curl` requires `-L`). Otherwise, the file is streamed through
-        our proxies and queued for caching.
+        automatically (`curl` requires `-L`). Otherwise, the file is redirected to
+        `dl.fansapi.com`, which streams it through the account proxy and reports billing
+        back to the API.
 
         Args:
           extra_headers: Send extra headers
@@ -307,13 +309,13 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not cdn_url:
             raise ValueError(f"Expected a non-empty value for `cdn_url` but received {cdn_url!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             path_template("/api/{account}/media/download/{cdn_url}", account=account, cdn_url=cdn_url),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
     async def scrape(
