@@ -96,7 +96,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_retrieve(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.retrieve(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkRetrieveResponse, trial_link, path=["response"])
@@ -105,7 +105,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_retrieve(self, client: OnlyFansAPI) -> None:
         response = client.trial_links.with_raw_response.retrieve(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -118,7 +118,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_retrieve(self, client: OnlyFansAPI) -> None:
         with client.trial_links.with_streaming_response.retrieve(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -134,7 +134,7 @@ class TestTrialLinks:
     def test_path_params_retrieve(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.retrieve(
-                trial_link_id="repellat",
+                trial_link_id="natus",
                 account="",
             )
 
@@ -211,7 +211,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_delete(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.delete(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkDeleteResponse, trial_link, path=["response"])
@@ -220,7 +220,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_delete(self, client: OnlyFansAPI) -> None:
         response = client.trial_links.with_raw_response.delete(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -233,7 +233,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_delete(self, client: OnlyFansAPI) -> None:
         with client.trial_links.with_streaming_response.delete(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -249,7 +249,7 @@ class TestTrialLinks:
     def test_path_params_delete(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.delete(
-                trial_link_id="repellat",
+                trial_link_id="natus",
                 account="",
             )
 
@@ -327,7 +327,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_list_subscribers(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.list_subscribers(
-            trial_link_id="vitae",
+            trial_link_id="reprehenderit",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -338,7 +338,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_list_subscribers(self, client: OnlyFansAPI) -> None:
         response = client.trial_links.with_raw_response.list_subscribers(
-            trial_link_id="vitae",
+            trial_link_id="reprehenderit",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -353,7 +353,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_list_subscribers(self, client: OnlyFansAPI) -> None:
         with client.trial_links.with_streaming_response.list_subscribers(
-            trial_link_id="vitae",
+            trial_link_id="reprehenderit",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -371,7 +371,7 @@ class TestTrialLinks:
     def test_path_params_list_subscribers(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.list_subscribers(
-                trial_link_id="vitae",
+                trial_link_id="reprehenderit",
                 account="",
                 limit=10,
                 offset=0,
@@ -389,7 +389,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_retrieve_cohort_arps(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert trial_link is None
@@ -398,7 +398,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_retrieve_cohort_arps_with_all_params(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
             acquisition_end="2026-01-31T23:59:59Z",
             acquisition_start="2026-01-01T00:00:00Z",
@@ -410,7 +410,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_retrieve_cohort_arps(self, client: OnlyFansAPI) -> None:
         response = client.trial_links.with_raw_response.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -423,7 +423,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_retrieve_cohort_arps(self, client: OnlyFansAPI) -> None:
         with client.trial_links.with_streaming_response.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -439,7 +439,7 @@ class TestTrialLinks:
     def test_path_params_retrieve_cohort_arps(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.retrieve_cohort_arps(
-                trial_link_id="qui",
+                trial_link_id="laboriosam",
                 account="",
             )
 
@@ -453,7 +453,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_retrieve_stats(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkRetrieveStatsResponse, trial_link, path=["response"])
@@ -462,7 +462,7 @@ class TestTrialLinks:
     @parametrize
     def test_method_retrieve_stats_with_all_params(self, client: OnlyFansAPI) -> None:
         trial_link = client.trial_links.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
             date_end="2026-01-31T23:59:59Z",
             date_start="2026-01-01T00:00:00Z",
@@ -473,7 +473,7 @@ class TestTrialLinks:
     @parametrize
     def test_raw_response_retrieve_stats(self, client: OnlyFansAPI) -> None:
         response = client.trial_links.with_raw_response.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -486,7 +486,7 @@ class TestTrialLinks:
     @parametrize
     def test_streaming_response_retrieve_stats(self, client: OnlyFansAPI) -> None:
         with client.trial_links.with_streaming_response.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -502,7 +502,7 @@ class TestTrialLinks:
     def test_path_params_retrieve_stats(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.trial_links.with_raw_response.retrieve_stats(
-                trial_link_id="quibusdam",
+                trial_link_id="nobis",
                 account="",
             )
 
@@ -589,7 +589,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.retrieve(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkRetrieveResponse, trial_link, path=["response"])
@@ -598,7 +598,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.trial_links.with_raw_response.retrieve(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -611,7 +611,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.trial_links.with_streaming_response.retrieve(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -627,7 +627,7 @@ class TestAsyncTrialLinks:
     async def test_path_params_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.retrieve(
-                trial_link_id="repellat",
+                trial_link_id="natus",
                 account="",
             )
 
@@ -704,7 +704,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.delete(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkDeleteResponse, trial_link, path=["response"])
@@ -713,7 +713,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.trial_links.with_raw_response.delete(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -726,7 +726,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.trial_links.with_streaming_response.delete(
-            trial_link_id="repellat",
+            trial_link_id="natus",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -742,7 +742,7 @@ class TestAsyncTrialLinks:
     async def test_path_params_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.delete(
-                trial_link_id="repellat",
+                trial_link_id="natus",
                 account="",
             )
 
@@ -820,7 +820,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_list_subscribers(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.list_subscribers(
-            trial_link_id="vitae",
+            trial_link_id="reprehenderit",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -831,7 +831,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_list_subscribers(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.trial_links.with_raw_response.list_subscribers(
-            trial_link_id="vitae",
+            trial_link_id="reprehenderit",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -846,7 +846,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_list_subscribers(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.trial_links.with_streaming_response.list_subscribers(
-            trial_link_id="vitae",
+            trial_link_id="reprehenderit",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -864,7 +864,7 @@ class TestAsyncTrialLinks:
     async def test_path_params_list_subscribers(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.list_subscribers(
-                trial_link_id="vitae",
+                trial_link_id="reprehenderit",
                 account="",
                 limit=10,
                 offset=0,
@@ -882,7 +882,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_retrieve_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert trial_link is None
@@ -891,7 +891,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_retrieve_cohort_arps_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
             acquisition_end="2026-01-31T23:59:59Z",
             acquisition_start="2026-01-01T00:00:00Z",
@@ -903,7 +903,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_retrieve_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.trial_links.with_raw_response.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -916,7 +916,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_retrieve_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.trial_links.with_streaming_response.retrieve_cohort_arps(
-            trial_link_id="qui",
+            trial_link_id="laboriosam",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -932,7 +932,7 @@ class TestAsyncTrialLinks:
     async def test_path_params_retrieve_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.retrieve_cohort_arps(
-                trial_link_id="qui",
+                trial_link_id="laboriosam",
                 account="",
             )
 
@@ -946,7 +946,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrialLinkRetrieveStatsResponse, trial_link, path=["response"])
@@ -955,7 +955,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_method_retrieve_stats_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         trial_link = await async_client.trial_links.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
             date_end="2026-01-31T23:59:59Z",
             date_start="2026-01-01T00:00:00Z",
@@ -966,7 +966,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_raw_response_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.trial_links.with_raw_response.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -979,7 +979,7 @@ class TestAsyncTrialLinks:
     @parametrize
     async def test_streaming_response_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.trial_links.with_streaming_response.retrieve_stats(
-            trial_link_id="quibusdam",
+            trial_link_id="nobis",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -995,7 +995,7 @@ class TestAsyncTrialLinks:
     async def test_path_params_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.trial_links.with_raw_response.retrieve_stats(
-                trial_link_id="quibusdam",
+                trial_link_id="nobis",
                 account="",
             )
 
