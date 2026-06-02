@@ -36,8 +36,8 @@ class TestStored:
         stored = client.stored.list_shared_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "glzjjfz",
-                "tags": ["macjms"],
+                "search": "ccyotgpfkysngijpwg",
+                "tags": ["c"],
             },
             limit=10,
             offset=0,
@@ -92,8 +92,8 @@ class TestStored:
         stored = client.stored.list_shared_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "vzqvknjw",
-                "tags": ["sf"],
+                "search": "tar",
+                "tags": ["iejgxtgtoym"],
             },
             limit=10,
             offset=0,
@@ -149,8 +149,8 @@ class TestStored:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "include_smart_links": True,
-                "search": "bsytubzhqtba",
-                "tags": ["ixmjftajlpfjqpk"],
+                "search": "ccielr",
+                "tags": ["rgfqobfjkfhlxp"],
             },
             limit=10,
             offset=0,
@@ -206,8 +206,8 @@ class TestStored:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "include_smart_links": True,
-                "search": "jlde",
-                "tags": ["kxlawdiljvvhrtxnv"],
+                "search": "tlsayaecxzh",
+                "tags": ["rydrfjvmf"],
             },
             limit=10,
             offset=0,
@@ -268,8 +268,8 @@ class TestAsyncStored:
         stored = await async_client.stored.list_shared_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "glzjjfz",
-                "tags": ["macjms"],
+                "search": "ccyotgpfkysngijpwg",
+                "tags": ["c"],
             },
             limit=10,
             offset=0,
@@ -324,8 +324,8 @@ class TestAsyncStored:
         stored = await async_client.stored.list_shared_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "vzqvknjw",
-                "tags": ["sf"],
+                "search": "tar",
+                "tags": ["iejgxtgtoym"],
             },
             limit=10,
             offset=0,
@@ -381,8 +381,8 @@ class TestAsyncStored:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "include_smart_links": True,
-                "search": "bsytubzhqtba",
-                "tags": ["ixmjftajlpfjqpk"],
+                "search": "ccielr",
+                "tags": ["rgfqobfjkfhlxp"],
             },
             limit=10,
             offset=0,
@@ -438,8 +438,8 @@ class TestAsyncStored:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "include_smart_links": True,
-                "search": "jlde",
-                "tags": ["kxlawdiljvvhrtxnv"],
+                "search": "tlsayaecxzh",
+                "tags": ["rydrfjvmf"],
             },
             limit=10,
             offset=0,
