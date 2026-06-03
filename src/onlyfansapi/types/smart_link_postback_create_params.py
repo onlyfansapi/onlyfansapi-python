@@ -22,8 +22,8 @@ class SmartLinkPostbackCreateParams(TypedDict, total=False):
     url: Required[str]
     """The destination URL.
 
-    Variables such as `{click_id}`, `{fbclid}`, `{gclid}`, and `{ttclid}` are
-    replaced when the postback is dispatched.
+    Variables such as `{external_click_id}`, `{fbclid}`, `{gclid}`, and `{ttclid}`
+    are replaced when the postback is dispatched.
     """
 
     smart_link_ids: SequenceNotStr[str]

@@ -29,7 +29,7 @@ class TestSmartLinkPostbacks:
         smart_link_postback = client.smart_link_postbacks.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
         )
         assert_matches_type(SmartLinkPostbackCreateResponse, smart_link_postback, path=["response"])
 
@@ -39,7 +39,7 @@ class TestSmartLinkPostbacks:
         smart_link_postback = client.smart_link_postbacks.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
             smart_link_ids=["01JTESTLINK000000000000001"],
         )
         assert_matches_type(SmartLinkPostbackCreateResponse, smart_link_postback, path=["response"])
@@ -50,7 +50,7 @@ class TestSmartLinkPostbacks:
         response = client.smart_link_postbacks.with_raw_response.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
         )
 
         assert response.is_closed is True
@@ -64,7 +64,7 @@ class TestSmartLinkPostbacks:
         with client.smart_link_postbacks.with_streaming_response.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -115,7 +115,7 @@ class TestSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
         )
         assert_matches_type(SmartLinkPostbackUpdateResponse, smart_link_postback, path=["response"])
 
@@ -126,7 +126,7 @@ class TestSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
             smart_link_ids=["01JTESTLINK000000000000001"],
         )
         assert_matches_type(SmartLinkPostbackUpdateResponse, smart_link_postback, path=["response"])
@@ -138,7 +138,7 @@ class TestSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
         )
 
         assert response.is_closed is True
@@ -153,7 +153,7 @@ class TestSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -237,7 +237,7 @@ class TestAsyncSmartLinkPostbacks:
         smart_link_postback = await async_client.smart_link_postbacks.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
         )
         assert_matches_type(SmartLinkPostbackCreateResponse, smart_link_postback, path=["response"])
 
@@ -247,7 +247,7 @@ class TestAsyncSmartLinkPostbacks:
         smart_link_postback = await async_client.smart_link_postbacks.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
             smart_link_ids=["01JTESTLINK000000000000001"],
         )
         assert_matches_type(SmartLinkPostbackCreateResponse, smart_link_postback, path=["response"])
@@ -258,7 +258,7 @@ class TestAsyncSmartLinkPostbacks:
         response = await async_client.smart_link_postbacks.with_raw_response.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
         )
 
         assert response.is_closed is True
@@ -272,7 +272,7 @@ class TestAsyncSmartLinkPostbacks:
         async with async_client.smart_link_postbacks.with_streaming_response.create(
             conversion_types=["new_subscriber", "new_transaction"],
             smart_link_scope="campaign_specific",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}&gclid={gclid}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}&gclid={gclid}",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -323,7 +323,7 @@ class TestAsyncSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
         )
         assert_matches_type(SmartLinkPostbackUpdateResponse, smart_link_postback, path=["response"])
 
@@ -334,7 +334,7 @@ class TestAsyncSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
             smart_link_ids=["01JTESTLINK000000000000001"],
         )
         assert_matches_type(SmartLinkPostbackUpdateResponse, smart_link_postback, path=["response"])
@@ -346,7 +346,7 @@ class TestAsyncSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
         )
 
         assert response.is_closed is True
@@ -361,7 +361,7 @@ class TestAsyncSmartLinkPostbacks:
             postback_id=123,
             conversion_types=["new_subscriber"],
             smart_link_scope="global",
-            url="https://example.com/postback?click={click_id}&type={conversion_type}",
+            url="https://example.com/postback?click={external_click_id}&type={conversion_type}",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
