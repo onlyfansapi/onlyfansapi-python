@@ -73,8 +73,8 @@ class SmartLinkPostbacksResource(SyncAPIResource):
           smart_link_scope: `global` fires for all Smart Links. `campaign_specific` fires only for selected
               Smart Links.
 
-          url: The destination URL. Variables such as `{click_id}`, `{fbclid}`, `{gclid}`, and
-              `{ttclid}` are replaced when the postback is dispatched.
+          url: The destination URL. Variables such as `{external_click_id}`, `{fbclid}`,
+              `{gclid}`, and `{ttclid}` are replaced when the postback is dispatched.
 
           smart_link_ids: Smart Link ULIDs. Required when `smart_link_scope` is `campaign_specific`.
 
@@ -282,8 +282,8 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
           smart_link_scope: `global` fires for all Smart Links. `campaign_specific` fires only for selected
               Smart Links.
 
-          url: The destination URL. Variables such as `{click_id}`, `{fbclid}`, `{gclid}`, and
-              `{ttclid}` are replaced when the postback is dispatched.
+          url: The destination URL. Variables such as `{external_click_id}`, `{fbclid}`,
+              `{gclid}`, and `{ttclid}` are replaced when the postback is dispatched.
 
           smart_link_ids: Smart Link ULIDs. Required when `smart_link_scope` is `campaign_specific`.
 
