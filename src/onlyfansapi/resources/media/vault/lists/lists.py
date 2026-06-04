@@ -23,7 +23,7 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.media.vault import list_list_params, list_create_params
+from .....types.media.vault import list_list_params, list_create_params, list_update_params
 from .....types.media.vault.list_list_response import ListListResponse
 from .....types.media.vault.list_create_response import ListCreateResponse
 from .....types.media.vault.list_delete_response import ListDeleteResponse
@@ -135,6 +135,7 @@ class ListsResource(SyncAPIResource):
         list_id: str,
         *,
         account: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,10 +143,13 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListUpdateResponse:
-        """
-        Rename a Vault list.
+        """Rename a Vault list.
 
         Args:
+          name: The new name for the vault list.
+
+        Must not be greater than 255 characters.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -160,6 +164,7 @@ class ListsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return self._put(
             path_template("/api/{account}/media/vault/lists/{list_id}", account=account, list_id=list_id),
+            body=maybe_transform({"name": name}, list_update_params.ListUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -358,6 +363,7 @@ class AsyncListsResource(AsyncAPIResource):
         list_id: str,
         *,
         account: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -365,10 +371,13 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListUpdateResponse:
-        """
-        Rename a Vault list.
+        """Rename a Vault list.
 
         Args:
+          name: The new name for the vault list.
+
+        Must not be greater than 255 characters.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -383,6 +392,7 @@ class AsyncListsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return await self._put(
             path_template("/api/{account}/media/vault/lists/{list_id}", account=account, list_id=list_id),
+            body=await async_maybe_transform({"name": name}, list_update_params.ListUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
