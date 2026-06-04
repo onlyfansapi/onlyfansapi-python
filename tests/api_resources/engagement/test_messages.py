@@ -24,7 +24,7 @@ class TestMessages:
     @parametrize
     def test_method_get_message_buyers(self, client: OnlyFansAPI) -> None:
         message = client.engagement.messages.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(MessageGetMessageBuyersResponse, message, path=["response"])
@@ -33,7 +33,7 @@ class TestMessages:
     @parametrize
     def test_method_get_message_buyers_with_all_params(self, client: OnlyFansAPI) -> None:
         message = client.engagement.messages.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             marker=0,
@@ -47,7 +47,7 @@ class TestMessages:
     @parametrize
     def test_raw_response_get_message_buyers(self, client: OnlyFansAPI) -> None:
         response = client.engagement.messages.with_raw_response.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -60,7 +60,7 @@ class TestMessages:
     @parametrize
     def test_streaming_response_get_message_buyers(self, client: OnlyFansAPI) -> None:
         with client.engagement.messages.with_streaming_response.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -76,7 +76,7 @@ class TestMessages:
     def test_path_params_get_message_buyers(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.engagement.messages.with_raw_response.get_message_buyers(
-                message_id="quo",
+                message_id="eum",
                 account="",
             )
 
@@ -148,7 +148,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_method_get_message_buyers(self, async_client: AsyncOnlyFansAPI) -> None:
         message = await async_client.engagement.messages.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(MessageGetMessageBuyersResponse, message, path=["response"])
@@ -157,7 +157,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_method_get_message_buyers_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         message = await async_client.engagement.messages.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             marker=0,
@@ -171,7 +171,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_raw_response_get_message_buyers(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.engagement.messages.with_raw_response.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -184,7 +184,7 @@ class TestAsyncMessages:
     @parametrize
     async def test_streaming_response_get_message_buyers(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.engagement.messages.with_streaming_response.get_message_buyers(
-            message_id="quo",
+            message_id="eum",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -200,7 +200,7 @@ class TestAsyncMessages:
     async def test_path_params_get_message_buyers(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.engagement.messages.with_raw_response.get_message_buyers(
-                message_id="quo",
+                message_id="eum",
                 account="",
             )
 
