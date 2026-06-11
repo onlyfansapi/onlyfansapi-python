@@ -160,6 +160,7 @@ class SmartLinksResource(SyncAPIResource):
         meta_pixel_ids: Optional[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         offset: int | Omit = omit,
+        pixel_ids: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -176,11 +177,13 @@ class SmartLinksResource(SyncAPIResource):
           limit: The number of Smart Links to return. Default `50`. Must be at least 1. Must not
               be greater than 1000.
 
-          meta_pixel_ids: Comma-separated Meta Pixel IDs to include.
+          meta_pixel_ids: Deprecated alias for `pixel_ids`. Comma-separated Pixel IDs to include.
 
           name: Filter Smart Links by name. Must not be greater than 255 characters.
 
           offset: The offset used for pagination. Default `0`. Must be at least 0.
+
+          pixel_ids: Comma-separated ad platform Pixel IDs to include.
 
           extra_headers: Send extra headers
 
@@ -204,6 +207,7 @@ class SmartLinksResource(SyncAPIResource):
                         "meta_pixel_ids": meta_pixel_ids,
                         "name": name,
                         "offset": offset,
+                        "pixel_ids": pixel_ids,
                     },
                     smart_link_list_params.SmartLinkListParams,
                 ),
@@ -741,6 +745,7 @@ class AsyncSmartLinksResource(AsyncAPIResource):
         meta_pixel_ids: Optional[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         offset: int | Omit = omit,
+        pixel_ids: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -757,11 +762,13 @@ class AsyncSmartLinksResource(AsyncAPIResource):
           limit: The number of Smart Links to return. Default `50`. Must be at least 1. Must not
               be greater than 1000.
 
-          meta_pixel_ids: Comma-separated Meta Pixel IDs to include.
+          meta_pixel_ids: Deprecated alias for `pixel_ids`. Comma-separated Pixel IDs to include.
 
           name: Filter Smart Links by name. Must not be greater than 255 characters.
 
           offset: The offset used for pagination. Default `0`. Must be at least 0.
+
+          pixel_ids: Comma-separated ad platform Pixel IDs to include.
 
           extra_headers: Send extra headers
 
@@ -785,6 +792,7 @@ class AsyncSmartLinksResource(AsyncAPIResource):
                         "meta_pixel_ids": meta_pixel_ids,
                         "name": name,
                         "offset": offset,
+                        "pixel_ids": pixel_ids,
                     },
                     smart_link_list_params.SmartLinkListParams,
                 ),

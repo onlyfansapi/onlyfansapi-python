@@ -19,10 +19,13 @@ class SmartLinkListParams(TypedDict, total=False):
     """
 
     meta_pixel_ids: Optional[str]
-    """Comma-separated Meta Pixel IDs to include."""
+    """Deprecated alias for `pixel_ids`. Comma-separated Pixel IDs to include."""
 
     name: Optional[str]
     """Filter Smart Links by name. Must not be greater than 255 characters."""
 
     offset: int
     """The offset used for pagination. Default `0`. Must be at least 0."""
+
+    pixel_ids: Optional[str]
+    """Comma-separated ad platform Pixel IDs to include."""
