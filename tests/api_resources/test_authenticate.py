@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="esse",
-            auth_type="email_password",
-            cookies="in",
+            auth_id="omnis",
+            auth_type="raw_data",
+            cookies="exercitationem",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": ":fL:=7r",
+                "password": "Q704]UxB_U1/S",
                 "port": 8080,
-                "username": "rerum",
+                "username": "porro",
             },
-            email="scorkery@example.net",
+            email="margie95@example.org",
             force_connect=False,
-            name="aut",
-            password="!wpJI\\$dI*",
-            proxy_country="us",
-            user_agent="neque",
-            xbc="quam",
+            name="dicta",
+            password="yN#:\\gzj4@!WS%",
+            proxy_country="uk",
+            user_agent="voluptatem",
+            xbc="molestiae",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="esse",
-            auth_type="email_password",
-            cookies="in",
+            auth_id="omnis",
+            auth_type="raw_data",
+            cookies="exercitationem",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": ":fL:=7r",
+                "password": "Q704]UxB_U1/S",
                 "port": 8080,
-                "username": "rerum",
+                "username": "porro",
             },
-            email="scorkery@example.net",
+            email="margie95@example.org",
             force_connect=False,
-            name="aut",
-            password="!wpJI\\$dI*",
-            proxy_country="us",
-            user_agent="neque",
-            xbc="quam",
+            name="dicta",
+            password="yN#:\\gzj4@!WS%",
+            proxy_country="uk",
+            user_agent="voluptatem",
+            xbc="molestiae",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
