@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="nisi",
+            auth_id="perferendis",
             auth_type="raw_data",
-            cookies="ut",
+            cookies="sit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "r+T2d-~2k",
+                "password": "d!(``m",
                 "port": 8080,
-                "username": "minima",
+                "username": "quas",
             },
-            email="keanu.nader@example.org",
-            force_connect=False,
-            name="velit",
-            password="l;pcSTW#YvN)",
+            email="sarah73@example.org",
+            force_connect=True,
+            name="numquam",
+            password="y<X(:.:{e{D",
             proxy_country="uk",
-            user_agent="at",
-            xbc="aut",
+            user_agent="deleniti",
+            xbc="excepturi",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="nisi",
+            auth_id="perferendis",
             auth_type="raw_data",
-            cookies="ut",
+            cookies="sit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "r+T2d-~2k",
+                "password": "d!(``m",
                 "port": 8080,
-                "username": "minima",
+                "username": "quas",
             },
-            email="keanu.nader@example.org",
-            force_connect=False,
-            name="velit",
-            password="l;pcSTW#YvN)",
+            email="sarah73@example.org",
+            force_connect=True,
+            name="numquam",
+            password="y<X(:.:{e{D",
             proxy_country="uk",
-            user_agent="at",
-            xbc="aut",
+            user_agent="deleniti",
+            xbc="excepturi",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
