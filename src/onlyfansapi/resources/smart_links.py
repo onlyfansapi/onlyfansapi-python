@@ -156,6 +156,7 @@ class SmartLinksResource(SyncAPIResource):
         self,
         *,
         account_ids: Optional[str] | Omit = omit,
+        filter: smart_link_list_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         meta_pixel_ids: Optional[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
@@ -203,6 +204,7 @@ class SmartLinksResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "account_ids": account_ids,
+                        "filter": filter,
                         "limit": limit,
                         "meta_pixel_ids": meta_pixel_ids,
                         "name": name,
@@ -741,6 +743,7 @@ class AsyncSmartLinksResource(AsyncAPIResource):
         self,
         *,
         account_ids: Optional[str] | Omit = omit,
+        filter: smart_link_list_params.Filter | Omit = omit,
         limit: int | Omit = omit,
         meta_pixel_ids: Optional[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
@@ -788,6 +791,7 @@ class AsyncSmartLinksResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "account_ids": account_ids,
+                        "filter": filter,
                         "limit": limit,
                         "meta_pixel_ids": meta_pixel_ids,
                         "name": name,

@@ -311,7 +311,7 @@ class OnlyFansAPI(SyncAPIClient):
 
     @cached_property
     def link_tags(self) -> LinkTagsResource:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import LinkTagsResource
 
         return LinkTagsResource(self)
@@ -779,7 +779,7 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
 
     @cached_property
     def link_tags(self) -> AsyncLinkTagsResource:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import AsyncLinkTagsResource
 
         return AsyncLinkTagsResource(self)
@@ -1189,7 +1189,7 @@ class OnlyFansAPIWithRawResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.LinkTagsResourceWithRawResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import LinkTagsResourceWithRawResponse
 
         return LinkTagsResourceWithRawResponse(self._client.link_tags)
@@ -1482,7 +1482,7 @@ class AsyncOnlyFansAPIWithRawResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.AsyncLinkTagsResourceWithRawResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import AsyncLinkTagsResourceWithRawResponse
 
         return AsyncLinkTagsResourceWithRawResponse(self._client.link_tags)
@@ -1775,7 +1775,7 @@ class OnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.LinkTagsResourceWithStreamingResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import LinkTagsResourceWithStreamingResponse
 
         return LinkTagsResourceWithStreamingResponse(self._client.link_tags)
@@ -2068,7 +2068,7 @@ class AsyncOnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.AsyncLinkTagsResourceWithStreamingResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import AsyncLinkTagsResourceWithStreamingResponse
 
         return AsyncLinkTagsResourceWithStreamingResponse(self._client.link_tags)

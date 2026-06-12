@@ -5,12 +5,16 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import TypedDict
 
-__all__ = ["SmartLinkListParams"]
+from .._types import SequenceNotStr
+
+__all__ = ["SmartLinkListParams", "Filter"]
 
 
 class SmartLinkListParams(TypedDict, total=False):
     account_ids: Optional[str]
     """Comma-separated account prefixed IDs to include."""
+
+    filter: Filter
 
     limit: int
     """The number of Smart Links to return.
@@ -29,3 +33,8 @@ class SmartLinkListParams(TypedDict, total=False):
 
     pixel_ids: Optional[str]
     """Comma-separated ad platform Pixel IDs to include."""
+
+
+class Filter(TypedDict, total=False):
+    tags: SequenceNotStr[str]
+    """Must not be greater than 50 characters."""
