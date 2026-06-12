@@ -24,7 +24,7 @@ __all__ = ["LinkTagsResource", "AsyncLinkTagsResource"]
 
 
 class LinkTagsResource(SyncAPIResource):
-    """APIs for managing tags on free trial links and tracking links"""
+    """APIs for managing tags on free trial links, tracking links, and Smart Links"""
 
     @cached_property
     def with_raw_response(self) -> LinkTagsResourceWithRawResponse:
@@ -48,7 +48,7 @@ class LinkTagsResource(SyncAPIResource):
     def list(
         self,
         *,
-        type: Literal["trial_links", "tracking_links"] | Omit = omit,
+        type: Literal["trial_links", "tracking_links", "smart_links"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,11 +57,11 @@ class LinkTagsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LinkTagListResponse:
         """
-        Get all existing tags that have been used on free trial links and/or tracking
-        links for this account. This is a free endpoint.
+        Get all existing tags that have been used on free trial links, tracking links,
+        and/or Smart Links for this account. This is a free endpoint.
 
         Args:
-          type: Filter by link type. If not provided, returns tags for both types.
+          type: Filter by link type. If not provided, returns tags for all types.
 
           extra_headers: Send extra headers
 
@@ -85,7 +85,7 @@ class LinkTagsResource(SyncAPIResource):
 
 
 class AsyncLinkTagsResource(AsyncAPIResource):
-    """APIs for managing tags on free trial links and tracking links"""
+    """APIs for managing tags on free trial links, tracking links, and Smart Links"""
 
     @cached_property
     def with_raw_response(self) -> AsyncLinkTagsResourceWithRawResponse:
@@ -109,7 +109,7 @@ class AsyncLinkTagsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        type: Literal["trial_links", "tracking_links"] | Omit = omit,
+        type: Literal["trial_links", "tracking_links", "smart_links"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -118,11 +118,11 @@ class AsyncLinkTagsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LinkTagListResponse:
         """
-        Get all existing tags that have been used on free trial links and/or tracking
-        links for this account. This is a free endpoint.
+        Get all existing tags that have been used on free trial links, tracking links,
+        and/or Smart Links for this account. This is a free endpoint.
 
         Args:
-          type: Filter by link type. If not provided, returns tags for both types.
+          type: Filter by link type. If not provided, returns tags for all types.
 
           extra_headers: Send extra headers
 
