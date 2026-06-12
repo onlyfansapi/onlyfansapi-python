@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="voluptate",
-            auth_type="raw_data",
-            cookies="accusantium",
+            auth_id="impedit",
+            auth_type="mobile_app",
+            cookies="aut",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "Jr6</}k#$G",
+                "password": "vOy@4$#Z0>'[x",
                 "port": 8080,
-                "username": "ipsam",
+                "username": "optio",
             },
-            email="fkirlin@example.com",
+            email="jarrell37@example.org",
             force_connect=False,
-            name="facilis",
-            password="9PX8`V>hkw[`?CUz#A#3",
+            name="totam",
+            password="Ut;aK1",
             proxy_country="uk",
-            user_agent="aspernatur",
-            xbc="quo",
+            user_agent="harum",
+            xbc="eos",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="voluptate",
-            auth_type="raw_data",
-            cookies="accusantium",
+            auth_id="impedit",
+            auth_type="mobile_app",
+            cookies="aut",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "Jr6</}k#$G",
+                "password": "vOy@4$#Z0>'[x",
                 "port": 8080,
-                "username": "ipsam",
+                "username": "optio",
             },
-            email="fkirlin@example.com",
+            email="jarrell37@example.org",
             force_connect=False,
-            name="facilis",
-            password="9PX8`V>hkw[`?CUz#A#3",
+            name="totam",
+            password="Ut;aK1",
             proxy_country="uk",
-            user_agent="aspernatur",
-            xbc="quo",
+            user_agent="harum",
+            xbc="eos",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
