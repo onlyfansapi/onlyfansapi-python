@@ -110,7 +110,7 @@ class TestSettings:
     def test_method_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         setting = client.saved_for_later.posts.settings.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
-            period=24,
+            period=12,
         )
         assert_matches_type(SettingEnableOrUpdateAutomaticPostingResponse, setting, path=["response"])
 
@@ -119,7 +119,7 @@ class TestSettings:
     def test_raw_response_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         response = client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
-            period=24,
+            period=12,
         )
 
         assert response.is_closed is True
@@ -132,7 +132,7 @@ class TestSettings:
     def test_streaming_response_enable_or_update_automatic_posting(self, client: OnlyFansAPI) -> None:
         with client.saved_for_later.posts.settings.with_streaming_response.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
-            period=24,
+            period=12,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -148,7 +148,7 @@ class TestSettings:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
                 account="",
-                period=24,
+                period=12,
             )
 
 
@@ -246,7 +246,7 @@ class TestAsyncSettings:
     async def test_method_enable_or_update_automatic_posting(self, async_client: AsyncOnlyFansAPI) -> None:
         setting = await async_client.saved_for_later.posts.settings.enable_or_update_automatic_posting(
             account="acct_XXXXXXXXXXXXXXX",
-            period=24,
+            period=12,
         )
         assert_matches_type(SettingEnableOrUpdateAutomaticPostingResponse, setting, path=["response"])
 
@@ -256,7 +256,7 @@ class TestAsyncSettings:
         response = (
             await async_client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
                 account="acct_XXXXXXXXXXXXXXX",
-                period=24,
+                period=12,
             )
         )
 
@@ -271,7 +271,7 @@ class TestAsyncSettings:
         async with (
             async_client.saved_for_later.posts.settings.with_streaming_response.enable_or_update_automatic_posting(
                 account="acct_XXXXXXXXXXXXXXX",
-                period=24,
+                period=12,
             )
         ) as response:
             assert not response.is_closed
@@ -288,5 +288,5 @@ class TestAsyncSettings:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.saved_for_later.posts.settings.with_raw_response.enable_or_update_automatic_posting(
                 account="",
-                period=24,
+                period=12,
             )
