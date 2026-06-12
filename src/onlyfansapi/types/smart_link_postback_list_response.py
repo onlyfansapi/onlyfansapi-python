@@ -12,6 +12,7 @@ __all__ = [
     "_Meta_Cache",
     "_Meta_Credits",
     "Data",
+    "DataHeader",
     "DataLatestResponse",
     "DataSmartLink",
 ]
@@ -35,6 +36,12 @@ class _Meta(BaseModel):
     api_cache: Optional[_Meta_Cache] = FieldInfo(alias="_cache", default=None)
 
     api_credits: Optional[_Meta_Credits] = FieldInfo(alias="_credits", default=None)
+
+
+class DataHeader(BaseModel):
+    name: Optional[str] = None
+
+    value: Optional[str] = None
 
 
 class DataLatestResponse(BaseModel):
@@ -68,9 +75,15 @@ class DataSmartLink(BaseModel):
 class Data(BaseModel):
     id: Optional[int] = None
 
+    body: Optional[str] = None
+
     conversion_types: Optional[List[str]] = None
 
     created_at: Optional[str] = None
+
+    headers: Optional[List[DataHeader]] = None
+
+    http_method: Optional[str] = None
 
     latest_response: Optional[DataLatestResponse] = None
 
