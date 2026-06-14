@@ -24,7 +24,7 @@ class TestMedia:
     @parametrize
     def test_method_add(self, client: OnlyFansAPI) -> None:
         media = client.media.vault.lists.media.add(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -34,7 +34,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_add(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.media.with_raw_response.add(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -48,7 +48,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_add(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.media.with_streaming_response.add(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         ) as response:
@@ -65,7 +65,7 @@ class TestMedia:
     def test_path_params_add(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.media.with_raw_response.add(
-                list_id="aut",
+                list_id="ut",
                 account="",
                 media_ids=["string"],
             )
@@ -81,7 +81,7 @@ class TestMedia:
     @parametrize
     def test_method_remove(self, client: OnlyFansAPI) -> None:
         media = client.media.vault.lists.media.remove(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -91,7 +91,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_remove(self, client: OnlyFansAPI) -> None:
         response = client.media.vault.lists.media.with_raw_response.remove(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -105,7 +105,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_remove(self, client: OnlyFansAPI) -> None:
         with client.media.vault.lists.media.with_streaming_response.remove(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         ) as response:
@@ -122,7 +122,7 @@ class TestMedia:
     def test_path_params_remove(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.media.vault.lists.media.with_raw_response.remove(
-                list_id="aut",
+                list_id="ut",
                 account="",
                 media_ids=["string"],
             )
@@ -144,7 +144,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_add(self, async_client: AsyncOnlyFansAPI) -> None:
         media = await async_client.media.vault.lists.media.add(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -154,7 +154,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.media.with_raw_response.add(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -168,7 +168,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.media.with_streaming_response.add(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         ) as response:
@@ -185,7 +185,7 @@ class TestAsyncMedia:
     async def test_path_params_add(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.media.with_raw_response.add(
-                list_id="aut",
+                list_id="ut",
                 account="",
                 media_ids=["string"],
             )
@@ -201,7 +201,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         media = await async_client.media.vault.lists.media.remove(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -211,7 +211,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.media.vault.lists.media.with_raw_response.remove(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         )
@@ -225,7 +225,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.media.vault.lists.media.with_streaming_response.remove(
-            list_id="aut",
+            list_id="ut",
             account="acct_XXXXXXXXXXXXXXX",
             media_ids=["string"],
         ) as response:
@@ -242,7 +242,7 @@ class TestAsyncMedia:
     async def test_path_params_remove(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.media.vault.lists.media.with_raw_response.remove(
-                list_id="aut",
+                list_id="ut",
                 account="",
                 media_ids=["string"],
             )
