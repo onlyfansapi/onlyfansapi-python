@@ -53,7 +53,6 @@ if TYPE_CHECKING:
         payouts,
         stories,
         accounts,
-        messages,
         profiles,
         settings,
         webhooks,
@@ -90,7 +89,6 @@ if TYPE_CHECKING:
     from .resources.bundles import BundlesResource, AsyncBundlesResource
     from .resources.payouts import PayoutsResource, AsyncPayoutsResource
     from .resources.accounts import AccountsResource, AsyncAccountsResource
-    from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.fans.fans import FansResource, AsyncFansResource
@@ -250,12 +248,6 @@ class OnlyFansAPI(SyncAPIClient):
         from .resources.chats import ChatsResource
 
         return ChatsResource(self)
-
-    @cached_property
-    def messages(self) -> MessagesResource:
-        from .resources.messages import MessagesResource
-
-        return MessagesResource(self)
 
     @cached_property
     def client_sessions(self) -> ClientSessionsResource:
@@ -720,12 +712,6 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
         return AsyncChatsResource(self)
 
     @cached_property
-    def messages(self) -> AsyncMessagesResource:
-        from .resources.messages import AsyncMessagesResource
-
-        return AsyncMessagesResource(self)
-
-    @cached_property
     def client_sessions(self) -> AsyncClientSessionsResource:
         from .resources.client_sessions import AsyncClientSessionsResource
 
@@ -1130,12 +1116,6 @@ class OnlyFansAPIWithRawResponse:
         return ChatsResourceWithRawResponse(self._client.chats)
 
     @cached_property
-    def messages(self) -> messages.MessagesResourceWithRawResponse:
-        from .resources.messages import MessagesResourceWithRawResponse
-
-        return MessagesResourceWithRawResponse(self._client.messages)
-
-    @cached_property
     def client_sessions(self) -> client_sessions.ClientSessionsResourceWithRawResponse:
         from .resources.client_sessions import ClientSessionsResourceWithRawResponse
 
@@ -1421,12 +1401,6 @@ class AsyncOnlyFansAPIWithRawResponse:
         from .resources.chats import AsyncChatsResourceWithRawResponse
 
         return AsyncChatsResourceWithRawResponse(self._client.chats)
-
-    @cached_property
-    def messages(self) -> messages.AsyncMessagesResourceWithRawResponse:
-        from .resources.messages import AsyncMessagesResourceWithRawResponse
-
-        return AsyncMessagesResourceWithRawResponse(self._client.messages)
 
     @cached_property
     def client_sessions(self) -> client_sessions.AsyncClientSessionsResourceWithRawResponse:
@@ -1716,12 +1690,6 @@ class OnlyFansAPIWithStreamedResponse:
         return ChatsResourceWithStreamingResponse(self._client.chats)
 
     @cached_property
-    def messages(self) -> messages.MessagesResourceWithStreamingResponse:
-        from .resources.messages import MessagesResourceWithStreamingResponse
-
-        return MessagesResourceWithStreamingResponse(self._client.messages)
-
-    @cached_property
     def client_sessions(self) -> client_sessions.ClientSessionsResourceWithStreamingResponse:
         from .resources.client_sessions import ClientSessionsResourceWithStreamingResponse
 
@@ -2007,12 +1975,6 @@ class AsyncOnlyFansAPIWithStreamedResponse:
         from .resources.chats import AsyncChatsResourceWithStreamingResponse
 
         return AsyncChatsResourceWithStreamingResponse(self._client.chats)
-
-    @cached_property
-    def messages(self) -> messages.AsyncMessagesResourceWithStreamingResponse:
-        from .resources.messages import AsyncMessagesResourceWithStreamingResponse
-
-        return AsyncMessagesResourceWithStreamingResponse(self._client.messages)
 
     @cached_property
     def client_sessions(self) -> client_sessions.AsyncClientSessionsResourceWithStreamingResponse:
