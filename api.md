@@ -233,18 +233,6 @@ Methods:
 
 - <code title="post /api/{account}/chats/mark-as-read">client.chats.mark_all_as_read.<a href="./src/onlyfansapi/resources/chats/mark_all_as_read.py">all</a>(account) -> <a href="./src/onlyfansapi/types/chats/mark_all_as_read_all_response.py">MarkAllAsReadAllResponse</a></code>
 
-# Messages
-
-Types:
-
-```python
-from onlyfansapi.types import MessageAttachTagsResponse
-```
-
-Methods:
-
-- <code title="post /api/{account}/messages/{message_id}/attach-tags">client.messages.<a href="./src/onlyfansapi/resources/messages.py">attach_tags</a>(message_id, \*, account, \*\*<a href="src/onlyfansapi/types/message_attach_tags_params.py">params</a>) -> <a href="./src/onlyfansapi/types/message_attach_tags_response.py">MessageAttachTagsResponse</a></code>
-
 # ClientSessions
 
 Types:

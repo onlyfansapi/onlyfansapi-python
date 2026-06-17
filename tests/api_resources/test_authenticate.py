@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="illum",
+            auth_id="commodi",
             auth_type="mobile_app",
-            cookies="sit",
+            cookies="sunt",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "qQ})OJ~10",
+                "password": "Ct3dI&oY%Y_",
                 "port": 8080,
-                "username": "et",
+                "username": "necessitatibus",
             },
-            email="maverick.wyman@example.com",
+            email="feeney.lavon@example.org",
             force_connect=False,
-            name="et",
-            password='V6E-7NCd_p"J&I',
-            proxy_country="uk",
-            user_agent="praesentium",
-            xbc="vel",
+            name="asperiores",
+            password='[Yd[`."`',
+            proxy_country="us",
+            user_agent="voluptas",
+            xbc="dolore",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="illum",
+            auth_id="commodi",
             auth_type="mobile_app",
-            cookies="sit",
+            cookies="sunt",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "qQ})OJ~10",
+                "password": "Ct3dI&oY%Y_",
                 "port": 8080,
-                "username": "et",
+                "username": "necessitatibus",
             },
-            email="maverick.wyman@example.com",
+            email="feeney.lavon@example.org",
             force_connect=False,
-            name="et",
-            password='V6E-7NCd_p"J&I',
-            proxy_country="uk",
-            user_agent="praesentium",
-            xbc="vel",
+            name="asperiores",
+            password='[Yd[`."`',
+            proxy_country="us",
+            user_agent="voluptas",
+            xbc="dolore",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
