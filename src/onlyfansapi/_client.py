@@ -497,9 +497,11 @@ class OnlyFansAPI(SyncAPIClient):
 
     @override
     def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
-        return {
-            **(self._default if security.get("default", False) else {}),
-        }
+        headers: dict[str, str] = {}
+        if security.get("default", False):
+            for key, value in self._default.items():
+                headers.setdefault(key, value)
+        return headers
 
     @property
     def _default(self) -> dict[str, str]:
@@ -959,9 +961,11 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
 
     @override
     def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
-        return {
-            **(self._default if security.get("default", False) else {}),
-        }
+        headers: dict[str, str] = {}
+        if security.get("default", False):
+            for key, value in self._default.items():
+                headers.setdefault(key, value)
+        return headers
 
     @property
     def _default(self) -> dict[str, str]:
