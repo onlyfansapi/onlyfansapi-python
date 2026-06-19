@@ -55,6 +55,8 @@ class _Meta(BaseModel):
 class _Pagination(BaseModel):
     next_page: Optional[str] = None
 
+    notice: Optional[str] = None
+
 
 class DataItemUserAvatarThumbs(BaseModel):
     c144: Optional[str] = None
@@ -95,8 +97,6 @@ class DataItem(BaseModel):
 
 
 class Data(BaseModel):
-    has_more: Optional[bool] = FieldInfo(alias="hasMore", default=None)
-
     items: Optional[List[DataItem]] = None
 
 
