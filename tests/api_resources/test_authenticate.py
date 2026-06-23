@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="facilis",
-            auth_type="raw_data",
-            cookies="dolorum",
+            auth_id="eveniet",
+            auth_type="email_password",
+            cookies="qui",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "%nv|d{yS7mQ+Y=){",
+                "password": "gjUi~ua",
                 "port": 8080,
-                "username": "rerum",
+                "username": "commodi",
             },
-            email="darwin27@example.com",
+            email="zulauf.brad@example.com",
             force_connect=True,
-            name="expedita",
-            password=",o\\Pc2&B",
-            proxy_country="us",
-            user_agent="ea",
-            xbc="velit",
+            name="quia",
+            password="?Lmk$iyXW19'gSiDR",
+            proxy_country="uk",
+            user_agent="animi",
+            xbc="nihil",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="facilis",
-            auth_type="raw_data",
-            cookies="dolorum",
+            auth_id="eveniet",
+            auth_type="email_password",
+            cookies="qui",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "%nv|d{yS7mQ+Y=){",
+                "password": "gjUi~ua",
                 "port": 8080,
-                "username": "rerum",
+                "username": "commodi",
             },
-            email="darwin27@example.com",
+            email="zulauf.brad@example.com",
             force_connect=True,
-            name="expedita",
-            password=",o\\Pc2&B",
-            proxy_country="us",
-            user_agent="ea",
-            xbc="velit",
+            name="quia",
+            password="?Lmk$iyXW19'gSiDR",
+            proxy_country="uk",
+            user_agent="animi",
+            xbc="nihil",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
