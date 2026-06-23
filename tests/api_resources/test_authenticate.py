@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="aut",
-            auth_type="raw_data",
-            cookies="ipsam",
+            auth_id="iure",
+            auth_type="email_password",
+            cookies="quia",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "KW)S]X",
+                "password": "2meT2v^s_;^7",
                 "port": 8080,
-                "username": "ut",
+                "username": "quia",
             },
-            email="kaylah00@example.net",
-            force_connect=True,
-            name="qui",
-            password="3giC.cV]0[6v@N>U*v4",
+            email="lockman.orland@example.org",
+            force_connect=False,
+            name="autem",
+            password="N|H+Od7/?(",
             proxy_country="uk",
-            user_agent="consequatur",
-            xbc="esse",
+            user_agent="pariatur",
+            xbc="reprehenderit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="aut",
-            auth_type="raw_data",
-            cookies="ipsam",
+            auth_id="iure",
+            auth_type="email_password",
+            cookies="quia",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "KW)S]X",
+                "password": "2meT2v^s_;^7",
                 "port": 8080,
-                "username": "ut",
+                "username": "quia",
             },
-            email="kaylah00@example.net",
-            force_connect=True,
-            name="qui",
-            password="3giC.cV]0[6v@N>U*v4",
+            email="lockman.orland@example.org",
+            force_connect=False,
+            name="autem",
+            password="N|H+Od7/?(",
             proxy_country="uk",
-            user_agent="consequatur",
-            xbc="esse",
+            user_agent="pariatur",
+            xbc="reprehenderit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
