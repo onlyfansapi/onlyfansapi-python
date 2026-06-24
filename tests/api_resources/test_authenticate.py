@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="iure",
+            auth_id="est",
             auth_type="email_password",
-            cookies="quia",
+            cookies="sit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "2meT2v^s_;^7",
+                "password": 'TH"T@`Oc:j\\S(%HXG',
                 "port": 8080,
-                "username": "quia",
+                "username": "minus",
             },
-            email="lockman.orland@example.org",
+            email="serena23@example.com",
             force_connect=False,
-            name="autem",
-            password="N|H+Od7/?(",
-            proxy_country="uk",
-            user_agent="pariatur",
-            xbc="reprehenderit",
+            name="nemo",
+            password=",K)[?yCtgC|<vS",
+            proxy_country="us",
+            user_agent="dolore",
+            xbc="beatae",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="iure",
+            auth_id="est",
             auth_type="email_password",
-            cookies="quia",
+            cookies="sit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "2meT2v^s_;^7",
+                "password": 'TH"T@`Oc:j\\S(%HXG',
                 "port": 8080,
-                "username": "quia",
+                "username": "minus",
             },
-            email="lockman.orland@example.org",
+            email="serena23@example.com",
             force_connect=False,
-            name="autem",
-            password="N|H+Od7/?(",
-            proxy_country="uk",
-            user_agent="pariatur",
-            xbc="reprehenderit",
+            name="nemo",
+            password=",K)[?yCtgC|<vS",
+            proxy_country="us",
+            user_agent="dolore",
+            xbc="beatae",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
