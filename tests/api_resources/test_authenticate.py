@@ -160,22 +160,22 @@ class TestAuthenticate:
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
             _internal_automatic_syncs_disabled=False,
-            auth_id="quidem",
-            auth_type="raw_data",
-            cookies="inventore",
+            auth_id="architecto",
+            auth_type="email_password",
+            cookies="molestiae",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "p~}9w:4'FL(UKv`",
+                "password": "4LTo`WYrb.P",
                 "port": 8080,
-                "username": "eaque",
+                "username": "provident",
             },
-            email="florine.smith@example.net",
-            force_connect=False,
-            name="sed",
-            password="uj!7M%g[|P6|",
-            proxy_country="us",
-            user_agent="ut",
-            xbc="ut",
+            email="levi.wisozk@example.net",
+            force_connect=True,
+            name="ullam",
+            password="fqfGHi-Mn",
+            proxy_country="uk",
+            user_agent="ratione",
+            xbc="molestiae",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -396,22 +396,22 @@ class TestAsyncAuthenticate:
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
             _internal_automatic_syncs_disabled=False,
-            auth_id="quidem",
-            auth_type="raw_data",
-            cookies="inventore",
+            auth_id="architecto",
+            auth_type="email_password",
+            cookies="molestiae",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "p~}9w:4'FL(UKv`",
+                "password": "4LTo`WYrb.P",
                 "port": 8080,
-                "username": "eaque",
+                "username": "provident",
             },
-            email="florine.smith@example.net",
-            force_connect=False,
-            name="sed",
-            password="uj!7M%g[|P6|",
-            proxy_country="us",
-            user_agent="ut",
-            xbc="ut",
+            email="levi.wisozk@example.net",
+            force_connect=True,
+            name="ullam",
+            password="fqfGHi-Mn",
+            proxy_country="uk",
+            user_agent="ratione",
+            xbc="molestiae",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
