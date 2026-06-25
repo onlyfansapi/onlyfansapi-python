@@ -157,7 +157,6 @@ class AuthenticateResource(SyncAPIResource):
     def start(
         self,
         *,
-        _internal_automatic_syncs_disabled: bool | Omit = omit,
         auth_id: str | Omit = omit,
         auth_type: Literal["email_password", "raw_data", "mobile_app"] | Omit = omit,
         cookies: str | Omit = omit,
@@ -232,7 +231,6 @@ class AuthenticateResource(SyncAPIResource):
                 "/api/authenticate",
                 body=maybe_transform(
                     {
-                        "_internal_automatic_syncs_disabled": _internal_automatic_syncs_disabled,
                         "auth_id": auth_id,
                         "auth_type": auth_type,
                         "cookies": cookies,
@@ -434,7 +432,6 @@ class AsyncAuthenticateResource(AsyncAPIResource):
     async def start(
         self,
         *,
-        _internal_automatic_syncs_disabled: bool | Omit = omit,
         auth_id: str | Omit = omit,
         auth_type: Literal["email_password", "raw_data", "mobile_app"] | Omit = omit,
         cookies: str | Omit = omit,
@@ -509,7 +506,6 @@ class AsyncAuthenticateResource(AsyncAPIResource):
                 "/api/authenticate",
                 body=await async_maybe_transform(
                     {
-                        "_internal_automatic_syncs_disabled": _internal_automatic_syncs_disabled,
                         "auth_id": auth_id,
                         "auth_type": auth_type,
                         "cookies": cookies,
