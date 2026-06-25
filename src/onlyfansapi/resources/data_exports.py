@@ -117,11 +117,12 @@ class DataExportsResource(SyncAPIResource):
               (optional, USD), `maxSubscribePrice` (optional, USD), `location` (optional),
               `minPostsCount` (optional, minimum posts), `minPhotosCount` (optional, minimum
               photos), `minVideosCount` (optional, minimum videos), `minSubscribersCount`
-              (optional, minimum subscribers), `minJoinDate` (optional, ISO 8601 date),
-              `minLastSeenAt` (optional, ISO 8601 date), `createdAtFrom` (optional, ISO 8601
-              date, profile added to DB after), `createdAtTo` (optional, ISO 8601 date,
-              profile added to DB before), `instagram` (optional), `twitter` (optional),
-              `tiktok` (optional), `maxResults` (optional, limit results).
+              (optional, minimum subscribers), `maxSubscribersCount` (optional, maximum
+              subscribers), `minJoinDate` (optional, ISO 8601 date), `minLastSeenAt`
+              (optional, ISO 8601 date), `createdAtFrom` (optional, ISO 8601 date, profile
+              added to DB after), `createdAtTo` (optional, ISO 8601 date, profile added to DB
+              before), `instagram` (optional), `twitter` (optional), `tiktok` (optional),
+              `maxResults` (optional, limit results).
 
           extra_headers: Send extra headers
 
@@ -466,11 +467,12 @@ class AsyncDataExportsResource(AsyncAPIResource):
               (optional, USD), `maxSubscribePrice` (optional, USD), `location` (optional),
               `minPostsCount` (optional, minimum posts), `minPhotosCount` (optional, minimum
               photos), `minVideosCount` (optional, minimum videos), `minSubscribersCount`
-              (optional, minimum subscribers), `minJoinDate` (optional, ISO 8601 date),
-              `minLastSeenAt` (optional, ISO 8601 date), `createdAtFrom` (optional, ISO 8601
-              date, profile added to DB after), `createdAtTo` (optional, ISO 8601 date,
-              profile added to DB before), `instagram` (optional), `twitter` (optional),
-              `tiktok` (optional), `maxResults` (optional, limit results).
+              (optional, minimum subscribers), `maxSubscribersCount` (optional, maximum
+              subscribers), `minJoinDate` (optional, ISO 8601 date), `minLastSeenAt`
+              (optional, ISO 8601 date), `createdAtFrom` (optional, ISO 8601 date, profile
+              added to DB after), `createdAtTo` (optional, ISO 8601 date, profile added to DB
+              before), `instagram` (optional), `twitter` (optional), `tiktok` (optional),
+              `maxResults` (optional, limit results).
 
           extra_headers: Send extra headers
 

@@ -10,6 +10,8 @@ __all__ = ["AuthenticateStartParams", "CustomProxy"]
 
 
 class AuthenticateStartParams(TypedDict, total=False):
+    _internal_automatic_syncs_disabled: bool
+
     auth_id: str
     """The auth_id from OnlyFans session cookies.
 
