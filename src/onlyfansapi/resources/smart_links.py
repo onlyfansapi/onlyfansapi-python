@@ -400,6 +400,7 @@ class SmartLinksResource(SyncAPIResource):
         min_revenue_net: float | Omit = omit,
         min_tips_net: float | Omit = omit,
         offset: int | Omit = omit,
+        previously_subscribed: bool | Omit = omit,
         sort: Literal[
             "revenue_net",
             "-revenue_net",
@@ -411,6 +412,7 @@ class SmartLinksResource(SyncAPIResource):
             "-converted_at",
         ]
         | Omit = omit,
+        subscribed_using_promo: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -435,7 +437,12 @@ class SmartLinksResource(SyncAPIResource):
 
           offset: Offset for pagination. Default `0`
 
+          previously_subscribed: Optional - Filter to returning subscribers (fans previously subscribed before
+              this subscription)
+
           sort: Optional sort field. Default `-revenue_net`
+
+          subscribed_using_promo: Optional - Filter to fans who subscribed via a promotion/offer
 
           extra_headers: Send extra headers
 
@@ -462,7 +469,9 @@ class SmartLinksResource(SyncAPIResource):
                         "min_revenue_net": min_revenue_net,
                         "min_tips_net": min_tips_net,
                         "offset": offset,
+                        "previously_subscribed": previously_subscribed,
                         "sort": sort,
+                        "subscribed_using_promo": subscribed_using_promo,
                     },
                     smart_link_list_fans_params.SmartLinkListFansParams,
                 ),
@@ -987,6 +996,7 @@ class AsyncSmartLinksResource(AsyncAPIResource):
         min_revenue_net: float | Omit = omit,
         min_tips_net: float | Omit = omit,
         offset: int | Omit = omit,
+        previously_subscribed: bool | Omit = omit,
         sort: Literal[
             "revenue_net",
             "-revenue_net",
@@ -998,6 +1008,7 @@ class AsyncSmartLinksResource(AsyncAPIResource):
             "-converted_at",
         ]
         | Omit = omit,
+        subscribed_using_promo: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1022,7 +1033,12 @@ class AsyncSmartLinksResource(AsyncAPIResource):
 
           offset: Offset for pagination. Default `0`
 
+          previously_subscribed: Optional - Filter to returning subscribers (fans previously subscribed before
+              this subscription)
+
           sort: Optional sort field. Default `-revenue_net`
+
+          subscribed_using_promo: Optional - Filter to fans who subscribed via a promotion/offer
 
           extra_headers: Send extra headers
 
@@ -1049,7 +1065,9 @@ class AsyncSmartLinksResource(AsyncAPIResource):
                         "min_revenue_net": min_revenue_net,
                         "min_tips_net": min_tips_net,
                         "offset": offset,
+                        "previously_subscribed": previously_subscribed,
                         "sort": sort,
+                        "subscribed_using_promo": subscribed_using_promo,
                     },
                     smart_link_list_fans_params.SmartLinkListFansParams,
                 ),
