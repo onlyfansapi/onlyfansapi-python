@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="ut",
-            auth_type="raw_data",
-            cookies="aut",
+            auth_id="adipisci",
+            auth_type="email_password",
+            cookies="nobis",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "PV]t%g^e8c>p",
+                "password": "iMAw[^Dh",
                 "port": 8080,
-                "username": "fuga",
+                "username": "eius",
             },
-            email="felicia.conroy@example.org",
+            email="tavares.parisian@example.com",
             force_connect=False,
-            name="libero",
-            password=";I>RKQ8FaS;I2'~a'",
+            name="qui",
+            password='p:FIuSeR"V:V!j0\\%c',
             proxy_country="uk",
-            user_agent="sit",
-            xbc="sint",
+            user_agent="iusto",
+            xbc="facere",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="ut",
-            auth_type="raw_data",
-            cookies="aut",
+            auth_id="adipisci",
+            auth_type="email_password",
+            cookies="nobis",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "PV]t%g^e8c>p",
+                "password": "iMAw[^Dh",
                 "port": 8080,
-                "username": "fuga",
+                "username": "eius",
             },
-            email="felicia.conroy@example.org",
+            email="tavares.parisian@example.com",
             force_connect=False,
-            name="libero",
-            password=";I>RKQ8FaS;I2'~a'",
+            name="qui",
+            password='p:FIuSeR"V:V!j0\\%c',
             proxy_country="uk",
-            user_agent="sit",
-            xbc="sint",
+            user_agent="iusto",
+            xbc="facere",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
