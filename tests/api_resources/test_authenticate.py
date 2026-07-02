@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="eum",
-            auth_type="mobile_app",
-            cookies="asperiores",
+            auth_id="quia",
+            auth_type="email_password",
+            cookies="minima",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "2.]kmr@4",
+                "password": "FG3J/,zkL{n'zOE",
                 "port": 8080,
-                "username": "ducimus",
+                "username": "error",
             },
-            email="omari.swift@example.net",
-            force_connect=True,
-            name="est",
-            password="y|(]SwZB",
-            proxy_country="us",
-            user_agent="optio",
-            xbc="dolores",
+            email="goodwin.mireille@example.net",
+            force_connect=False,
+            name="minima",
+            password="nd0q%`d4AA",
+            proxy_country="uk",
+            user_agent="aliquam",
+            xbc="non",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="eum",
-            auth_type="mobile_app",
-            cookies="asperiores",
+            auth_id="quia",
+            auth_type="email_password",
+            cookies="minima",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "2.]kmr@4",
+                "password": "FG3J/,zkL{n'zOE",
                 "port": 8080,
-                "username": "ducimus",
+                "username": "error",
             },
-            email="omari.swift@example.net",
-            force_connect=True,
-            name="est",
-            password="y|(]SwZB",
-            proxy_country="us",
-            user_agent="optio",
-            xbc="dolores",
+            email="goodwin.mireille@example.net",
+            force_connect=False,
+            name="minima",
+            password="nd0q%`d4AA",
+            proxy_country="uk",
+            user_agent="aliquam",
+            xbc="non",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
