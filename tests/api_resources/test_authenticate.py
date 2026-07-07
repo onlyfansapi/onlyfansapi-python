@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="nulla",
-            auth_type="mobile_app",
-            cookies="rerum",
+            auth_id="est",
+            auth_type="email_password",
+            cookies="dolor",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "M.l@&J-r&7W)\\",
+                "password": "#a4priR",
                 "port": 8080,
-                "username": "nostrum",
+                "username": "reprehenderit",
             },
-            email="ludwig.schamberger@example.com",
-            force_connect=False,
-            name="et",
-            password="hlj}Lntq[q<#k><w8",
+            email="kassandra.leffler@example.com",
+            force_connect=True,
+            name="blanditiis",
+            password="pGn#+;<{qe%K?{DI",
             proxy_country="uk",
-            user_agent="ut",
-            xbc="soluta",
+            user_agent="ratione",
+            xbc="et",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="nulla",
-            auth_type="mobile_app",
-            cookies="rerum",
+            auth_id="est",
+            auth_type="email_password",
+            cookies="dolor",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "M.l@&J-r&7W)\\",
+                "password": "#a4priR",
                 "port": 8080,
-                "username": "nostrum",
+                "username": "reprehenderit",
             },
-            email="ludwig.schamberger@example.com",
-            force_connect=False,
-            name="et",
-            password="hlj}Lntq[q<#k><w8",
+            email="kassandra.leffler@example.com",
+            force_connect=True,
+            name="blanditiis",
+            password="pGn#+;<{qe%K?{DI",
             proxy_country="uk",
-            user_agent="ut",
-            xbc="soluta",
+            user_agent="ratione",
+            xbc="et",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
