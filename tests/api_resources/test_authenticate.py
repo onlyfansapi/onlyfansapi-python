@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="quis",
-            auth_type="mobile_app",
-            cookies="et",
+            auth_id="eum",
+            auth_type="raw_data",
+            cookies="odit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "Qyz]@%i*",
+                "password": 'POf.nEnqDZO3?"S0v(',
                 "port": 8080,
-                "username": "possimus",
+                "username": "et",
             },
-            email="leslie.bechtelar@example.org",
+            email="weissnat.angelica@example.org",
             force_connect=True,
-            name="id",
-            password="r|QC&G$'<Am>g5",
-            proxy_country="uk",
-            user_agent="molestiae",
-            xbc="voluptatem",
+            name="assumenda",
+            password='"{PO#j\\cb$~maj',
+            proxy_country="gb",
+            user_agent="modi",
+            xbc="iure",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="quis",
-            auth_type="mobile_app",
-            cookies="et",
+            auth_id="eum",
+            auth_type="raw_data",
+            cookies="odit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "Qyz]@%i*",
+                "password": 'POf.nEnqDZO3?"S0v(',
                 "port": 8080,
-                "username": "possimus",
+                "username": "et",
             },
-            email="leslie.bechtelar@example.org",
+            email="weissnat.angelica@example.org",
             force_connect=True,
-            name="id",
-            password="r|QC&G$'<Am>g5",
-            proxy_country="uk",
-            user_agent="molestiae",
-            xbc="voluptatem",
+            name="assumenda",
+            password='"{PO#j\\cb$~maj',
+            proxy_country="gb",
+            user_agent="modi",
+            xbc="iure",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
