@@ -36,8 +36,8 @@ class TestStored:
         stored = client.stored.list_shared_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "gcxqnn",
-                "tags": ["qghvlyldc"],
+                "search": "cmraibuytgylrfmkzfaizm",
+                "tags": ["izxyenxtwp"],
             },
             limit=10,
             offset=0,
@@ -92,8 +92,8 @@ class TestStored:
         stored = client.stored.list_shared_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "b",
-                "tags": ["crhiykqcabynpuseoffhzkihw"],
+                "search": "ar",
+                "tags": ["bbjouspfozrmhwtmnslyr"],
             },
             limit=10,
             offset=0,
@@ -149,8 +149,8 @@ class TestStored:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "include_smart_links": True,
-                "search": "rbqwkm",
-                "tags": ["vsvhbtnoabaoquikckbloygw"],
+                "search": "yaiwtqnkpjheeidasgqd",
+                "tags": ["hevhomaozqiphd"],
             },
             limit=10,
             offset=0,
@@ -205,9 +205,9 @@ class TestStored:
         stored = client.stored.list_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "include_smart_links": False,
-                "search": "rfex",
-                "tags": ["bbnwhtgtaqt"],
+                "include_smart_links": True,
+                "search": "bj",
+                "tags": ["kzgwepavwz"],
             },
             limit=10,
             offset=0,
@@ -268,8 +268,8 @@ class TestAsyncStored:
         stored = await async_client.stored.list_shared_tracking_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "gcxqnn",
-                "tags": ["qghvlyldc"],
+                "search": "cmraibuytgylrfmkzfaizm",
+                "tags": ["izxyenxtwp"],
             },
             limit=10,
             offset=0,
@@ -324,8 +324,8 @@ class TestAsyncStored:
         stored = await async_client.stored.list_shared_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "search": "b",
-                "tags": ["crhiykqcabynpuseoffhzkihw"],
+                "search": "ar",
+                "tags": ["bbjouspfozrmhwtmnslyr"],
             },
             limit=10,
             offset=0,
@@ -381,8 +381,8 @@ class TestAsyncStored:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "include_smart_links": True,
-                "search": "rbqwkm",
-                "tags": ["vsvhbtnoabaoquikckbloygw"],
+                "search": "yaiwtqnkpjheeidasgqd",
+                "tags": ["hevhomaozqiphd"],
             },
             limit=10,
             offset=0,
@@ -437,9 +437,9 @@ class TestAsyncStored:
         stored = await async_client.stored.list_trial_links(
             account="acct_XXXXXXXXXXXXXXX",
             filter={
-                "include_smart_links": False,
-                "search": "rfex",
-                "tags": ["bbnwhtgtaqt"],
+                "include_smart_links": True,
+                "search": "bj",
+                "tags": ["kzgwepavwz"],
             },
             limit=10,
             offset=0,
