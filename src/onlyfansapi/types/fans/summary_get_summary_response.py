@@ -26,6 +26,8 @@ class SummaryData(BaseModel):
 
     requests: Optional[str] = None
 
+    spend_cadence: Optional[str] = None
+
     themes: Optional[str] = None
 
     travel_plans: Optional[str] = None
@@ -37,6 +39,8 @@ class SummaryGetSummaryResponse(BaseModel):
     error_message: Optional[str] = None
 
     last_analyzed_at: Optional[str] = None
+
+    last_buy_date: Optional[str] = None
 
     status: Optional[str] = None
 
