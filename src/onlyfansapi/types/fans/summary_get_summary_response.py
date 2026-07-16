@@ -8,7 +8,11 @@ __all__ = ["SummaryGetSummaryResponse", "SummaryData"]
 
 
 class SummaryData(BaseModel):
+    content_dislikes: Optional[str] = None
+
     content_preferences: Optional[str] = None
+
+    dos_and_donts: Optional[str] = None
 
     family_pets: Optional[str] = None
 
