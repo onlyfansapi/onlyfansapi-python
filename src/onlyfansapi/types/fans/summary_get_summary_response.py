@@ -1,10 +1,16 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
 from ..._models import BaseModel
 
-__all__ = ["SummaryGetSummaryResponse", "SummaryData"]
+__all__ = ["SummaryGetSummaryResponse", "CustomField", "SummaryData"]
+
+
+class CustomField(BaseModel):
+    key: Optional[str] = None
+
+    label: Optional[str] = None
 
 
 class SummaryData(BaseModel):
@@ -39,6 +45,8 @@ class SummaryData(BaseModel):
 
 class SummaryGetSummaryResponse(BaseModel):
     analyzed_message_count: Optional[int] = None
+
+    custom_fields: Optional[List[CustomField]] = None
 
     error_message: Optional[str] = None
 
