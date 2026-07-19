@@ -136,7 +136,7 @@ class MessagesResource(SyncAPIResource):
 
           order: Sort order for messages (desc or asc)
 
-          skip_users: Whether to skip user details (all or none)
+          skip_users: Whether to skip user details (`all` or `none`).
 
           extra_headers: Send extra headers
 
@@ -631,7 +631,7 @@ class AsyncMessagesResource(AsyncAPIResource):
 
           order: Sort order for messages (desc or asc)
 
-          skip_users: Whether to skip user details (all or none)
+          skip_users: Whether to skip user details (`all` or `none`).
 
           extra_headers: Send extra headers
 

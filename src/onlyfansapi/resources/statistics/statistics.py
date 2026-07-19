@@ -78,8 +78,8 @@ class StatisticsResource(SyncAPIResource):
         self,
         account: str,
         *,
-        end_date: str,
-        start_date: str,
+        end_date: str | Omit = omit,
+        start_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -266,8 +266,8 @@ class AsyncStatisticsResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        end_date: str,
-        start_date: str,
+        end_date: str | Omit = omit,
+        start_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

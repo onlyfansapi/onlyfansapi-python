@@ -22,9 +22,6 @@ class SmartLinkListParams(TypedDict, total=False):
     Default `50`. Must be at least 1. Must not be greater than 1000.
     """
 
-    meta_pixel_ids: Optional[str]
-    """Deprecated alias for `pixel_ids`. Comma-separated Pixel IDs to include."""
-
     name: Optional[str]
     """Filter Smart Links by name. Must not be greater than 255 characters."""
 

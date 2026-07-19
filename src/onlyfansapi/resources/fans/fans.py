@@ -327,16 +327,16 @@ class FansResource(SyncAPIResource):
         renewals. Newest fans are first.
 
         Args:
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
               than 100.
 
           offset: Number of fans to skip. Must be at least 0.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           type: Filter by type: total, renew, or new.
 
@@ -393,11 +393,11 @@ class FansResource(SyncAPIResource):
         Args:
           by: Sort by: total (default), subscribes, tips, messages, post, streams.
 
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           extra_headers: Send extra headers
 
@@ -744,16 +744,16 @@ class AsyncFansResource(AsyncAPIResource):
         renewals. Newest fans are first.
 
         Args:
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
               than 100.
 
           offset: Number of fans to skip. Must be at least 0.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           type: Filter by type: total, renew, or new.
 
@@ -810,11 +810,11 @@ class AsyncFansResource(AsyncAPIResource):
         Args:
           by: Sort by: total (default), subscribes, tips, messages, post, streams.
 
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           extra_headers: Send extra headers
 

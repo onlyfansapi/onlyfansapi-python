@@ -107,7 +107,8 @@ class ChatsResource(SyncAPIResource):
 
           query: Search query to filter chats
 
-          skip_users: Whether to skip user details in response (all or none). Default = all
+          skip_users: Whether to skip user details in the response (`all` or `none`). Defaults to
+              `all`.
 
           extra_headers: Send extra headers
 
@@ -239,7 +240,8 @@ class ChatsResource(SyncAPIResource):
 
           offset: Number of medias to skip for pagination
 
-          skip_users: Whether to skip user details in response (all or none). Default = all
+          skip_users: Whether to skip user details in the response (`all` or `none`). Defaults to
+              `all`.
 
           type: Filter by specific media types. Keep empty to return all.
 
@@ -519,7 +521,8 @@ class AsyncChatsResource(AsyncAPIResource):
 
           query: Search query to filter chats
 
-          skip_users: Whether to skip user details in response (all or none). Default = all
+          skip_users: Whether to skip user details in the response (`all` or `none`). Defaults to
+              `all`.
 
           extra_headers: Send extra headers
 
@@ -651,7 +654,8 @@ class AsyncChatsResource(AsyncAPIResource):
 
           offset: Number of medias to skip for pagination
 
-          skip_users: Whether to skip user details in response (all or none). Default = all
+          skip_users: Whether to skip user details in the response (`all` or `none`). Defaults to
+              `all`.
 
           type: Filter by specific media types. Keep empty to return all.
 

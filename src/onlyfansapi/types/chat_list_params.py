@@ -24,4 +24,7 @@ class ChatListParams(TypedDict, total=False):
     """Search query to filter chats"""
 
     skip_users: Literal["all", "none"]
-    """Whether to skip user details in response (all or none). Default = all"""
+    """Whether to skip user details in the response (`all` or `none`).
+
+    Defaults to `all`.
+    """
