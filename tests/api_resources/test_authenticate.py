@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="quia",
-            auth_type="mobile_app",
-            cookies="sequi",
+            auth_id="optio",
+            auth_type="email_password",
+            cookies="optio",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": '\\w7O1<{"v',
+                "password": "b{EE{myHh@r?:/^@5@$",
                 "port": 8080,
-                "username": "et",
+                "username": "voluptatem",
             },
-            email="jordon.leffler@example.net",
-            force_connect=False,
-            name="quia",
-            password="K)RXLbI+b9pQAg",
-            proxy_country="us",
-            user_agent="rerum",
-            xbc="quia",
+            email="tavares24@example.net",
+            force_connect=True,
+            name="distinctio",
+            password='l>Fn"_]C}3E=*Q[Ppk|',
+            proxy_country="gb",
+            user_agent="voluptatem",
+            xbc="nisi",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="quia",
-            auth_type="mobile_app",
-            cookies="sequi",
+            auth_id="optio",
+            auth_type="email_password",
+            cookies="optio",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": '\\w7O1<{"v',
+                "password": "b{EE{myHh@r?:/^@5@$",
                 "port": 8080,
-                "username": "et",
+                "username": "voluptatem",
             },
-            email="jordon.leffler@example.net",
-            force_connect=False,
-            name="quia",
-            password="K)RXLbI+b9pQAg",
-            proxy_country="us",
-            user_agent="rerum",
-            xbc="quia",
+            email="tavares24@example.net",
+            force_connect=True,
+            name="distinctio",
+            password='l>Fn"_]C}3E=*Q[Ppk|',
+            proxy_country="gb",
+            user_agent="voluptatem",
+            xbc="nisi",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
