@@ -158,7 +158,6 @@ class SmartLinksResource(SyncAPIResource):
         account_ids: Optional[str] | Omit = omit,
         filter: smart_link_list_params.Filter | Omit = omit,
         limit: int | Omit = omit,
-        meta_pixel_ids: Optional[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         offset: int | Omit = omit,
         pixel_ids: Optional[str] | Omit = omit,
@@ -177,8 +176,6 @@ class SmartLinksResource(SyncAPIResource):
 
           limit: The number of Smart Links to return. Default `50`. Must be at least 1. Must not
               be greater than 1000.
-
-          meta_pixel_ids: Deprecated alias for `pixel_ids`. Comma-separated Pixel IDs to include.
 
           name: Filter Smart Links by name. Must not be greater than 255 characters.
 
@@ -206,7 +203,6 @@ class SmartLinksResource(SyncAPIResource):
                         "account_ids": account_ids,
                         "filter": filter,
                         "limit": limit,
-                        "meta_pixel_ids": meta_pixel_ids,
                         "name": name,
                         "offset": offset,
                         "pixel_ids": pixel_ids,
@@ -754,7 +750,6 @@ class AsyncSmartLinksResource(AsyncAPIResource):
         account_ids: Optional[str] | Omit = omit,
         filter: smart_link_list_params.Filter | Omit = omit,
         limit: int | Omit = omit,
-        meta_pixel_ids: Optional[str] | Omit = omit,
         name: Optional[str] | Omit = omit,
         offset: int | Omit = omit,
         pixel_ids: Optional[str] | Omit = omit,
@@ -773,8 +768,6 @@ class AsyncSmartLinksResource(AsyncAPIResource):
 
           limit: The number of Smart Links to return. Default `50`. Must be at least 1. Must not
               be greater than 1000.
-
-          meta_pixel_ids: Deprecated alias for `pixel_ids`. Comma-separated Pixel IDs to include.
 
           name: Filter Smart Links by name. Must not be greater than 255 characters.
 
@@ -802,7 +795,6 @@ class AsyncSmartLinksResource(AsyncAPIResource):
                         "account_ids": account_ids,
                         "filter": filter,
                         "limit": limit,
-                        "meta_pixel_ids": meta_pixel_ids,
                         "name": name,
                         "offset": offset,
                         "pixel_ids": pixel_ids,

@@ -66,7 +66,7 @@ class ReachResource(SyncAPIResource):
         Args:
           end_date: The end date for the period.
 
-          start_date: The start date for the period
+          start_date: The start date for the period.
 
           filter: Optionally, filter the results by `chart` or `topCountries`. See example
               responses.
@@ -154,7 +154,7 @@ class AsyncReachResource(AsyncAPIResource):
         Args:
           end_date: The end date for the period.
 
-          start_date: The start date for the period
+          start_date: The start date for the period.
 
           filter: Optionally, filter the results by `chart` or `topCountries`. See example
               responses.

@@ -256,8 +256,8 @@ class MassMessagingResource(SyncAPIResource):
         Get an overview of mass messages, showing the send count and view count.
 
         Args:
-          end_date: The latest mass message to retrieve. Keep empty to get all. MUST BE DATE AFTER
-              `startDate`. This is also used for pagination.
+          end_date: The latest mass message to retrieve. Keep empty to get all. It must be after
+              `startDate` and is also used for pagination.
 
           limit: Number of mass messages to return (default = 10)
 
@@ -626,8 +626,8 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         Get an overview of mass messages, showing the send count and view count.
 
         Args:
-          end_date: The latest mass message to retrieve. Keep empty to get all. MUST BE DATE AFTER
-              `startDate`. This is also used for pagination.
+          end_date: The latest mass message to retrieve. Keep empty to get all. It must be after
+              `startDate` and is also used for pagination.
 
           limit: Number of mass messages to return (default = 10)
 
