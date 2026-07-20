@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -12,6 +12,16 @@ __all__ = ["MessageSendParams"]
 
 class MessageSendParams(TypedDict, total=False):
     account: Required[str]
+
+    block_banned_words: Annotated[
+        Literal["strict_ban", "risky", "replace_soften"], PropertyInfo(alias="blockBannedWords")
+    ]
+    """
+    Screen `text` for OnlyFans banned words and block the send if any are found
+    (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+    `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+    only. Omit to disable screening.
+    """
 
     giphy_id: Annotated[str, PropertyInfo(alias="giphyId")]
     """The ID of the Giphy GIF to attach to the message.

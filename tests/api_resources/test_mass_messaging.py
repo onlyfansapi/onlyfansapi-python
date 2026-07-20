@@ -93,6 +93,7 @@ class TestMassMessaging:
             id="id",
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", "string"],
@@ -314,6 +315,7 @@ class TestMassMessaging:
         mass_messaging = client.mass_messaging.send(
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             excluded_lists=["fans", "recent", "following", "rebill_off", "tagged", "string"],
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
@@ -442,6 +444,7 @@ class TestAsyncMassMessaging:
             id="id",
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", "string"],
@@ -663,6 +666,7 @@ class TestAsyncMassMessaging:
         mass_messaging = await async_client.mass_messaging.send(
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             excluded_lists=["fans", "recent", "following", "rebill_off", "tagged", "string"],
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
