@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
+from typing_extensions import Literal
 
 import httpx
 
@@ -90,6 +91,7 @@ class MassMessagingResource(SyncAPIResource):
         *,
         account: str,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
@@ -110,6 +112,11 @@ class MassMessagingResource(SyncAPIResource):
 
         Args:
           text: The message text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the update if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
@@ -149,6 +156,7 @@ class MassMessagingResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
@@ -300,6 +308,7 @@ class MassMessagingResource(SyncAPIResource):
         account: str,
         *,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         excluded_lists: SequenceNotStr[str] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
@@ -328,6 +337,11 @@ class MassMessagingResource(SyncAPIResource):
 
         Args:
           text: The message text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           excluded_lists: Array of user list IDs that the mass message will NOT be sent to.
 
@@ -375,6 +389,7 @@ class MassMessagingResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "excluded_lists": excluded_lists,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
@@ -460,6 +475,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         *,
         account: str,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
@@ -480,6 +496,11 @@ class AsyncMassMessagingResource(AsyncAPIResource):
 
         Args:
           text: The message text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the update if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
@@ -519,6 +540,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
@@ -670,6 +692,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         account: str,
         *,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         excluded_lists: SequenceNotStr[str] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
@@ -698,6 +721,11 @@ class AsyncMassMessagingResource(AsyncAPIResource):
 
         Args:
           text: The message text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           excluded_lists: Array of user list IDs that the mass message will NOT be sent to.
 
@@ -745,6 +773,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "excluded_lists": excluded_lists,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,

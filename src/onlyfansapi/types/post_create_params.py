@@ -15,6 +15,16 @@ class PostCreateParams(TypedDict, total=False):
     text: Required[str]
     """The post text content"""
 
+    block_banned_words: Annotated[
+        Literal["strict_ban", "risky", "replace_soften"], PropertyInfo(alias="blockBannedWords")
+    ]
+    """
+    Screen `text` for OnlyFans banned words and block the post if any are found
+    (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+    `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+    only. Omit to disable screening.
+    """
+
     expire_days: Annotated[int, PropertyInfo(alias="expireDays")]
     """Number of days after which the post will expire.
 

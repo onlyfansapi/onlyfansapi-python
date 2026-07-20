@@ -422,6 +422,7 @@ class TestMessages:
         message = client.chats.messages.send(
             chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            block_banned_words="strict_ban",
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", 1234567890],
@@ -1007,6 +1008,7 @@ class TestAsyncMessages:
         message = await async_client.chats.messages.send(
             chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            block_banned_words="strict_ban",
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", 1234567890],

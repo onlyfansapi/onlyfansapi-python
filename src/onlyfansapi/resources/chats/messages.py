@@ -356,6 +356,7 @@ class MessagesResource(SyncAPIResource):
         chat_id: str,
         *,
         account: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
@@ -377,6 +378,11 @@ class MessagesResource(SyncAPIResource):
         Send a new message to a chat.
 
         Args:
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
+
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
 
@@ -419,6 +425,7 @@ class MessagesResource(SyncAPIResource):
             path_template("/api/{account}/chats/{chat_id}/messages", account=account, chat_id=chat_id),
             body=maybe_transform(
                 {
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
@@ -851,6 +858,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         chat_id: str,
         *,
         account: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
@@ -872,6 +880,11 @@ class AsyncMessagesResource(AsyncAPIResource):
         Send a new message to a chat.
 
         Args:
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
+
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
 
@@ -914,6 +927,7 @@ class AsyncMessagesResource(AsyncAPIResource):
             path_template("/api/{account}/chats/{chat_id}/messages", account=account, chat_id=chat_id),
             body=await async_maybe_transform(
                 {
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
