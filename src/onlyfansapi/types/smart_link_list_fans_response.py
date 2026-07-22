@@ -115,6 +115,8 @@ class DataRow(BaseModel):
 class DataSummary(BaseModel):
     fans_total: Optional[int] = None
 
+    fans_with_1_plus_messages_total: Optional[int] = None
+
     fans_with_3_plus_messages_total: Optional[int] = None
 
     revenue_net_total: Optional[int] = None

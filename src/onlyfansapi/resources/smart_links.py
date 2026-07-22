@@ -315,7 +315,9 @@ class SmartLinksResource(SyncAPIResource):
         self,
         smart_link_id: str,
         *,
-        conversion_type: Literal["new_subscriber", "new_transaction", "message_received", "fan_sent_3_messages"]
+        conversion_type: Literal[
+            "new_subscriber", "new_transaction", "message_received", "fan_sent_1_message", "fan_sent_3_messages"
+        ]
         | Omit = omit,
         date_end: str | Omit = omit,
         date_start: str | Omit = omit,
@@ -907,7 +909,9 @@ class AsyncSmartLinksResource(AsyncAPIResource):
         self,
         smart_link_id: str,
         *,
-        conversion_type: Literal["new_subscriber", "new_transaction", "message_received", "fan_sent_3_messages"]
+        conversion_type: Literal[
+            "new_subscriber", "new_transaction", "message_received", "fan_sent_1_message", "fan_sent_3_messages"
+        ]
         | Omit = omit,
         date_end: str | Omit = omit,
         date_start: str | Omit = omit,
