@@ -18,7 +18,7 @@ class FanListLatestParams(TypedDict, total=False):
     limit: int
     """Number of fans to return (1-50).
 
-    Must be at least 1. Must not be greater than 100.
+    Must be at least 1. Must not be greater than 50.
     """
 
     offset: int

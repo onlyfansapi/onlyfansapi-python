@@ -141,11 +141,17 @@ class FansResource(SyncAPIResource):
     ) -> FanListActiveResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped. To
+        track progress, GET /{account}/me returns data.subscribersCount (the current
+        active-subscriber count) as a total.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -202,11 +208,15 @@ class FansResource(SyncAPIResource):
     ) -> FanListAllResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -264,10 +274,15 @@ class FansResource(SyncAPIResource):
         """Get a paginated list of expired fans for an Account.
 
         Newest fans are first.
+        Paginate by following `_pagination.next_page` until it is null (`data.hasMore`
+        is the authoritative flag). Do NOT use the page's item count to detect the last
+        page — OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for
+        limit=20) on a non-final page because it filters entries server-side; no fans
+        are skipped.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -331,7 +346,7 @@ class FansResource(SyncAPIResource):
               not be greater than 255 characters.
 
           limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 100.
+              than 50.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -558,11 +573,17 @@ class AsyncFansResource(AsyncAPIResource):
     ) -> FanListActiveResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped. To
+        track progress, GET /{account}/me returns data.subscribersCount (the current
+        active-subscriber count) as a total.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -619,11 +640,15 @@ class AsyncFansResource(AsyncAPIResource):
     ) -> FanListAllResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -681,10 +706,15 @@ class AsyncFansResource(AsyncAPIResource):
         """Get a paginated list of expired fans for an Account.
 
         Newest fans are first.
+        Paginate by following `_pagination.next_page` until it is null (`data.hasMore`
+        is the authoritative flag). Do NOT use the page's item count to detect the last
+        page — OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for
+        limit=20) on a non-final page because it filters entries server-side; no fans
+        are skipped.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -748,7 +778,7 @@ class AsyncFansResource(AsyncAPIResource):
               not be greater than 255 characters.
 
           limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 100.
+              than 50.
 
           offset: Number of fans to skip. Must be at least 0.
 
