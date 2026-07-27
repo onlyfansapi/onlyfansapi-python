@@ -96,7 +96,7 @@ class MassMessagingResource(SyncAPIResource):
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
         previews: SequenceNotStr[str] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         scheduled_date: str | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
@@ -130,7 +130,7 @@ class MassMessagingResource(SyncAPIResource):
               not 0). Will be shown if `price` is provided. All `previews` values must also
               exist in the `mediaFiles` array.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
@@ -314,7 +314,7 @@ class MassMessagingResource(SyncAPIResource):
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
         rf_tag: str | Omit = omit,
@@ -357,7 +357,7 @@ class MassMessagingResource(SyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your mass message
@@ -480,7 +480,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
         previews: SequenceNotStr[str] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         scheduled_date: str | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
@@ -514,7 +514,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
               not 0). Will be shown if `price` is provided. All `previews` values must also
               exist in the `mediaFiles` array.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
@@ -698,7 +698,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
         rf_tag: str | Omit = omit,
@@ -741,7 +741,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your mass message

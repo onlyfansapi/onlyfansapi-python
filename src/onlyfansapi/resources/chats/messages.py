@@ -361,7 +361,7 @@ class MessagesResource(SyncAPIResource):
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         reply_to_message_id: int | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
@@ -395,7 +395,7 @@ class MessagesResource(SyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           reply_to_message_id: Mark this message as a reply to another (can be either your own, or the
@@ -863,7 +863,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         reply_to_message_id: int | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
@@ -897,7 +897,7 @@ class AsyncMessagesResource(AsyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           reply_to_message_id: Mark this message as a reply to another (can be either your own, or the
