@@ -160,21 +160,21 @@ class TestAuthenticate:
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
             auth_id="quia",
-            auth_type="raw_data",
-            cookies="qui",
+            auth_type="mobile_app",
+            cookies="ut",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "kAa/?E,Vq$XqM2uN7",
+                "password": "LB<J@uJMhj{",
                 "port": 8080,
-                "username": "distinctio",
+                "username": "modi",
             },
-            email="weissnat.marian@example.org",
+            email="celia.schowalter@example.org",
             force_connect=False,
-            name="facere",
-            password="RPoFyhZ!2UWUJ_\\<#Hq",
+            name="cupiditate",
+            password="i/fAyt-z416",
             proxy_country="uk",
-            user_agent="reprehenderit",
-            xbc="est",
+            user_agent="sed",
+            xbc="et",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -395,21 +395,21 @@ class TestAsyncAuthenticate:
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
             auth_id="quia",
-            auth_type="raw_data",
-            cookies="qui",
+            auth_type="mobile_app",
+            cookies="ut",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "kAa/?E,Vq$XqM2uN7",
+                "password": "LB<J@uJMhj{",
                 "port": 8080,
-                "username": "distinctio",
+                "username": "modi",
             },
-            email="weissnat.marian@example.org",
+            email="celia.schowalter@example.org",
             force_connect=False,
-            name="facere",
-            password="RPoFyhZ!2UWUJ_\\<#Hq",
+            name="cupiditate",
+            password="i/fAyt-z416",
             proxy_country="uk",
-            user_agent="reprehenderit",
-            xbc="est",
+            user_agent="sed",
+            xbc="et",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
