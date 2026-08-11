@@ -68,3 +68,5 @@ class MessageSendParams(TypedDict, total=False):
 
     text: str
     """The message text content. Required unless a media file is present."""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
