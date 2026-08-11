@@ -285,7 +285,7 @@ class TestHighlights:
     @parametrize
     def test_method_add_story(self, client: OnlyFansAPI) -> None:
         highlight = client.stories.highlights.add_story(
-            path_story_id="omnis",
+            path_story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
             body_story_id=2345678901,
@@ -296,7 +296,7 @@ class TestHighlights:
     @parametrize
     def test_raw_response_add_story(self, client: OnlyFansAPI) -> None:
         response = client.stories.highlights.with_raw_response.add_story(
-            path_story_id="omnis",
+            path_story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
             body_story_id=2345678901,
@@ -311,7 +311,7 @@ class TestHighlights:
     @parametrize
     def test_streaming_response_add_story(self, client: OnlyFansAPI) -> None:
         with client.stories.highlights.with_streaming_response.add_story(
-            path_story_id="omnis",
+            path_story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
             body_story_id=2345678901,
@@ -329,7 +329,7 @@ class TestHighlights:
     def test_path_params_add_story(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.stories.highlights.with_raw_response.add_story(
-                path_story_id="omnis",
+                path_story_id="et",
                 account="",
                 highlight_id=1234567890,
                 body_story_id=2345678901,
@@ -347,7 +347,7 @@ class TestHighlights:
     @parametrize
     def test_method_remove_story(self, client: OnlyFansAPI) -> None:
         highlight = client.stories.highlights.remove_story(
-            story_id="omnis",
+            story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
         )
@@ -357,7 +357,7 @@ class TestHighlights:
     @parametrize
     def test_raw_response_remove_story(self, client: OnlyFansAPI) -> None:
         response = client.stories.highlights.with_raw_response.remove_story(
-            story_id="omnis",
+            story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
         )
@@ -371,7 +371,7 @@ class TestHighlights:
     @parametrize
     def test_streaming_response_remove_story(self, client: OnlyFansAPI) -> None:
         with client.stories.highlights.with_streaming_response.remove_story(
-            story_id="omnis",
+            story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
         ) as response:
@@ -388,7 +388,7 @@ class TestHighlights:
     def test_path_params_remove_story(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.stories.highlights.with_raw_response.remove_story(
-                story_id="omnis",
+                story_id="et",
                 account="",
                 highlight_id=1234567890,
             )
@@ -666,7 +666,7 @@ class TestAsyncHighlights:
     @parametrize
     async def test_method_add_story(self, async_client: AsyncOnlyFansAPI) -> None:
         highlight = await async_client.stories.highlights.add_story(
-            path_story_id="omnis",
+            path_story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
             body_story_id=2345678901,
@@ -677,7 +677,7 @@ class TestAsyncHighlights:
     @parametrize
     async def test_raw_response_add_story(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.stories.highlights.with_raw_response.add_story(
-            path_story_id="omnis",
+            path_story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
             body_story_id=2345678901,
@@ -692,7 +692,7 @@ class TestAsyncHighlights:
     @parametrize
     async def test_streaming_response_add_story(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.stories.highlights.with_streaming_response.add_story(
-            path_story_id="omnis",
+            path_story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
             body_story_id=2345678901,
@@ -710,7 +710,7 @@ class TestAsyncHighlights:
     async def test_path_params_add_story(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.stories.highlights.with_raw_response.add_story(
-                path_story_id="omnis",
+                path_story_id="et",
                 account="",
                 highlight_id=1234567890,
                 body_story_id=2345678901,
@@ -728,7 +728,7 @@ class TestAsyncHighlights:
     @parametrize
     async def test_method_remove_story(self, async_client: AsyncOnlyFansAPI) -> None:
         highlight = await async_client.stories.highlights.remove_story(
-            story_id="omnis",
+            story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
         )
@@ -738,7 +738,7 @@ class TestAsyncHighlights:
     @parametrize
     async def test_raw_response_remove_story(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.stories.highlights.with_raw_response.remove_story(
-            story_id="omnis",
+            story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
         )
@@ -752,7 +752,7 @@ class TestAsyncHighlights:
     @parametrize
     async def test_streaming_response_remove_story(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.stories.highlights.with_streaming_response.remove_story(
-            story_id="omnis",
+            story_id="et",
             account="acct_XXXXXXXXXXXXXXX",
             highlight_id=1234567890,
         ) as response:
@@ -769,7 +769,7 @@ class TestAsyncHighlights:
     async def test_path_params_remove_story(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.stories.highlights.with_raw_response.remove_story(
-                story_id="omnis",
+                story_id="et",
                 account="",
                 highlight_id=1234567890,
             )
