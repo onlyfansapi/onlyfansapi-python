@@ -433,6 +433,7 @@ class TestMessages:
             rf_partner="rfPartner",
             rf_tag="rfTag",
             text="Hello!",
+            idempotency_key="a1b2c3d4-5e6f-4789-a0b1-c2d3e4f5a6b7",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 
@@ -1019,6 +1020,7 @@ class TestAsyncMessages:
             rf_partner="rfPartner",
             rf_tag="rfTag",
             text="Hello!",
+            idempotency_key="a1b2c3d4-5e6f-4789-a0b1-c2d3e4f5a6b7",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 

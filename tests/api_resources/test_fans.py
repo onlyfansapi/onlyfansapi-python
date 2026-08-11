@@ -92,6 +92,7 @@ class TestFans:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "duration": 0,
+                "max_total_spent": 0,
                 "online": None,
                 "tips": 0,
                 "total_spent": 0,
@@ -152,6 +153,7 @@ class TestFans:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "duration": 0,
+                "max_total_spent": 0,
                 "online": None,
                 "tips": 0,
                 "total_spent": 0,
@@ -212,6 +214,7 @@ class TestFans:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "duration": 0,
+                "max_total_spent": 0,
                 "online": None,
                 "tips": 0,
                 "total_spent": 0,
@@ -495,6 +498,7 @@ class TestAsyncFans:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "duration": 0,
+                "max_total_spent": 0,
                 "online": None,
                 "tips": 0,
                 "total_spent": 0,
@@ -555,6 +559,7 @@ class TestAsyncFans:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "duration": 0,
+                "max_total_spent": 0,
                 "online": None,
                 "tips": 0,
                 "total_spent": 0,
@@ -615,6 +620,7 @@ class TestAsyncFans:
             account="acct_XXXXXXXXXXXXXXX",
             filter={
                 "duration": 0,
+                "max_total_spent": 0,
                 "online": None,
                 "tips": 0,
                 "total_spent": 0,
