@@ -131,7 +131,7 @@ class TestSmartLinks:
     def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list(
             account_ids="acct_abc123,acct_def456",
-            filter={"tags": ["q"]},
+            filter={"tags": ["jhyjnfspmdel"]},
             limit=50,
             name="Instagram",
             offset=0,
@@ -207,7 +207,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_list_clicks(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
         )
         assert_matches_type(SmartLinkListClicksResponse, smart_link, path=["response"])
 
@@ -215,7 +215,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_list_clicks_with_all_params(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
             date_end="2026-01-07T23:59:59Z",
             date_start="2026-01-01T00:00:00Z",
             include_bots=True,
@@ -229,7 +229,7 @@ class TestSmartLinks:
     @parametrize
     def test_raw_response_list_clicks(self, client: OnlyFansAPI) -> None:
         response = client.smart_links.with_raw_response.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
         )
 
         assert response.is_closed is True
@@ -241,7 +241,7 @@ class TestSmartLinks:
     @parametrize
     def test_streaming_response_list_clicks(self, client: OnlyFansAPI) -> None:
         with client.smart_links.with_streaming_response.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -321,7 +321,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_list_fans(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
         )
         assert_matches_type(SmartLinkListFansResponse, smart_link, path=["response"])
 
@@ -329,7 +329,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_list_fans_with_all_params(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
             has_messages=True,
             limit=100,
             min_messages_sent_by_fan=3,
@@ -346,7 +346,7 @@ class TestSmartLinks:
     @parametrize
     def test_raw_response_list_fans(self, client: OnlyFansAPI) -> None:
         response = client.smart_links.with_raw_response.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
         )
 
         assert response.is_closed is True
@@ -358,7 +358,7 @@ class TestSmartLinks:
     @parametrize
     def test_streaming_response_list_fans(self, client: OnlyFansAPI) -> None:
         with client.smart_links.with_streaming_response.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -380,7 +380,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_list_spenders(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
         )
         assert_matches_type(SmartLinkListSpendersResponse, smart_link, path=["response"])
 
@@ -388,7 +388,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_list_spenders_with_all_params(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
             limit=50,
             min_spend=1,
             offset=0,
@@ -399,7 +399,7 @@ class TestSmartLinks:
     @parametrize
     def test_raw_response_list_spenders(self, client: OnlyFansAPI) -> None:
         response = client.smart_links.with_raw_response.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
         )
 
         assert response.is_closed is True
@@ -411,7 +411,7 @@ class TestSmartLinks:
     @parametrize
     def test_streaming_response_list_spenders(self, client: OnlyFansAPI) -> None:
         with client.smart_links.with_streaming_response.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -486,7 +486,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_retrieve_stats(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
         )
         assert_matches_type(SmartLinkRetrieveStatsResponse, smart_link, path=["response"])
 
@@ -494,7 +494,7 @@ class TestSmartLinks:
     @parametrize
     def test_method_retrieve_stats_with_all_params(self, client: OnlyFansAPI) -> None:
         smart_link = client.smart_links.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
             date_end="2026-01-31T23:59:59Z",
             date_start="2026-01-01T00:00:00Z",
         )
@@ -504,7 +504,7 @@ class TestSmartLinks:
     @parametrize
     def test_raw_response_retrieve_stats(self, client: OnlyFansAPI) -> None:
         response = client.smart_links.with_raw_response.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
         )
 
         assert response.is_closed is True
@@ -516,7 +516,7 @@ class TestSmartLinks:
     @parametrize
     def test_streaming_response_retrieve_stats(self, client: OnlyFansAPI) -> None:
         with client.smart_links.with_streaming_response.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -644,7 +644,7 @@ class TestAsyncSmartLinks:
     async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list(
             account_ids="acct_abc123,acct_def456",
-            filter={"tags": ["q"]},
+            filter={"tags": ["jhyjnfspmdel"]},
             limit=50,
             name="Instagram",
             offset=0,
@@ -720,7 +720,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_list_clicks(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
         )
         assert_matches_type(SmartLinkListClicksResponse, smart_link, path=["response"])
 
@@ -728,7 +728,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_list_clicks_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
             date_end="2026-01-07T23:59:59Z",
             date_start="2026-01-01T00:00:00Z",
             include_bots=True,
@@ -742,7 +742,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_raw_response_list_clicks(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.smart_links.with_raw_response.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
         )
 
         assert response.is_closed is True
@@ -754,7 +754,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_streaming_response_list_clicks(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.smart_links.with_streaming_response.list_clicks(
-            smart_link_id="nam",
+            smart_link_id="est",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -834,7 +834,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_list_fans(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
         )
         assert_matches_type(SmartLinkListFansResponse, smart_link, path=["response"])
 
@@ -842,7 +842,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_list_fans_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
             has_messages=True,
             limit=100,
             min_messages_sent_by_fan=3,
@@ -859,7 +859,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_raw_response_list_fans(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.smart_links.with_raw_response.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
         )
 
         assert response.is_closed is True
@@ -871,7 +871,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_streaming_response_list_fans(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.smart_links.with_streaming_response.list_fans(
-            smart_link_id="sunt",
+            smart_link_id="consequatur",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -893,7 +893,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_list_spenders(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
         )
         assert_matches_type(SmartLinkListSpendersResponse, smart_link, path=["response"])
 
@@ -901,7 +901,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_list_spenders_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
             limit=50,
             min_spend=1,
             offset=0,
@@ -912,7 +912,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_raw_response_list_spenders(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.smart_links.with_raw_response.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
         )
 
         assert response.is_closed is True
@@ -924,7 +924,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_streaming_response_list_spenders(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.smart_links.with_streaming_response.list_spenders(
-            smart_link_id="officia",
+            smart_link_id="et",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -999,7 +999,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
         )
         assert_matches_type(SmartLinkRetrieveStatsResponse, smart_link, path=["response"])
 
@@ -1007,7 +1007,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_method_retrieve_stats_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         smart_link = await async_client.smart_links.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
             date_end="2026-01-31T23:59:59Z",
             date_start="2026-01-01T00:00:00Z",
         )
@@ -1017,7 +1017,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_raw_response_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.smart_links.with_raw_response.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
         )
 
         assert response.is_closed is True
@@ -1029,7 +1029,7 @@ class TestAsyncSmartLinks:
     @parametrize
     async def test_streaming_response_retrieve_stats(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.smart_links.with_streaming_response.retrieve_stats(
-            smart_link_id="id",
+            smart_link_id="magni",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
