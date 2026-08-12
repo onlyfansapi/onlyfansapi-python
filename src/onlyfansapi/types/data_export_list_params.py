@@ -34,8 +34,12 @@ class DataExportListParams(TypedDict, total=False):
         "media_vault",
         "trial_links",
         "tracking_links",
+        "smart_links",
         "payouts",
         "chargebacks",
         "public_profiles",
+        "fans",
+        "followings",
+        "profile_visitors",
     ]
     """Filter by export type"""

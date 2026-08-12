@@ -69,6 +69,7 @@ class DataExportsResource(SyncAPIResource):
             "public_profiles",
             "fans",
             "followings",
+            "profile_visitors",
         ],
         account_ids: SequenceNotStr[str] | Omit = omit,
         auto_start: bool | Omit = omit,
@@ -91,11 +92,14 @@ class DataExportsResource(SyncAPIResource):
 
           file_type: The output file format. Supported formats vary by export type: `csv` or `xlsx`
               for transactions, chat_messages, trial_links, tracking_links, smart_links,
-              payouts, chargebacks, public_profiles, fans, followings; `zip` for media_vault.
+              payouts, chargebacks, public_profiles, fans, followings, profile_visitors; `zip`
+              for media_vault.
 
           start_date: The start date for the export (ISO 8601 format).
 
-          type: The type of data to export
+          type: The type of data to export. `profile_visitors` returns one row per account per
+              day, scraped one day at a time so the daily numbers are not aggregated away by
+              OnlyFans.
 
           account_ids: Array of account prefixed IDs to export data from. Not required for
               `public_profiles` type.
@@ -219,9 +223,13 @@ class DataExportsResource(SyncAPIResource):
             "media_vault",
             "trial_links",
             "tracking_links",
+            "smart_links",
             "payouts",
             "chargebacks",
             "public_profiles",
+            "fans",
+            "followings",
+            "profile_visitors",
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -419,6 +427,7 @@ class AsyncDataExportsResource(AsyncAPIResource):
             "public_profiles",
             "fans",
             "followings",
+            "profile_visitors",
         ],
         account_ids: SequenceNotStr[str] | Omit = omit,
         auto_start: bool | Omit = omit,
@@ -441,11 +450,14 @@ class AsyncDataExportsResource(AsyncAPIResource):
 
           file_type: The output file format. Supported formats vary by export type: `csv` or `xlsx`
               for transactions, chat_messages, trial_links, tracking_links, smart_links,
-              payouts, chargebacks, public_profiles, fans, followings; `zip` for media_vault.
+              payouts, chargebacks, public_profiles, fans, followings, profile_visitors; `zip`
+              for media_vault.
 
           start_date: The start date for the export (ISO 8601 format).
 
-          type: The type of data to export
+          type: The type of data to export. `profile_visitors` returns one row per account per
+              day, scraped one day at a time so the daily numbers are not aggregated away by
+              OnlyFans.
 
           account_ids: Array of account prefixed IDs to export data from. Not required for
               `public_profiles` type.
@@ -569,9 +581,13 @@ class AsyncDataExportsResource(AsyncAPIResource):
             "media_vault",
             "trial_links",
             "tracking_links",
+            "smart_links",
             "payouts",
             "chargebacks",
             "public_profiles",
+            "fans",
+            "followings",
+            "profile_visitors",
         ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
