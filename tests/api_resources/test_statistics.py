@@ -144,6 +144,7 @@ class TestStatistics:
             end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
             detailed=False,
+            detailed_type="total",
         )
         assert_matches_type(StatisticGetSubscriberMetricsResponse, statistic, path=["response"])
 
@@ -316,6 +317,7 @@ class TestAsyncStatistics:
             end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
             detailed=False,
+            detailed_type="total",
         )
         assert_matches_type(StatisticGetSubscriberMetricsResponse, statistic, path=["response"])
 
