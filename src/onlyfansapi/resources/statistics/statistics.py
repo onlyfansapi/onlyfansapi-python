@@ -184,6 +184,7 @@ class StatisticsResource(SyncAPIResource):
         end_date: str,
         start_date: str,
         detailed: Optional[bool] | Omit = omit,
+        detailed_type: Optional[Literal["total", "renew", "new"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -203,6 +204,9 @@ class StatisticsResource(SyncAPIResource):
 
           detailed: Include paid and free fan metrics. Will slow down the response time, and might
               time out if timeframe is too large. Default = `false`
+
+          detailed_type: Use only with `detailed=true` - otherwise, it has no effect. Filter the
+              subscriber statistics (default = total)
 
           extra_headers: Send extra headers
 
@@ -226,6 +230,7 @@ class StatisticsResource(SyncAPIResource):
                         "end_date": end_date,
                         "start_date": start_date,
                         "detailed": detailed,
+                        "detailed_type": detailed_type,
                     },
                     statistic_get_subscriber_metrics_params.StatisticGetSubscriberMetricsParams,
                 ),
@@ -372,6 +377,7 @@ class AsyncStatisticsResource(AsyncAPIResource):
         end_date: str,
         start_date: str,
         detailed: Optional[bool] | Omit = omit,
+        detailed_type: Optional[Literal["total", "renew", "new"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -391,6 +397,9 @@ class AsyncStatisticsResource(AsyncAPIResource):
 
           detailed: Include paid and free fan metrics. Will slow down the response time, and might
               time out if timeframe is too large. Default = `false`
+
+          detailed_type: Use only with `detailed=true` - otherwise, it has no effect. Filter the
+              subscriber statistics (default = total)
 
           extra_headers: Send extra headers
 
@@ -414,6 +423,7 @@ class AsyncStatisticsResource(AsyncAPIResource):
                         "end_date": end_date,
                         "start_date": start_date,
                         "detailed": detailed,
+                        "detailed_type": detailed_type,
                     },
                     statistic_get_subscriber_metrics_params.StatisticGetSubscriberMetricsParams,
                 ),
