@@ -64,7 +64,9 @@ class FollowingResource(SyncAPIResource):
     ) -> FollowingListActiveResponse:
         """Get a paginated list of followings for an Account.
 
-        Newest followings are first.
+        OnlyFans returns this list
+        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
+        list does not share this order, so do not assume it applies there.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -121,7 +123,9 @@ class FollowingResource(SyncAPIResource):
     ) -> FollowingListAllResponse:
         """Get a paginated list of followings for an Account.
 
-        Newest followings are first.
+        OnlyFans returns this list
+        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
+        list does not share this order, so do not assume it applies there.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -178,8 +182,13 @@ class FollowingResource(SyncAPIResource):
     ) -> FollowingListExpiredResponse:
         """Get a paginated list of expired followings for an Account.
 
-        Newest followings are
-        first.
+        This list has no
+        order guarantee. Unlike the all and active lists, it is sorted by neither
+        `subscribedByData.subscribeAt` nor `subscribedByData.expiredAt`. To poll for new
+        expirations, page through the full list each cycle (`limit=50`, follow
+        `_pagination.next_page` until it is null) and diff it against your own store
+        using `subscribedByData.expiredAt`. Do NOT stop early at the first entry you
+        have already seen, as that can silently skip real expirations.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -259,7 +268,9 @@ class AsyncFollowingResource(AsyncAPIResource):
     ) -> FollowingListActiveResponse:
         """Get a paginated list of followings for an Account.
 
-        Newest followings are first.
+        OnlyFans returns this list
+        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
+        list does not share this order, so do not assume it applies there.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -316,7 +327,9 @@ class AsyncFollowingResource(AsyncAPIResource):
     ) -> FollowingListAllResponse:
         """Get a paginated list of followings for an Account.
 
-        Newest followings are first.
+        OnlyFans returns this list
+        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
+        list does not share this order, so do not assume it applies there.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -373,8 +386,13 @@ class AsyncFollowingResource(AsyncAPIResource):
     ) -> FollowingListExpiredResponse:
         """Get a paginated list of expired followings for an Account.
 
-        Newest followings are
-        first.
+        This list has no
+        order guarantee. Unlike the all and active lists, it is sorted by neither
+        `subscribedByData.subscribeAt` nor `subscribedByData.expiredAt`. To poll for new
+        expirations, page through the full list each cycle (`limit=50`, follow
+        `_pagination.next_page` until it is null) and diff it against your own store
+        using `subscribedByData.expiredAt`. Do NOT stop early at the first entry you
+        have already seen, as that can silently skip real expirations.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
