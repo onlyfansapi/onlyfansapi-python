@@ -62,7 +62,8 @@ class MassMessagingResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingRetrieveResponse:
         """
-        Get the content of a mass message.
+        Get the content and settings of a mass message, including a message scheduled
+        for later.
 
         Args:
           extra_headers: Send extra headers
@@ -108,7 +109,8 @@ class MassMessagingResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingUpdateResponse:
         """
-        Update a mass message.
+        Update the content, recipients, media, price, or scheduled send time of an
+        existing mass message.
 
         Args:
           text: The message text content
@@ -185,8 +187,10 @@ class MassMessagingResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingListResponse:
-        """
-        List the pending or recently sent mass messages in the message queue.
+        """List pending, scheduled, and recently sent mass messages.
+
+        Use an item ID to
+        retrieve, update, reschedule, delete, or unsend the message.
 
         Args:
           extra_headers: Send extra headers
@@ -446,7 +450,8 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingRetrieveResponse:
         """
-        Get the content of a mass message.
+        Get the content and settings of a mass message, including a message scheduled
+        for later.
 
         Args:
           extra_headers: Send extra headers
@@ -492,7 +497,8 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingUpdateResponse:
         """
-        Update a mass message.
+        Update the content, recipients, media, price, or scheduled send time of an
+        existing mass message.
 
         Args:
           text: The message text content
@@ -569,8 +575,10 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingListResponse:
-        """
-        List the pending or recently sent mass messages in the message queue.
+        """List pending, scheduled, and recently sent mass messages.
+
+        Use an item ID to
+        retrieve, update, reschedule, delete, or unsend the message.
 
         Args:
           extra_headers: Send extra headers
