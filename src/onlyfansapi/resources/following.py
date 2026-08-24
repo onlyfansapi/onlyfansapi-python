@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -55,6 +56,8 @@ class FollowingResource(SyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: Optional[str] | Omit = omit,
+        sort: Optional[Literal["last_activity", "expire_date", "subscribe_date", "is_expired"]] | Omit = omit,
+        sort_direction: Optional[Literal["asc", "desc"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -64,9 +67,11 @@ class FollowingResource(SyncAPIResource):
     ) -> FollowingListActiveResponse:
         """Get a paginated list of followings for an Account.
 
-        OnlyFans returns this list
-        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
-        list does not share this order, so do not assume it applies there.
+        By default OnlyFans returns
+        this list newest-first, sorted by `subscribedByData.subscribeAt` descending. The
+        expired list does not share this order, so do not assume it applies there. Pass
+        `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
+        description for the caveat that OnlyFans persists the chosen order account-wide.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -75,6 +80,17 @@ class FollowingResource(SyncAPIResource):
           offset: Pagination offset. Must be at least 0.
 
           query: Search within following name/username.
+
+          sort: Order the list by `last_activity` (the followed creator's last activity),
+              `expire_date` (subscription expiry), `subscribe_date` (subscription start) or
+              `is_expired` (expired first — OnlyFans only offers this one on the expired
+              list). Omit it to keep whichever order is currently stored for the account.
+              **Note:** OnlyFans persists this order account-wide, so it also applies to later
+              requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
+              changed again. This field is required when <code>sortDirection</code> is
+              present.
+
+          sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
 
           extra_headers: Send extra headers
 
@@ -99,6 +115,8 @@ class FollowingResource(SyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
                     },
                     following_list_active_params.FollowingListActiveParams,
                 ),
@@ -114,6 +132,8 @@ class FollowingResource(SyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: Optional[str] | Omit = omit,
+        sort: Optional[Literal["last_activity", "expire_date", "subscribe_date", "is_expired"]] | Omit = omit,
+        sort_direction: Optional[Literal["asc", "desc"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,9 +143,11 @@ class FollowingResource(SyncAPIResource):
     ) -> FollowingListAllResponse:
         """Get a paginated list of followings for an Account.
 
-        OnlyFans returns this list
-        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
-        list does not share this order, so do not assume it applies there.
+        By default OnlyFans returns
+        this list newest-first, sorted by `subscribedByData.subscribeAt` descending. The
+        expired list does not share this order, so do not assume it applies there. Pass
+        `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
+        description for the caveat that OnlyFans persists the chosen order account-wide.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -134,6 +156,17 @@ class FollowingResource(SyncAPIResource):
           offset: Pagination offset. Must be at least 0.
 
           query: Search within following name/username.
+
+          sort: Order the list by `last_activity` (the followed creator's last activity),
+              `expire_date` (subscription expiry), `subscribe_date` (subscription start) or
+              `is_expired` (expired first — OnlyFans only offers this one on the expired
+              list). Omit it to keep whichever order is currently stored for the account.
+              **Note:** OnlyFans persists this order account-wide, so it also applies to later
+              requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
+              changed again. This field is required when <code>sortDirection</code> is
+              present.
+
+          sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
 
           extra_headers: Send extra headers
 
@@ -158,6 +191,8 @@ class FollowingResource(SyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
                     },
                     following_list_all_params.FollowingListAllParams,
                 ),
@@ -173,6 +208,8 @@ class FollowingResource(SyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: Optional[str] | Omit = omit,
+        sort: Optional[Literal["last_activity", "expire_date", "subscribe_date", "is_expired"]] | Omit = omit,
+        sort_direction: Optional[Literal["asc", "desc"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -188,7 +225,10 @@ class FollowingResource(SyncAPIResource):
         expirations, page through the full list each cycle (`limit=50`, follow
         `_pagination.next_page` until it is null) and diff it against your own store
         using `subscribedByData.expiredAt`. Do NOT stop early at the first entry you
-        have already seen, as that can silently skip real expirations.
+        have already seen, as that can silently skip real expirations. Pass
+        `sort=expire_date` (optionally with `sortDirection`) to get a deterministic
+        order instead — see the parameter description for the caveat that OnlyFans
+        persists the chosen order account-wide.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -197,6 +237,17 @@ class FollowingResource(SyncAPIResource):
           offset: Pagination offset. Must be at least 0.
 
           query: Search within following name/username.
+
+          sort: Order the list by `last_activity` (the followed creator's last activity),
+              `expire_date` (subscription expiry), `subscribe_date` (subscription start) or
+              `is_expired` (expired first — OnlyFans only offers this one on the expired
+              list). Omit it to keep whichever order is currently stored for the account.
+              **Note:** OnlyFans persists this order account-wide, so it also applies to later
+              requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
+              changed again. This field is required when <code>sortDirection</code> is
+              present.
+
+          sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
 
           extra_headers: Send extra headers
 
@@ -221,6 +272,8 @@ class FollowingResource(SyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
                     },
                     following_list_expired_params.FollowingListExpiredParams,
                 ),
@@ -259,6 +312,8 @@ class AsyncFollowingResource(AsyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: Optional[str] | Omit = omit,
+        sort: Optional[Literal["last_activity", "expire_date", "subscribe_date", "is_expired"]] | Omit = omit,
+        sort_direction: Optional[Literal["asc", "desc"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -268,9 +323,11 @@ class AsyncFollowingResource(AsyncAPIResource):
     ) -> FollowingListActiveResponse:
         """Get a paginated list of followings for an Account.
 
-        OnlyFans returns this list
-        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
-        list does not share this order, so do not assume it applies there.
+        By default OnlyFans returns
+        this list newest-first, sorted by `subscribedByData.subscribeAt` descending. The
+        expired list does not share this order, so do not assume it applies there. Pass
+        `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
+        description for the caveat that OnlyFans persists the chosen order account-wide.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -279,6 +336,17 @@ class AsyncFollowingResource(AsyncAPIResource):
           offset: Pagination offset. Must be at least 0.
 
           query: Search within following name/username.
+
+          sort: Order the list by `last_activity` (the followed creator's last activity),
+              `expire_date` (subscription expiry), `subscribe_date` (subscription start) or
+              `is_expired` (expired first — OnlyFans only offers this one on the expired
+              list). Omit it to keep whichever order is currently stored for the account.
+              **Note:** OnlyFans persists this order account-wide, so it also applies to later
+              requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
+              changed again. This field is required when <code>sortDirection</code> is
+              present.
+
+          sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
 
           extra_headers: Send extra headers
 
@@ -303,6 +371,8 @@ class AsyncFollowingResource(AsyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
                     },
                     following_list_active_params.FollowingListActiveParams,
                 ),
@@ -318,6 +388,8 @@ class AsyncFollowingResource(AsyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: Optional[str] | Omit = omit,
+        sort: Optional[Literal["last_activity", "expire_date", "subscribe_date", "is_expired"]] | Omit = omit,
+        sort_direction: Optional[Literal["asc", "desc"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -327,9 +399,11 @@ class AsyncFollowingResource(AsyncAPIResource):
     ) -> FollowingListAllResponse:
         """Get a paginated list of followings for an Account.
 
-        OnlyFans returns this list
-        newest-first, sorted by `subscribedByData.subscribeAt` descending. The expired
-        list does not share this order, so do not assume it applies there.
+        By default OnlyFans returns
+        this list newest-first, sorted by `subscribedByData.subscribeAt` descending. The
+        expired list does not share this order, so do not assume it applies there. Pass
+        `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
+        description for the caveat that OnlyFans persists the chosen order account-wide.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -338,6 +412,17 @@ class AsyncFollowingResource(AsyncAPIResource):
           offset: Pagination offset. Must be at least 0.
 
           query: Search within following name/username.
+
+          sort: Order the list by `last_activity` (the followed creator's last activity),
+              `expire_date` (subscription expiry), `subscribe_date` (subscription start) or
+              `is_expired` (expired first — OnlyFans only offers this one on the expired
+              list). Omit it to keep whichever order is currently stored for the account.
+              **Note:** OnlyFans persists this order account-wide, so it also applies to later
+              requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
+              changed again. This field is required when <code>sortDirection</code> is
+              present.
+
+          sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
 
           extra_headers: Send extra headers
 
@@ -362,6 +447,8 @@ class AsyncFollowingResource(AsyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
                     },
                     following_list_all_params.FollowingListAllParams,
                 ),
@@ -377,6 +464,8 @@ class AsyncFollowingResource(AsyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: Optional[str] | Omit = omit,
+        sort: Optional[Literal["last_activity", "expire_date", "subscribe_date", "is_expired"]] | Omit = omit,
+        sort_direction: Optional[Literal["asc", "desc"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -392,7 +481,10 @@ class AsyncFollowingResource(AsyncAPIResource):
         expirations, page through the full list each cycle (`limit=50`, follow
         `_pagination.next_page` until it is null) and diff it against your own store
         using `subscribedByData.expiredAt`. Do NOT stop early at the first entry you
-        have already seen, as that can silently skip real expirations.
+        have already seen, as that can silently skip real expirations. Pass
+        `sort=expire_date` (optionally with `sortDirection`) to get a deterministic
+        order instead — see the parameter description for the caveat that OnlyFans
+        persists the chosen order account-wide.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -401,6 +493,17 @@ class AsyncFollowingResource(AsyncAPIResource):
           offset: Pagination offset. Must be at least 0.
 
           query: Search within following name/username.
+
+          sort: Order the list by `last_activity` (the followed creator's last activity),
+              `expire_date` (subscription expiry), `subscribe_date` (subscription start) or
+              `is_expired` (expired first — OnlyFans only offers this one on the expired
+              list). Omit it to keep whichever order is currently stored for the account.
+              **Note:** OnlyFans persists this order account-wide, so it also applies to later
+              requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
+              changed again. This field is required when <code>sortDirection</code> is
+              present.
+
+          sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
 
           extra_headers: Send extra headers
 
@@ -425,6 +528,8 @@ class AsyncFollowingResource(AsyncAPIResource):
                         "limit": limit,
                         "offset": offset,
                         "query": query,
+                        "sort": sort,
+                        "sort_direction": sort_direction,
                     },
                     following_list_expired_params.FollowingListExpiredParams,
                 ),
