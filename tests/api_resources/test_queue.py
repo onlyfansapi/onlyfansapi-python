@@ -26,7 +26,6 @@ class TestQueue:
     def test_method_list(self, client: OnlyFansAPI) -> None:
         queue = client.queue.list(
             account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
             publish_date_end="2025-01-01",
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
@@ -35,10 +34,22 @@ class TestQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
+        queue = client.queue.list(
+            account="acct_XXXXXXXXXXXXXXX",
+            publish_date_end="2025-01-01",
+            publish_date_start="2025-01-01",
+            timezone="Europe/Prague",
+            limit=20,
+            type=["post"],
+        )
+        assert_matches_type(QueueListResponse, queue, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.queue.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
             publish_date_end="2025-01-01",
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
@@ -54,7 +65,6 @@ class TestQueue:
     def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.queue.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
             publish_date_end="2025-01-01",
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
@@ -73,7 +83,6 @@ class TestQueue:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.queue.with_raw_response.list(
                 account="",
-                limit=20,
                 publish_date_end="2025-01-01",
                 publish_date_start="2025-01-01",
                 timezone="Europe/Prague",
@@ -196,7 +205,6 @@ class TestAsyncQueue:
     async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         queue = await async_client.queue.list(
             account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
             publish_date_end="2025-01-01",
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
@@ -205,10 +213,22 @@ class TestAsyncQueue:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        queue = await async_client.queue.list(
+            account="acct_XXXXXXXXXXXXXXX",
+            publish_date_end="2025-01-01",
+            publish_date_start="2025-01-01",
+            timezone="Europe/Prague",
+            limit=20,
+            type=["post"],
+        )
+        assert_matches_type(QueueListResponse, queue, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.queue.with_raw_response.list(
             account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
             publish_date_end="2025-01-01",
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
@@ -224,7 +244,6 @@ class TestAsyncQueue:
     async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.queue.with_streaming_response.list(
             account="acct_XXXXXXXXXXXXXXX",
-            limit=20,
             publish_date_end="2025-01-01",
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
@@ -243,7 +262,6 @@ class TestAsyncQueue:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.queue.with_raw_response.list(
                 account="",
-                limit=20,
                 publish_date_end="2025-01-01",
                 publish_date_start="2025-01-01",
                 timezone="Europe/Prague",
