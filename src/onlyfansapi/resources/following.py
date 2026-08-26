@@ -72,6 +72,11 @@ class FollowingResource(SyncAPIResource):
         expired list does not share this order, so do not assume it applies there. Pass
         `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
         description for the caveat that OnlyFans persists the chosen order account-wide.
+        An empty page is not the end of the list: OnlyFans applies `offset` to the whole
+        following collection before filtering it down to the requested list, so a page
+        can come back empty while more results follow. Keep following
+        `_pagination.next_page` until it is `null` instead of stopping at the first
+        empty page.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -87,10 +92,22 @@ class FollowingResource(SyncAPIResource):
               list). Omit it to keep whichever order is currently stored for the account.
               **Note:** OnlyFans persists this order account-wide, so it also applies to later
               requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
-              changed again. This field is required when <code>sortDirection</code> is
+              changed again. **Expired list:** OnlyFans applies `offset` to the whole
+              following collection and only then filters it down to expired subscriptions, so
+              ordering by expiry descending puts the still-active subscriptions first and
+              moves the expired rows to the tail of the collection — the first several hundred
+              offsets then come back empty. Use `sortDirection=asc` or `sort=is_expired` to
+              get expired-first results. For that reason `sort=expire_date` on the expired
+              list defaults to `asc` instead of `desc` when you do not pass `sortDirection`.
+              Whatever order you pick, an empty page is **not** the end of the list: keep
+              following `_pagination.next_page` until it is `null` rather than stopping at the
+              first empty page. This field is required when <code>sortDirection</code> is
               present.
 
           sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
+              Exception: `sort=expire_date` on the expired list defaults to `asc`, because
+              `desc` moves the expired rows to the tail of the underlying collection and
+              leaves the early pages empty. Passing `sortDirection` explicitly always wins.
 
           extra_headers: Send extra headers
 
@@ -148,6 +165,11 @@ class FollowingResource(SyncAPIResource):
         expired list does not share this order, so do not assume it applies there. Pass
         `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
         description for the caveat that OnlyFans persists the chosen order account-wide.
+        An empty page is not the end of the list: OnlyFans applies `offset` to the whole
+        following collection before filtering it down to the requested list, so a page
+        can come back empty while more results follow. Keep following
+        `_pagination.next_page` until it is `null` instead of stopping at the first
+        empty page.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -163,10 +185,22 @@ class FollowingResource(SyncAPIResource):
               list). Omit it to keep whichever order is currently stored for the account.
               **Note:** OnlyFans persists this order account-wide, so it also applies to later
               requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
-              changed again. This field is required when <code>sortDirection</code> is
+              changed again. **Expired list:** OnlyFans applies `offset` to the whole
+              following collection and only then filters it down to expired subscriptions, so
+              ordering by expiry descending puts the still-active subscriptions first and
+              moves the expired rows to the tail of the collection — the first several hundred
+              offsets then come back empty. Use `sortDirection=asc` or `sort=is_expired` to
+              get expired-first results. For that reason `sort=expire_date` on the expired
+              list defaults to `asc` instead of `desc` when you do not pass `sortDirection`.
+              Whatever order you pick, an empty page is **not** the end of the list: keep
+              following `_pagination.next_page` until it is `null` rather than stopping at the
+              first empty page. This field is required when <code>sortDirection</code> is
               present.
 
           sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
+              Exception: `sort=expire_date` on the expired list defaults to `asc`, because
+              `desc` moves the expired rows to the tail of the underlying collection and
+              leaves the early pages empty. Passing `sortDirection` explicitly always wins.
 
           extra_headers: Send extra headers
 
@@ -225,10 +259,18 @@ class FollowingResource(SyncAPIResource):
         expirations, page through the full list each cycle (`limit=50`, follow
         `_pagination.next_page` until it is null) and diff it against your own store
         using `subscribedByData.expiredAt`. Do NOT stop early at the first entry you
-        have already seen, as that can silently skip real expirations. Pass
-        `sort=expire_date` (optionally with `sortDirection`) to get a deterministic
-        order instead — see the parameter description for the caveat that OnlyFans
-        persists the chosen order account-wide.
+        have already seen, as that can silently skip real expirations. An empty page is
+        not the end of the list either: OnlyFans applies `offset` to the whole following
+        collection and only then filters that window down to expired subscriptions, so
+        early pages can come back empty while hundreds of expired rows still follow.
+        Keep following `_pagination.next_page` until it is `null` instead of stopping at
+        the first empty page. Pass `sort=expire_date` (optionally with `sortDirection`)
+        to get a deterministic order instead — see the parameter description for the
+        caveat that OnlyFans persists the chosen order account-wide. Ordering by expiry
+        descending puts the still-active subscriptions first and moves the expired rows
+        to the tail of the collection, so prefer `sortDirection=asc` or
+        `sort=is_expired` for expired-first results; for that reason `sort=expire_date`
+        defaults to `asc` on this list when no `sortDirection` is given.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -244,10 +286,22 @@ class FollowingResource(SyncAPIResource):
               list). Omit it to keep whichever order is currently stored for the account.
               **Note:** OnlyFans persists this order account-wide, so it also applies to later
               requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
-              changed again. This field is required when <code>sortDirection</code> is
+              changed again. **Expired list:** OnlyFans applies `offset` to the whole
+              following collection and only then filters it down to expired subscriptions, so
+              ordering by expiry descending puts the still-active subscriptions first and
+              moves the expired rows to the tail of the collection — the first several hundred
+              offsets then come back empty. Use `sortDirection=asc` or `sort=is_expired` to
+              get expired-first results. For that reason `sort=expire_date` on the expired
+              list defaults to `asc` instead of `desc` when you do not pass `sortDirection`.
+              Whatever order you pick, an empty page is **not** the end of the list: keep
+              following `_pagination.next_page` until it is `null` rather than stopping at the
+              first empty page. This field is required when <code>sortDirection</code> is
               present.
 
           sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
+              Exception: `sort=expire_date` on the expired list defaults to `asc`, because
+              `desc` moves the expired rows to the tail of the underlying collection and
+              leaves the early pages empty. Passing `sortDirection` explicitly always wins.
 
           extra_headers: Send extra headers
 
@@ -328,6 +382,11 @@ class AsyncFollowingResource(AsyncAPIResource):
         expired list does not share this order, so do not assume it applies there. Pass
         `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
         description for the caveat that OnlyFans persists the chosen order account-wide.
+        An empty page is not the end of the list: OnlyFans applies `offset` to the whole
+        following collection before filtering it down to the requested list, so a page
+        can come back empty while more results follow. Keep following
+        `_pagination.next_page` until it is `null` instead of stopping at the first
+        empty page.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -343,10 +402,22 @@ class AsyncFollowingResource(AsyncAPIResource):
               list). Omit it to keep whichever order is currently stored for the account.
               **Note:** OnlyFans persists this order account-wide, so it also applies to later
               requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
-              changed again. This field is required when <code>sortDirection</code> is
+              changed again. **Expired list:** OnlyFans applies `offset` to the whole
+              following collection and only then filters it down to expired subscriptions, so
+              ordering by expiry descending puts the still-active subscriptions first and
+              moves the expired rows to the tail of the collection — the first several hundred
+              offsets then come back empty. Use `sortDirection=asc` or `sort=is_expired` to
+              get expired-first results. For that reason `sort=expire_date` on the expired
+              list defaults to `asc` instead of `desc` when you do not pass `sortDirection`.
+              Whatever order you pick, an empty page is **not** the end of the list: keep
+              following `_pagination.next_page` until it is `null` rather than stopping at the
+              first empty page. This field is required when <code>sortDirection</code> is
               present.
 
           sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
+              Exception: `sort=expire_date` on the expired list defaults to `asc`, because
+              `desc` moves the expired rows to the tail of the underlying collection and
+              leaves the early pages empty. Passing `sortDirection` explicitly always wins.
 
           extra_headers: Send extra headers
 
@@ -404,6 +475,11 @@ class AsyncFollowingResource(AsyncAPIResource):
         expired list does not share this order, so do not assume it applies there. Pass
         `sort` (optionally with `sortDirection`) to reorder the list — see the parameter
         description for the caveat that OnlyFans persists the chosen order account-wide.
+        An empty page is not the end of the list: OnlyFans applies `offset` to the whole
+        following collection before filtering it down to the requested list, so a page
+        can come back empty while more results follow. Keep following
+        `_pagination.next_page` until it is `null` instead of stopping at the first
+        empty page.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -419,10 +495,22 @@ class AsyncFollowingResource(AsyncAPIResource):
               list). Omit it to keep whichever order is currently stored for the account.
               **Note:** OnlyFans persists this order account-wide, so it also applies to later
               requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
-              changed again. This field is required when <code>sortDirection</code> is
+              changed again. **Expired list:** OnlyFans applies `offset` to the whole
+              following collection and only then filters it down to expired subscriptions, so
+              ordering by expiry descending puts the still-active subscriptions first and
+              moves the expired rows to the tail of the collection — the first several hundred
+              offsets then come back empty. Use `sortDirection=asc` or `sort=is_expired` to
+              get expired-first results. For that reason `sort=expire_date` on the expired
+              list defaults to `asc` instead of `desc` when you do not pass `sortDirection`.
+              Whatever order you pick, an empty page is **not** the end of the list: keep
+              following `_pagination.next_page` until it is `null` rather than stopping at the
+              first empty page. This field is required when <code>sortDirection</code> is
               present.
 
           sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
+              Exception: `sort=expire_date` on the expired list defaults to `asc`, because
+              `desc` moves the expired rows to the tail of the underlying collection and
+              leaves the early pages empty. Passing `sortDirection` explicitly always wins.
 
           extra_headers: Send extra headers
 
@@ -481,10 +569,18 @@ class AsyncFollowingResource(AsyncAPIResource):
         expirations, page through the full list each cycle (`limit=50`, follow
         `_pagination.next_page` until it is null) and diff it against your own store
         using `subscribedByData.expiredAt`. Do NOT stop early at the first entry you
-        have already seen, as that can silently skip real expirations. Pass
-        `sort=expire_date` (optionally with `sortDirection`) to get a deterministic
-        order instead — see the parameter description for the caveat that OnlyFans
-        persists the chosen order account-wide.
+        have already seen, as that can silently skip real expirations. An empty page is
+        not the end of the list either: OnlyFans applies `offset` to the whole following
+        collection and only then filters that window down to expired subscriptions, so
+        early pages can come back empty while hundreds of expired rows still follow.
+        Keep following `_pagination.next_page` until it is `null` instead of stopping at
+        the first empty page. Pass `sort=expire_date` (optionally with `sortDirection`)
+        to get a deterministic order instead — see the parameter description for the
+        caveat that OnlyFans persists the chosen order account-wide. Ordering by expiry
+        descending puts the still-active subscriptions first and moves the expired rows
+        to the tail of the collection, so prefer `sortDirection=asc` or
+        `sort=is_expired` for expired-first results; for that reason `sort=expire_date`
+        defaults to `asc` on this list when no `sortDirection` is given.
 
         Args:
           limit: Number of followings to return (1-50). Must be at least 1. Must not be greater
@@ -500,10 +596,22 @@ class AsyncFollowingResource(AsyncAPIResource):
               list). Omit it to keep whichever order is currently stored for the account.
               **Note:** OnlyFans persists this order account-wide, so it also applies to later
               requests that omit `sort` and to the creator's own onlyfans.com UI, until it is
-              changed again. This field is required when <code>sortDirection</code> is
+              changed again. **Expired list:** OnlyFans applies `offset` to the whole
+              following collection and only then filters it down to expired subscriptions, so
+              ordering by expiry descending puts the still-active subscriptions first and
+              moves the expired rows to the tail of the collection — the first several hundred
+              offsets then come back empty. Use `sortDirection=asc` or `sort=is_expired` to
+              get expired-first results. For that reason `sort=expire_date` on the expired
+              list defaults to `asc` instead of `desc` when you do not pass `sortDirection`.
+              Whatever order you pick, an empty page is **not** the end of the list: keep
+              following `_pagination.next_page` until it is `null` rather than stopping at the
+              first empty page. This field is required when <code>sortDirection</code> is
               present.
 
           sort_direction: Direction for `sort`: `desc` (default) or `asc`. Requires `sort` to be set.
+              Exception: `sort=expire_date` on the expired list defaults to `asc`, because
+              `desc` moves the expired rows to the tail of the underlying collection and
+              leaves the early pages empty. Passing `sortDirection` explicitly always wins.
 
           extra_headers: Send extra headers
 
