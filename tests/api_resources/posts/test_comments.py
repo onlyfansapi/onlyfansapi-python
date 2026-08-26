@@ -29,7 +29,7 @@ class TestComments:
     @parametrize
     def test_method_create(self, client: OnlyFansAPI) -> None:
         comment = client.posts.comments.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
         )
@@ -39,7 +39,7 @@ class TestComments:
     @parametrize
     def test_method_create_with_all_params(self, client: OnlyFansAPI) -> None:
         comment = client.posts.comments.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
             answer_to=123,
@@ -51,7 +51,7 @@ class TestComments:
     @parametrize
     def test_raw_response_create(self, client: OnlyFansAPI) -> None:
         response = client.posts.comments.with_raw_response.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
         )
@@ -65,7 +65,7 @@ class TestComments:
     @parametrize
     def test_streaming_response_create(self, client: OnlyFansAPI) -> None:
         with client.posts.comments.with_streaming_response.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
         ) as response:
@@ -82,7 +82,7 @@ class TestComments:
     def test_path_params_create(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.posts.comments.with_raw_response.create(
-                post_id="fugit",
+                post_id="nesciunt",
                 account="",
                 text="This is a comment.",
             )
@@ -98,7 +98,7 @@ class TestComments:
     @parametrize
     def test_method_list(self, client: OnlyFansAPI) -> None:
         comment = client.posts.comments.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(CommentListResponse, comment, path=["response"])
@@ -107,7 +107,7 @@ class TestComments:
     @parametrize
     def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         comment = client.posts.comments.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -119,7 +119,7 @@ class TestComments:
     @parametrize
     def test_raw_response_list(self, client: OnlyFansAPI) -> None:
         response = client.posts.comments.with_raw_response.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -132,7 +132,7 @@ class TestComments:
     @parametrize
     def test_streaming_response_list(self, client: OnlyFansAPI) -> None:
         with client.posts.comments.with_streaming_response.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -148,7 +148,7 @@ class TestComments:
     def test_path_params_list(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.posts.comments.with_raw_response.list(
-                post_id="fugit",
+                post_id="nesciunt",
                 account="",
             )
 
@@ -418,7 +418,7 @@ class TestAsyncComments:
     @parametrize
     async def test_method_create(self, async_client: AsyncOnlyFansAPI) -> None:
         comment = await async_client.posts.comments.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
         )
@@ -428,7 +428,7 @@ class TestAsyncComments:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         comment = await async_client.posts.comments.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
             answer_to=123,
@@ -440,7 +440,7 @@ class TestAsyncComments:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.posts.comments.with_raw_response.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
         )
@@ -454,7 +454,7 @@ class TestAsyncComments:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.posts.comments.with_streaming_response.create(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             text="This is a comment.",
         ) as response:
@@ -471,7 +471,7 @@ class TestAsyncComments:
     async def test_path_params_create(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.posts.comments.with_raw_response.create(
-                post_id="fugit",
+                post_id="nesciunt",
                 account="",
                 text="This is a comment.",
             )
@@ -487,7 +487,7 @@ class TestAsyncComments:
     @parametrize
     async def test_method_list(self, async_client: AsyncOnlyFansAPI) -> None:
         comment = await async_client.posts.comments.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(CommentListResponse, comment, path=["response"])
@@ -496,7 +496,7 @@ class TestAsyncComments:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         comment = await async_client.posts.comments.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
@@ -508,7 +508,7 @@ class TestAsyncComments:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.posts.comments.with_raw_response.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -521,7 +521,7 @@ class TestAsyncComments:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.posts.comments.with_streaming_response.list(
-            post_id="fugit",
+            post_id="nesciunt",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -537,7 +537,7 @@ class TestAsyncComments:
     async def test_path_params_list(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.posts.comments.with_raw_response.list(
-                post_id="fugit",
+                post_id="nesciunt",
                 account="",
             )
 
