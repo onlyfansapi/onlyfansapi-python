@@ -41,5 +41,6 @@ class DataExportListParams(TypedDict, total=False):
         "fans",
         "followings",
         "profile_visitors",
+        "fansly_chat_messages",
     ]
     """Filter by export type"""

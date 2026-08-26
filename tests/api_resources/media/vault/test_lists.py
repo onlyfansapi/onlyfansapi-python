@@ -191,6 +191,7 @@ class TestLists:
     def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
+            lightweight=True,
             limit=24,
             offset=0,
             query="My list name",
@@ -457,6 +458,7 @@ class TestAsyncLists:
     async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
+            lightweight=True,
             limit=24,
             offset=0,
             query="My list name",

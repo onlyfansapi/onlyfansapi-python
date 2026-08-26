@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 import httpx
 
 from .media import (
@@ -175,6 +177,7 @@ class ListsResource(SyncAPIResource):
         self,
         account: str,
         *,
+        lightweight: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: str | Omit = omit,
@@ -188,7 +191,25 @@ class ListsResource(SyncAPIResource):
         """
         List your Vault lists (categories).
 
+        Every response carries an `ETag` computed over the `data` payload. Send it back
+        as `If-None-Match` on your next call and you will get a `304 Not Modified` with
+        an empty body when nothing changed, so you can keep serving your cached copy
+        instead of re-parsing the full list. Credits are debited either way — we still
+        have to ask OnlyFans for the current state to know whether it changed.
+
+        The `ETag` covers `data` only, never `_meta` — your credits balance changes on
+        every call, so including it would mean the `ETag` never matches. Because a `304`
+        has no body, it also has no `_meta`: read the current credits and rate-limit
+        counters from the `X-OFAPI-Credits-Used`, `X-OFAPI-Credits-Balance`,
+        `X-Rate-Limit-Limit-Minute` and `X-Rate-Limit-Remaining-Minute` response
+        headers, which are sent on `304` responses too. The `_meta` inside a body you
+        cached earlier is stale by definition.
+
         Args:
+          lightweight: Set to `true` to return only `id`, `name`, `type`, `canUpdate` and a rolled-up
+              `mediaCount` per list, dropping the `medias` previews. Much smaller payload —
+              ideal for rendering a folder picker. Default: `false`
+
           limit: Number of media to return per page. Default: `24`
 
           offset: The offset used for pagination. Default `0`
@@ -205,23 +226,27 @@ class ListsResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return self._get(
-            path_template("/api/{account}/media/vault/lists", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                        "query": query,
-                    },
-                    list_list_params.ListListParams,
+        return cast(
+            ListListResponse,
+            self._get(
+                path_template("/api/{account}/media/vault/lists", account=account),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "lightweight": lightweight,
+                            "limit": limit,
+                            "offset": offset,
+                            "query": query,
+                        },
+                        list_list_params.ListListParams,
+                    ),
                 ),
+                cast_to=cast(Any, ListListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=ListListResponse,
         )
 
     def delete(
@@ -403,6 +428,7 @@ class AsyncListsResource(AsyncAPIResource):
         self,
         account: str,
         *,
+        lightweight: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: str | Omit = omit,
@@ -416,7 +442,25 @@ class AsyncListsResource(AsyncAPIResource):
         """
         List your Vault lists (categories).
 
+        Every response carries an `ETag` computed over the `data` payload. Send it back
+        as `If-None-Match` on your next call and you will get a `304 Not Modified` with
+        an empty body when nothing changed, so you can keep serving your cached copy
+        instead of re-parsing the full list. Credits are debited either way — we still
+        have to ask OnlyFans for the current state to know whether it changed.
+
+        The `ETag` covers `data` only, never `_meta` — your credits balance changes on
+        every call, so including it would mean the `ETag` never matches. Because a `304`
+        has no body, it also has no `_meta`: read the current credits and rate-limit
+        counters from the `X-OFAPI-Credits-Used`, `X-OFAPI-Credits-Balance`,
+        `X-Rate-Limit-Limit-Minute` and `X-Rate-Limit-Remaining-Minute` response
+        headers, which are sent on `304` responses too. The `_meta` inside a body you
+        cached earlier is stale by definition.
+
         Args:
+          lightweight: Set to `true` to return only `id`, `name`, `type`, `canUpdate` and a rolled-up
+              `mediaCount` per list, dropping the `medias` previews. Much smaller payload —
+              ideal for rendering a folder picker. Default: `false`
+
           limit: Number of media to return per page. Default: `24`
 
           offset: The offset used for pagination. Default `0`
@@ -433,23 +477,27 @@ class AsyncListsResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return await self._get(
-            path_template("/api/{account}/media/vault/lists", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                        "query": query,
-                    },
-                    list_list_params.ListListParams,
+        return cast(
+            ListListResponse,
+            await self._get(
+                path_template("/api/{account}/media/vault/lists", account=account),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "lightweight": lightweight,
+                            "limit": limit,
+                            "offset": offset,
+                            "query": query,
+                        },
+                        list_list_params.ListListParams,
+                    ),
                 ),
+                cast_to=cast(Any, ListListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=ListListResponse,
         )
 
     async def delete(
