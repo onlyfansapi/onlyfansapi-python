@@ -327,6 +327,7 @@ class TestMassMessaging:
             rf_tag="rfTag",
             save_for_later=True,
             scheduled_date="2025-01-01T00:00:00.000Z",
+            subscribed_within_last_days=0,
             user_ids=["string"],
             user_lists=["fans", "recent", "following", "rebill_off", "tagged", "string"],
         )
@@ -678,6 +679,7 @@ class TestAsyncMassMessaging:
             rf_tag="rfTag",
             save_for_later=True,
             scheduled_date="2025-01-01T00:00:00.000Z",
+            subscribed_within_last_days=0,
             user_ids=["string"],
             user_lists=["fans", "recent", "following", "rebill_off", "tagged", "string"],
         )
