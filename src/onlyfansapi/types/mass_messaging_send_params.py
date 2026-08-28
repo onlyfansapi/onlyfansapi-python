@@ -71,6 +71,13 @@ class MassMessagingSendParams(TypedDict, total=False):
     scheduled_date: Annotated[str, PropertyInfo(alias="scheduledDate")]
     """Schedule the chat message in the future (UTC timezone)."""
 
+    subscribed_within_last_days: Annotated[int, PropertyInfo(alias="subscribedWithinLastDays")]
+    """
+    Only send to fans who subscribed within the last N calendar days (1-30,
+    including today). Can be combined with `userLists` and `userIds`. Cannot be
+    combined with `scheduledDate` or `saveForLater`.
+    """
+
     user_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="userIds")]
     """Array of user IDs that the mass message will be sent to."""
 

@@ -324,6 +324,7 @@ class MassMessagingResource(SyncAPIResource):
         rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
+        subscribed_within_last_days: int | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -374,6 +375,10 @@ class MassMessagingResource(SyncAPIResource):
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
 
+          subscribed_within_last_days: Only send to fans who subscribed within the last N calendar days (1-30,
+              including today). Can be combined with `userLists` and `userIds`. Cannot be
+              combined with `scheduledDate` or `saveForLater`.
+
           user_ids: Array of user IDs that the mass message will be sent to.
 
           user_lists: Array of user list IDs that the mass message will be sent to.
@@ -405,6 +410,7 @@ class MassMessagingResource(SyncAPIResource):
                     "rf_tag": rf_tag,
                     "save_for_later": save_for_later,
                     "scheduled_date": scheduled_date,
+                    "subscribed_within_last_days": subscribed_within_last_days,
                     "user_ids": user_ids,
                     "user_lists": user_lists,
                 },
@@ -712,6 +718,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
+        subscribed_within_last_days: int | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -762,6 +769,10 @@ class AsyncMassMessagingResource(AsyncAPIResource):
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
 
+          subscribed_within_last_days: Only send to fans who subscribed within the last N calendar days (1-30,
+              including today). Can be combined with `userLists` and `userIds`. Cannot be
+              combined with `scheduledDate` or `saveForLater`.
+
           user_ids: Array of user IDs that the mass message will be sent to.
 
           user_lists: Array of user list IDs that the mass message will be sent to.
@@ -793,6 +804,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
                     "rf_tag": rf_tag,
                     "save_for_later": save_for_later,
                     "scheduled_date": scheduled_date,
+                    "subscribed_within_last_days": subscribed_within_last_days,
                     "user_ids": user_ids,
                     "user_lists": user_lists,
                 },
