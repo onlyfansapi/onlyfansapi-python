@@ -77,7 +77,8 @@ class SmartLinkPostbacksResource(SyncAPIResource):
               Smart Links.
 
           url: The destination URL. Variables such as `{external_click_id}`, `{fbclid}`,
-              `{gclid}`, and `{ttclid}` are replaced when the postback is dispatched.
+              `{gclid}`, `{gbraid}`, `{wbraid}`, `{ttclid}`, and `{sccid}` are replaced when
+              the postback is dispatched.
 
           body: Optional request body template for POST postbacks. Variables are replaced when
               the postback is dispatched.
@@ -312,7 +313,8 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
               Smart Links.
 
           url: The destination URL. Variables such as `{external_click_id}`, `{fbclid}`,
-              `{gclid}`, and `{ttclid}` are replaced when the postback is dispatched.
+              `{gclid}`, `{gbraid}`, `{wbraid}`, `{ttclid}`, and `{sccid}` are replaced when
+              the postback is dispatched.
 
           body: Optional request body template for POST postbacks. Variables are replaced when
               the postback is dispatched.

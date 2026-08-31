@@ -92,6 +92,8 @@ class DataRowClick(BaseModel):
 
     fbclid: Optional[str] = None
 
+    gbraid: Optional[str] = None
+
     gclid: Optional[str] = None
 
     gross_clicks: Optional[int] = None
@@ -103,6 +105,8 @@ class DataRowClick(BaseModel):
     is_duplicate: Optional[bool] = None
 
     referrer: Optional[str] = None
+
+    sccid: Optional[str] = None
 
     ttclid: Optional[str] = None
 
@@ -117,6 +121,8 @@ class DataRowClick(BaseModel):
     utm_source: Optional[str] = None
 
     utm_term: Optional[str] = None
+
+    wbraid: Optional[str] = None
 
 
 class DataRowFan(BaseModel):
