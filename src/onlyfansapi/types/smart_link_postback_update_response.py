@@ -74,6 +74,10 @@ class Data(BaseModel):
 
     smart_links: Optional[List[DataSmartLink]] = None
 
+    traffic_source_ids: Optional[List[object]] = None
+
+    traffic_sources: Optional[List[object]] = None
+
     updated_at: Optional[str] = None
 
     url: Optional[str] = None
