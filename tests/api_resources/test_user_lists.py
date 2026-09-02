@@ -28,7 +28,7 @@ class TestUserLists:
     def test_method_create(self, client: OnlyFansAPI) -> None:
         user_list = client.user_lists.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="kfdfn",
+            name="saqguaffcklfhzdh",
         )
         assert_matches_type(UserListCreateResponse, user_list, path=["response"])
 
@@ -37,7 +37,7 @@ class TestUserLists:
     def test_raw_response_create(self, client: OnlyFansAPI) -> None:
         response = client.user_lists.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="kfdfn",
+            name="saqguaffcklfhzdh",
         )
 
         assert response.is_closed is True
@@ -50,7 +50,7 @@ class TestUserLists:
     def test_streaming_response_create(self, client: OnlyFansAPI) -> None:
         with client.user_lists.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="kfdfn",
+            name="saqguaffcklfhzdh",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -66,7 +66,7 @@ class TestUserLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.user_lists.with_raw_response.create(
                 account="",
-                name="kfdfn",
+                name="saqguaffcklfhzdh",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -305,7 +305,7 @@ class TestAsyncUserLists:
     async def test_method_create(self, async_client: AsyncOnlyFansAPI) -> None:
         user_list = await async_client.user_lists.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="kfdfn",
+            name="saqguaffcklfhzdh",
         )
         assert_matches_type(UserListCreateResponse, user_list, path=["response"])
 
@@ -314,7 +314,7 @@ class TestAsyncUserLists:
     async def test_raw_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.user_lists.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="kfdfn",
+            name="saqguaffcklfhzdh",
         )
 
         assert response.is_closed is True
@@ -327,7 +327,7 @@ class TestAsyncUserLists:
     async def test_streaming_response_create(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.user_lists.with_streaming_response.create(
             account="acct_XXXXXXXXXXXXXXX",
-            name="kfdfn",
+            name="saqguaffcklfhzdh",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -343,7 +343,7 @@ class TestAsyncUserLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.user_lists.with_raw_response.create(
                 account="",
-                name="kfdfn",
+                name="saqguaffcklfhzdh",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

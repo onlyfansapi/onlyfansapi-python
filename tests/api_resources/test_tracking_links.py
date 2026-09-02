@@ -85,7 +85,7 @@ class TestTrackingLinks:
     @parametrize
     def test_method_retrieve(self, client: OnlyFansAPI) -> None:
         tracking_link = client.tracking_links.retrieve(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrackingLinkRetrieveResponse, tracking_link, path=["response"])
@@ -94,7 +94,7 @@ class TestTrackingLinks:
     @parametrize
     def test_raw_response_retrieve(self, client: OnlyFansAPI) -> None:
         response = client.tracking_links.with_raw_response.retrieve(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -107,7 +107,7 @@ class TestTrackingLinks:
     @parametrize
     def test_streaming_response_retrieve(self, client: OnlyFansAPI) -> None:
         with client.tracking_links.with_streaming_response.retrieve(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -123,7 +123,7 @@ class TestTrackingLinks:
     def test_path_params_retrieve(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.tracking_links.with_raw_response.retrieve(
-                tracking_link_id="cupiditate",
+                tracking_link_id="aut",
                 account="",
             )
 
@@ -149,7 +149,7 @@ class TestTrackingLinks:
             end_date="2025-01-31 23:59:59",
             limit=10,
             offset=0,
-            pagination=0,
+            pagination=1,
             sort="desc",
             sortby="claims",
             start_date="2025-01-01 00:00:00",
@@ -196,7 +196,7 @@ class TestTrackingLinks:
     @parametrize
     def test_method_delete(self, client: OnlyFansAPI) -> None:
         tracking_link = client.tracking_links.delete(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrackingLinkDeleteResponse, tracking_link, path=["response"])
@@ -205,7 +205,7 @@ class TestTrackingLinks:
     @parametrize
     def test_raw_response_delete(self, client: OnlyFansAPI) -> None:
         response = client.tracking_links.with_raw_response.delete(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -218,7 +218,7 @@ class TestTrackingLinks:
     @parametrize
     def test_streaming_response_delete(self, client: OnlyFansAPI) -> None:
         with client.tracking_links.with_streaming_response.delete(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -234,7 +234,7 @@ class TestTrackingLinks:
     def test_path_params_delete(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.tracking_links.with_raw_response.delete(
-                tracking_link_id="cupiditate",
+                tracking_link_id="aut",
                 account="",
             )
 
@@ -248,7 +248,7 @@ class TestTrackingLinks:
     @parametrize
     def test_method_get_cohort_arps(self, client: OnlyFansAPI) -> None:
         tracking_link = client.tracking_links.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert tracking_link is None
@@ -257,7 +257,7 @@ class TestTrackingLinks:
     @parametrize
     def test_method_get_cohort_arps_with_all_params(self, client: OnlyFansAPI) -> None:
         tracking_link = client.tracking_links.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
             acquisition_end="2026-01-31T23:59:59Z",
             acquisition_start="2026-01-01T00:00:00Z",
@@ -269,7 +269,7 @@ class TestTrackingLinks:
     @parametrize
     def test_raw_response_get_cohort_arps(self, client: OnlyFansAPI) -> None:
         response = client.tracking_links.with_raw_response.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -282,7 +282,7 @@ class TestTrackingLinks:
     @parametrize
     def test_streaming_response_get_cohort_arps(self, client: OnlyFansAPI) -> None:
         with client.tracking_links.with_streaming_response.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -298,7 +298,7 @@ class TestTrackingLinks:
     def test_path_params_get_cohort_arps(self, client: OnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.tracking_links.with_raw_response.get_cohort_arps(
-                tracking_link_id="inventore",
+                tracking_link_id="cum",
                 account="",
             )
 
@@ -563,7 +563,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         tracking_link = await async_client.tracking_links.retrieve(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrackingLinkRetrieveResponse, tracking_link, path=["response"])
@@ -572,7 +572,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.tracking_links.with_raw_response.retrieve(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -585,7 +585,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.tracking_links.with_streaming_response.retrieve(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -601,7 +601,7 @@ class TestAsyncTrackingLinks:
     async def test_path_params_retrieve(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.tracking_links.with_raw_response.retrieve(
-                tracking_link_id="cupiditate",
+                tracking_link_id="aut",
                 account="",
             )
 
@@ -627,7 +627,7 @@ class TestAsyncTrackingLinks:
             end_date="2025-01-31 23:59:59",
             limit=10,
             offset=0,
-            pagination=0,
+            pagination=1,
             sort="desc",
             sortby="claims",
             start_date="2025-01-01 00:00:00",
@@ -674,7 +674,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_method_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         tracking_link = await async_client.tracking_links.delete(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert_matches_type(TrackingLinkDeleteResponse, tracking_link, path=["response"])
@@ -683,7 +683,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.tracking_links.with_raw_response.delete(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -696,7 +696,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.tracking_links.with_streaming_response.delete(
-            tracking_link_id="cupiditate",
+            tracking_link_id="aut",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -712,7 +712,7 @@ class TestAsyncTrackingLinks:
     async def test_path_params_delete(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.tracking_links.with_raw_response.delete(
-                tracking_link_id="cupiditate",
+                tracking_link_id="aut",
                 account="",
             )
 
@@ -726,7 +726,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_method_get_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         tracking_link = await async_client.tracking_links.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
         )
         assert tracking_link is None
@@ -735,7 +735,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_method_get_cohort_arps_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         tracking_link = await async_client.tracking_links.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
             acquisition_end="2026-01-31T23:59:59Z",
             acquisition_start="2026-01-01T00:00:00Z",
@@ -747,7 +747,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_raw_response_get_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.tracking_links.with_raw_response.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
         )
 
@@ -760,7 +760,7 @@ class TestAsyncTrackingLinks:
     @parametrize
     async def test_streaming_response_get_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.tracking_links.with_streaming_response.get_cohort_arps(
-            tracking_link_id="inventore",
+            tracking_link_id="cum",
             account="acct_XXXXXXXXXXXXXXX",
         ) as response:
             assert not response.is_closed
@@ -776,7 +776,7 @@ class TestAsyncTrackingLinks:
     async def test_path_params_get_cohort_arps(self, async_client: AsyncOnlyFansAPI) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.tracking_links.with_raw_response.get_cohort_arps(
-                tracking_link_id="inventore",
+                tracking_link_id="cum",
                 account="",
             )
 
