@@ -38,7 +38,7 @@ class TestNotifications:
             from_id=123,
             limit=10,
             skip_users="all",
-            type="subscriptions",
+            type="mentions",
         )
         assert_matches_type(NotificationListResponse, notification, path=["response"])
 
@@ -228,7 +228,7 @@ class TestAsyncNotifications:
             from_id=123,
             limit=10,
             skip_users="all",
-            type="subscriptions",
+            type="mentions",
         )
         assert_matches_type(NotificationListResponse, notification, path=["response"])
 
