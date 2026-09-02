@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="saepe",
-            auth_type="email_password",
-            cookies="neque",
+            auth_id="sed",
+            auth_type="mobile_app",
+            cookies="velit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "<aj-UPD`~8",
+                "password": "0colAc.A^oY$?g/[tvQ%",
                 "port": 8080,
-                "username": "a",
+                "username": "qui",
             },
-            email="lue.murphy@example.org",
+            email="sam.hill@example.org",
             force_connect=True,
-            name="perferendis",
-            password=")^A+]1VF/^hrd",
-            proxy_country="gb",
-            user_agent="distinctio",
-            xbc="iste",
+            name="laborum",
+            password="Lm]BX%W}Y|",
+            proxy_country="uk",
+            user_agent="optio",
+            xbc="qui",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="saepe",
-            auth_type="email_password",
-            cookies="neque",
+            auth_id="sed",
+            auth_type="mobile_app",
+            cookies="velit",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "<aj-UPD`~8",
+                "password": "0colAc.A^oY$?g/[tvQ%",
                 "port": 8080,
-                "username": "a",
+                "username": "qui",
             },
-            email="lue.murphy@example.org",
+            email="sam.hill@example.org",
             force_connect=True,
-            name="perferendis",
-            password=")^A+]1VF/^hrd",
-            proxy_country="gb",
-            user_agent="distinctio",
-            xbc="iste",
+            name="laborum",
+            password="Lm]BX%W}Y|",
+            proxy_country="uk",
+            user_agent="optio",
+            xbc="qui",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
