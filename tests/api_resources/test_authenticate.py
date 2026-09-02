@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="dignissimos",
+            auth_id="distinctio",
             auth_type="mobile_app",
-            cookies="veritatis",
+            cookies="omnis",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": '"[jc~:aXZ|#P,if<$',
+                "password": ";.<!,QN",
                 "port": 8080,
-                "username": "dicta",
+                "username": "eius",
             },
-            email="candice.nolan@example.com",
-            force_connect=True,
-            name="ea",
-            password="\\@0TgKVl<?gv",
-            proxy_country="us",
-            user_agent="dolorem",
-            xbc="sit",
+            email="darlene36@example.com",
+            force_connect=False,
+            name="dolor",
+            password="FsxBow",
+            proxy_country="uk",
+            user_agent="eos",
+            xbc="nisi",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="dignissimos",
+            auth_id="distinctio",
             auth_type="mobile_app",
-            cookies="veritatis",
+            cookies="omnis",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": '"[jc~:aXZ|#P,if<$',
+                "password": ";.<!,QN",
                 "port": 8080,
-                "username": "dicta",
+                "username": "eius",
             },
-            email="candice.nolan@example.com",
-            force_connect=True,
-            name="ea",
-            password="\\@0TgKVl<?gv",
-            proxy_country="us",
-            user_agent="dolorem",
-            xbc="sit",
+            email="darlene36@example.com",
+            force_connect=False,
+            name="dolor",
+            password="FsxBow",
+            proxy_country="uk",
+            user_agent="eos",
+            xbc="nisi",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
