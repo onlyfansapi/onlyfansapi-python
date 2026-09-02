@@ -161,20 +161,20 @@ class TestAuthenticate:
         authenticate = client.authenticate.start(
             auth_id="qui",
             auth_type="mobile_app",
-            cookies="consequuntur",
+            cookies="sequi",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": ":DZ$N#_SGsMG^mJ",
+                "password": "1!c!hVEC\\HogH5",
                 "port": 8080,
-                "username": "aut",
+                "username": "ipsa",
             },
-            email="kreynolds@example.net",
-            force_connect=False,
-            name="repudiandae",
-            password='"!nSQ1z>_boCTlwV,_',
+            email="vito96@example.net",
+            force_connect=True,
+            name="earum",
+            password="Tezbl6c&+xDM",
             proxy_country="us",
-            user_agent="adipisci",
-            xbc="aliquid",
+            user_agent="dolor",
+            xbc="minus",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -396,20 +396,20 @@ class TestAsyncAuthenticate:
         authenticate = await async_client.authenticate.start(
             auth_id="qui",
             auth_type="mobile_app",
-            cookies="consequuntur",
+            cookies="sequi",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": ":DZ$N#_SGsMG^mJ",
+                "password": "1!c!hVEC\\HogH5",
                 "port": 8080,
-                "username": "aut",
+                "username": "ipsa",
             },
-            email="kreynolds@example.net",
-            force_connect=False,
-            name="repudiandae",
-            password='"!nSQ1z>_boCTlwV,_',
+            email="vito96@example.net",
+            force_connect=True,
+            name="earum",
+            password="Tezbl6c&+xDM",
             proxy_country="us",
-            user_agent="adipisci",
-            xbc="aliquid",
+            user_agent="dolor",
+            xbc="minus",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
