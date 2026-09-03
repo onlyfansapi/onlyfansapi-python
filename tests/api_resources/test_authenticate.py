@@ -160,21 +160,21 @@ class TestAuthenticate:
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
             auth_id="et",
-            auth_type="mobile_app",
-            cookies="autem",
+            auth_type="email_password",
+            cookies="qui",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "tlMluL6:Hx92hb-CsX",
+                "password": "duOft@@jK",
                 "port": 8080,
-                "username": "rerum",
+                "username": "neque",
             },
-            email="ernser.shayna@example.org",
+            email="emelia74@example.org",
             force_connect=False,
-            name="quo",
-            password="El2%{Jc{ub,4ZZdF%'",
+            name="dolorum",
+            password="jd<9IDZ83CuP^*hYyM*;",
             proxy_country="us",
-            user_agent="modi",
-            xbc="officia",
+            user_agent="iste",
+            xbc="velit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -395,21 +395,21 @@ class TestAsyncAuthenticate:
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
             auth_id="et",
-            auth_type="mobile_app",
-            cookies="autem",
+            auth_type="email_password",
+            cookies="qui",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "tlMluL6:Hx92hb-CsX",
+                "password": "duOft@@jK",
                 "port": 8080,
-                "username": "rerum",
+                "username": "neque",
             },
-            email="ernser.shayna@example.org",
+            email="emelia74@example.org",
             force_connect=False,
-            name="quo",
-            password="El2%{Jc{ub,4ZZdF%'",
+            name="dolorum",
+            password="jd<9IDZ83CuP^*hYyM*;",
             proxy_country="us",
-            user_agent="modi",
-            xbc="officia",
+            user_agent="iste",
+            xbc="velit",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
