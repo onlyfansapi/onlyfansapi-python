@@ -98,7 +98,7 @@ class NotificationsResource(SyncAPIResource):
 
           limit: The number of notifications. Default `10`
 
-          skip_users: Whether to skip user details. Default `all`
+          skip_users: Whether to skip user details. Defaults to `all`.
 
           type: Filter notifications by a specific type
 
@@ -303,7 +303,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
 
           limit: The number of notifications. Default `10`
 
-          skip_users: Whether to skip user details. Default `all`
+          skip_users: Whether to skip user details. Defaults to `all`.
 
           type: Filter notifications by a specific type
 

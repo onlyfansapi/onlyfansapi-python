@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 import httpx
 
 from .media import (
@@ -23,7 +25,7 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.media.vault import list_list_params, list_create_params
+from .....types.media.vault import list_list_params, list_create_params, list_update_params
 from .....types.media.vault.list_list_response import ListListResponse
 from .....types.media.vault.list_create_response import ListCreateResponse
 from .....types.media.vault.list_delete_response import ListDeleteResponse
@@ -135,6 +137,7 @@ class ListsResource(SyncAPIResource):
         list_id: str,
         *,
         account: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,10 +145,13 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListUpdateResponse:
-        """
-        Rename a Vault list.
+        """Rename a Vault list.
 
         Args:
+          name: The new name for the vault list.
+
+        Must not be greater than 255 characters.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -160,6 +166,7 @@ class ListsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return self._put(
             path_template("/api/{account}/media/vault/lists/{list_id}", account=account, list_id=list_id),
+            body=maybe_transform({"name": name}, list_update_params.ListUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -170,6 +177,7 @@ class ListsResource(SyncAPIResource):
         self,
         account: str,
         *,
+        lightweight: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: str | Omit = omit,
@@ -183,7 +191,25 @@ class ListsResource(SyncAPIResource):
         """
         List your Vault lists (categories).
 
+        Every response carries an `ETag` computed over the `data` payload. Send it back
+        as `If-None-Match` on your next call and you will get a `304 Not Modified` with
+        an empty body when nothing changed, so you can keep serving your cached copy
+        instead of re-parsing the full list. Credits are debited either way — we still
+        have to ask OnlyFans for the current state to know whether it changed.
+
+        The `ETag` covers `data` only, never `_meta` — your credits balance changes on
+        every call, so including it would mean the `ETag` never matches. Because a `304`
+        has no body, it also has no `_meta`: read the current credits and rate-limit
+        counters from the `X-OFAPI-Credits-Used`, `X-OFAPI-Credits-Balance`,
+        `X-Rate-Limit-Limit-Minute` and `X-Rate-Limit-Remaining-Minute` response
+        headers, which are sent on `304` responses too. The `_meta` inside a body you
+        cached earlier is stale by definition.
+
         Args:
+          lightweight: Set to `true` to return only `id`, `name`, `type`, `canUpdate` and a rolled-up
+              `mediaCount` per list, dropping the `medias` previews. Much smaller payload —
+              ideal for rendering a folder picker. Default: `false`
+
           limit: Number of media to return per page. Default: `24`
 
           offset: The offset used for pagination. Default `0`
@@ -200,23 +226,27 @@ class ListsResource(SyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return self._get(
-            path_template("/api/{account}/media/vault/lists", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                        "query": query,
-                    },
-                    list_list_params.ListListParams,
+        return cast(
+            ListListResponse,
+            self._get(
+                path_template("/api/{account}/media/vault/lists", account=account),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {
+                            "lightweight": lightweight,
+                            "limit": limit,
+                            "offset": offset,
+                            "query": query,
+                        },
+                        list_list_params.ListListParams,
+                    ),
                 ),
+                cast_to=cast(Any, ListListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=ListListResponse,
         )
 
     def delete(
@@ -358,6 +388,7 @@ class AsyncListsResource(AsyncAPIResource):
         list_id: str,
         *,
         account: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -365,10 +396,13 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListUpdateResponse:
-        """
-        Rename a Vault list.
+        """Rename a Vault list.
 
         Args:
+          name: The new name for the vault list.
+
+        Must not be greater than 255 characters.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -383,6 +417,7 @@ class AsyncListsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return await self._put(
             path_template("/api/{account}/media/vault/lists/{list_id}", account=account, list_id=list_id),
+            body=await async_maybe_transform({"name": name}, list_update_params.ListUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -393,6 +428,7 @@ class AsyncListsResource(AsyncAPIResource):
         self,
         account: str,
         *,
+        lightweight: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         query: str | Omit = omit,
@@ -406,7 +442,25 @@ class AsyncListsResource(AsyncAPIResource):
         """
         List your Vault lists (categories).
 
+        Every response carries an `ETag` computed over the `data` payload. Send it back
+        as `If-None-Match` on your next call and you will get a `304 Not Modified` with
+        an empty body when nothing changed, so you can keep serving your cached copy
+        instead of re-parsing the full list. Credits are debited either way — we still
+        have to ask OnlyFans for the current state to know whether it changed.
+
+        The `ETag` covers `data` only, never `_meta` — your credits balance changes on
+        every call, so including it would mean the `ETag` never matches. Because a `304`
+        has no body, it also has no `_meta`: read the current credits and rate-limit
+        counters from the `X-OFAPI-Credits-Used`, `X-OFAPI-Credits-Balance`,
+        `X-Rate-Limit-Limit-Minute` and `X-Rate-Limit-Remaining-Minute` response
+        headers, which are sent on `304` responses too. The `_meta` inside a body you
+        cached earlier is stale by definition.
+
         Args:
+          lightweight: Set to `true` to return only `id`, `name`, `type`, `canUpdate` and a rolled-up
+              `mediaCount` per list, dropping the `medias` previews. Much smaller payload —
+              ideal for rendering a folder picker. Default: `false`
+
           limit: Number of media to return per page. Default: `24`
 
           offset: The offset used for pagination. Default `0`
@@ -423,23 +477,27 @@ class AsyncListsResource(AsyncAPIResource):
         """
         if not account:
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
-        return await self._get(
-            path_template("/api/{account}/media/vault/lists", account=account),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                        "query": query,
-                    },
-                    list_list_params.ListListParams,
+        return cast(
+            ListListResponse,
+            await self._get(
+                path_template("/api/{account}/media/vault/lists", account=account),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {
+                            "lightweight": lightweight,
+                            "limit": limit,
+                            "offset": offset,
+                            "query": query,
+                        },
+                        list_list_params.ListListParams,
+                    ),
                 ),
+                cast_to=cast(Any, ListListResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=ListListResponse,
         )
 
     async def delete(

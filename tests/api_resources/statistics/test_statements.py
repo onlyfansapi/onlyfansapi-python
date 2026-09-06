@@ -22,6 +22,7 @@ class TestStatements:
     def test_method_get_earnings(self, client: OnlyFansAPI) -> None:
         statement = client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
+            end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         )
         assert_matches_type(StatementGetEarningsResponse, statement, path=["response"])
@@ -31,8 +32,8 @@ class TestStatements:
     def test_method_get_earnings_with_all_params(self, client: OnlyFansAPI) -> None:
         statement = client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
-            start_date="2025-01-01 00:00:00",
             end_date="2025-03-31 23:59:59",
+            start_date="2025-01-01 00:00:00",
             type="total",
         )
         assert_matches_type(StatementGetEarningsResponse, statement, path=["response"])
@@ -42,6 +43,7 @@ class TestStatements:
     def test_raw_response_get_earnings(self, client: OnlyFansAPI) -> None:
         response = client.statistics.statements.with_raw_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
+            end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         )
 
@@ -55,6 +57,7 @@ class TestStatements:
     def test_streaming_response_get_earnings(self, client: OnlyFansAPI) -> None:
         with client.statistics.statements.with_streaming_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
+            end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         ) as response:
             assert not response.is_closed
@@ -71,6 +74,7 @@ class TestStatements:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.statements.with_raw_response.get_earnings(
                 account="",
+                end_date="2025-03-31 23:59:59",
                 start_date="2025-01-01 00:00:00",
             )
 
@@ -85,6 +89,7 @@ class TestAsyncStatements:
     async def test_method_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         statement = await async_client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
+            end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         )
         assert_matches_type(StatementGetEarningsResponse, statement, path=["response"])
@@ -94,8 +99,8 @@ class TestAsyncStatements:
     async def test_method_get_earnings_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         statement = await async_client.statistics.statements.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
-            start_date="2025-01-01 00:00:00",
             end_date="2025-03-31 23:59:59",
+            start_date="2025-01-01 00:00:00",
             type="total",
         )
         assert_matches_type(StatementGetEarningsResponse, statement, path=["response"])
@@ -105,6 +110,7 @@ class TestAsyncStatements:
     async def test_raw_response_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.statements.with_raw_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
+            end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         )
 
@@ -118,6 +124,7 @@ class TestAsyncStatements:
     async def test_streaming_response_get_earnings(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.statements.with_streaming_response.get_earnings(
             account="acct_XXXXXXXXXXXXXXX",
+            end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         ) as response:
             assert not response.is_closed
@@ -134,5 +141,6 @@ class TestAsyncStatements:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.statements.with_raw_response.get_earnings(
                 account="",
+                end_date="2025-03-31 23:59:59",
                 start_date="2025-01-01 00:00:00",
             )

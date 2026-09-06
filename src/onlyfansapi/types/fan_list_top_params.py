@@ -15,11 +15,11 @@ class FanListTopParams(TypedDict, total=False):
     end_date: Optional[str]
     """End date for filtering (required with start_date).
 
-    This field is required when <code>start_date</code> is present.
+    Must be a valid date. Must not be greater than 255 characters.
     """
 
     start_date: Optional[str]
     """Start date for filtering (required with end_date).
 
-    This field is required when <code>end_date</code> is present.
+    Must be a valid date. Must not be greater than 255 characters.
     """

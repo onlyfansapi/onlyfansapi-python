@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["StatisticCalculateTotalTransactionsParams"]
 
 
 class StatisticCalculateTotalTransactionsParams(TypedDict, total=False):
-    end_date: Required[str]
+    end_date: str
     """The end date for the period. Keep empty to calculate everything."""
 
-    start_date: Required[str]
+    start_date: str
     """The start date for the period. Keep empty to calculate everything."""

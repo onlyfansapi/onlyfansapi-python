@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -136,7 +136,7 @@ class MessagesResource(SyncAPIResource):
 
           order: Sort order for messages (desc or asc)
 
-          skip_users: Whether to skip user details (all or none)
+          skip_users: Whether to skip user details (`all` or `none`).
 
           extra_headers: Send extra headers
 
@@ -356,16 +356,18 @@ class MessagesResource(SyncAPIResource):
         chat_id: str,
         *,
         account: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         reply_to_message_id: int | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
         rf_tag: str | Omit = omit,
         text: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -376,7 +378,36 @@ class MessagesResource(SyncAPIResource):
         """
         Send a new message to a chat.
 
+        **Idempotency.** Pass an `Idempotency-Key` header to make retries safe. The
+        first request with a given key is executed normally and its response is stored
+        for **24 hours**; any later request with the same key returns that stored
+        response, plus an `Idempotent-Replayed: true` header, without contacting
+        OnlyFans and without consuming credits. The replayed body is the original
+        response with its `_meta._credits` block rewritten to show `used: 0` and your
+        current balance.
+
+        Keys are scoped to your team, this endpoint and the account in the URL, so the
+        same value can be reused safely against a different account. Use a fresh, unique
+        value (a UUID works well) for each message you send; it must be 1-255 printable
+        ASCII characters.
+
+        - `400 IDEMPOTENCY_KEY_INVALID` — the header value is empty, too long, or
+          contains non-ASCII characters.
+        - `409 IDEMPOTENCY_CONFLICT` — an earlier request with this key is still
+          running. Retry once it finishes.
+        - `422 IDEMPOTENCY_KEY_MISMATCH` — this key was already used with a different
+          request body or chat.
+
+        Responses with a `5xx` status (and `408`/`429`) are never stored, so a failed
+        send can be retried with the same key. The header is optional: omit it and the
+        endpoint behaves exactly as before.
+
         Args:
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
+
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
 
@@ -389,7 +420,7 @@ class MessagesResource(SyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           reply_to_message_id: Mark this message as a reply to another (can be either your own, or the
@@ -415,10 +446,12 @@ class MessagesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not chat_id:
             raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        extra_headers = {**strip_not_given({"Idempotency-Key": idempotency_key}), **(extra_headers or {})}
         return self._post(
             path_template("/api/{account}/chats/{chat_id}/messages", account=account, chat_id=chat_id),
             body=maybe_transform(
                 {
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
@@ -631,7 +664,7 @@ class AsyncMessagesResource(AsyncAPIResource):
 
           order: Sort order for messages (desc or asc)
 
-          skip_users: Whether to skip user details (all or none)
+          skip_users: Whether to skip user details (`all` or `none`).
 
           extra_headers: Send extra headers
 
@@ -851,16 +884,18 @@ class AsyncMessagesResource(AsyncAPIResource):
         chat_id: str,
         *,
         account: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         reply_to_message_id: int | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
         rf_tag: str | Omit = omit,
         text: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -871,7 +906,36 @@ class AsyncMessagesResource(AsyncAPIResource):
         """
         Send a new message to a chat.
 
+        **Idempotency.** Pass an `Idempotency-Key` header to make retries safe. The
+        first request with a given key is executed normally and its response is stored
+        for **24 hours**; any later request with the same key returns that stored
+        response, plus an `Idempotent-Replayed: true` header, without contacting
+        OnlyFans and without consuming credits. The replayed body is the original
+        response with its `_meta._credits` block rewritten to show `used: 0` and your
+        current balance.
+
+        Keys are scoped to your team, this endpoint and the account in the URL, so the
+        same value can be reused safely against a different account. Use a fresh, unique
+        value (a UUID works well) for each message you send; it must be 1-255 printable
+        ASCII characters.
+
+        - `400 IDEMPOTENCY_KEY_INVALID` — the header value is empty, too long, or
+          contains non-ASCII characters.
+        - `409 IDEMPOTENCY_CONFLICT` — an earlier request with this key is still
+          running. Retry once it finishes.
+        - `422 IDEMPOTENCY_KEY_MISMATCH` — this key was already used with a different
+          request body or chat.
+
+        Responses with a `5xx` status (and `408`/`429`) are never stored, so a failed
+        send can be retried with the same key. The header is optional: omit it and the
+        endpoint behaves exactly as before.
+
         Args:
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
+
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
 
@@ -884,7 +948,7 @@ class AsyncMessagesResource(AsyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           reply_to_message_id: Mark this message as a reply to another (can be either your own, or the
@@ -910,10 +974,12 @@ class AsyncMessagesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not chat_id:
             raise ValueError(f"Expected a non-empty value for `chat_id` but received {chat_id!r}")
+        extra_headers = {**strip_not_given({"Idempotency-Key": idempotency_key}), **(extra_headers or {})}
         return await self._post(
             path_template("/api/{account}/chats/{chat_id}/messages", account=account, chat_id=chat_id),
             body=await async_maybe_transform(
                 {
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,

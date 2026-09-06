@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
+from typing_extensions import Literal
 
 import httpx
 
@@ -61,7 +62,8 @@ class MassMessagingResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingRetrieveResponse:
         """
-        Get the content of a mass message.
+        Get the content and settings of a mass message, including a message scheduled
+        for later.
 
         Args:
           extra_headers: Send extra headers
@@ -90,11 +92,12 @@ class MassMessagingResource(SyncAPIResource):
         *,
         account: str,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
         previews: SequenceNotStr[str] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         scheduled_date: str | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
@@ -106,10 +109,16 @@ class MassMessagingResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingUpdateResponse:
         """
-        Update a mass message.
+        Update the content, recipients, media, price, or scheduled send time of an
+        existing mass message.
 
         Args:
           text: The message text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the update if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
@@ -123,7 +132,7 @@ class MassMessagingResource(SyncAPIResource):
               not 0). Will be shown if `price` is provided. All `previews` values must also
               exist in the `mediaFiles` array.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
@@ -149,6 +158,7 @@ class MassMessagingResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
@@ -177,8 +187,10 @@ class MassMessagingResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingListResponse:
-        """
-        List the pending or recently sent mass messages in the message queue.
+        """List pending, scheduled, and recently sent mass messages.
+
+        Use an item ID to
+        retrieve, update, reschedule, delete, or unsend the message.
 
         Args:
           extra_headers: Send extra headers
@@ -256,8 +268,8 @@ class MassMessagingResource(SyncAPIResource):
         Get an overview of mass messages, showing the send count and view count.
 
         Args:
-          end_date: The latest mass message to retrieve. Keep empty to get all. MUST BE DATE AFTER
-              `startDate`. This is also used for pagination.
+          end_date: The latest mass message to retrieve. Keep empty to get all. It must be after
+              `startDate` and is also used for pagination.
 
           limit: Number of mass messages to return (default = 10)
 
@@ -300,17 +312,19 @@ class MassMessagingResource(SyncAPIResource):
         account: str,
         *,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         excluded_lists: SequenceNotStr[str] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
         rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
+        subscribed_within_last_days: int | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -329,6 +343,11 @@ class MassMessagingResource(SyncAPIResource):
         Args:
           text: The message text content
 
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
+
           excluded_lists: Array of user list IDs that the mass message will NOT be sent to.
 
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
@@ -343,7 +362,7 @@ class MassMessagingResource(SyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your mass message
@@ -355,6 +374,10 @@ class MassMessagingResource(SyncAPIResource):
           save_for_later: Add your message to the "Saved for later" queue.
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
+
+          subscribed_within_last_days: Only send to fans who subscribed within the last N calendar days (1-30,
+              including today). Can be combined with `userLists` and `userIds`. Cannot be
+              combined with `scheduledDate` or `saveForLater`.
 
           user_ids: Array of user IDs that the mass message will be sent to.
 
@@ -375,6 +398,7 @@ class MassMessagingResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "excluded_lists": excluded_lists,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
@@ -386,6 +410,7 @@ class MassMessagingResource(SyncAPIResource):
                     "rf_tag": rf_tag,
                     "save_for_later": save_for_later,
                     "scheduled_date": scheduled_date,
+                    "subscribed_within_last_days": subscribed_within_last_days,
                     "user_ids": user_ids,
                     "user_lists": user_lists,
                 },
@@ -431,7 +456,8 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingRetrieveResponse:
         """
-        Get the content of a mass message.
+        Get the content and settings of a mass message, including a message scheduled
+        for later.
 
         Args:
           extra_headers: Send extra headers
@@ -460,11 +486,12 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         *,
         account: str,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: SequenceNotStr[str] | Omit = omit,
         previews: SequenceNotStr[str] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         scheduled_date: str | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
@@ -476,10 +503,16 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingUpdateResponse:
         """
-        Update a mass message.
+        Update the content, recipients, media, price, or scheduled send time of an
+        existing mass message.
 
         Args:
           text: The message text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the update if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
               endpoints (`/giphy/trending`, `/giphy/search`).
@@ -493,7 +526,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
               not 0). Will be shown if `price` is provided. All `previews` values must also
               exist in the `mediaFiles` array.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
@@ -519,6 +552,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
                     "media_files": media_files,
@@ -547,8 +581,10 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MassMessagingListResponse:
-        """
-        List the pending or recently sent mass messages in the message queue.
+        """List pending, scheduled, and recently sent mass messages.
+
+        Use an item ID to
+        retrieve, update, reschedule, delete, or unsend the message.
 
         Args:
           extra_headers: Send extra headers
@@ -626,8 +662,8 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         Get an overview of mass messages, showing the send count and view count.
 
         Args:
-          end_date: The latest mass message to retrieve. Keep empty to get all. MUST BE DATE AFTER
-              `startDate`. This is also used for pagination.
+          end_date: The latest mass message to retrieve. Keep empty to get all. It must be after
+              `startDate` and is also used for pagination.
 
           limit: Number of mass messages to return (default = 10)
 
@@ -670,17 +706,19 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         account: str,
         *,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         excluded_lists: SequenceNotStr[str] | Omit = omit,
         giphy_id: str | Omit = omit,
         locked_text: bool | Omit = omit,
         media_files: Iterable[object] | Omit = omit,
         previews: Iterable[object] | Omit = omit,
-        price: int | Omit = omit,
+        price: float | Omit = omit,
         rf_guest: str | Omit = omit,
         rf_partner: str | Omit = omit,
         rf_tag: str | Omit = omit,
         save_for_later: bool | Omit = omit,
         scheduled_date: str | Omit = omit,
+        subscribed_within_last_days: int | Omit = omit,
         user_ids: SequenceNotStr[str] | Omit = omit,
         user_lists: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -699,6 +737,11 @@ class AsyncMassMessagingResource(AsyncAPIResource):
         Args:
           text: The message text content
 
+          block_banned_words: Screen `text` for OnlyFans banned words and block the send if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
+
           excluded_lists: Array of user list IDs that the mass message will NOT be sent to.
 
           giphy_id: The ID of the Giphy GIF to attach to the message. Get IDs from the Giphy listing
@@ -713,7 +756,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
               referencing uploaded files in `mediaFiles`. Will be shown if `price` is
               provided.
 
-          price: Price for paid content (0 or between 3-200). In case this is not zero,
+          price: Price for paid content in USD (0 or between 3-200). In case this is not zero,
               **mediaFiles** is required
 
           rf_guest: Array of OnlyFans Release Form Guest IDs to tag in your mass message
@@ -725,6 +768,10 @@ class AsyncMassMessagingResource(AsyncAPIResource):
           save_for_later: Add your message to the "Saved for later" queue.
 
           scheduled_date: Schedule the chat message in the future (UTC timezone).
+
+          subscribed_within_last_days: Only send to fans who subscribed within the last N calendar days (1-30,
+              including today). Can be combined with `userLists` and `userIds`. Cannot be
+              combined with `scheduledDate` or `saveForLater`.
 
           user_ids: Array of user IDs that the mass message will be sent to.
 
@@ -745,6 +792,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "excluded_lists": excluded_lists,
                     "giphy_id": giphy_id,
                     "locked_text": locked_text,
@@ -756,6 +804,7 @@ class AsyncMassMessagingResource(AsyncAPIResource):
                     "rf_tag": rf_tag,
                     "save_for_later": save_for_later,
                     "scheduled_date": scheduled_date,
+                    "subscribed_within_last_days": subscribed_within_last_days,
                     "user_ids": user_ids,
                     "user_lists": user_lists,
                 },

@@ -41,6 +41,8 @@ class TestFollowing:
             limit=10,
             offset=0,
             query="john",
+            sort="subscribe_date",
+            sort_direction="desc",
         )
         assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
@@ -98,6 +100,8 @@ class TestFollowing:
             limit=10,
             offset=0,
             query="john",
+            sort="subscribe_date",
+            sort_direction="desc",
         )
         assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
@@ -155,6 +159,8 @@ class TestFollowing:
             limit=10,
             offset=0,
             query="john",
+            sort="subscribe_date",
+            sort_direction="desc",
         )
         assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 
@@ -218,6 +224,8 @@ class TestAsyncFollowing:
             limit=10,
             offset=0,
             query="john",
+            sort="subscribe_date",
+            sort_direction="desc",
         )
         assert_matches_type(FollowingListActiveResponse, following, path=["response"])
 
@@ -275,6 +283,8 @@ class TestAsyncFollowing:
             limit=10,
             offset=0,
             query="john",
+            sort="subscribe_date",
+            sort_direction="desc",
         )
         assert_matches_type(FollowingListAllResponse, following, path=["response"])
 
@@ -332,6 +342,8 @@ class TestAsyncFollowing:
             limit=10,
             offset=0,
             query="john",
+            sort="subscribe_date",
+            sort_direction="desc",
         )
         assert_matches_type(FollowingListExpiredResponse, following, path=["response"])
 

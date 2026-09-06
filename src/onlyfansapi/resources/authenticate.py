@@ -165,7 +165,7 @@ class AuthenticateResource(SyncAPIResource):
         force_connect: bool | Omit = omit,
         name: str | Omit = omit,
         password: str | Omit = omit,
-        proxy_country: Literal["us", "uk"] | Omit = omit,
+        proxy_country: Literal["us", "uk", "gb"] | Omit = omit,
         user_agent: str | Omit = omit,
         xbc: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -440,7 +440,7 @@ class AsyncAuthenticateResource(AsyncAPIResource):
         force_connect: bool | Omit = omit,
         name: str | Omit = omit,
         password: str | Omit = omit,
-        proxy_country: Literal["us", "uk"] | Omit = omit,
+        proxy_country: Literal["us", "uk", "gb"] | Omit = omit,
         user_agent: str | Omit = omit,
         xbc: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

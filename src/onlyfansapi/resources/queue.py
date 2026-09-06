@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+from typing import List
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import queue_list_params, queue_count_params
-from .._types import Body, Query, Headers, NotGiven, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -47,10 +50,11 @@ class QueueResource(SyncAPIResource):
         self,
         account: str,
         *,
-        limit: int,
         publish_date_end: str,
         publish_date_start: str,
         timezone: str,
+        limit: int | Omit = omit,
+        type: List[Literal["chat", "post"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -58,18 +62,24 @@ class QueueResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueueListResponse:
-        """
-        List posts and messages in the queue.
+        """List scheduled posts and mass messages for a date range.
+
+        Use the type filter to
+        return only posts, messages, or both.
 
         Args:
-          limit: Maximum number of queue items to return (default = 20)
+          publish_date_end: Latest publish date to return. Must be a valid date. Must be a valid date. Must
+              be a date after or equal to <code>publishDateStart</code>.
 
-          publish_date_end: Latest publish date to return
+          publish_date_start: Earliest publish date to return (must be at least today). Must be a valid date.
+              Must be a valid date. Must be a date after or equal to <code>today</code>.
 
-          publish_date_start: Earliest publish date to return (must be at least today)
+          timezone: Timezone of the provided dates.
+              [View available timezone values](https://www.php.net/manual/en/timezones.php).
+              Must be a valid time zone, such as <code>Africa/Accra</code>.
 
-          timezone: Time timezone of the provided dates.
-              [View available timezone values](https://www.php.net/manual/en/timezones.php)
+          limit: Maximum number of queue items to return (default 20). Must be at least 1. Must
+              not be greater than 100.
 
           extra_headers: Send extra headers
 
@@ -90,10 +100,11 @@ class QueueResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "limit": limit,
                         "publish_date_end": publish_date_end,
                         "publish_date_start": publish_date_start,
                         "timezone": timezone,
+                        "limit": limit,
+                        "type": type,
                     },
                     queue_list_params.QueueListParams,
                 ),
@@ -218,10 +229,11 @@ class AsyncQueueResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        limit: int,
         publish_date_end: str,
         publish_date_start: str,
         timezone: str,
+        limit: int | Omit = omit,
+        type: List[Literal["chat", "post"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -229,18 +241,24 @@ class AsyncQueueResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueueListResponse:
-        """
-        List posts and messages in the queue.
+        """List scheduled posts and mass messages for a date range.
+
+        Use the type filter to
+        return only posts, messages, or both.
 
         Args:
-          limit: Maximum number of queue items to return (default = 20)
+          publish_date_end: Latest publish date to return. Must be a valid date. Must be a valid date. Must
+              be a date after or equal to <code>publishDateStart</code>.
 
-          publish_date_end: Latest publish date to return
+          publish_date_start: Earliest publish date to return (must be at least today). Must be a valid date.
+              Must be a valid date. Must be a date after or equal to <code>today</code>.
 
-          publish_date_start: Earliest publish date to return (must be at least today)
+          timezone: Timezone of the provided dates.
+              [View available timezone values](https://www.php.net/manual/en/timezones.php).
+              Must be a valid time zone, such as <code>Africa/Accra</code>.
 
-          timezone: Time timezone of the provided dates.
-              [View available timezone values](https://www.php.net/manual/en/timezones.php)
+          limit: Maximum number of queue items to return (default 20). Must be at least 1. Must
+              not be greater than 100.
 
           extra_headers: Send extra headers
 
@@ -261,10 +279,11 @@ class AsyncQueueResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "limit": limit,
                         "publish_date_end": publish_date_end,
                         "publish_date_start": publish_date_start,
                         "timezone": timezone,
+                        "limit": limit,
+                        "type": type,
                     },
                     queue_list_params.QueueListParams,
                 ),

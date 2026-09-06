@@ -233,18 +233,6 @@ Methods:
 
 - <code title="post /api/{account}/chats/mark-as-read">client.chats.mark_all_as_read.<a href="./src/onlyfansapi/resources/chats/mark_all_as_read.py">all</a>(account) -> <a href="./src/onlyfansapi/types/chats/mark_all_as_read_all_response.py">MarkAllAsReadAllResponse</a></code>
 
-# Messages
-
-Types:
-
-```python
-from onlyfansapi.types import MessageAttachTagsResponse
-```
-
-Methods:
-
-- <code title="post /api/{account}/messages/{message_id}/attach-tags">client.messages.<a href="./src/onlyfansapi/resources/messages.py">attach_tags</a>(message_id, \*, account, \*\*<a href="src/onlyfansapi/types/message_attach_tags_params.py">params</a>) -> <a href="./src/onlyfansapi/types/message_attach_tags_response.py">MessageAttachTagsResponse</a></code>
-
 # ClientSessions
 
 Types:
@@ -520,12 +508,12 @@ Methods:
 Types:
 
 ```python
-from onlyfansapi.types import MediaDownloadResponse, MediaScrapeResponse, MediaUploadResponse
+from onlyfansapi.types import MediaScrapeResponse, MediaUploadResponse
 ```
 
 Methods:
 
-- <code title="get /api/{account}/media/download/{cdnUrl}">client.media.<a href="./src/onlyfansapi/resources/media/media.py">download</a>(cdn_url, \*, account) -> str</code>
+- <code title="get /api/{account}/media/download/{cdnUrl}">client.media.<a href="./src/onlyfansapi/resources/media/media.py">download</a>(cdn_url, \*, account) -> None</code>
 - <code title="post /api/{account}/media/scrape">client.media.<a href="./src/onlyfansapi/resources/media/media.py">scrape</a>(account, \*\*<a href="src/onlyfansapi/types/media_scrape_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media_scrape_response.py">MediaScrapeResponse</a></code>
 - <code title="post /api/{account}/media/upload">client.media.<a href="./src/onlyfansapi/resources/media/media.py">upload</a>(account, \*\*<a href="src/onlyfansapi/types/media_upload_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media_upload_response.py">MediaUploadResponse</a></code>
 
@@ -579,7 +567,7 @@ Methods:
 
 - <code title="post /api/{account}/media/vault/lists">client.media.vault.lists.<a href="./src/onlyfansapi/resources/media/vault/lists/lists.py">create</a>(account, \*\*<a href="src/onlyfansapi/types/media/vault/list_create_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media/vault/list_create_response.py">ListCreateResponse</a></code>
 - <code title="get /api/{account}/media/vault/lists/{list_id}">client.media.vault.lists.<a href="./src/onlyfansapi/resources/media/vault/lists/lists.py">retrieve</a>(list_id, \*, account) -> <a href="./src/onlyfansapi/types/media/vault/list_retrieve_response.py">ListRetrieveResponse</a></code>
-- <code title="put /api/{account}/media/vault/lists/{list_id}">client.media.vault.lists.<a href="./src/onlyfansapi/resources/media/vault/lists/lists.py">update</a>(list_id, \*, account) -> <a href="./src/onlyfansapi/types/media/vault/list_update_response.py">ListUpdateResponse</a></code>
+- <code title="put /api/{account}/media/vault/lists/{list_id}">client.media.vault.lists.<a href="./src/onlyfansapi/resources/media/vault/lists/lists.py">update</a>(list_id, \*, account, \*\*<a href="src/onlyfansapi/types/media/vault/list_update_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media/vault/list_update_response.py">ListUpdateResponse</a></code>
 - <code title="get /api/{account}/media/vault/lists">client.media.vault.lists.<a href="./src/onlyfansapi/resources/media/vault/lists/lists.py">list</a>(account, \*\*<a href="src/onlyfansapi/types/media/vault/list_list_params.py">params</a>) -> <a href="./src/onlyfansapi/types/media/vault/list_list_response.py">ListListResponse</a></code>
 - <code title="delete /api/{account}/media/vault/lists/{list_id}">client.media.vault.lists.<a href="./src/onlyfansapi/resources/media/vault/lists/lists.py">delete</a>(list_id, \*, account) -> <a href="./src/onlyfansapi/types/media/vault/list_delete_response.py">ListDeleteResponse</a></code>
 

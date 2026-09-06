@@ -12,13 +12,14 @@ __all__ = [
     "UnionMember0",
     "UnionMember1",
     "UnionMember2",
-    "UnionMember2Media",
-    "UnionMember2MediaFiles",
-    "UnionMember2MediaFilesFull",
     "UnionMember3",
     "UnionMember3Media",
-    "UnionMember3MediaAdditional",
-    "UnionMember3MediaThumb",
+    "UnionMember3MediaFiles",
+    "UnionMember3MediaFilesFull",
+    "UnionMember4",
+    "UnionMember4Media",
+    "UnionMember4MediaAdditional",
+    "UnionMember4MediaThumb",
 ]
 
 
@@ -40,7 +41,17 @@ class UnionMember1(BaseModel):
     status: Optional[str] = None
 
 
-class UnionMember2MediaFilesFull(BaseModel):
+class UnionMember2(BaseModel):
+    """Upload rejected by OnlyFans — `error` carries the upstream reason verbatim"""
+
+    error: Optional[str] = None
+
+    prefixed_id: Optional[str] = None
+
+    status: Optional[str] = None
+
+
+class UnionMember3MediaFilesFull(BaseModel):
     height: Optional[int] = None
 
     size: Optional[int] = None
@@ -52,8 +63,8 @@ class UnionMember2MediaFilesFull(BaseModel):
     width: Optional[int] = None
 
 
-class UnionMember2MediaFiles(BaseModel):
-    full: Optional[UnionMember2MediaFilesFull] = None
+class UnionMember3MediaFiles(BaseModel):
+    full: Optional[UnionMember3MediaFilesFull] = None
 
     preview: Optional[str] = None
 
@@ -62,7 +73,7 @@ class UnionMember2MediaFiles(BaseModel):
     thumb: Optional[str] = None
 
 
-class UnionMember2Media(BaseModel):
+class UnionMember3Media(BaseModel):
     id: Optional[int] = None
 
     can_view: Optional[bool] = FieldInfo(alias="canView", default=None)
@@ -73,7 +84,7 @@ class UnionMember2Media(BaseModel):
 
     duration: Optional[int] = None
 
-    files: Optional[UnionMember2MediaFiles] = None
+    files: Optional[UnionMember3MediaFiles] = None
 
     has_custom_preview: Optional[bool] = FieldInfo(alias="hasCustomPreview", default=None)
 
@@ -86,30 +97,30 @@ class UnionMember2Media(BaseModel):
     type: Optional[str] = None
 
 
-class UnionMember2(BaseModel):
+class UnionMember3(BaseModel):
     """Completed POST /media/vault upload"""
 
     credits_used: Optional[int] = None
 
-    media: Optional[UnionMember2Media] = None
+    media: Optional[UnionMember3Media] = None
 
     prefixed_id: Optional[str] = None
 
     status: Optional[str] = None
 
 
-class UnionMember3MediaAdditional(BaseModel):
+class UnionMember4MediaAdditional(BaseModel):
     user: Optional[str] = None
 
 
-class UnionMember3MediaThumb(BaseModel):
+class UnionMember4MediaThumb(BaseModel):
     id: Optional[int] = None
 
     url: Optional[str] = None
 
 
-class UnionMember3Media(BaseModel):
-    additional: Optional[UnionMember3MediaAdditional] = None
+class UnionMember4Media(BaseModel):
+    additional: Optional[UnionMember4MediaAdditional] = None
 
     extra: Optional[str] = None
 
@@ -123,19 +134,19 @@ class UnionMember3Media(BaseModel):
 
     source_url: Optional[str] = FieldInfo(alias="sourceUrl", default=None)
 
-    thumbs: Optional[List[UnionMember3MediaThumb]] = None
+    thumbs: Optional[List[UnionMember4MediaThumb]] = None
 
 
-class UnionMember3(BaseModel):
+class UnionMember4(BaseModel):
     """Completed POST /media/upload upload"""
 
     credits_used: Optional[int] = None
 
-    media: Optional[UnionMember3Media] = None
+    media: Optional[UnionMember4Media] = None
 
     prefixed_id: Optional[str] = None
 
     status: Optional[str] = None
 
 
-UploadGetStatusResponse: TypeAlias = Union[UnionMember0, UnionMember1, UnionMember2, UnionMember3]
+UploadGetStatusResponse: TypeAlias = Union[UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4]

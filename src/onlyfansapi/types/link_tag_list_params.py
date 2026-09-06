@@ -8,5 +8,5 @@ __all__ = ["LinkTagListParams"]
 
 
 class LinkTagListParams(TypedDict, total=False):
-    type: Literal["trial_links", "tracking_links"]
-    """Filter by link type. If not provided, returns tags for both types."""
+    type: Literal["trial_links", "tracking_links", "smart_links"]
+    """Filter by link type. If not provided, returns tags for all types."""

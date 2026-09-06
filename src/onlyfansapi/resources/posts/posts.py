@@ -90,6 +90,7 @@ class PostsResource(SyncAPIResource):
         account: str,
         *,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         expire_days: int | Omit = omit,
         fund_raising_target_amount: int | Omit = omit,
         fund_raising_tips_presets: SequenceNotStr[str] | Omit = omit,
@@ -115,6 +116,11 @@ class PostsResource(SyncAPIResource):
 
         Args:
           text: The post text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the post if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
@@ -164,6 +170,7 @@ class PostsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "expire_days": expire_days,
                     "fund_raising_target_amount": fund_raising_target_amount,
                     "fund_raising_tips_presets": fund_raising_tips_presets,
@@ -226,6 +233,7 @@ class PostsResource(SyncAPIResource):
         *,
         account: str,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         expire_days: int | Omit = omit,
         fund_raising_target_amount: int | Omit = omit,
         fund_raising_tips_presets: SequenceNotStr[str] | Omit = omit,
@@ -251,6 +259,11 @@ class PostsResource(SyncAPIResource):
 
         Args:
           text: The post text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the update if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
@@ -300,6 +313,7 @@ class PostsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "expire_days": expire_days,
                     "fund_raising_target_amount": fund_raising_target_amount,
                     "fund_raising_tips_presets": fund_raising_tips_presets,
@@ -627,6 +641,7 @@ class AsyncPostsResource(AsyncAPIResource):
         account: str,
         *,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         expire_days: int | Omit = omit,
         fund_raising_target_amount: int | Omit = omit,
         fund_raising_tips_presets: SequenceNotStr[str] | Omit = omit,
@@ -652,6 +667,11 @@ class AsyncPostsResource(AsyncAPIResource):
 
         Args:
           text: The post text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the post if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
@@ -701,6 +721,7 @@ class AsyncPostsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "expire_days": expire_days,
                     "fund_raising_target_amount": fund_raising_target_amount,
                     "fund_raising_tips_presets": fund_raising_tips_presets,
@@ -763,6 +784,7 @@ class AsyncPostsResource(AsyncAPIResource):
         *,
         account: str,
         text: str,
+        block_banned_words: Literal["strict_ban", "risky", "replace_soften"] | Omit = omit,
         expire_days: int | Omit = omit,
         fund_raising_target_amount: int | Omit = omit,
         fund_raising_tips_presets: SequenceNotStr[str] | Omit = omit,
@@ -788,6 +810,11 @@ class AsyncPostsResource(AsyncAPIResource):
 
         Args:
           text: The post text content
+
+          block_banned_words: Screen `text` for OnlyFans banned words and block the update if any are found
+              (returns a 422 listing the offending words). `strict_ban` blocks all tiers,
+              `risky` blocks Risky + Replace/soften, `replace_soften` blocks Replace/soften
+              only. Omit to disable screening.
 
           expire_days: Number of days after which the post will expire. Between 1 and 30 days. Keep
               empty for no expiration.
@@ -837,6 +864,7 @@ class AsyncPostsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "text": text,
+                    "block_banned_words": block_banned_words,
                     "expire_days": expire_days,
                     "fund_raising_target_amount": fund_raising_target_amount,
                     "fund_raising_tips_presets": fund_raising_tips_presets,

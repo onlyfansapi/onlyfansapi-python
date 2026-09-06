@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["StatisticGetSubscriberMetricsParams"]
 
@@ -20,4 +20,10 @@ class StatisticGetSubscriberMetricsParams(TypedDict, total=False):
 
     Will slow down the response time, and might time out if timeframe is too large.
     Default = `false`
+    """
+
+    detailed_type: Optional[Literal["total", "renew", "new"]]
+    """Use only with `detailed=true` - otherwise, it has no effect.
+
+    Filter the subscriber statistics (default = total)
     """
