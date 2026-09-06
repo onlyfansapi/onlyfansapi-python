@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="consequatur",
-            auth_type="email_password",
-            cookies="nihil",
+            auth_id="et",
+            auth_type="raw_data",
+            cookies="rerum",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "s!kez.F",
+                "password": "a~&,cjRZnBa!HpzZ8Zp",
                 "port": 8080,
-                "username": "autem",
+                "username": "atque",
             },
-            email="lewis82@example.net",
+            email="jovanny.dickens@example.net",
             force_connect=False,
-            name="saepe",
-            password=",7u(pyX~|qk]N(",
-            proxy_country="gb",
-            user_agent="et",
-            xbc="provident",
+            name="et",
+            password=",#(yZg@3ul5",
+            proxy_country="uk",
+            user_agent="quo",
+            xbc="voluptatem",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="consequatur",
-            auth_type="email_password",
-            cookies="nihil",
+            auth_id="et",
+            auth_type="raw_data",
+            cookies="rerum",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "s!kez.F",
+                "password": "a~&,cjRZnBa!HpzZ8Zp",
                 "port": 8080,
-                "username": "autem",
+                "username": "atque",
             },
-            email="lewis82@example.net",
+            email="jovanny.dickens@example.net",
             force_connect=False,
-            name="saepe",
-            password=",7u(pyX~|qk]N(",
-            proxy_country="gb",
-            user_agent="et",
-            xbc="provident",
+            name="et",
+            password=",#(yZg@3ul5",
+            proxy_country="uk",
+            user_agent="quo",
+            xbc="voluptatem",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
