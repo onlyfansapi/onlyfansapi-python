@@ -30,7 +30,7 @@ class TestProfiles:
     def test_method_retrieve_with_all_params(self, client: OnlyFansAPI) -> None:
         profile = client.profiles.retrieve(
             username="madison420ivy",
-            fresh=False,
+            fresh=True,
         )
         assert_matches_type(ProfileRetrieveResponse, profile, path=["response"])
 
@@ -87,7 +87,7 @@ class TestAsyncProfiles:
     async def test_method_retrieve_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         profile = await async_client.profiles.retrieve(
             username="madison420ivy",
-            fresh=False,
+            fresh=True,
         )
         assert_matches_type(ProfileRetrieveResponse, profile, path=["response"])
 
