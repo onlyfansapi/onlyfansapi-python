@@ -16,6 +16,12 @@ __all__ = [
     "DataMedia",
     "DataMediaFiles",
     "DataMediaFilesFull",
+    "DataQuestion",
+    "DataQuestionEntity",
+    "DataQuestionPositions",
+    "DataReleaseForm",
+    "DataReleaseFormUser",
+    "DataText",
 ]
 
 
@@ -97,10 +103,118 @@ class DataMedia(BaseModel):
     type: Optional[str] = None
 
 
+class DataQuestionEntity(BaseModel):
+    id: Optional[int] = None
+
+    created_at: Optional[str] = FieldInfo(alias="createdAt", default=None)
+
+    text: Optional[str] = None
+
+
+class DataQuestionPositions(BaseModel):
+    angle: Optional[int] = None
+
+    color: Optional[str] = None
+
+    height: Optional[int] = None
+
+    left: Optional[int] = None
+
+    top: Optional[int] = None
+
+    width: Optional[int] = None
+
+    x: Optional[str] = None
+
+    y: Optional[str] = None
+
+    z_index: Optional[int] = FieldInfo(alias="zIndex", default=None)
+
+
+class DataQuestion(BaseModel):
+    entity: Optional[DataQuestionEntity] = None
+
+    positions: Optional[DataQuestionPositions] = None
+
+    type: Optional[str] = None
+
+
+class DataReleaseFormUser(BaseModel):
+    id: Optional[int] = None
+
+    avatar: Optional[str] = None
+
+    avatar_thumbs: Optional[str] = FieldInfo(alias="avatarThumbs", default=None)
+
+    is_from_guest: Optional[bool] = FieldInfo(alias="isFromGuest", default=None)
+
+    is_identity_verified: Optional[bool] = FieldInfo(alias="isIdentityVerified", default=None)
+
+    iv_status: Optional[str] = FieldInfo(alias="ivStatus", default=None)
+
+    name: Optional[str] = None
+
+    username: Optional[str] = None
+
+    view: Optional[str] = None
+
+
+class DataReleaseForm(BaseModel):
+    id: Optional[int] = None
+
+    name: Optional[str] = None
+
+    partner_source: Optional[str] = FieldInfo(alias="partnerSource", default=None)
+
+    type: Optional[str] = None
+
+    user: Optional[DataReleaseFormUser] = None
+
+
+class DataText(BaseModel):
+    angle: Optional[int] = None
+
+    bg_color: Optional[str] = FieldInfo(alias="bgColor", default=None)
+
+    color: Optional[str] = None
+
+    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+
+    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+
+    font_style: Optional[str] = FieldInfo(alias="fontStyle", default=None)
+
+    font_weight: Optional[int] = FieldInfo(alias="fontWeight", default=None)
+
+    left: Optional[int] = None
+
+    scale: Optional[int] = None
+
+    text: Optional[str] = None
+
+    text_align: Optional[str] = FieldInfo(alias="textAlign", default=None)
+
+    text_height: Optional[float] = FieldInfo(alias="textHeight", default=None)
+
+    text_width: Optional[int] = FieldInfo(alias="textWidth", default=None)
+
+    top: Optional[int] = None
+
+    type: Optional[str] = None
+
+    users: Optional[List[object]] = None
+
+    z_index: Optional[int] = FieldInfo(alias="zIndex", default=None)
+
+
 class Data(BaseModel):
     id: Optional[int] = None
 
     can_delete: Optional[bool] = FieldInfo(alias="canDelete", default=None)
+
+    canvas_height: Optional[int] = FieldInfo(alias="canvasHeight", default=None)
+
+    canvas_width: Optional[int] = FieldInfo(alias="canvasWidth", default=None)
 
     comments_count: Optional[int] = FieldInfo(alias="commentsCount", default=None)
 
@@ -120,9 +234,11 @@ class Data(BaseModel):
 
     media: Optional[List[DataMedia]] = None
 
-    question: Optional[str] = None
+    question: Optional[DataQuestion] = None
 
-    release_forms: Optional[List[object]] = FieldInfo(alias="releaseForms", default=None)
+    release_forms: Optional[List[DataReleaseForm]] = FieldInfo(alias="releaseForms", default=None)
+
+    texts: Optional[List[DataText]] = None
 
     tips_amount: Optional[str] = FieldInfo(alias="tipsAmount", default=None)
 

@@ -36,4 +36,4 @@ class MessageListParams(TypedDict, total=False):
     """Sort order for messages (desc or asc)"""
 
     skip_users: str
-    """Whether to skip user details (all or none)"""
+    """Whether to skip user details (`all` or `none`)."""

@@ -3,27 +3,40 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["TrialLinkListParams"]
 
 
 class TrialLinkListParams(TypedDict, total=False):
-    limit: Required[int]
-    """The number of trial links to return. Default `10`"""
+    end_date: Annotated[Optional[str], PropertyInfo(alias="endDate")]
+    """The end date for trial links.
 
-    offset: Required[int]
-    """The offset used for pagination. Default `0`"""
-
-    field: Optional[Literal["create_date", "expire_date", "subscribe_counts", "subscribe_days", "claims_count"]]
-    """Sort the results by a field. Default `create_date`"""
-
-    sort: Optional[Literal["desc", "asc"]]
-    """Sort the results. Default `desc`"""
-
-    synchronous: Optional[bool]
+    Keep empty to get all. Must not be greater than 255 characters.
     """
-    Wait for the revenue data to finish processing, instead of processing in the
-    background. **Will result in longer response times, use with caution**. Default
-    `false`
+
+    field: Literal["create_date", "expire_date", "subscribe_counts", "subscribe_days", "claims_count"]
+    """Field to sort by. Default `create_date`."""
+
+    limit: int
+    """The number of trial links to return.
+
+    Default `10`. Must be at least 1. Must not be greater than 100.
     """
+
+    offset: int
+    """The offset used for pagination. Default `0`. Must be at least 0."""
+
+    sort: Literal["asc", "desc"]
+    """Sort direction. Default `desc`."""
+
+    start_date: Annotated[Optional[str], PropertyInfo(alias="startDate")]
+    """The start date for trial links.
+
+    Keep empty to get all. Must not be greater than 255 characters.
+    """
+
+    synchronous: bool
+    """Wait for revenue calculation instead of processing it in the background."""

@@ -80,6 +80,8 @@ class DataData(BaseModel):
 
     failed_at: Optional[str] = None
 
+    failed_downloads: Optional[int] = None
+
     failed_reason: Optional[str] = None
 
     file_type: Optional[str] = None

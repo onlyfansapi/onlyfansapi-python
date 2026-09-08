@@ -422,16 +422,18 @@ class TestMessages:
         message = client.chats.messages.send(
             chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            block_banned_words="strict_ban",
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", 1234567890],
             previews=["ofapi_media_abc123", 1234567890],
-            price=10,
+            price=6.97,
             reply_to_message_id=123456789,
             rf_guest="rfGuest",
             rf_partner="rfPartner",
             rf_tag="rfTag",
             text="Hello!",
+            idempotency_key="a1b2c3d4-5e6f-4789-a0b1-c2d3e4f5a6b7",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 
@@ -1007,16 +1009,18 @@ class TestAsyncMessages:
         message = await async_client.chats.messages.send(
             chat_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            block_banned_words="strict_ban",
             giphy_id="WAGC3LeqJvXglm5H7a",
             locked_text=True,
             media_files=["ofapi_media_abc123", 1234567890],
             previews=["ofapi_media_abc123", 1234567890],
-            price=10,
+            price=6.97,
             reply_to_message_id=123456789,
             rf_guest="rfGuest",
             rf_partner="rfPartner",
             rf_tag="rfTag",
             text="Hello!",
+            idempotency_key="a1b2c3d4-5e6f-4789-a0b1-c2d3e4f5a6b7",
         )
         assert_matches_type(MessageSendResponse, message, path=["response"])
 

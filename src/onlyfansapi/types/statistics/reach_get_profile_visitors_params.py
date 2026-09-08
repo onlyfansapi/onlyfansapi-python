@@ -13,7 +13,7 @@ class ReachGetProfileVisitorsParams(TypedDict, total=False):
     """The end date for the period."""
 
     start_date: Required[str]
-    """The start date for the period"""
+    """The start date for the period."""
 
     filter: Optional[Literal["chart", "topCountries"]]
     """Optionally, filter the results by `chart` or `topCountries`.

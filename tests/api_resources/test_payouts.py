@@ -177,8 +177,8 @@ class TestPayouts:
     def test_method_retrieve_earning_statistics_with_all_params(self, client: OnlyFansAPI) -> None:
         payout = client.payouts.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-01-01 00:00:00, +30days",
-            start_date="2025-01-01 00:00:00, -30days",
+            end_date="2025-01-31 23:59:59",
+            start_date="2025-01-01 00:00:00",
         )
         assert_matches_type(PayoutRetrieveEarningStatisticsResponse, payout, path=["response"])
 
@@ -463,8 +463,8 @@ class TestAsyncPayouts:
     async def test_method_retrieve_earning_statistics_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         payout = await async_client.payouts.retrieve_earning_statistics(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-01-01 00:00:00, +30days",
-            start_date="2025-01-01 00:00:00, -30days",
+            end_date="2025-01-31 23:59:59",
+            start_date="2025-01-01 00:00:00",
         )
         assert_matches_type(PayoutRetrieveEarningStatisticsResponse, payout, path=["response"])
 

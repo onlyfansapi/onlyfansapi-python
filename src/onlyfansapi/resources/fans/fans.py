@@ -141,11 +141,23 @@ class FansResource(SyncAPIResource):
     ) -> FanListActiveResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped. To
+        track progress, GET `/{account}/me` returns data.subscribersCount (the current
+        active-subscriber count) as a total.
+
+        Supports `filter[max_total_spent]` (e.g. `filter[max_total_spent]=0` for fans
+        who have never spent), which OnlyFans itself cannot do. Those requests are
+        answered from OnlyFansAPI's own fan index rather than proxied, so the page is
+        limited to fans we have already indexed for this account — see `data._source` in
+        the response.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -202,11 +214,21 @@ class FansResource(SyncAPIResource):
     ) -> FanListAllResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped.
+
+        Supports `filter[max_total_spent]` (e.g. `filter[max_total_spent]=0` for fans
+        who have never spent), which OnlyFans itself cannot do. Those requests are
+        answered from OnlyFansAPI's own fan index rather than proxied, so the page is
+        limited to fans we have already indexed for this account — see `data._source` in
+        the response.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -264,10 +286,21 @@ class FansResource(SyncAPIResource):
         """Get a paginated list of expired fans for an Account.
 
         Newest fans are first.
+        Paginate by following `_pagination.next_page` until it is null (`data.hasMore`
+        is the authoritative flag). Do NOT use the page's item count to detect the last
+        page — OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for
+        limit=20) on a non-final page because it filters entries server-side; no fans
+        are skipped.
+
+        Supports `filter[max_total_spent]` (e.g. `filter[max_total_spent]=0` for fans
+        who have never spent), which OnlyFans itself cannot do. Those requests are
+        answered from OnlyFansAPI's own fan index rather than proxied, so the page is
+        limited to fans we have already indexed for this account — see `data._source` in
+        the response.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -327,16 +360,16 @@ class FansResource(SyncAPIResource):
         renewals. Newest fans are first.
 
         Args:
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 100.
+              than 50.
 
           offset: Number of fans to skip. Must be at least 0.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           type: Filter by type: total, renew, or new.
 
@@ -393,11 +426,11 @@ class FansResource(SyncAPIResource):
         Args:
           by: Sort by: total (default), subscribes, tips, messages, post, streams.
 
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           extra_headers: Send extra headers
 
@@ -558,11 +591,23 @@ class AsyncFansResource(AsyncAPIResource):
     ) -> FanListActiveResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped. To
+        track progress, GET `/{account}/me` returns data.subscribersCount (the current
+        active-subscriber count) as a total.
+
+        Supports `filter[max_total_spent]` (e.g. `filter[max_total_spent]=0` for fans
+        who have never spent), which OnlyFans itself cannot do. Those requests are
+        answered from OnlyFansAPI's own fan index rather than proxied, so the page is
+        limited to fans we have already indexed for this account — see `data._source` in
+        the response.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -619,11 +664,21 @@ class AsyncFansResource(AsyncAPIResource):
     ) -> FanListAllResponse:
         """Get a paginated list of fans for an Account.
 
-        Newest fans are first.
+        Newest fans are first. Paginate by
+        following `_pagination.next_page` until it is null (`data.hasMore` is the
+        authoritative flag). Do NOT use the page's item count to detect the last page —
+        OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for limit=20) on
+        a non-final page because it filters entries server-side; no fans are skipped.
+
+        Supports `filter[max_total_spent]` (e.g. `filter[max_total_spent]=0` for fans
+        who have never spent), which OnlyFans itself cannot do. Those requests are
+        answered from OnlyFansAPI's own fan index rather than proxied, so the page is
+        limited to fans we have already indexed for this account — see `data._source` in
+        the response.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -681,10 +736,21 @@ class AsyncFansResource(AsyncAPIResource):
         """Get a paginated list of expired fans for an Account.
 
         Newest fans are first.
+        Paginate by following `_pagination.next_page` until it is null (`data.hasMore`
+        is the authoritative flag). Do NOT use the page's item count to detect the last
+        page — OnlyFans occasionally returns fewer than `limit` items (e.g. 19 for
+        limit=20) on a non-final page because it filters entries server-side; no fans
+        are skipped.
+
+        Supports `filter[max_total_spent]` (e.g. `filter[max_total_spent]=0` for fans
+        who have never spent), which OnlyFans itself cannot do. Those requests are
+        answered from OnlyFansAPI's own fan index rather than proxied, so the page is
+        limited to fans we have already indexed for this account — see `data._source` in
+        the response.
 
         Args:
-          limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 20.
+          limit: Number of fans to return (1-20). OnlyFans does not allow more than 20 per page.
+              Must be at least 1. Must not be greater than 20.
 
           offset: Number of fans to skip. Must be at least 0.
 
@@ -744,16 +810,16 @@ class AsyncFansResource(AsyncAPIResource):
         renewals. Newest fans are first.
 
         Args:
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           limit: Number of fans to return (1-50). Must be at least 1. Must not be greater
-              than 100.
+              than 50.
 
           offset: Number of fans to skip. Must be at least 0.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           type: Filter by type: total, renew, or new.
 
@@ -810,11 +876,11 @@ class AsyncFansResource(AsyncAPIResource):
         Args:
           by: Sort by: total (default), subscribes, tips, messages, post, streams.
 
-          end_date: End date for filtering (required with start_date). This field is required when
-              <code>start_date</code> is present.
+          end_date: End date for filtering (required with start_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
-          start_date: Start date for filtering (required with end_date). This field is required when
-              <code>end_date</code> is present.
+          start_date: Start date for filtering (required with end_date). Must be a valid date. Must
+              not be greater than 255 characters.
 
           extra_headers: Send extra headers
 

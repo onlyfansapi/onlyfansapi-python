@@ -11,7 +11,7 @@ __all__ = ["DirectMessageChartParams"]
 
 class DirectMessageChartParams(TypedDict, total=False):
     end_date: Annotated[str, PropertyInfo(alias="endDate")]
-    """End of the chart window in `Y-m-d H:i:s` format. Must be after `startDate`."""
+    """End of the chart window in `Y-m-d H:i:s` format. It must be after `startDate`."""
 
     start_date: Annotated[str, PropertyInfo(alias="startDate")]
     """Start of the chart window in `Y-m-d H:i:s` format."""

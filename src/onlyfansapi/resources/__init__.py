@@ -128,14 +128,6 @@ from .accounts import (
     AccountsResourceWithStreamingResponse,
     AsyncAccountsResourceWithStreamingResponse,
 )
-from .messages import (
-    MessagesResource,
-    AsyncMessagesResource,
-    MessagesResourceWithRawResponse,
-    AsyncMessagesResourceWithRawResponse,
-    MessagesResourceWithStreamingResponse,
-    AsyncMessagesResourceWithStreamingResponse,
-)
 from .profiles import (
     ProfilesResource,
     AsyncProfilesResource,
@@ -388,12 +380,6 @@ __all__ = [
     "AsyncChatsResourceWithRawResponse",
     "ChatsResourceWithStreamingResponse",
     "AsyncChatsResourceWithStreamingResponse",
-    "MessagesResource",
-    "AsyncMessagesResource",
-    "MessagesResourceWithRawResponse",
-    "AsyncMessagesResourceWithRawResponse",
-    "MessagesResourceWithStreamingResponse",
-    "AsyncMessagesResourceWithStreamingResponse",
     "ClientSessionsResource",
     "AsyncClientSessionsResource",
     "ClientSessionsResourceWithRawResponse",

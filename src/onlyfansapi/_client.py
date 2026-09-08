@@ -53,7 +53,6 @@ if TYPE_CHECKING:
         payouts,
         stories,
         accounts,
-        messages,
         profiles,
         settings,
         webhooks,
@@ -90,7 +89,6 @@ if TYPE_CHECKING:
     from .resources.bundles import BundlesResource, AsyncBundlesResource
     from .resources.payouts import PayoutsResource, AsyncPayoutsResource
     from .resources.accounts import AccountsResource, AsyncAccountsResource
-    from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.fans.fans import FansResource, AsyncFansResource
@@ -252,12 +250,6 @@ class OnlyFansAPI(SyncAPIClient):
         return ChatsResource(self)
 
     @cached_property
-    def messages(self) -> MessagesResource:
-        from .resources.messages import MessagesResource
-
-        return MessagesResource(self)
-
-    @cached_property
     def client_sessions(self) -> ClientSessionsResource:
         from .resources.client_sessions import ClientSessionsResource
 
@@ -311,7 +303,7 @@ class OnlyFansAPI(SyncAPIClient):
 
     @cached_property
     def link_tags(self) -> LinkTagsResource:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import LinkTagsResource
 
         return LinkTagsResource(self)
@@ -505,9 +497,11 @@ class OnlyFansAPI(SyncAPIClient):
 
     @override
     def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
-        return {
-            **(self._default if security.get("default", False) else {}),
-        }
+        headers: dict[str, str] = {}
+        if security.get("default", False):
+            for key, value in self._default.items():
+                headers.setdefault(key, value)
+        return headers
 
     @property
     def _default(self) -> dict[str, str]:
@@ -720,12 +714,6 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
         return AsyncChatsResource(self)
 
     @cached_property
-    def messages(self) -> AsyncMessagesResource:
-        from .resources.messages import AsyncMessagesResource
-
-        return AsyncMessagesResource(self)
-
-    @cached_property
     def client_sessions(self) -> AsyncClientSessionsResource:
         from .resources.client_sessions import AsyncClientSessionsResource
 
@@ -779,7 +767,7 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
 
     @cached_property
     def link_tags(self) -> AsyncLinkTagsResource:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import AsyncLinkTagsResource
 
         return AsyncLinkTagsResource(self)
@@ -973,9 +961,11 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
 
     @override
     def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
-        return {
-            **(self._default if security.get("default", False) else {}),
-        }
+        headers: dict[str, str] = {}
+        if security.get("default", False):
+            for key, value in self._default.items():
+                headers.setdefault(key, value)
+        return headers
 
     @property
     def _default(self) -> dict[str, str]:
@@ -1130,12 +1120,6 @@ class OnlyFansAPIWithRawResponse:
         return ChatsResourceWithRawResponse(self._client.chats)
 
     @cached_property
-    def messages(self) -> messages.MessagesResourceWithRawResponse:
-        from .resources.messages import MessagesResourceWithRawResponse
-
-        return MessagesResourceWithRawResponse(self._client.messages)
-
-    @cached_property
     def client_sessions(self) -> client_sessions.ClientSessionsResourceWithRawResponse:
         from .resources.client_sessions import ClientSessionsResourceWithRawResponse
 
@@ -1189,7 +1173,7 @@ class OnlyFansAPIWithRawResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.LinkTagsResourceWithRawResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import LinkTagsResourceWithRawResponse
 
         return LinkTagsResourceWithRawResponse(self._client.link_tags)
@@ -1423,12 +1407,6 @@ class AsyncOnlyFansAPIWithRawResponse:
         return AsyncChatsResourceWithRawResponse(self._client.chats)
 
     @cached_property
-    def messages(self) -> messages.AsyncMessagesResourceWithRawResponse:
-        from .resources.messages import AsyncMessagesResourceWithRawResponse
-
-        return AsyncMessagesResourceWithRawResponse(self._client.messages)
-
-    @cached_property
     def client_sessions(self) -> client_sessions.AsyncClientSessionsResourceWithRawResponse:
         from .resources.client_sessions import AsyncClientSessionsResourceWithRawResponse
 
@@ -1482,7 +1460,7 @@ class AsyncOnlyFansAPIWithRawResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.AsyncLinkTagsResourceWithRawResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import AsyncLinkTagsResourceWithRawResponse
 
         return AsyncLinkTagsResourceWithRawResponse(self._client.link_tags)
@@ -1716,12 +1694,6 @@ class OnlyFansAPIWithStreamedResponse:
         return ChatsResourceWithStreamingResponse(self._client.chats)
 
     @cached_property
-    def messages(self) -> messages.MessagesResourceWithStreamingResponse:
-        from .resources.messages import MessagesResourceWithStreamingResponse
-
-        return MessagesResourceWithStreamingResponse(self._client.messages)
-
-    @cached_property
     def client_sessions(self) -> client_sessions.ClientSessionsResourceWithStreamingResponse:
         from .resources.client_sessions import ClientSessionsResourceWithStreamingResponse
 
@@ -1775,7 +1747,7 @@ class OnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.LinkTagsResourceWithStreamingResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import LinkTagsResourceWithStreamingResponse
 
         return LinkTagsResourceWithStreamingResponse(self._client.link_tags)
@@ -2009,12 +1981,6 @@ class AsyncOnlyFansAPIWithStreamedResponse:
         return AsyncChatsResourceWithStreamingResponse(self._client.chats)
 
     @cached_property
-    def messages(self) -> messages.AsyncMessagesResourceWithStreamingResponse:
-        from .resources.messages import AsyncMessagesResourceWithStreamingResponse
-
-        return AsyncMessagesResourceWithStreamingResponse(self._client.messages)
-
-    @cached_property
     def client_sessions(self) -> client_sessions.AsyncClientSessionsResourceWithStreamingResponse:
         from .resources.client_sessions import AsyncClientSessionsResourceWithStreamingResponse
 
@@ -2068,7 +2034,7 @@ class AsyncOnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def link_tags(self) -> link_tags.AsyncLinkTagsResourceWithStreamingResponse:
-        """APIs for managing tags on free trial links and tracking links"""
+        """APIs for managing tags on free trial links, tracking links, and Smart Links"""
         from .resources.link_tags import AsyncLinkTagsResourceWithStreamingResponse
 
         return AsyncLinkTagsResourceWithStreamingResponse(self._client.link_tags)

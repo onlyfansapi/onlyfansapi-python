@@ -93,7 +93,7 @@ class MessagesResource(SyncAPIResource):
 
           offset: Offset for pagination (default = 0)
 
-          skip_users: Optional flag for subsequent pages (example: all)
+          skip_users: Optional flag for subsequent pages (example: all).
 
           skip_users_dups: Skip duplicate users in results (0/1). Default = 1
 
@@ -149,8 +149,8 @@ class MessagesResource(SyncAPIResource):
         Get the top performing message by purchases in the selected timeframe.
 
         Args:
-          end_date: The end date for the period. Keep empty to retrieve until now. MUST BE DATE
-              AFTER `startDate`.
+          end_date: The end date for the period. Keep empty to retrieve until now. It must be after
+              `startDate`.
 
           start_date: The start date for the period. Keep empty to retrieve from the model start date.
 
@@ -238,7 +238,7 @@ class AsyncMessagesResource(AsyncAPIResource):
 
           offset: Offset for pagination (default = 0)
 
-          skip_users: Optional flag for subsequent pages (example: all)
+          skip_users: Optional flag for subsequent pages (example: all).
 
           skip_users_dups: Skip duplicate users in results (0/1). Default = 1
 
@@ -294,8 +294,8 @@ class AsyncMessagesResource(AsyncAPIResource):
         Get the top performing message by purchases in the selected timeframe.
 
         Args:
-          end_date: The end date for the period. Keep empty to retrieve until now. MUST BE DATE
-              AFTER `startDate`.
+          end_date: The end date for the period. Keep empty to retrieve until now. It must be after
+              `startDate`.
 
           start_date: The start date for the period. Keep empty to retrieve from the model start date.
 

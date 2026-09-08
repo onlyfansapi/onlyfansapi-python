@@ -20,7 +20,7 @@ class MessageGetMessageBuyersParams(TypedDict, total=False):
     """Offset for pagination (default = 0)"""
 
     skip_users: str
-    """Optional flag for subsequent pages (example: all)"""
+    """Optional flag for subsequent pages (example: all)."""
 
     skip_users_dups: int
     """Skip duplicate users in results (0/1). Default = 1"""

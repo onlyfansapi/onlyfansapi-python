@@ -37,6 +37,44 @@ class TestStories:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_create_with_all_params(self, client: OnlyFansAPI) -> None:
+        story = client.stories.create(
+            account="acct_XXXXXXXXXXXXXXX",
+            media_files=["ofapi_media_abc123", "string"],
+            canvas_height=1920,
+            canvas_width=1080,
+            question={
+                "color": "#FF51DC",
+                "height": 160,
+                "left": 25,
+                "text": "Ask me anything!",
+                "top": 30,
+                "width": 257,
+            },
+            texts=[
+                {
+                    "text": "New drop today!",
+                    "angle": 0,
+                    "bg_color": "#FF51DC",
+                    "color": "#FFFFFF",
+                    "font_family": "ShantellSans",
+                    "font_size": 24,
+                    "font_weight": 400,
+                    "left": 30.5,
+                    "scale": 1,
+                    "text_align": "center",
+                    "text_height": 36,
+                    "text_width": 140,
+                    "top": 60,
+                    "type": "text",
+                    "z_index": 8,
+                }
+            ],
+        )
+        assert_matches_type(StoryCreateResponse, story, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_create(self, client: OnlyFansAPI) -> None:
         response = client.stories.with_raw_response.create(
             account="acct_XXXXXXXXXXXXXXX",
@@ -419,6 +457,44 @@ class TestAsyncStories:
         story = await async_client.stories.create(
             account="acct_XXXXXXXXXXXXXXX",
             media_files=["ofapi_media_abc123", "string"],
+        )
+        assert_matches_type(StoryCreateResponse, story, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        story = await async_client.stories.create(
+            account="acct_XXXXXXXXXXXXXXX",
+            media_files=["ofapi_media_abc123", "string"],
+            canvas_height=1920,
+            canvas_width=1080,
+            question={
+                "color": "#FF51DC",
+                "height": 160,
+                "left": 25,
+                "text": "Ask me anything!",
+                "top": 30,
+                "width": 257,
+            },
+            texts=[
+                {
+                    "text": "New drop today!",
+                    "angle": 0,
+                    "bg_color": "#FF51DC",
+                    "color": "#FFFFFF",
+                    "font_family": "ShantellSans",
+                    "font_size": 24,
+                    "font_weight": 400,
+                    "left": 30.5,
+                    "scale": 1,
+                    "text_align": "center",
+                    "text_height": 36,
+                    "text_width": 140,
+                    "top": 60,
+                    "type": "text",
+                    "z_index": 8,
+                }
+            ],
         )
         assert_matches_type(StoryCreateResponse, story, path=["response"])
 

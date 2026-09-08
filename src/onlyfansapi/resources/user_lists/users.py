@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
@@ -104,6 +106,7 @@ class UsersResource(SyncAPIResource):
         *,
         account: str,
         ids: SequenceNotStr[str],
+        skip_invalid: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -117,6 +120,14 @@ class UsersResource(SyncAPIResource):
         Args:
           ids: Array of OnlyFans User IDs to be added into the list
 
+          skip_invalid: Set to `true` to skip the User IDs OnlyFans refuses instead of failing the whole
+              batch. We drop the rejected IDs and retry the remainder for you (up to 5
+              OnlyFans attempts, each costing 1 credit), then respond `200` with `data.added`
+              (the IDs that made it in) and `data.failed` (an object mapping each rejected
+              User ID to the reason OnlyFans gave). Note this changes the shape of `data` —
+              see the example responses. Failures that are not about individual users (e.g. an
+              invalid or inaccessible list ID) still return the regular `400`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -129,13 +140,24 @@ class UsersResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not user_list_id:
             raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
-        return self._post(
-            path_template("/api/{account}/user-lists/{user_list_id}/users", account=account, user_list_id=user_list_id),
-            body=maybe_transform({"ids": ids}, user_add_params.UserAddParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            UserAddResponse,
+            self._post(
+                path_template(
+                    "/api/{account}/user-lists/{user_list_id}/users", account=account, user_list_id=user_list_id
+                ),
+                body=maybe_transform(
+                    {
+                        "ids": ids,
+                        "skip_invalid": skip_invalid,
+                    },
+                    user_add_params.UserAddParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, UserAddResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=UserAddResponse,
         )
 
     def clear(
@@ -391,6 +413,7 @@ class AsyncUsersResource(AsyncAPIResource):
         *,
         account: str,
         ids: SequenceNotStr[str],
+        skip_invalid: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -404,6 +427,14 @@ class AsyncUsersResource(AsyncAPIResource):
         Args:
           ids: Array of OnlyFans User IDs to be added into the list
 
+          skip_invalid: Set to `true` to skip the User IDs OnlyFans refuses instead of failing the whole
+              batch. We drop the rejected IDs and retry the remainder for you (up to 5
+              OnlyFans attempts, each costing 1 credit), then respond `200` with `data.added`
+              (the IDs that made it in) and `data.failed` (an object mapping each rejected
+              User ID to the reason OnlyFans gave). Note this changes the shape of `data` —
+              see the example responses. Failures that are not about individual users (e.g. an
+              invalid or inaccessible list ID) still return the regular `400`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -416,13 +447,24 @@ class AsyncUsersResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not user_list_id:
             raise ValueError(f"Expected a non-empty value for `user_list_id` but received {user_list_id!r}")
-        return await self._post(
-            path_template("/api/{account}/user-lists/{user_list_id}/users", account=account, user_list_id=user_list_id),
-            body=await async_maybe_transform({"ids": ids}, user_add_params.UserAddParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            UserAddResponse,
+            await self._post(
+                path_template(
+                    "/api/{account}/user-lists/{user_list_id}/users", account=account, user_list_id=user_list_id
+                ),
+                body=await async_maybe_transform(
+                    {
+                        "ids": ids,
+                        "skip_invalid": skip_invalid,
+                    },
+                    user_add_params.UserAddParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(Any, UserAddResponse),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=UserAddResponse,
         )
 
     async def clear(

@@ -35,7 +35,11 @@ class TestSharedTrackingLinks:
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
+            pagination=1,
+            sorting_deleted=1,
+            stats="true",
             synchronous=False,
+            with_deleted=1,
         )
         assert_matches_type(SharedTrackingLinkListResponse, shared_tracking_link, path=["response"])
 
@@ -140,7 +144,11 @@ class TestAsyncSharedTrackingLinks:
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
+            pagination=1,
+            sorting_deleted=1,
+            stats="true",
             synchronous=False,
+            with_deleted=1,
         )
         assert_matches_type(SharedTrackingLinkListResponse, shared_tracking_link, path=["response"])
 
