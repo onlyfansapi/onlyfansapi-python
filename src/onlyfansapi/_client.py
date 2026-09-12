@@ -290,7 +290,10 @@ class OnlyFansAPI(SyncAPIClient):
 
     @cached_property
     def trial_links(self) -> TrialLinksResource:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.trial_links import TrialLinksResource
 
         return TrialLinksResource(self)
@@ -451,7 +454,10 @@ class OnlyFansAPI(SyncAPIClient):
 
     @cached_property
     def tracking_links(self) -> TrackingLinksResource:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.tracking_links import TrackingLinksResource
 
         return TrackingLinksResource(self)
@@ -754,7 +760,10 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
 
     @cached_property
     def trial_links(self) -> AsyncTrialLinksResource:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.trial_links import AsyncTrialLinksResource
 
         return AsyncTrialLinksResource(self)
@@ -915,7 +924,10 @@ class AsyncOnlyFansAPI(AsyncAPIClient):
 
     @cached_property
     def tracking_links(self) -> AsyncTrackingLinksResource:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.tracking_links import AsyncTrackingLinksResource
 
         return AsyncTrackingLinksResource(self)
@@ -1160,7 +1172,10 @@ class OnlyFansAPIWithRawResponse:
 
     @cached_property
     def trial_links(self) -> trial_links.TrialLinksResourceWithRawResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.trial_links import TrialLinksResourceWithRawResponse
 
         return TrialLinksResourceWithRawResponse(self._client.trial_links)
@@ -1321,7 +1336,10 @@ class OnlyFansAPIWithRawResponse:
 
     @cached_property
     def tracking_links(self) -> tracking_links.TrackingLinksResourceWithRawResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.tracking_links import TrackingLinksResourceWithRawResponse
 
         return TrackingLinksResourceWithRawResponse(self._client.tracking_links)
@@ -1447,7 +1465,10 @@ class AsyncOnlyFansAPIWithRawResponse:
 
     @cached_property
     def trial_links(self) -> trial_links.AsyncTrialLinksResourceWithRawResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.trial_links import AsyncTrialLinksResourceWithRawResponse
 
         return AsyncTrialLinksResourceWithRawResponse(self._client.trial_links)
@@ -1608,7 +1629,10 @@ class AsyncOnlyFansAPIWithRawResponse:
 
     @cached_property
     def tracking_links(self) -> tracking_links.AsyncTrackingLinksResourceWithRawResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.tracking_links import AsyncTrackingLinksResourceWithRawResponse
 
         return AsyncTrackingLinksResourceWithRawResponse(self._client.tracking_links)
@@ -1734,7 +1758,10 @@ class OnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def trial_links(self) -> trial_links.TrialLinksResourceWithStreamingResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.trial_links import TrialLinksResourceWithStreamingResponse
 
         return TrialLinksResourceWithStreamingResponse(self._client.trial_links)
@@ -1895,7 +1922,10 @@ class OnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def tracking_links(self) -> tracking_links.TrackingLinksResourceWithStreamingResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.tracking_links import TrackingLinksResourceWithStreamingResponse
 
         return TrackingLinksResourceWithStreamingResponse(self._client.tracking_links)
@@ -2021,7 +2051,10 @@ class AsyncOnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def trial_links(self) -> trial_links.AsyncTrialLinksResourceWithStreamingResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.trial_links import AsyncTrialLinksResourceWithStreamingResponse
 
         return AsyncTrialLinksResourceWithStreamingResponse(self._client.trial_links)
@@ -2182,7 +2215,10 @@ class AsyncOnlyFansAPIWithStreamedResponse:
 
     @cached_property
     def tracking_links(self) -> tracking_links.AsyncTrackingLinksResourceWithStreamingResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         from .resources.tracking_links import AsyncTrackingLinksResourceWithStreamingResponse
 
         return AsyncTrackingLinksResourceWithStreamingResponse(self._client.tracking_links)
