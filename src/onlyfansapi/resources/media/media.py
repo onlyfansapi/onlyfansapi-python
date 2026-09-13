@@ -82,14 +82,19 @@ class MediaResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
-
-        When the
-        file is already cached on our CDN, this endpoint returns a `302` redirect to a
-        `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
-        automatically (`curl` requires `-L`). Otherwise, the file is redirected to
-        `dl.fansapi.com`, which streams it through the account proxy and reports billing
-        back to the API.
+        """
+        Downloads a file from a `https://cdn*.onlyfans.com/*` URL through a `302`
+        redirect. Follow redirects (`curl -L`). Cached `cdn.fansapi.com` files are free;
+        otherwise `dl.fansapi.com` streams through the account proxy. Send one
+        `Range: bytes=start-end` header to request a chunk for playback or a preview. A
+        supported range returns `206`, `Content-Range`, and the chunk Content-Length; an
+        upstream that ignores Range can return a full `200`, so check the response. Each
+        nonempty transfer costs 3 credits per decimal MB streamed (minimum 1 credit).
+        Credits for the selected response are reserved before streaming; unused reserved
+        credits are released on completion, including an interrupted transfer. HEAD
+        follows the same redirects and returns metadata without a body or download
+        charge. HEAD does not populate the media cache. This regular endpoint does not
+        decrypt DRM media.
 
         Args:
           extra_headers: Send extra headers
@@ -289,14 +294,19 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
-
-        When the
-        file is already cached on our CDN, this endpoint returns a `302` redirect to a
-        `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
-        automatically (`curl` requires `-L`). Otherwise, the file is redirected to
-        `dl.fansapi.com`, which streams it through the account proxy and reports billing
-        back to the API.
+        """
+        Downloads a file from a `https://cdn*.onlyfans.com/*` URL through a `302`
+        redirect. Follow redirects (`curl -L`). Cached `cdn.fansapi.com` files are free;
+        otherwise `dl.fansapi.com` streams through the account proxy. Send one
+        `Range: bytes=start-end` header to request a chunk for playback or a preview. A
+        supported range returns `206`, `Content-Range`, and the chunk Content-Length; an
+        upstream that ignores Range can return a full `200`, so check the response. Each
+        nonempty transfer costs 3 credits per decimal MB streamed (minimum 1 credit).
+        Credits for the selected response are reserved before streaming; unused reserved
+        credits are released on completion, including an interrupted transfer. HEAD
+        follows the same redirects and returns metadata without a body or download
+        charge. HEAD does not populate the media cache. This regular endpoint does not
+        decrypt DRM media.
 
         Args:
           extra_headers: Send extra headers
