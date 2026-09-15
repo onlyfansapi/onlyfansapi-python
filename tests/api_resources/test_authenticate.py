@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="laudantium",
-            auth_type="mobile_app",
-            cookies="culpa",
+            auth_id="corrupti",
+            auth_type="raw_data",
+            cookies="veniam",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": '",_u0P8(~CFB#MYwfG',
+                "password": ")H4n'%j`HpbHc@`fE3b@",
                 "port": 8080,
-                "username": "dignissimos",
+                "username": "inventore",
             },
-            email="hane.alexanne@example.com",
+            email="jennings74@example.org",
             force_connect=False,
-            name="tenetur",
-            password="+>`wu1bE|bsaGNwN",
+            name="rerum",
+            password="/n&O/Pu7YnV1fa(|w]z~",
             proxy_country="us",
-            user_agent="fugit",
-            xbc="velit",
+            user_agent="quod",
+            xbc="id",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="laudantium",
-            auth_type="mobile_app",
-            cookies="culpa",
+            auth_id="corrupti",
+            auth_type="raw_data",
+            cookies="veniam",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": '",_u0P8(~CFB#MYwfG',
+                "password": ")H4n'%j`HpbHc@`fE3b@",
                 "port": 8080,
-                "username": "dignissimos",
+                "username": "inventore",
             },
-            email="hane.alexanne@example.com",
+            email="jennings74@example.org",
             force_connect=False,
-            name="tenetur",
-            password="+>`wu1bE|bsaGNwN",
+            name="rerum",
+            password="/n&O/Pu7YnV1fa(|w]z~",
             proxy_country="us",
-            user_agent="fugit",
-            xbc="velit",
+            user_agent="quod",
+            xbc="id",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
