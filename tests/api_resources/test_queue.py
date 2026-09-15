@@ -41,7 +41,7 @@ class TestQueue:
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
             limit=20,
-            type=["post"],
+            type=["chat"],
         )
         assert_matches_type(QueueListResponse, queue, path=["response"])
 
@@ -220,7 +220,7 @@ class TestAsyncQueue:
             publish_date_start="2025-01-01",
             timezone="Europe/Prague",
             limit=20,
-            type=["post"],
+            type=["chat"],
         )
         assert_matches_type(QueueListResponse, queue, path=["response"])
 
