@@ -17,7 +17,7 @@ from .uploads import (
     AsyncUploadsResourceWithStreamingResponse,
 )
 from ..._files import deepcopy_with_paths
-from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
 from ..._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -81,14 +81,20 @@ class MediaResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
-        """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
-
-        When the
-        file is already cached on our CDN, this endpoint returns a `302` redirect to a
-        `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
-        automatically (`curl` requires `-L`). Otherwise, the file is streamed through
-        our proxies and queued for caching.
+    ) -> None:
+        """
+        Downloads a file from a `https://cdn*.onlyfans.com/*` URL through a `302`
+        redirect. Follow redirects (`curl -L`). Cached `cdn.fansapi.com` files are free;
+        otherwise `dl.fansapi.com` streams through the account proxy. Send one
+        `Range: bytes=start-end` header to request a chunk for playback or a preview. A
+        supported range returns `206`, `Content-Range`, and the chunk Content-Length; an
+        upstream that ignores Range can return a full `200`, so check the response. Each
+        nonempty transfer costs 3 credits per decimal MB streamed (minimum 1 credit).
+        Credits for the selected response are reserved before streaming; unused reserved
+        credits are released on completion, including an interrupted transfer. HEAD
+        follows the same redirects and returns metadata without a body or download
+        charge. HEAD does not populate the media cache. This regular endpoint does not
+        decrypt DRM media.
 
         Args:
           extra_headers: Send extra headers
@@ -103,13 +109,13 @@ class MediaResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not cdn_url:
             raise ValueError(f"Expected a non-empty value for `cdn_url` but received {cdn_url!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             path_template("/api/{account}/media/download/{cdn_url}", account=account, cdn_url=cdn_url),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
     def scrape(
@@ -199,7 +205,9 @@ class MediaResource(SyncAPIResource):
 
         Args:
           async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
-              check status. Recommended for large files.
+              check status. Recommended for large files. Instead of polling, you can subscribe
+              to the `media_uploads.completed` and `media_uploads.failed` webhook events —
+              they only fire for async uploads.
 
           file:
               The file to upload. Required if `file_url` is not provided. Maximum file size:
@@ -285,14 +293,20 @@ class AsyncMediaResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
-        """Downloads a file directly from a `https://cdn*.onlyfans.com/*` URL.
-
-        When the
-        file is already cached on our CDN, this endpoint returns a `302` redirect to a
-        `https://cdn.fansapi.com/*` URL. Most HTTP clients follow redirects
-        automatically (`curl` requires `-L`). Otherwise, the file is streamed through
-        our proxies and queued for caching.
+    ) -> None:
+        """
+        Downloads a file from a `https://cdn*.onlyfans.com/*` URL through a `302`
+        redirect. Follow redirects (`curl -L`). Cached `cdn.fansapi.com` files are free;
+        otherwise `dl.fansapi.com` streams through the account proxy. Send one
+        `Range: bytes=start-end` header to request a chunk for playback or a preview. A
+        supported range returns `206`, `Content-Range`, and the chunk Content-Length; an
+        upstream that ignores Range can return a full `200`, so check the response. Each
+        nonempty transfer costs 3 credits per decimal MB streamed (minimum 1 credit).
+        Credits for the selected response are reserved before streaming; unused reserved
+        credits are released on completion, including an interrupted transfer. HEAD
+        follows the same redirects and returns metadata without a body or download
+        charge. HEAD does not populate the media cache. This regular endpoint does not
+        decrypt DRM media.
 
         Args:
           extra_headers: Send extra headers
@@ -307,13 +321,13 @@ class AsyncMediaResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         if not cdn_url:
             raise ValueError(f"Expected a non-empty value for `cdn_url` but received {cdn_url!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             path_template("/api/{account}/media/download/{cdn_url}", account=account, cdn_url=cdn_url),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
     async def scrape(
@@ -403,7 +417,9 @@ class AsyncMediaResource(AsyncAPIResource):
 
         Args:
           async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
-              check status. Recommended for large files.
+              check status. Recommended for large files. Instead of polling, you can subscribe
+              to the `media_uploads.completed` and `media_uploads.failed` webhook events —
+              they only fire for async uploads.
 
           file:
               The file to upload. Required if `file_url` is not provided. Maximum file size:

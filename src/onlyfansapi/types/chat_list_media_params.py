@@ -18,7 +18,10 @@ class ChatListMediaParams(TypedDict, total=False):
     """Number of medias to skip for pagination"""
 
     skip_users: str
-    """Whether to skip user details in response (all or none). Default = all"""
+    """Whether to skip user details in the response (`all` or `none`).
+
+    Defaults to `all`.
+    """
 
     type: Optional[Literal["photos", "videos", "audios"]]
     """Filter by specific media types. Keep empty to return all."""

@@ -47,8 +47,8 @@ class StatementsResource(SyncAPIResource):
         self,
         account: str,
         *,
+        end_date: str,
         start_date: str,
-        end_date: str | Omit = omit,
         type: Literal["total", "subscribes", "tips", "post", "messages", "stream"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -61,9 +61,9 @@ class StatementsResource(SyncAPIResource):
         Get the earnings for a given period.
 
         Args:
-          start_date: The start date for the period
-
           end_date: The end date for the period.
+
+          start_date: The start date for the period.
 
           type: Filter by All / Subscriptions / Tips / Posts / Messages / Streams
 
@@ -86,8 +86,8 @@ class StatementsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "start_date": start_date,
                         "end_date": end_date,
+                        "start_date": start_date,
                         "type": type,
                     },
                     statement_get_earnings_params.StatementGetEarningsParams,
@@ -121,8 +121,8 @@ class AsyncStatementsResource(AsyncAPIResource):
         self,
         account: str,
         *,
+        end_date: str,
         start_date: str,
-        end_date: str | Omit = omit,
         type: Literal["total", "subscribes", "tips", "post", "messages", "stream"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -135,9 +135,9 @@ class AsyncStatementsResource(AsyncAPIResource):
         Get the earnings for a given period.
 
         Args:
-          start_date: The start date for the period
-
           end_date: The end date for the period.
+
+          start_date: The start date for the period.
 
           type: Filter by All / Subscriptions / Tips / Posts / Messages / Streams
 
@@ -160,8 +160,8 @@ class AsyncStatementsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "start_date": start_date,
                         "end_date": end_date,
+                        "start_date": start_date,
                         "type": type,
                     },
                     statement_get_earnings_params.StatementGetEarningsParams,

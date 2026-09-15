@@ -24,7 +24,10 @@ __all__ = ["TagsResource", "AsyncTagsResource"]
 
 
 class TagsResource(SyncAPIResource):
-    """APIs for managing Free Trial Links"""
+    """APIs for managing Free Trial Links.
+
+    Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+    """
 
     @cached_property
     def with_raw_response(self) -> TagsResourceWithRawResponse:
@@ -167,7 +170,10 @@ class TagsResource(SyncAPIResource):
 
 
 class AsyncTagsResource(AsyncAPIResource):
-    """APIs for managing Free Trial Links"""
+    """APIs for managing Free Trial Links.
+
+    Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+    """
 
     @cached_property
     def with_raw_response(self) -> AsyncTagsResourceWithRawResponse:

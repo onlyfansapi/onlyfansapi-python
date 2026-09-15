@@ -53,7 +53,7 @@ class AuthenticateStartParams(TypedDict, total=False):
     Required when auth_type is `email_password`.
     """
 
-    proxy_country: Annotated[Literal["us", "uk"], PropertyInfo(alias="proxyCountry")]
+    proxy_country: Annotated[Literal["us", "uk", "gb"], PropertyInfo(alias="proxyCountry")]
     """The country of the managed proxy server you want to use.
 
     Eg. "us" for United States. Cannot be used together with customProxy.

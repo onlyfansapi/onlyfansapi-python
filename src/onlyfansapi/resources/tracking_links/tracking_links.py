@@ -46,11 +46,17 @@ __all__ = ["TrackingLinksResource", "AsyncTrackingLinksResource"]
 
 
 class TrackingLinksResource(SyncAPIResource):
-    """APIs for managing tracking links"""
+    """APIs for managing tracking links.
+
+    Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+    """
 
     @cached_property
     def tags(self) -> TagsResource:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return TagsResource(self._client)
 
     @cached_property
@@ -161,13 +167,14 @@ class TrackingLinksResource(SyncAPIResource):
         account: str,
         *,
         end_date: Optional[str] | Omit = omit,
-        limit: Optional[int] | Omit = omit,
-        offset: Optional[int] | Omit = omit,
-        sort: Optional[Literal["desc", "asc"]] | Omit = omit,
-        sortby: Optional[Literal["claims", "created_date"]] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        pagination: Literal[0, 1] | Omit = omit,
+        sort: Literal["asc", "desc"] | Omit = omit,
+        sortby: Literal["claims", "created_date"] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
-        synchronous: Optional[bool] | Omit = omit,
-        with_deleted: Optional[bool] | Omit = omit,
+        synchronous: bool | Omit = omit,
+        with_deleted: Literal[0, 1] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -179,24 +186,24 @@ class TrackingLinksResource(SyncAPIResource):
         List all tracking links for the account and revenue data
 
         Args:
-          end_date: The end date for Tracking Links. Keep empty to get all.
+          end_date: The end date for tracking links. Keep empty to get all. Must not be greater than
+              255 characters.
 
-          limit: The number of tracking links to return. Default `3`
+          limit: The number of tracking links to return. Default `10`. Must be at least 1. Must
+              not be greater than 100.
 
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
-          sort: Sort the results. Default `desc`
+          sort: Sort direction. Default `desc`.
 
-          sortby: Sort by subscriber count (claims), or creation date
+          sortby: Sort by subscriber count (`claims`) or creation date (`created_date`).
 
-          start_date: The start date for Tracking Links. Keep empty to get all.
+          start_date: The start date for tracking links. Keep empty to get all. Must not be greater
+              than 255 characters.
 
-          synchronous: Wait for the revenue data to finish processing, instead of processing in the
-              background. **Will result in longer response times, use with caution**. Default
-              `false`
+          synchronous: Wait for revenue calculation instead of processing it in the background.
 
-          with_deleted: Whether or not to include deleted tracking links in the response. Default
-              `false`
+          with_deleted: Whether to include deleted tracking links. Default `true`.
 
           extra_headers: Send extra headers
 
@@ -220,6 +227,7 @@ class TrackingLinksResource(SyncAPIResource):
                         "end_date": end_date,
                         "limit": limit,
                         "offset": offset,
+                        "pagination": pagination,
                         "sort": sort,
                         "sortby": sortby,
                         "start_date": start_date,
@@ -511,11 +519,17 @@ class TrackingLinksResource(SyncAPIResource):
 
 
 class AsyncTrackingLinksResource(AsyncAPIResource):
-    """APIs for managing tracking links"""
+    """APIs for managing tracking links.
+
+    Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+    """
 
     @cached_property
     def tags(self) -> AsyncTagsResource:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return AsyncTagsResource(self._client)
 
     @cached_property
@@ -626,13 +640,14 @@ class AsyncTrackingLinksResource(AsyncAPIResource):
         account: str,
         *,
         end_date: Optional[str] | Omit = omit,
-        limit: Optional[int] | Omit = omit,
-        offset: Optional[int] | Omit = omit,
-        sort: Optional[Literal["desc", "asc"]] | Omit = omit,
-        sortby: Optional[Literal["claims", "created_date"]] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        pagination: Literal[0, 1] | Omit = omit,
+        sort: Literal["asc", "desc"] | Omit = omit,
+        sortby: Literal["claims", "created_date"] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
-        synchronous: Optional[bool] | Omit = omit,
-        with_deleted: Optional[bool] | Omit = omit,
+        synchronous: bool | Omit = omit,
+        with_deleted: Literal[0, 1] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -644,24 +659,24 @@ class AsyncTrackingLinksResource(AsyncAPIResource):
         List all tracking links for the account and revenue data
 
         Args:
-          end_date: The end date for Tracking Links. Keep empty to get all.
+          end_date: The end date for tracking links. Keep empty to get all. Must not be greater than
+              255 characters.
 
-          limit: The number of tracking links to return. Default `3`
+          limit: The number of tracking links to return. Default `10`. Must be at least 1. Must
+              not be greater than 100.
 
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
-          sort: Sort the results. Default `desc`
+          sort: Sort direction. Default `desc`.
 
-          sortby: Sort by subscriber count (claims), or creation date
+          sortby: Sort by subscriber count (`claims`) or creation date (`created_date`).
 
-          start_date: The start date for Tracking Links. Keep empty to get all.
+          start_date: The start date for tracking links. Keep empty to get all. Must not be greater
+              than 255 characters.
 
-          synchronous: Wait for the revenue data to finish processing, instead of processing in the
-              background. **Will result in longer response times, use with caution**. Default
-              `false`
+          synchronous: Wait for revenue calculation instead of processing it in the background.
 
-          with_deleted: Whether or not to include deleted tracking links in the response. Default
-              `false`
+          with_deleted: Whether to include deleted tracking links. Default `true`.
 
           extra_headers: Send extra headers
 
@@ -685,6 +700,7 @@ class AsyncTrackingLinksResource(AsyncAPIResource):
                         "end_date": end_date,
                         "limit": limit,
                         "offset": offset,
+                        "pagination": pagination,
                         "sort": sort,
                         "sortby": sortby,
                         "start_date": start_date,
@@ -1006,7 +1022,10 @@ class TrackingLinksResourceWithRawResponse:
 
     @cached_property
     def tags(self) -> TagsResourceWithRawResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return TagsResourceWithRawResponse(self._tracking_links.tags)
 
 
@@ -1041,7 +1060,10 @@ class AsyncTrackingLinksResourceWithRawResponse:
 
     @cached_property
     def tags(self) -> AsyncTagsResourceWithRawResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return AsyncTagsResourceWithRawResponse(self._tracking_links.tags)
 
 
@@ -1076,7 +1098,10 @@ class TrackingLinksResourceWithStreamingResponse:
 
     @cached_property
     def tags(self) -> TagsResourceWithStreamingResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return TagsResourceWithStreamingResponse(self._tracking_links.tags)
 
 
@@ -1111,5 +1136,8 @@ class AsyncTrackingLinksResourceWithStreamingResponse:
 
     @cached_property
     def tags(self) -> AsyncTagsResourceWithStreamingResponse:
-        """APIs for managing tracking links"""
+        """APIs for managing tracking links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return AsyncTagsResourceWithStreamingResponse(self._tracking_links.tags)

@@ -41,6 +41,7 @@ class TestPosts:
         post = client.posts.create(
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             expire_days=3,
             fund_raising_target_amount=30,
             fund_raising_tips_presets=["string", "string", "string"],
@@ -157,6 +158,7 @@ class TestPosts:
             post_id=1234567890,
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             expire_days=3,
             fund_raising_target_amount=30,
             fund_raising_tips_presets=["string", "string", "string"],
@@ -552,6 +554,7 @@ class TestAsyncPosts:
         post = await async_client.posts.create(
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             expire_days=3,
             fund_raising_target_amount=30,
             fund_raising_tips_presets=["string", "string", "string"],
@@ -668,6 +671,7 @@ class TestAsyncPosts:
             post_id=1234567890,
             account="acct_XXXXXXXXXXXXXXX",
             text="Hello!",
+            block_banned_words="strict_ban",
             expire_days=3,
             fund_raising_target_amount=30,
             fund_raising_tips_presets=["string", "string", "string"],
