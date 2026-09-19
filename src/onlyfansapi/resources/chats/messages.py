@@ -118,14 +118,17 @@ class MessagesResource(SyncAPIResource):
     ) -> MessageListResponse:
         """Get messages from a specific chat.
 
+        Use `filter=pinned` or
+        [List Pinned Chat Messages](https://docs.onlyfansapi.com/api-reference/chat-messages/list-pinned-chat-messages)
+        to retrieve only pinned messages. Follow `_pagination.next_page` until it is
+        null; a short page can still have more results.
+
         Args:
-          filter: Filter by certain messages.
+          filter: Filter by certain messages. Currently, only pins are filterable.
 
-        Currently, only pins are filterable.
-
-          first_id: Use for pagination when `order=desc` (newest to oldest). Include this message ID
-              as the first message in the results. Used to retrieve messages from e.g. the
-              Search Chat Messages endpoint IDs.
+          first_id: Use for pagination when `order=desc` (newest to oldest). Pass the last message
+              ID from the previous page to retrieve older messages, excluding that cursor
+              message.
 
           last_id: Use for pagination when `order=asc` (oldest to newest). Include this message ID
               as the first message in the results. WARNING! The response list of messages will
@@ -275,8 +278,12 @@ class MessagesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessagePinResponse:
-        """
-        Pin a message from a chat.
+        """Pin a message from a chat.
+
+        Requires API-key write permission. No request body is
+        needed. Use
+        [List Pinned Chat Messages](https://docs.onlyfansapi.com/api-reference/chat-messages/list-pinned-chat-messages)
+        to read the current pins.
 
         Args:
           extra_headers: Send extra headers
@@ -528,8 +535,12 @@ class MessagesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageUnpinResponse:
-        """
-        Unpin a message from a chat.
+        """Unpin a message from a chat.
+
+        Requires API-key delete permission; a read_write
+        key cannot unpin. No request body is needed. Use
+        [List Pinned Chat Messages](https://docs.onlyfansapi.com/api-reference/chat-messages/list-pinned-chat-messages)
+        to read the current pins.
 
         Args:
           extra_headers: Send extra headers
@@ -646,14 +657,17 @@ class AsyncMessagesResource(AsyncAPIResource):
     ) -> MessageListResponse:
         """Get messages from a specific chat.
 
+        Use `filter=pinned` or
+        [List Pinned Chat Messages](https://docs.onlyfansapi.com/api-reference/chat-messages/list-pinned-chat-messages)
+        to retrieve only pinned messages. Follow `_pagination.next_page` until it is
+        null; a short page can still have more results.
+
         Args:
-          filter: Filter by certain messages.
+          filter: Filter by certain messages. Currently, only pins are filterable.
 
-        Currently, only pins are filterable.
-
-          first_id: Use for pagination when `order=desc` (newest to oldest). Include this message ID
-              as the first message in the results. Used to retrieve messages from e.g. the
-              Search Chat Messages endpoint IDs.
+          first_id: Use for pagination when `order=desc` (newest to oldest). Pass the last message
+              ID from the previous page to retrieve older messages, excluding that cursor
+              message.
 
           last_id: Use for pagination when `order=asc` (oldest to newest). Include this message ID
               as the first message in the results. WARNING! The response list of messages will
@@ -803,8 +817,12 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessagePinResponse:
-        """
-        Pin a message from a chat.
+        """Pin a message from a chat.
+
+        Requires API-key write permission. No request body is
+        needed. Use
+        [List Pinned Chat Messages](https://docs.onlyfansapi.com/api-reference/chat-messages/list-pinned-chat-messages)
+        to read the current pins.
 
         Args:
           extra_headers: Send extra headers
@@ -1056,8 +1074,12 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageUnpinResponse:
-        """
-        Unpin a message from a chat.
+        """Unpin a message from a chat.
+
+        Requires API-key delete permission; a read_write
+        key cannot unpin. No request body is needed. Use
+        [List Pinned Chat Messages](https://docs.onlyfansapi.com/api-reference/chat-messages/list-pinned-chat-messages)
+        to read the current pins.
 
         Args:
           extra_headers: Send extra headers
