@@ -232,7 +232,9 @@ class VaultResource(SyncAPIResource):
 
         Args:
           async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
-              check status. Recommended for large files.
+              check status. Recommended for large files. Instead of polling, you can subscribe
+              to the `media_uploads.completed` and `media_uploads.failed` webhook events —
+              they only fire for async uploads.
 
           file:
               The file to upload. Required if `file_url` is not provided. Maximum file size:
@@ -461,7 +463,9 @@ class AsyncVaultResource(AsyncAPIResource):
 
         Args:
           async_: Set to `true` to process uploads in the background. Returns a `polling_url` to
-              check status. Recommended for large files.
+              check status. Recommended for large files. Instead of polling, you can subscribe
+              to the `media_uploads.completed` and `media_uploads.failed` webhook events —
+              they only fire for async uploads.
 
           file:
               The file to upload. Required if `file_url` is not provided. Maximum file size:

@@ -99,6 +99,17 @@ class TestUsers:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_add_with_all_params(self, client: OnlyFansAPI) -> None:
+        user = client.user_lists.users.add(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+            ids=["string", "string", "string"],
+            skip_invalid=True,
+        )
+        assert_matches_type(UserAddResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_add(self, client: OnlyFansAPI) -> None:
         response = client.user_lists.users.with_raw_response.add(
             user_list_id="userListId",
@@ -449,6 +460,17 @@ class TestAsyncUsers:
             user_list_id="userListId",
             account="acct_XXXXXXXXXXXXXXX",
             ids=["string", "string", "string"],
+        )
+        assert_matches_type(UserAddResponse, user, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_add_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        user = await async_client.user_lists.users.add(
+            user_list_id="userListId",
+            account="acct_XXXXXXXXXXXXXXX",
+            ids=["string", "string", "string"],
+            skip_invalid=True,
         )
         assert_matches_type(UserAddResponse, user, path=["response"])
 

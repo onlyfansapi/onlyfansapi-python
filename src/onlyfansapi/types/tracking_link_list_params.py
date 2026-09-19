@@ -12,32 +12,36 @@ __all__ = ["TrackingLinkListParams"]
 
 class TrackingLinkListParams(TypedDict, total=False):
     end_date: Annotated[Optional[str], PropertyInfo(alias="endDate")]
-    """The end date for Tracking Links. Keep empty to get all."""
+    """The end date for tracking links.
 
-    limit: Optional[int]
-    """The number of tracking links to return. Default `3`"""
+    Keep empty to get all. Must not be greater than 255 characters.
+    """
 
-    offset: Optional[int]
-    """The offset used for pagination. Default `0`"""
+    limit: int
+    """The number of tracking links to return.
 
-    sort: Optional[Literal["desc", "asc"]]
-    """Sort the results. Default `desc`"""
+    Default `10`. Must be at least 1. Must not be greater than 100.
+    """
 
-    sortby: Optional[Literal["claims", "created_date"]]
-    """Sort by subscriber count (claims), or creation date"""
+    offset: int
+    """The offset used for pagination. Default `0`. Must be at least 0."""
+
+    pagination: Literal[0, 1]
+
+    sort: Literal["asc", "desc"]
+    """Sort direction. Default `desc`."""
+
+    sortby: Literal["claims", "created_date"]
+    """Sort by subscriber count (`claims`) or creation date (`created_date`)."""
 
     start_date: Annotated[Optional[str], PropertyInfo(alias="startDate")]
-    """The start date for Tracking Links. Keep empty to get all."""
+    """The start date for tracking links.
 
-    synchronous: Optional[bool]
-    """
-    Wait for the revenue data to finish processing, instead of processing in the
-    background. **Will result in longer response times, use with caution**. Default
-    `false`
+    Keep empty to get all. Must not be greater than 255 characters.
     """
 
-    with_deleted: Optional[bool]
-    """Whether or not to include deleted tracking links in the response.
+    synchronous: bool
+    """Wait for revenue calculation instead of processing it in the background."""
 
-    Default `false`
-    """
+    with_deleted: Literal[0, 1]
+    """Whether to include deleted tracking links. Default `true`."""

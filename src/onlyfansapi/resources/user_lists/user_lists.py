@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -187,6 +188,7 @@ class UserListsResource(SyncAPIResource):
         *,
         limit: Optional[int] | Omit = omit,
         offset: Optional[int] | Omit = omit,
+        view: Literal["queue"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -194,14 +196,19 @@ class UserListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> UserListListResponse:
-        """
-        Get a list of OnlyFans Collections - User Lists
+        """Get a list of OnlyFans Collections - User Lists.
+
+        If you only want to get User
+        Lists available for sending a Mass-Message, use `?view=queue`
 
         Args:
           limit: How many results to return in the request. Max. 50 user lists. Must be at
               least 10. Must not be greater than 50.
 
           offset: Must be at least 0.
+
+          view: How to return the results. `queue` returns the user lists that are available for
+              Mass-Messaging.
 
           extra_headers: Send extra headers
 
@@ -224,6 +231,7 @@ class UserListsResource(SyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
+                        "view": view,
                     },
                     user_list_list_params.UserListListParams,
                 ),
@@ -420,6 +428,7 @@ class AsyncUserListsResource(AsyncAPIResource):
         *,
         limit: Optional[int] | Omit = omit,
         offset: Optional[int] | Omit = omit,
+        view: Literal["queue"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -427,14 +436,19 @@ class AsyncUserListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> UserListListResponse:
-        """
-        Get a list of OnlyFans Collections - User Lists
+        """Get a list of OnlyFans Collections - User Lists.
+
+        If you only want to get User
+        Lists available for sending a Mass-Message, use `?view=queue`
 
         Args:
           limit: How many results to return in the request. Max. 50 user lists. Must be at
               least 10. Must not be greater than 50.
 
           offset: Must be at least 0.
+
+          view: How to return the results. `queue` returns the user lists that are available for
+              Mass-Messaging.
 
           extra_headers: Send extra headers
 
@@ -457,6 +471,7 @@ class AsyncUserListsResource(AsyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
+                        "view": view,
                     },
                     user_list_list_params.UserListListParams,
                 ),

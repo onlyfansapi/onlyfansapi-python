@@ -1,29 +1,49 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import TypeAlias
+
+from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["ProfitabilityGetProfitabilityResponse", "ProfitabilityGetProfitabilityResponseItem"]
+__all__ = ["ProfitabilityGetProfitabilityResponse", "Data"]
 
 
-class ProfitabilityGetProfitabilityResponseItem(BaseModel):
-    commission: Optional[float] = None
+class Data(BaseModel):
+    active_milestones: Optional[str] = FieldInfo(alias="activeMilestones", default=None)
 
-    creator_id: Optional[int] = None
+    agency_earnings: Optional[str] = FieldInfo(alias="agencyEarnings", default=None)
 
-    gross_revenue: Optional[float] = None
+    commission_amount: Optional[str] = FieldInfo(alias="commissionAmount", default=None)
 
-    margin: Optional[float] = None
+    commission_rate: Optional[str] = FieldInfo(alias="commissionRate", default=None)
 
-    name: Optional[str] = None
+    costs: Optional[List[object]] = None
 
-    net_revenue: Optional[float] = None
+    creator_name: Optional[str] = FieldInfo(alias="creatorName", default=None)
 
-    profit: Optional[float] = None
+    has_commission_for_period: Optional[bool] = FieldInfo(alias="hasCommissionForPeriod", default=None)
 
-    total_costs: Optional[float] = None
+    has_costs_for_period: Optional[bool] = FieldInfo(alias="hasCostsForPeriod", default=None)
+
+    margin_percentage: Optional[str] = FieldInfo(alias="marginPercentage", default=None)
+
+    month: Optional[int] = None
+
+    only_fans_user_id: Optional[int] = FieldInfo(alias="onlyFansUserId", default=None)
+
+    profit: Optional[str] = None
+
+    projected_net: Optional[str] = FieldInfo(alias="projectedNet", default=None)
+
+    rate_periods: Optional[List[object]] = FieldInfo(alias="ratePeriods", default=None)
+
+    referral_note: Optional[str] = FieldInfo(alias="referralNote", default=None)
+
+    total_costs: Optional[str] = FieldInfo(alias="totalCosts", default=None)
+
+    year: Optional[int] = None
 
 
-ProfitabilityGetProfitabilityResponse: TypeAlias = List[ProfitabilityGetProfitabilityResponseItem]
+class ProfitabilityGetProfitabilityResponse(BaseModel):
+    data: Optional[List[Data]] = None

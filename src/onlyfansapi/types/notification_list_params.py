@@ -18,7 +18,7 @@ class NotificationListParams(TypedDict, total=False):
     """The number of notifications. Default `10`"""
 
     skip_users: Literal["all", "none"]
-    """Whether to skip user details. Default `all`"""
+    """Whether to skip user details. Defaults to `all`."""
 
     type: Literal[
         "all", "subscriptions", "onlyfans", "purchases", "tips", "tags", "comments", "mentions", "likes", "promotions"

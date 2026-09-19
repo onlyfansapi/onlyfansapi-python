@@ -8,7 +8,9 @@ __all__ = ["SmartLinkListConversionsParams"]
 
 
 class SmartLinkListConversionsParams(TypedDict, total=False):
-    conversion_type: Literal["new_subscriber", "new_transaction", "message_received", "fan_sent_3_messages"]
+    conversion_type: Literal[
+        "new_subscriber", "new_transaction", "message_received", "fan_sent_1_message", "fan_sent_3_messages"
+    ]
     """Optional conversion type filter"""
 
     date_end: str

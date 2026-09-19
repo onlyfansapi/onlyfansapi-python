@@ -151,7 +151,8 @@ class ReleaseFormsResource(SyncAPIResource):
 
         These are
         verified creators who have signed release forms to appear in your content. Use
-        `offset` and `limit` for pagination.
+        `offset` and `limit` for pagination, following `_pagination.next_page` until it
+        is `null`.
 
         Args:
           filter: Filter users by type: `all` or `pending`.
@@ -321,7 +322,8 @@ class AsyncReleaseFormsResource(AsyncAPIResource):
 
         These are
         verified creators who have signed release forms to appear in your content. Use
-        `offset` and `limit` for pagination.
+        `offset` and `limit` for pagination, following `_pagination.next_page` until it
+        is `null`.
 
         Args:
           filter: Filter users by type: `all` or `pending`.

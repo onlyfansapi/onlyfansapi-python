@@ -13,7 +13,7 @@ class MessageGetTopMessageParams(TypedDict, total=False):
     end_date: Annotated[str, PropertyInfo(alias="endDate")]
     """The end date for the period.
 
-    Keep empty to retrieve until now. MUST BE DATE AFTER `startDate`.
+    Keep empty to retrieve until now. It must be after `startDate`.
     """
 
     start_date: Annotated[str, PropertyInfo(alias="startDate")]

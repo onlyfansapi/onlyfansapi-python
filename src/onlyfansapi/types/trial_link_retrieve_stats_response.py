@@ -63,6 +63,8 @@ class DataMonthlyMetric(BaseModel):
 
 
 class DataSummary(BaseModel):
+    chargebacks_total: Optional[float] = None
+
     clicks_total: Optional[int] = None
 
     revenue_cached_at: Optional[str] = None
