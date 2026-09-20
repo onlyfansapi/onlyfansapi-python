@@ -31,7 +31,7 @@ class TestClientSessions:
         client_session = client.client_sessions.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
             client_reference_id="my_crm_model_12345",
-            proxy_country="uk",
+            proxy_country="us",
         )
         assert_matches_type(ClientSessionCreateResponse, client_session, path=["response"])
 
@@ -81,7 +81,7 @@ class TestAsyncClientSessions:
         client_session = await async_client.client_sessions.create(
             display_name="STRLCxGLVC Agency / Model: Stella",
             client_reference_id="my_crm_model_12345",
-            proxy_country="uk",
+            proxy_country="us",
         )
         assert_matches_type(ClientSessionCreateResponse, client_session, path=["response"])
 
