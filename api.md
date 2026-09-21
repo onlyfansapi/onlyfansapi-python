@@ -273,6 +273,7 @@ Types:
 
 ```python
 from onlyfansapi.types import (
+    DataExportCreateResponse,
     DataExportRetrieveResponse,
     DataExportListResponse,
     DataExportCancelResponse,
@@ -283,6 +284,7 @@ from onlyfansapi.types import (
 
 Methods:
 
+- <code title="post /api/data-exports">client.data_exports.<a href="./src/onlyfansapi/resources/data_exports.py">create</a>(\*\*<a href="src/onlyfansapi/types/data_export_create_params.py">params</a>) -> <a href="./src/onlyfansapi/types/data_export_create_response.py">DataExportCreateResponse</a></code>
 - <code title="get /api/data-exports/{data_export_id}">client.data_exports.<a href="./src/onlyfansapi/resources/data_exports.py">retrieve</a>(data_export_id, \*\*<a href="src/onlyfansapi/types/data_export_retrieve_params.py">params</a>) -> <a href="./src/onlyfansapi/types/data_export_retrieve_response.py">DataExportRetrieveResponse</a></code>
 - <code title="get /api/data-exports">client.data_exports.<a href="./src/onlyfansapi/resources/data_exports.py">list</a>(\*\*<a href="src/onlyfansapi/types/data_export_list_params.py">params</a>) -> <a href="./src/onlyfansapi/types/data_export_list_response.py">DataExportListResponse</a></code>
 - <code title="delete /api/data-exports/{data_export_id}">client.data_exports.<a href="./src/onlyfansapi/resources/data_exports.py">cancel</a>(data_export_id) -> <a href="./src/onlyfansapi/types/data_export_cancel_response.py">DataExportCancelResponse</a></code>
