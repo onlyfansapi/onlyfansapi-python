@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="consequatur",
-            auth_type="mobile_app",
-            cookies="id",
+            auth_id="qui",
+            auth_type="email_password",
+            cookies="vel",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": 'RI2A0v\\2fz")&!j',
+                "password": "E:5Xrcnj-!B0",
                 "port": 8080,
-                "username": "quasi",
+                "username": "iste",
             },
-            email="adalberto.flatley@example.com",
+            email="zfeest@example.net",
             force_connect=True,
-            name="voluptate",
-            password="\"<4<u>-':PF",
-            proxy_country="us",
-            user_agent="accusantium",
-            xbc="fugiat",
+            name="sed",
+            password="vWub+zf",
+            proxy_country="gb",
+            user_agent="modi",
+            xbc="ut",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="consequatur",
-            auth_type="mobile_app",
-            cookies="id",
+            auth_id="qui",
+            auth_type="email_password",
+            cookies="vel",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": 'RI2A0v\\2fz")&!j',
+                "password": "E:5Xrcnj-!B0",
                 "port": 8080,
-                "username": "quasi",
+                "username": "iste",
             },
-            email="adalberto.flatley@example.com",
+            email="zfeest@example.net",
             force_connect=True,
-            name="voluptate",
-            password="\"<4<u>-':PF",
-            proxy_country="us",
-            user_agent="accusantium",
-            xbc="fugiat",
+            name="sed",
+            password="vWub+zf",
+            proxy_country="gb",
+            user_agent="modi",
+            xbc="ut",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 

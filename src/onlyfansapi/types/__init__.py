@@ -91,7 +91,6 @@ from .trial_link_create_params import TrialLinkCreateParams as TrialLinkCreatePa
 from .trial_link_list_response import TrialLinkListResponse as TrialLinkListResponse
 from .whoami_retrieve_response import WhoamiRetrieveResponse as WhoamiRetrieveResponse
 from .authenticate_start_params import AuthenticateStartParams as AuthenticateStartParams
-from .data_export_create_params import DataExportCreateParams as DataExportCreateParams
 from .data_export_list_response import DataExportListResponse as DataExportListResponse
 from .fan_list_expired_response import FanListExpiredResponse as FanListExpiredResponse
 from .following_list_all_params import FollowingListAllParams as FollowingListAllParams
@@ -123,7 +122,6 @@ from .trial_link_delete_response import TrialLinkDeleteResponse as TrialLinkDele
 from .account_disconnect_response import AccountDisconnectResponse as AccountDisconnectResponse
 from .authenticate_start_response import AuthenticateStartResponse as AuthenticateStartResponse
 from .data_export_cancel_response import DataExportCancelResponse as DataExportCancelResponse
-from .data_export_create_response import DataExportCreateResponse as DataExportCreateResponse
 from .data_export_retrieve_params import DataExportRetrieveParams as DataExportRetrieveParams
 from .following_list_all_response import FollowingListAllResponse as FollowingListAllResponse
 from .payout_list_requests_params import PayoutListRequestsParams as PayoutListRequestsParams

@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import data_export_list_params, data_export_create_params, data_export_retrieve_params
-from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..types import data_export_list_params, data_export_retrieve_params
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -23,7 +22,6 @@ from ..types.data_export_list_response import DataExportListResponse
 from ..types.data_export_retry_response import DataExportRetryResponse
 from ..types.data_export_start_response import DataExportStartResponse
 from ..types.data_export_cancel_response import DataExportCancelResponse
-from ..types.data_export_create_response import DataExportCreateResponse
 from ..types.data_export_retrieve_response import DataExportRetrieveResponse
 
 __all__ = ["DataExportsResource", "AsyncDataExportsResource"]
@@ -50,118 +48,6 @@ class DataExportsResource(SyncAPIResource):
         For more information, see https://www.github.com/onlyfansapi/onlyfansapi-python#with_streaming_response
         """
         return DataExportsResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        end_date: str,
-        file_type: Literal["csv", "xlsx", "zip"],
-        start_date: str,
-        type: Literal[
-            "transactions",
-            "chat_messages",
-            "media_vault",
-            "trial_links",
-            "tracking_links",
-            "smart_links",
-            "payouts",
-            "chargebacks",
-            "public_profiles",
-            "fans",
-            "followings",
-            "profile_visitors",
-            "fansly_chat_messages",
-        ],
-        account_ids: SequenceNotStr[str] | Omit = omit,
-        auto_start: bool | Omit = omit,
-        export_columns: SequenceNotStr[str] | Omit = omit,
-        options: Dict[str, object] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DataExportCreateResponse:
-        """Create a new data export request.
-
-        This will calculate the required credits and
-        prepare the export for starting.
-
-        Args:
-          end_date: The end date for the export (ISO 8601 format).
-
-          file_type: The output file format. Supported formats vary by export type: `csv` or `xlsx`
-              for transactions, chat_messages, fansly_chat_messages, trial_links,
-              tracking_links, smart_links, payouts, chargebacks, public_profiles, fans,
-              followings, profile_visitors; `zip` for media_vault.
-
-          start_date: The start date for the export (ISO 8601 format).
-
-          type: The type of data to export. Use `fansly_chat_messages` to export Fansly chat
-              messages (all other types are OnlyFans). `profile_visitors` returns one row per
-              account per day, scraped one day at a time so the daily numbers are not
-              aggregated away by OnlyFans.
-
-          account_ids: Array of account prefixed IDs to export data from. Not required for
-              `public_profiles` type. For `fansly_chat_messages`, pass Fansly account prefixed
-              IDs (`fansly_acct_...`); all other types take OnlyFans account IDs.
-
-          auto_start: When true, automatically starts the export after creation.
-
-          export_columns: Array of column names to include in the export (optional, defaults to all
-              columns for the export type)
-
-          options: Type-specific export options. For `chat_messages`: `maxMessages` (required per
-              account, max 10,000,000), `maxChats` (optional per-account chat scrape limit),
-              `skipMassMessages` (optional, bool), `chatIds` (optional array of numeric
-              fan/chat IDs; filters output and can drastically reduce totals). For
-              `fansly_chat_messages`: `maxMessages` (required per account, max 10,000,000),
-              `maxChats` (optional per-account chat scrape limit), `chatIds` (optional array
-              of Fansly group ID strings; filters output and can drastically reduce totals).
-              For `media_vault`: `mediaType` (required, one of: `all`, `photo`, `gif`,
-              `video`, `audio`). For `fans`: `type` (required, one of: `all`, `active`,
-              `expired`, `latest`). For `followings`: `type` (required, one of: `all`,
-              `active`, `expired`). For `public_profiles`: `query` (optional, full-text
-              search), `gender` (optional, filter: male, female, trans, couple),
-              `minSubscribePrice` (optional, USD), `maxSubscribePrice` (optional, USD),
-              `location` (optional), `minPostsCount` (optional, minimum posts),
-              `minPhotosCount` (optional, minimum photos), `minVideosCount` (optional, minimum
-              videos), `minSubscribersCount` (optional, minimum subscribers),
-              `maxSubscribersCount` (optional, maximum subscribers), `minJoinDate` (optional,
-              ISO 8601 date), `minLastSeenAt` (optional, ISO 8601 date), `createdAtFrom`
-              (optional, ISO 8601 date, profile added to DB after), `createdAtTo` (optional,
-              ISO 8601 date, profile added to DB before), `instagram` (optional), `twitter`
-              (optional), `tiktok` (optional), `maxResults` (optional, limit results).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/api/data-exports",
-            body=maybe_transform(
-                {
-                    "end_date": end_date,
-                    "file_type": file_type,
-                    "start_date": start_date,
-                    "type": type,
-                    "account_ids": account_ids,
-                    "auto_start": auto_start,
-                    "export_columns": export_columns,
-                    "options": options,
-                },
-                data_export_create_params.DataExportCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DataExportCreateResponse,
-        )
 
     def retrieve(
         self,
@@ -416,118 +302,6 @@ class AsyncDataExportsResource(AsyncAPIResource):
         """
         return AsyncDataExportsResourceWithStreamingResponse(self)
 
-    async def create(
-        self,
-        *,
-        end_date: str,
-        file_type: Literal["csv", "xlsx", "zip"],
-        start_date: str,
-        type: Literal[
-            "transactions",
-            "chat_messages",
-            "media_vault",
-            "trial_links",
-            "tracking_links",
-            "smart_links",
-            "payouts",
-            "chargebacks",
-            "public_profiles",
-            "fans",
-            "followings",
-            "profile_visitors",
-            "fansly_chat_messages",
-        ],
-        account_ids: SequenceNotStr[str] | Omit = omit,
-        auto_start: bool | Omit = omit,
-        export_columns: SequenceNotStr[str] | Omit = omit,
-        options: Dict[str, object] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DataExportCreateResponse:
-        """Create a new data export request.
-
-        This will calculate the required credits and
-        prepare the export for starting.
-
-        Args:
-          end_date: The end date for the export (ISO 8601 format).
-
-          file_type: The output file format. Supported formats vary by export type: `csv` or `xlsx`
-              for transactions, chat_messages, fansly_chat_messages, trial_links,
-              tracking_links, smart_links, payouts, chargebacks, public_profiles, fans,
-              followings, profile_visitors; `zip` for media_vault.
-
-          start_date: The start date for the export (ISO 8601 format).
-
-          type: The type of data to export. Use `fansly_chat_messages` to export Fansly chat
-              messages (all other types are OnlyFans). `profile_visitors` returns one row per
-              account per day, scraped one day at a time so the daily numbers are not
-              aggregated away by OnlyFans.
-
-          account_ids: Array of account prefixed IDs to export data from. Not required for
-              `public_profiles` type. For `fansly_chat_messages`, pass Fansly account prefixed
-              IDs (`fansly_acct_...`); all other types take OnlyFans account IDs.
-
-          auto_start: When true, automatically starts the export after creation.
-
-          export_columns: Array of column names to include in the export (optional, defaults to all
-              columns for the export type)
-
-          options: Type-specific export options. For `chat_messages`: `maxMessages` (required per
-              account, max 10,000,000), `maxChats` (optional per-account chat scrape limit),
-              `skipMassMessages` (optional, bool), `chatIds` (optional array of numeric
-              fan/chat IDs; filters output and can drastically reduce totals). For
-              `fansly_chat_messages`: `maxMessages` (required per account, max 10,000,000),
-              `maxChats` (optional per-account chat scrape limit), `chatIds` (optional array
-              of Fansly group ID strings; filters output and can drastically reduce totals).
-              For `media_vault`: `mediaType` (required, one of: `all`, `photo`, `gif`,
-              `video`, `audio`). For `fans`: `type` (required, one of: `all`, `active`,
-              `expired`, `latest`). For `followings`: `type` (required, one of: `all`,
-              `active`, `expired`). For `public_profiles`: `query` (optional, full-text
-              search), `gender` (optional, filter: male, female, trans, couple),
-              `minSubscribePrice` (optional, USD), `maxSubscribePrice` (optional, USD),
-              `location` (optional), `minPostsCount` (optional, minimum posts),
-              `minPhotosCount` (optional, minimum photos), `minVideosCount` (optional, minimum
-              videos), `minSubscribersCount` (optional, minimum subscribers),
-              `maxSubscribersCount` (optional, maximum subscribers), `minJoinDate` (optional,
-              ISO 8601 date), `minLastSeenAt` (optional, ISO 8601 date), `createdAtFrom`
-              (optional, ISO 8601 date, profile added to DB after), `createdAtTo` (optional,
-              ISO 8601 date, profile added to DB before), `instagram` (optional), `twitter`
-              (optional), `tiktok` (optional), `maxResults` (optional, limit results).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/api/data-exports",
-            body=await async_maybe_transform(
-                {
-                    "end_date": end_date,
-                    "file_type": file_type,
-                    "start_date": start_date,
-                    "type": type,
-                    "account_ids": account_ids,
-                    "auto_start": auto_start,
-                    "export_columns": export_columns,
-                    "options": options,
-                },
-                data_export_create_params.DataExportCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DataExportCreateResponse,
-        )
-
     async def retrieve(
         self,
         data_export_id: str,
@@ -763,9 +537,6 @@ class DataExportsResourceWithRawResponse:
     def __init__(self, data_exports: DataExportsResource) -> None:
         self._data_exports = data_exports
 
-        self.create = to_raw_response_wrapper(
-            data_exports.create,
-        )
         self.retrieve = to_raw_response_wrapper(
             data_exports.retrieve,
         )
@@ -787,9 +558,6 @@ class AsyncDataExportsResourceWithRawResponse:
     def __init__(self, data_exports: AsyncDataExportsResource) -> None:
         self._data_exports = data_exports
 
-        self.create = async_to_raw_response_wrapper(
-            data_exports.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
             data_exports.retrieve,
         )
@@ -811,9 +579,6 @@ class DataExportsResourceWithStreamingResponse:
     def __init__(self, data_exports: DataExportsResource) -> None:
         self._data_exports = data_exports
 
-        self.create = to_streamed_response_wrapper(
-            data_exports.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
             data_exports.retrieve,
         )
@@ -835,9 +600,6 @@ class AsyncDataExportsResourceWithStreamingResponse:
     def __init__(self, data_exports: AsyncDataExportsResource) -> None:
         self._data_exports = data_exports
 
-        self.create = async_to_streamed_response_wrapper(
-            data_exports.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
             data_exports.retrieve,
         )
