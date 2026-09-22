@@ -62,8 +62,8 @@ class DirectMessagesResource(SyncAPIResource):
         List sent direct messages with engagement stats (sent, viewed, purchased, etc.).
 
         Args:
-          end_date: The latest message to retrieve. Keep empty to get all. MUST BE DATE AFTER
-              `startDate`. This is also used for pagination.
+          end_date: The latest message to retrieve. Keep empty to get all. It must be after
+              `startDate` and is also used for pagination.
 
           limit: Number of messages to return (default = 10)
 
@@ -123,7 +123,7 @@ class DirectMessagesResource(SyncAPIResource):
         over time.
 
         Args:
-          end_date: End of the chart window in `Y-m-d H:i:s` format. Must be after `startDate`.
+          end_date: End of the chart window in `Y-m-d H:i:s` format. It must be after `startDate`.
 
           start_date: Start of the chart window in `Y-m-d H:i:s` format.
 
@@ -199,8 +199,8 @@ class AsyncDirectMessagesResource(AsyncAPIResource):
         List sent direct messages with engagement stats (sent, viewed, purchased, etc.).
 
         Args:
-          end_date: The latest message to retrieve. Keep empty to get all. MUST BE DATE AFTER
-              `startDate`. This is also used for pagination.
+          end_date: The latest message to retrieve. Keep empty to get all. It must be after
+              `startDate` and is also used for pagination.
 
           limit: Number of messages to return (default = 10)
 
@@ -260,7 +260,7 @@ class AsyncDirectMessagesResource(AsyncAPIResource):
         over time.
 
         Args:
-          end_date: End of the chart window in `Y-m-d H:i:s` format. Must be after `startDate`.
+          end_date: End of the chart window in `Y-m-d H:i:s` format. It must be after `startDate`.
 
           start_date: Start of the chart window in `Y-m-d H:i:s` format.
 

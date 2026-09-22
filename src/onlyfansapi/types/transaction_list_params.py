@@ -17,7 +17,7 @@ class TransactionListParams(TypedDict, total=False):
     """The marker used for pagination. Default: `null`"""
 
     start_date: Annotated[str, PropertyInfo(alias="startDate")]
-    """The start date for transactions list. Default: `-30days`"""
+    """The start date for the transactions list. Defaults to 30 days ago."""
 
     tips_source: Annotated[str, PropertyInfo(alias="tipsSource")]
     """Filter tips by source.

@@ -159,22 +159,22 @@ class TestAuthenticate:
     @parametrize
     def test_method_start_with_all_params(self, client: OnlyFansAPI) -> None:
         authenticate = client.authenticate.start(
-            auth_id="aut",
-            auth_type="raw_data",
-            cookies="nihil",
+            auth_id="ipsam",
+            auth_type="email_password",
+            cookies="saepe",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "]%<>fO<D?MmY&/O;<+s",
+                "password": "h*}fPo5923h/HgMj",
                 "port": 8080,
-                "username": "nostrum",
+                "username": "pariatur",
             },
-            email="rosalinda.feest@example.org",
+            email="chelsea55@example.com",
             force_connect=False,
-            name="eius",
-            password=":I_LGeDf:Y\\w.T7n",
-            proxy_country="uk",
-            user_agent="enim",
-            xbc="suscipit",
+            name="reiciendis",
+            password=",H@}2l`pFZ",
+            proxy_country="gb",
+            user_agent="magni",
+            xbc="et",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 
@@ -394,22 +394,22 @@ class TestAsyncAuthenticate:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         authenticate = await async_client.authenticate.start(
-            auth_id="aut",
-            auth_type="raw_data",
-            cookies="nihil",
+            auth_id="ipsam",
+            auth_type="email_password",
+            cookies="saepe",
             custom_proxy={
                 "host": "proxy.example.com",
-                "password": "]%<>fO<D?MmY&/O;<+s",
+                "password": "h*}fPo5923h/HgMj",
                 "port": 8080,
-                "username": "nostrum",
+                "username": "pariatur",
             },
-            email="rosalinda.feest@example.org",
+            email="chelsea55@example.com",
             force_connect=False,
-            name="eius",
-            password=":I_LGeDf:Y\\w.T7n",
-            proxy_country="uk",
-            user_agent="enim",
-            xbc="suscipit",
+            name="reiciendis",
+            password=",H@}2l`pFZ",
+            proxy_country="gb",
+            user_agent="magni",
+            xbc="et",
         )
         assert_matches_type(AuthenticateStartResponse, authenticate, path=["response"])
 

@@ -127,6 +127,7 @@ class TestLists:
         list_ = client.media.vault.lists.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            name="My renamed list",
         )
         assert_matches_type(ListUpdateResponse, list_, path=["response"])
 
@@ -136,6 +137,7 @@ class TestLists:
         response = client.media.vault.lists.with_raw_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            name="My renamed list",
         )
 
         assert response.is_closed is True
@@ -149,6 +151,7 @@ class TestLists:
         with client.media.vault.lists.with_streaming_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            name="My renamed list",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -165,12 +168,14 @@ class TestLists:
             client.media.vault.lists.with_raw_response.update(
                 list_id="123",
                 account="",
+                name="My renamed list",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             client.media.vault.lists.with_raw_response.update(
                 list_id="",
                 account="acct_XXXXXXXXXXXXXXX",
+                name="My renamed list",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -186,6 +191,7 @@ class TestLists:
     def test_method_list_with_all_params(self, client: OnlyFansAPI) -> None:
         list_ = client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
+            lightweight=True,
             limit=24,
             offset=0,
             query="My list name",
@@ -388,6 +394,7 @@ class TestAsyncLists:
         list_ = await async_client.media.vault.lists.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            name="My renamed list",
         )
         assert_matches_type(ListUpdateResponse, list_, path=["response"])
 
@@ -397,6 +404,7 @@ class TestAsyncLists:
         response = await async_client.media.vault.lists.with_raw_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            name="My renamed list",
         )
 
         assert response.is_closed is True
@@ -410,6 +418,7 @@ class TestAsyncLists:
         async with async_client.media.vault.lists.with_streaming_response.update(
             list_id="123",
             account="acct_XXXXXXXXXXXXXXX",
+            name="My renamed list",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -426,12 +435,14 @@ class TestAsyncLists:
             await async_client.media.vault.lists.with_raw_response.update(
                 list_id="123",
                 account="",
+                name="My renamed list",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             await async_client.media.vault.lists.with_raw_response.update(
                 list_id="",
                 account="acct_XXXXXXXXXXXXXXX",
+                name="My renamed list",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -447,6 +458,7 @@ class TestAsyncLists:
     async def test_method_list_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         list_ = await async_client.media.vault.lists.list(
             account="acct_XXXXXXXXXXXXXXX",
+            lightweight=True,
             limit=24,
             offset=0,
             query="My list name",
