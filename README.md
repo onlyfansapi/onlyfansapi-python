@@ -1,13 +1,16 @@
-# Only Fans API Python API library
+# OnlyFans Python SDK
 
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/onlyfans.svg?label=pypi%20(stable))](https://pypi.org/project/onlyfans/)
 
-The Only Fans API Python library provides convenient access to the Only Fans API REST API from any Python 3.9+
-application. The library includes type definitions for all request params and response fields,
-and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
+The OnlyFans Python SDK for the [OnlyFans API](https://onlyfansapi.com). Call any OnlyFans API endpoint from Python 3.9+: sync and async clients, typed Pydantic responses, automatic retries, and examples for FastAPI, Flask and Django.
 
-It is generated with [Stainless](https://www.stainless.com/).
+- **OnlyFans Python SDK guide:** [onlyfansapi.com/sdk/python](https://onlyfansapi.com/sdk/python)
+- **OnlyFans API:** [onlyfansapi.com](https://onlyfansapi.com)
+- **API reference:** [docs.onlyfansapi.com](https://docs.onlyfansapi.com)
+- **Get an API key:** [app.onlyfansapi.com](https://app.onlyfansapi.com)
+
+> Install `onlyfans` from PyPI, then `import onlyfansapi`.
 
 ## Documentation
 
