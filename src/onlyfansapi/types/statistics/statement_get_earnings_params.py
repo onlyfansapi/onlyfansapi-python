@@ -8,11 +8,11 @@ __all__ = ["StatementGetEarningsParams"]
 
 
 class StatementGetEarningsParams(TypedDict, total=False):
-    start_date: Required[str]
-    """The start date for the period"""
-
-    end_date: str
+    end_date: Required[str]
     """The end date for the period."""
+
+    start_date: Required[str]
+    """The start date for the period."""
 
     type: Literal["total", "subscribes", "tips", "post", "messages", "stream"]
     """Filter by All / Subscriptions / Tips / Posts / Messages / Streams"""

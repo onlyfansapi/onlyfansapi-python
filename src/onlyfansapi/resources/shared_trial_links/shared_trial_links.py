@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -71,7 +71,8 @@ class SharedTrialLinksResource(SyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        synchronous: Optional[bool] | Omit = omit,
+        pagination: Literal[0, 1] | Omit = omit,
+        synchronous: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -85,12 +86,12 @@ class SharedTrialLinksResource(SyncAPIResource):
         OnlyFans live and syncs to our cache.
 
         Args:
-          limit: The number of shared trial links to return. Default `10`
+          limit: The number of shared trial links to return. Default `10`. Must be at least 1.
+              Must not be greater than 100.
 
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
-          synchronous: Wait for the database sync to finish, instead of running it in the background.
-              **Will result in longer response times, use with caution**. Default `false`
+          synchronous: Wait for the database sync instead of processing it in the background.
 
           extra_headers: Send extra headers
 
@@ -113,6 +114,7 @@ class SharedTrialLinksResource(SyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
+                        "pagination": pagination,
                         "synchronous": synchronous,
                     },
                     shared_trial_link_list_params.SharedTrialLinkListParams,
@@ -202,7 +204,8 @@ class AsyncSharedTrialLinksResource(AsyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        synchronous: Optional[bool] | Omit = omit,
+        pagination: Literal[0, 1] | Omit = omit,
+        synchronous: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -216,12 +219,12 @@ class AsyncSharedTrialLinksResource(AsyncAPIResource):
         OnlyFans live and syncs to our cache.
 
         Args:
-          limit: The number of shared trial links to return. Default `10`
+          limit: The number of shared trial links to return. Default `10`. Must be at least 1.
+              Must not be greater than 100.
 
-          offset: The offset used for pagination. Default `0`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
-          synchronous: Wait for the database sync to finish, instead of running it in the background.
-              **Will result in longer response times, use with caution**. Default `false`
+          synchronous: Wait for the database sync instead of processing it in the background.
 
           extra_headers: Send extra headers
 
@@ -244,6 +247,7 @@ class AsyncSharedTrialLinksResource(AsyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
+                        "pagination": pagination,
                         "synchronous": synchronous,
                     },
                     shared_trial_link_list_params.SharedTrialLinkListParams,

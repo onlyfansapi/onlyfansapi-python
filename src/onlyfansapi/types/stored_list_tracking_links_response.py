@@ -87,6 +87,8 @@ class DataListLinks(BaseModel):
 class DataListRevenue(BaseModel):
     calculated_at: Optional[str] = FieldInfo(alias="calculatedAt", default=None)
 
+    chargebacks: Optional[int] = None
+
     is_loading: Optional[bool] = FieldInfo(alias="isLoading", default=None)
 
     revenue_per_click: Optional[float] = FieldInfo(alias="revenuePerClick", default=None)

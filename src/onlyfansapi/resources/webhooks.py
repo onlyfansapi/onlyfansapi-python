@@ -67,16 +67,19 @@ class WebhooksResource(SyncAPIResource):
         Create a new webhook for your Team
 
         Args:
-          account_scope: The account scope for the webhook. Use "global" for all accounts, "inclusive"
-              for only selected accounts, or "exclusive" for all except selected accounts.
+          account_scope: The account scope for the webhook (OnlyFans and Fansly webhooks alike). Use
+              "global" for all accounts, "inclusive" for only selected accounts, or
+              "exclusive" for all except selected accounts.
 
           endpoint_url: The URL of your webhook endpoint.
 
           events: An array of webhook events to subscribe to. For all options, refer to our **List
-              Available Events** endpoint.
+              Available Events** endpoint. A webhook is single-platform: subscribe to either
+              OnlyFans events or Fansly (`fansly.*`) events, never both in one webhook.
 
-          account_ids: An array of account IDs to apply the scope to. Required unless account_scope is
-              "global".
+          account_ids: An array of account IDs to apply the scope to. Use OnlyFans account IDs
+              (`acct_...`) for OnlyFans webhooks and Fansly account IDs (`fansly_acct_...`)
+              for Fansly webhooks. Required unless account_scope is "global".
 
           signing_secret: Optionally, add a signing secret to protect your webhook.
 
@@ -159,16 +162,19 @@ class WebhooksResource(SyncAPIResource):
         Update an existing webhook
 
         Args:
-          account_scope: The account scope for the webhook. Use "global" for all accounts, "inclusive"
-              for only selected accounts, or "exclusive" for all except selected accounts.
+          account_scope: The account scope for the webhook (OnlyFans and Fansly webhooks alike). Use
+              "global" for all accounts, "inclusive" for only selected accounts, or
+              "exclusive" for all except selected accounts.
 
           endpoint_url: The URL of your webhook endpoint.
 
           events: An array of webhook events to subscribe to. For all options, refer to our **List
-              Available Events** endpoint.
+              Available Events** endpoint. A webhook is single-platform: subscribe to either
+              OnlyFans events or Fansly (`fansly.*`) events, never both in one webhook.
 
-          account_ids: An array of account IDs to apply the scope to. Required unless account_scope is
-              "global".
+          account_ids: An array of account IDs to apply the scope to. Use OnlyFans account IDs
+              (`acct_...`) for OnlyFans webhooks and Fansly account IDs (`fansly_acct_...`)
+              for Fansly webhooks. Required unless account_scope is "global".
 
           enabled: Optionally, enabled/disable the webhook. This will stop/resume the sending of
               events, without having to delete the webhook.
@@ -312,16 +318,19 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Create a new webhook for your Team
 
         Args:
-          account_scope: The account scope for the webhook. Use "global" for all accounts, "inclusive"
-              for only selected accounts, or "exclusive" for all except selected accounts.
+          account_scope: The account scope for the webhook (OnlyFans and Fansly webhooks alike). Use
+              "global" for all accounts, "inclusive" for only selected accounts, or
+              "exclusive" for all except selected accounts.
 
           endpoint_url: The URL of your webhook endpoint.
 
           events: An array of webhook events to subscribe to. For all options, refer to our **List
-              Available Events** endpoint.
+              Available Events** endpoint. A webhook is single-platform: subscribe to either
+              OnlyFans events or Fansly (`fansly.*`) events, never both in one webhook.
 
-          account_ids: An array of account IDs to apply the scope to. Required unless account_scope is
-              "global".
+          account_ids: An array of account IDs to apply the scope to. Use OnlyFans account IDs
+              (`acct_...`) for OnlyFans webhooks and Fansly account IDs (`fansly_acct_...`)
+              for Fansly webhooks. Required unless account_scope is "global".
 
           signing_secret: Optionally, add a signing secret to protect your webhook.
 
@@ -404,16 +413,19 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Update an existing webhook
 
         Args:
-          account_scope: The account scope for the webhook. Use "global" for all accounts, "inclusive"
-              for only selected accounts, or "exclusive" for all except selected accounts.
+          account_scope: The account scope for the webhook (OnlyFans and Fansly webhooks alike). Use
+              "global" for all accounts, "inclusive" for only selected accounts, or
+              "exclusive" for all except selected accounts.
 
           endpoint_url: The URL of your webhook endpoint.
 
           events: An array of webhook events to subscribe to. For all options, refer to our **List
-              Available Events** endpoint.
+              Available Events** endpoint. A webhook is single-platform: subscribe to either
+              OnlyFans events or Fansly (`fansly.*`) events, never both in one webhook.
 
-          account_ids: An array of account IDs to apply the scope to. Required unless account_scope is
-              "global".
+          account_ids: An array of account IDs to apply the scope to. Use OnlyFans account IDs
+              (`acct_...`) for OnlyFans webhooks and Fansly account IDs (`fansly_acct_...`)
+              for Fansly webhooks. Required unless account_scope is "global".
 
           enabled: Optionally, enabled/disable the webhook. This will stop/resume the sending of
               events, without having to delete the webhook.

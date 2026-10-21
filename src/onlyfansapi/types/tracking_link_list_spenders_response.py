@@ -52,6 +52,8 @@ class _Meta(BaseModel):
 class DataRevenue(BaseModel):
     calculated_at: Optional[str] = None
 
+    chargebacks: Optional[float] = None
+
     total: Optional[float] = None
 
 

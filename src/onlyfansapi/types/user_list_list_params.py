@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["UserListListParams"]
 
@@ -17,3 +17,9 @@ class UserListListParams(TypedDict, total=False):
 
     offset: Optional[int]
     """Must be at least 0."""
+
+    view: Literal["queue"]
+    """How to return the results.
+
+    `queue` returns the user lists that are available for Mass-Messaging.
+    """

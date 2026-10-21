@@ -32,7 +32,7 @@ class TestTransactions:
             account="acct_XXXXXXXXXXXXXXX",
             limit="limit",
             marker="1739155047",
-            start_date="2025-01-01 00:00:00, -30days",
+            start_date="2025-01-01 00:00:00",
             tips_source="post_all",
             type="tips",
         )
@@ -93,7 +93,7 @@ class TestAsyncTransactions:
             account="acct_XXXXXXXXXXXXXXX",
             limit="limit",
             marker="1739155047",
-            start_date="2025-01-01 00:00:00, -30days",
+            start_date="2025-01-01 00:00:00",
             tips_source="post_all",
             type="tips",
         )

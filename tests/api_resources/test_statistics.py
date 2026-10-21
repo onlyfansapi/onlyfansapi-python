@@ -26,6 +26,14 @@ class TestStatistics:
     def test_method_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         statistic = client.statistics.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(StatisticCalculateTotalTransactionsResponse, statistic, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_calculate_total_transactions_with_all_params(self, client: OnlyFansAPI) -> None:
+        statistic = client.statistics.calculate_total_transactions(
+            account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         )
@@ -36,8 +44,6 @@ class TestStatistics:
     def test_raw_response_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         response = client.statistics.with_raw_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         )
 
         assert response.is_closed is True
@@ -50,8 +56,6 @@ class TestStatistics:
     def test_streaming_response_calculate_total_transactions(self, client: OnlyFansAPI) -> None:
         with client.statistics.with_streaming_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -67,8 +71,6 @@ class TestStatistics:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             client.statistics.with_raw_response.calculate_total_transactions(
                 account="",
-                end_date="2025-03-31 23:59:59",
-                start_date="2025-01-01 00:00:00",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -142,6 +144,7 @@ class TestStatistics:
             end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
             detailed=False,
+            detailed_type="total",
         )
         assert_matches_type(StatisticGetSubscriberMetricsResponse, statistic, path=["response"])
 
@@ -196,6 +199,14 @@ class TestAsyncStatistics:
     async def test_method_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         statistic = await async_client.statistics.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
+        )
+        assert_matches_type(StatisticCalculateTotalTransactionsResponse, statistic, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_calculate_total_transactions_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
+        statistic = await async_client.statistics.calculate_total_transactions(
+            account="acct_XXXXXXXXXXXXXXX",
             end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
         )
@@ -206,8 +217,6 @@ class TestAsyncStatistics:
     async def test_raw_response_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         response = await async_client.statistics.with_raw_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         )
 
         assert response.is_closed is True
@@ -220,8 +229,6 @@ class TestAsyncStatistics:
     async def test_streaming_response_calculate_total_transactions(self, async_client: AsyncOnlyFansAPI) -> None:
         async with async_client.statistics.with_streaming_response.calculate_total_transactions(
             account="acct_XXXXXXXXXXXXXXX",
-            end_date="2025-03-31 23:59:59",
-            start_date="2025-01-01 00:00:00",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -237,8 +244,6 @@ class TestAsyncStatistics:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account` but received ''"):
             await async_client.statistics.with_raw_response.calculate_total_transactions(
                 account="",
-                end_date="2025-03-31 23:59:59",
-                start_date="2025-01-01 00:00:00",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -312,6 +317,7 @@ class TestAsyncStatistics:
             end_date="2025-03-31 23:59:59",
             start_date="2025-01-01 00:00:00",
             detailed=False,
+            detailed_type="total",
         )
         assert_matches_type(StatisticGetSubscriberMetricsResponse, statistic, path=["response"])
 

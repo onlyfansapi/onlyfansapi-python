@@ -12,13 +12,13 @@ class FanListLatestParams(TypedDict, total=False):
     end_date: Optional[str]
     """End date for filtering (required with start_date).
 
-    This field is required when <code>start_date</code> is present.
+    Must be a valid date. Must not be greater than 255 characters.
     """
 
     limit: int
     """Number of fans to return (1-50).
 
-    Must be at least 1. Must not be greater than 100.
+    Must be at least 1. Must not be greater than 50.
     """
 
     offset: int
@@ -27,7 +27,7 @@ class FanListLatestParams(TypedDict, total=False):
     start_date: Optional[str]
     """Start date for filtering (required with end_date).
 
-    This field is required when <code>end_date</code> is present.
+    Must be a valid date. Must not be greater than 255 characters.
     """
 
     type: Optional[Literal["total", "renew", "new"]]

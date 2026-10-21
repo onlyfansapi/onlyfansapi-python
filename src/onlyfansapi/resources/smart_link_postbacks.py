@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -56,6 +56,9 @@ class SmartLinkPostbacksResource(SyncAPIResource):
         conversion_types: SequenceNotStr[str],
         smart_link_scope: Literal["global", "campaign_specific"],
         url: str,
+        body: str | Omit = omit,
+        headers: Iterable[smart_link_postback_create_params.Header] | Omit = omit,
+        http_method: Literal["GET", "POST"] | Omit = omit,
         smart_link_ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -73,8 +76,16 @@ class SmartLinkPostbacksResource(SyncAPIResource):
           smart_link_scope: `global` fires for all Smart Links. `campaign_specific` fires only for selected
               Smart Links.
 
-          url: The destination URL. Variables such as `{click_id}`, `{fbclid}`, `{gclid}`, and
-              `{ttclid}` are replaced when the postback is dispatched.
+          url: The destination URL. Variables such as `{external_click_id}`, `{fbclid}`,
+              `{gclid}`, `{gbraid}`, `{wbraid}`, `{ttclid}`, and `{sccid}` are replaced when
+              the postback is dispatched.
+
+          body: Optional request body template for POST postbacks. Variables are replaced when
+              the postback is dispatched.
+
+          headers: Optional request headers. Header values may include postback variables.
+
+          http_method: HTTP method used for the postback request. Defaults to `GET` when omitted.
 
           smart_link_ids: Smart Link ULIDs. Required when `smart_link_scope` is `campaign_specific`.
 
@@ -93,6 +104,9 @@ class SmartLinkPostbacksResource(SyncAPIResource):
                     "conversion_types": conversion_types,
                     "smart_link_scope": smart_link_scope,
                     "url": url,
+                    "body": body,
+                    "headers": headers,
+                    "http_method": http_method,
                     "smart_link_ids": smart_link_ids,
                 },
                 smart_link_postback_create_params.SmartLinkPostbackCreateParams,
@@ -141,6 +155,9 @@ class SmartLinkPostbacksResource(SyncAPIResource):
         conversion_types: SequenceNotStr[str],
         smart_link_scope: Literal["global", "campaign_specific"],
         url: str,
+        body: str | Omit = omit,
+        headers: Iterable[smart_link_postback_update_params.Header] | Omit = omit,
+        http_method: Literal["GET", "POST"] | Omit = omit,
         smart_link_ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -159,6 +176,13 @@ class SmartLinkPostbacksResource(SyncAPIResource):
 
           url: The destination URL.
 
+          body: Optional request body template for POST postbacks. Variables are replaced when
+              the postback is dispatched.
+
+          headers: Optional request headers. Header values may include postback variables.
+
+          http_method: HTTP method used for the postback request. Existing value is kept when omitted.
+
           smart_link_ids: Smart Link ULIDs. Required when `smart_link_scope` is `campaign_specific`.
 
           extra_headers: Send extra headers
@@ -176,6 +200,9 @@ class SmartLinkPostbacksResource(SyncAPIResource):
                     "conversion_types": conversion_types,
                     "smart_link_scope": smart_link_scope,
                     "url": url,
+                    "body": body,
+                    "headers": headers,
+                    "http_method": http_method,
                     "smart_link_ids": smart_link_ids,
                 },
                 smart_link_postback_update_params.SmartLinkPostbackUpdateParams,
@@ -265,6 +292,9 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
         conversion_types: SequenceNotStr[str],
         smart_link_scope: Literal["global", "campaign_specific"],
         url: str,
+        body: str | Omit = omit,
+        headers: Iterable[smart_link_postback_create_params.Header] | Omit = omit,
+        http_method: Literal["GET", "POST"] | Omit = omit,
         smart_link_ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -282,8 +312,16 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
           smart_link_scope: `global` fires for all Smart Links. `campaign_specific` fires only for selected
               Smart Links.
 
-          url: The destination URL. Variables such as `{click_id}`, `{fbclid}`, `{gclid}`, and
-              `{ttclid}` are replaced when the postback is dispatched.
+          url: The destination URL. Variables such as `{external_click_id}`, `{fbclid}`,
+              `{gclid}`, `{gbraid}`, `{wbraid}`, `{ttclid}`, and `{sccid}` are replaced when
+              the postback is dispatched.
+
+          body: Optional request body template for POST postbacks. Variables are replaced when
+              the postback is dispatched.
+
+          headers: Optional request headers. Header values may include postback variables.
+
+          http_method: HTTP method used for the postback request. Defaults to `GET` when omitted.
 
           smart_link_ids: Smart Link ULIDs. Required when `smart_link_scope` is `campaign_specific`.
 
@@ -302,6 +340,9 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
                     "conversion_types": conversion_types,
                     "smart_link_scope": smart_link_scope,
                     "url": url,
+                    "body": body,
+                    "headers": headers,
+                    "http_method": http_method,
                     "smart_link_ids": smart_link_ids,
                 },
                 smart_link_postback_create_params.SmartLinkPostbackCreateParams,
@@ -350,6 +391,9 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
         conversion_types: SequenceNotStr[str],
         smart_link_scope: Literal["global", "campaign_specific"],
         url: str,
+        body: str | Omit = omit,
+        headers: Iterable[smart_link_postback_update_params.Header] | Omit = omit,
+        http_method: Literal["GET", "POST"] | Omit = omit,
         smart_link_ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -368,6 +412,13 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
 
           url: The destination URL.
 
+          body: Optional request body template for POST postbacks. Variables are replaced when
+              the postback is dispatched.
+
+          headers: Optional request headers. Header values may include postback variables.
+
+          http_method: HTTP method used for the postback request. Existing value is kept when omitted.
+
           smart_link_ids: Smart Link ULIDs. Required when `smart_link_scope` is `campaign_specific`.
 
           extra_headers: Send extra headers
@@ -385,6 +436,9 @@ class AsyncSmartLinkPostbacksResource(AsyncAPIResource):
                     "conversion_types": conversion_types,
                     "smart_link_scope": smart_link_scope,
                     "url": url,
+                    "body": body,
+                    "headers": headers,
+                    "http_method": http_method,
                     "smart_link_ids": smart_link_ids,
                 },
                 smart_link_postback_update_params.SmartLinkPostbackUpdateParams,

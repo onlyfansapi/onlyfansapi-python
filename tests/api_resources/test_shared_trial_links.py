@@ -35,6 +35,7 @@ class TestSharedTrialLinks:
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
+            pagination=0,
             synchronous=False,
         )
         assert_matches_type(SharedTrialLinkListResponse, shared_trial_link, path=["response"])
@@ -140,6 +141,7 @@ class TestAsyncSharedTrialLinks:
             account="acct_XXXXXXXXXXXXXXX",
             limit=10,
             offset=0,
+            pagination=0,
             synchronous=False,
         )
         assert_matches_type(SharedTrialLinkListResponse, shared_trial_link, path=["response"])

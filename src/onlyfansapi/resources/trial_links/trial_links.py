@@ -46,11 +46,17 @@ __all__ = ["TrialLinksResource", "AsyncTrialLinksResource"]
 
 
 class TrialLinksResource(SyncAPIResource):
-    """APIs for managing Free Trial Links"""
+    """APIs for managing Free Trial Links.
+
+    Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+    """
 
     @cached_property
     def tags(self) -> TagsResource:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return TagsResource(self._client)
 
     @cached_property
@@ -173,12 +179,14 @@ class TrialLinksResource(SyncAPIResource):
         self,
         account: str,
         *,
-        limit: int,
-        offset: int,
-        field: Optional[Literal["create_date", "expire_date", "subscribe_counts", "subscribe_days", "claims_count"]]
+        end_date: Optional[str] | Omit = omit,
+        field: Literal["create_date", "expire_date", "subscribe_counts", "subscribe_days", "claims_count"]
         | Omit = omit,
-        sort: Optional[Literal["desc", "asc"]] | Omit = omit,
-        synchronous: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        sort: Literal["asc", "desc"] | Omit = omit,
+        start_date: Optional[str] | Omit = omit,
+        synchronous: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,17 +198,22 @@ class TrialLinksResource(SyncAPIResource):
         List all free trial links for the account, including the details and statistics
 
         Args:
-          limit: The number of trial links to return. Default `10`
+          end_date: The end date for trial links. Keep empty to get all. Must not be greater than
+              255 characters.
 
-          offset: The offset used for pagination. Default `0`
+          field: Field to sort by. Default `create_date`.
 
-          field: Sort the results by a field. Default `create_date`
+          limit: The number of trial links to return. Default `10`. Must be at least 1. Must not
+              be greater than 100.
 
-          sort: Sort the results. Default `desc`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
-          synchronous: Wait for the revenue data to finish processing, instead of processing in the
-              background. **Will result in longer response times, use with caution**. Default
-              `false`
+          sort: Sort direction. Default `desc`.
+
+          start_date: The start date for trial links. Keep empty to get all. Must not be greater than
+              255 characters.
+
+          synchronous: Wait for revenue calculation instead of processing it in the background.
 
           extra_headers: Send extra headers
 
@@ -221,10 +234,12 @@ class TrialLinksResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "end_date": end_date,
+                        "field": field,
                         "limit": limit,
                         "offset": offset,
-                        "field": field,
                         "sort": sort,
+                        "start_date": start_date,
                         "synchronous": synchronous,
                     },
                     trial_link_list_params.TrialLinkListParams,
@@ -497,11 +512,17 @@ class TrialLinksResource(SyncAPIResource):
 
 
 class AsyncTrialLinksResource(AsyncAPIResource):
-    """APIs for managing Free Trial Links"""
+    """APIs for managing Free Trial Links.
+
+    Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+    """
 
     @cached_property
     def tags(self) -> AsyncTagsResource:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return AsyncTagsResource(self._client)
 
     @cached_property
@@ -624,12 +645,14 @@ class AsyncTrialLinksResource(AsyncAPIResource):
         self,
         account: str,
         *,
-        limit: int,
-        offset: int,
-        field: Optional[Literal["create_date", "expire_date", "subscribe_counts", "subscribe_days", "claims_count"]]
+        end_date: Optional[str] | Omit = omit,
+        field: Literal["create_date", "expire_date", "subscribe_counts", "subscribe_days", "claims_count"]
         | Omit = omit,
-        sort: Optional[Literal["desc", "asc"]] | Omit = omit,
-        synchronous: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        sort: Literal["asc", "desc"] | Omit = omit,
+        start_date: Optional[str] | Omit = omit,
+        synchronous: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -641,17 +664,22 @@ class AsyncTrialLinksResource(AsyncAPIResource):
         List all free trial links for the account, including the details and statistics
 
         Args:
-          limit: The number of trial links to return. Default `10`
+          end_date: The end date for trial links. Keep empty to get all. Must not be greater than
+              255 characters.
 
-          offset: The offset used for pagination. Default `0`
+          field: Field to sort by. Default `create_date`.
 
-          field: Sort the results by a field. Default `create_date`
+          limit: The number of trial links to return. Default `10`. Must be at least 1. Must not
+              be greater than 100.
 
-          sort: Sort the results. Default `desc`
+          offset: The offset used for pagination. Default `0`. Must be at least 0.
 
-          synchronous: Wait for the revenue data to finish processing, instead of processing in the
-              background. **Will result in longer response times, use with caution**. Default
-              `false`
+          sort: Sort direction. Default `desc`.
+
+          start_date: The start date for trial links. Keep empty to get all. Must not be greater than
+              255 characters.
+
+          synchronous: Wait for revenue calculation instead of processing it in the background.
 
           extra_headers: Send extra headers
 
@@ -672,10 +700,12 @@ class AsyncTrialLinksResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "end_date": end_date,
+                        "field": field,
                         "limit": limit,
                         "offset": offset,
-                        "field": field,
                         "sort": sort,
+                        "start_date": start_date,
                         "synchronous": synchronous,
                     },
                     trial_link_list_params.TrialLinkListParams,
@@ -978,7 +1008,10 @@ class TrialLinksResourceWithRawResponse:
 
     @cached_property
     def tags(self) -> TagsResourceWithRawResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return TagsResourceWithRawResponse(self._trial_links.tags)
 
 
@@ -1013,7 +1046,10 @@ class AsyncTrialLinksResourceWithRawResponse:
 
     @cached_property
     def tags(self) -> AsyncTagsResourceWithRawResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return AsyncTagsResourceWithRawResponse(self._trial_links.tags)
 
 
@@ -1048,7 +1084,10 @@ class TrialLinksResourceWithStreamingResponse:
 
     @cached_property
     def tags(self) -> TagsResourceWithStreamingResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return TagsResourceWithStreamingResponse(self._trial_links.tags)
 
 
@@ -1083,5 +1122,8 @@ class AsyncTrialLinksResourceWithStreamingResponse:
 
     @cached_property
     def tags(self) -> AsyncTagsResourceWithStreamingResponse:
-        """APIs for managing Free Trial Links"""
+        """APIs for managing Free Trial Links.
+
+        Revenue totals are net earnings after refunds and chargebacks. `revenue.chargebacks` (or `summary.chargebacks_total` in stats) is the positive cached net amount already excluded from revenue; do not subtract it again. Spender responses include chargebacks across all attributed periods for each fan with positive net revenue.
+        """
         return AsyncTagsResourceWithStreamingResponse(self._trial_links.tags)

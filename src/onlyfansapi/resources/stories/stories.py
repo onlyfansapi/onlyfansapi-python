@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 
 import httpx
 
@@ -70,6 +70,10 @@ class StoriesResource(SyncAPIResource):
         account: str,
         *,
         media_files: SequenceNotStr[str],
+        canvas_height: int | Omit = omit,
+        canvas_width: int | Omit = omit,
+        question: story_create_params.Question | Omit = omit,
+        texts: Iterable[story_create_params.Text] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -78,11 +82,20 @@ class StoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StoryCreateResponse:
         """
-        Post a new media or vault file to your story.
+        Post a new media or vault file to your story, optionally with text overlays,
+        @mentions, and a question sticker. Overlay elements are rendered by OnlyFans on
+        top of your story media at view time.
 
         Args:
-          media_files: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0).
+          media_files: Array of media file upload prefixed_ids, or OF vault media IDs.
+
+          canvas_height: Canvas height overlay positions are relative to. Default `1920`.
+
+          canvas_width: Canvas width overlay positions are relative to. Default `1080`.
+
+          question: Interactive question sticker viewers can answer.
+
+          texts: Text and @mention overlays.
 
           extra_headers: Send extra headers
 
@@ -96,7 +109,16 @@ class StoriesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return self._post(
             path_template("/api/{account}/stories", account=account),
-            body=maybe_transform({"media_files": media_files}, story_create_params.StoryCreateParams),
+            body=maybe_transform(
+                {
+                    "media_files": media_files,
+                    "canvas_height": canvas_height,
+                    "canvas_width": canvas_width,
+                    "question": question,
+                    "texts": texts,
+                },
+                story_create_params.StoryCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -405,6 +427,10 @@ class AsyncStoriesResource(AsyncAPIResource):
         account: str,
         *,
         media_files: SequenceNotStr[str],
+        canvas_height: int | Omit = omit,
+        canvas_width: int | Omit = omit,
+        question: story_create_params.Question | Omit = omit,
+        texts: Iterable[story_create_params.Text] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -413,11 +439,20 @@ class AsyncStoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StoryCreateResponse:
         """
-        Post a new media or vault file to your story.
+        Post a new media or vault file to your story, optionally with text overlays,
+        @mentions, and a question sticker. Overlay elements are rendered by OnlyFans on
+        top of your story media at view time.
 
         Args:
-          media_files: Array of media file upload prefixed_ids, or OF media IDs (required if price is
-              not 0).
+          media_files: Array of media file upload prefixed_ids, or OF vault media IDs.
+
+          canvas_height: Canvas height overlay positions are relative to. Default `1920`.
+
+          canvas_width: Canvas width overlay positions are relative to. Default `1080`.
+
+          question: Interactive question sticker viewers can answer.
+
+          texts: Text and @mention overlays.
 
           extra_headers: Send extra headers
 
@@ -431,7 +466,16 @@ class AsyncStoriesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `account` but received {account!r}")
         return await self._post(
             path_template("/api/{account}/stories", account=account),
-            body=await async_maybe_transform({"media_files": media_files}, story_create_params.StoryCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "media_files": media_files,
+                    "canvas_height": canvas_height,
+                    "canvas_width": canvas_width,
+                    "question": question,
+                    "texts": texts,
+                },
+                story_create_params.StoryCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

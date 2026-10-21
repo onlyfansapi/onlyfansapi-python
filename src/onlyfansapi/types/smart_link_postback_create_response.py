@@ -6,7 +6,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["SmartLinkPostbackCreateResponse", "_Meta", "_Meta_Cache", "_Meta_Credits", "Data"]
+__all__ = ["SmartLinkPostbackCreateResponse", "_Meta", "_Meta_Cache", "_Meta_Credits", "Data", "DataHeader"]
 
 
 class _Meta_Cache(BaseModel):
@@ -29,12 +29,24 @@ class _Meta(BaseModel):
     api_credits: Optional[_Meta_Credits] = FieldInfo(alias="_credits", default=None)
 
 
+class DataHeader(BaseModel):
+    name: Optional[str] = None
+
+    value: Optional[str] = None
+
+
 class Data(BaseModel):
     id: Optional[int] = None
+
+    body: Optional[str] = None
 
     conversion_types: Optional[List[str]] = None
 
     created_at: Optional[str] = None
+
+    headers: Optional[List[DataHeader]] = None
+
+    http_method: Optional[str] = None
 
     latest_response: Optional[str] = None
 
@@ -43,6 +55,10 @@ class Data(BaseModel):
     smart_link_scope: Optional[str] = None
 
     smart_links: Optional[List[object]] = None
+
+    traffic_source_ids: Optional[List[object]] = None
+
+    traffic_sources: Optional[List[object]] = None
 
     updated_at: Optional[str] = None
 

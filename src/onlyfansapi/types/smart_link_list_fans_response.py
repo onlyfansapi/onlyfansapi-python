@@ -14,6 +14,8 @@ __all__ = [
     "Data",
     "DataFilters",
     "DataRow",
+    "DataRowSubscriptionInsights",
+    "DataRowSubscriptionInsightsCurrentSubscription",
     "DataSummary",
 ]
 
@@ -51,7 +53,35 @@ class DataFilters(BaseModel):
 
     offset: Optional[int] = None
 
+    previously_subscribed: Optional[str] = None
+
     sort: Optional[str] = None
+
+    subscribed_using_promo: Optional[str] = None
+
+
+class DataRowSubscriptionInsightsCurrentSubscription(BaseModel):
+    action: Optional[str] = None
+
+    is_free: Optional[bool] = None
+
+    price: Optional[int] = None
+
+    regular_price: Optional[int] = None
+
+    type: Optional[str] = None
+
+
+class DataRowSubscriptionInsights(BaseModel):
+    current_subscription: Optional[DataRowSubscriptionInsightsCurrentSubscription] = None
+
+    current_subscription_from_smart_link: Optional[bool] = None
+
+    has_subscription_data: Optional[bool] = None
+
+    previously_subscribed: Optional[bool] = None
+
+    subscribed_using_promo: Optional[bool] = None
 
 
 class DataRow(BaseModel):
@@ -75,6 +105,8 @@ class DataRow(BaseModel):
 
     revenue_net: Optional[int] = None
 
+    subscription_insights: Optional[DataRowSubscriptionInsights] = None
+
     tips_net: Optional[int] = None
 
     username: Optional[str] = None
@@ -82,6 +114,8 @@ class DataRow(BaseModel):
 
 class DataSummary(BaseModel):
     fans_total: Optional[int] = None
+
+    fans_with_1_plus_messages_total: Optional[int] = None
 
     fans_with_3_plus_messages_total: Optional[int] = None
 

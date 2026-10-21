@@ -26,6 +26,12 @@ class SmartLinkListFansParams(TypedDict, total=False):
     offset: int
     """Offset for pagination. Default `0`"""
 
+    previously_subscribed: bool
+    """
+    Optional - Filter to returning subscribers (fans previously subscribed before
+    this subscription)
+    """
+
     sort: Literal[
         "revenue_net",
         "-revenue_net",
@@ -37,3 +43,6 @@ class SmartLinkListFansParams(TypedDict, total=False):
         "-converted_at",
     ]
     """Optional sort field. Default `-revenue_net`"""
+
+    subscribed_using_promo: bool
+    """Optional - Filter to fans who subscribed via a promotion/offer"""

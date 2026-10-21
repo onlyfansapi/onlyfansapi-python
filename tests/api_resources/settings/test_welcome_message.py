@@ -76,7 +76,7 @@ class TestWelcomeMessage:
     def test_method_update_with_all_params(self, client: OnlyFansAPI) -> None:
         welcome_message = client.settings.welcome_message.update(
             account="acct_XXXXXXXXXXXXXXX",
-            is_forward=True,
+            is_forward=False,
             locked_text=False,
             media_files=["ofapi_media_abc123", 1234567890],
             previews=["ofapi_media_abc123", 1234567890],
@@ -229,7 +229,7 @@ class TestAsyncWelcomeMessage:
     async def test_method_update_with_all_params(self, async_client: AsyncOnlyFansAPI) -> None:
         welcome_message = await async_client.settings.welcome_message.update(
             account="acct_XXXXXXXXXXXXXXX",
-            is_forward=True,
+            is_forward=False,
             locked_text=False,
             media_files=["ofapi_media_abc123", 1234567890],
             previews=["ofapi_media_abc123", 1234567890],

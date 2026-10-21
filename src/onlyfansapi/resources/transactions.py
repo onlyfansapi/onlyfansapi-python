@@ -69,7 +69,7 @@ class TransactionsResource(SyncAPIResource):
 
           marker: The marker used for pagination. Default: `null`
 
-          start_date: The start date for transactions list. Default: `-30days`
+          start_date: The start date for the transactions list. Defaults to 30 days ago.
 
           tips_source: Filter tips by source. Only applies when `type=tips`. Options: `profile`,
               `post_all`, `chat`, `stream`, `story`
@@ -157,7 +157,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           marker: The marker used for pagination. Default: `null`
 
-          start_date: The start date for transactions list. Default: `-30days`
+          start_date: The start date for the transactions list. Defaults to 30 days ago.
 
           tips_source: Filter tips by source. Only applies when `type=tips`. Options: `profile`,
               `post_all`, `chat`, `stream`, `story`

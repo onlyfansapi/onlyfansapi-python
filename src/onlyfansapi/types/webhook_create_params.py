@@ -12,7 +12,7 @@ __all__ = ["WebhookCreateParams"]
 
 class WebhookCreateParams(TypedDict, total=False):
     account_scope: Required[str]
-    """The account scope for the webhook.
+    """The account scope for the webhook (OnlyFans and Fansly webhooks alike).
 
     Use "global" for all accounts, "inclusive" for only selected accounts, or
     "exclusive" for all except selected accounts.
@@ -24,13 +24,17 @@ class WebhookCreateParams(TypedDict, total=False):
     events: Required[SequenceNotStr[str]]
     """An array of webhook events to subscribe to.
 
-    For all options, refer to our **List Available Events** endpoint.
+    For all options, refer to our **List Available Events** endpoint. A webhook is
+    single-platform: subscribe to either OnlyFans events or Fansly (`fansly.*`)
+    events, never both in one webhook.
     """
 
     account_ids: SequenceNotStr[str]
     """An array of account IDs to apply the scope to.
 
-    Required unless account_scope is "global".
+    Use OnlyFans account IDs (`acct_...`) for OnlyFans webhooks and Fansly account
+    IDs (`fansly_acct_...`) for Fansly webhooks. Required unless account_scope is
+    "global".
     """
 
     signing_secret: Optional[str]
