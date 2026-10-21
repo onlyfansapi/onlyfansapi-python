@@ -1,7 +1,8 @@
 [project]
 name = "onlyfans"
 version = "0.2.0"
-description = "The official Python library for the OnlyFansAPI API"
+description = "OnlyFans Python SDK for the OnlyFans API (onlyfansapi.com). Sync and async, typed, with automatic retries."
+keywords = ["onlyfans", "onlyfans api", "onlyfans sdk", "onlyfans python", "onlyfans python sdk", "onlyfansapi"]
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
@@ -37,8 +38,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/onlyfansapi/onlyfansapi-python"
+Homepage = "https://onlyfansapi.com/sdk/python"
+Documentation = "https://docs.onlyfansapi.com"
 Repository = "https://github.com/onlyfansapi/onlyfansapi-python"
+"OnlyFans API" = "https://onlyfansapi.com"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
